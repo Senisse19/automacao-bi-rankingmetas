@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  sharepoint-whatsapp:
+    build: .
+    container_name: sharepoint-whatsapp-monitor
+    restart: unless-stopped
+
+    # Variáveis de ambiente para configuração
+    environment:
+      # SharePoint
+      - SHAREPOINT_CLIENT_ID=${SHAREPOINT_CLIENT_ID}
+      - SHAREPOINT_CLIENT_SECRET=${SHAREPOINT_CLIENT_SECRET}
+      - SHAREPOINT_TENANT=${SHAREPOINT_TENANT}
+      - SHAREPOINT_SITE_ID=${SHAREPOINT_SITE_ID}
+      - SHAREPOINT_FOLDER_ID=${SHAREPOINT_FOLDER_ID}
+
+      # Evolution API (WhatsApp)
+      - EVOLUTION_SERVER_URL=${EVOLUTION_SERVER_URL}
+      - EVOLUTION_API_KEY=${EVOLUTION_API_KEY}
+      - EVOLUTION_INSTANCE_NAME=${EVOLUTION_INSTANCE_NAME}
+      - EVOLUTION_GROUP_ID=${EVOLUTION_GROUP_ID}
+
+      # Configurações
+      - MONITOR_INTERVAL_SECONDS=${MONITOR_INTERVAL_SECONDS:-60}
+      - SCHEDULE_TIME=${SCHEDULE_TIME:-10:00}
+
+    # Volume para persistir known_files.json entre restarts
+    volumes:
+      - ./data:/app/data
+
+    # Logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
