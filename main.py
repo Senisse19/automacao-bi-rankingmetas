@@ -121,10 +121,16 @@ def run_monitor():
                 print(f"\n[{timestamp}] 🆕 {len(new_files)} novo(s) arquivo(s) detectado(s)!")
                 
                 for file in new_files:
-                    if send_file_to_whatsapp(sharepoint, evolution, file):
-                        monitor.mark_as_processed(file)
+                    # IMPORTANTE: Marca como processado ANTES de enviar
+                    # Isso evita envios duplicados em caso de restart
+                    monitor.mark_as_processed(file)
+                    
+                    # Tenta enviar
+                    success = send_file_to_whatsapp(sharepoint, evolution, file)
+                    if success:
+                        print(f"✅ Arquivo enviado com sucesso!")
                     else:
-                        print(f"⚠️ Falha no envio, será tentado novamente no próximo ciclo")
+                        print(f"⚠️ Falha no envio de {file.get('name')}")
                 
                 print()
             else:
