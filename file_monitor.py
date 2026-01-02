@@ -11,22 +11,37 @@ from config import KNOWN_FILES_PATH
 class FileMonitor:
     def __init__(self, sharepoint_client):
         self.sharepoint = sharepoint_client
+        print(f"📂 Caminho do arquivo de controle: {KNOWN_FILES_PATH}")
+        print(f"📂 Diretório existe: {os.path.exists(os.path.dirname(KNOWN_FILES_PATH) or '.')}")
         self.known_files = self._load_known_files()
+        print(f"📂 Arquivos conhecidos carregados: {len(self.known_files)}")
     
     def _load_known_files(self) -> dict:
         """Carrega arquivos já processados do arquivo JSON"""
+        print(f"📂 Verificando se {KNOWN_FILES_PATH} existe: {os.path.exists(KNOWN_FILES_PATH)}")
         if os.path.exists(KNOWN_FILES_PATH):
             try:
                 with open(KNOWN_FILES_PATH, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            except (json.JSONDecodeError, IOError):
+                    data = json.load(f)
+                    print(f"📂 Carregados {len(data)} arquivos do JSON")
+                    return data
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"❌ Erro ao carregar JSON: {e}")
                 return {}
+        print(f"📂 Arquivo não existe, iniciando vazio")
         return {}
     
     def _save_known_files(self):
         """Salva arquivos conhecidos no arquivo JSON"""
+        # Garantir que o diretório existe
+        dir_path = os.path.dirname(KNOWN_FILES_PATH)
+        if dir_path and not os.path.exists(dir_path):
+            os.makedirs(dir_path, exist_ok=True)
+            print(f"📂 Diretório criado: {dir_path}")
+        
         with open(KNOWN_FILES_PATH, "w", encoding="utf-8") as f:
             json.dump(self.known_files, f, indent=2, ensure_ascii=False)
+        print(f"💾 Salvo {len(self.known_files)} arquivos em {KNOWN_FILES_PATH}")
     
     def check_for_new_files(self) -> list:
         """
