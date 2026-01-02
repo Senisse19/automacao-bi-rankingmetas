@@ -5,8 +5,7 @@ Detecta novos uploads e dispara envio para WhatsApp
 import json
 import os
 from datetime import datetime
-
-KNOWN_FILES_PATH = "known_files.json"
+from config import KNOWN_FILES_PATH
 
 
 class FileMonitor:
