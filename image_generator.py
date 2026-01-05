@@ -279,14 +279,14 @@ class ImageGenerator:
             # Realizado grande
             realizado_y = y + 110
             draw.text((card_x + 20, realizado_y), "REALIZADO", font=font_label, fill=self.muted_text)
-            draw.text((card_x + 20, realizado_y + 18), total_gs.get("realizado", "-"), font=font_big_value, fill=self.accent_color)
+            draw.text((card_x + 20, realizado_y + 18), total_gs.get("realizado", "-"), font=font_big_value, fill=self.text_color)
             
             # Percentual
             percent = total_gs.get("percent", "")
             if percent:
                 bbox = draw.textbbox((0, 0), percent, font=font_big_value)
                 pw = bbox[2] - bbox[0]
-                draw.text((card_x + card_w - 20 - pw, realizado_y + 18), percent, font=font_big_value, fill=self.accent_color)
+                draw.text((card_x + card_w - 20 - pw, realizado_y + 18), percent, font=font_big_value, fill=self.text_color)
             
             y += 195
         
@@ -315,10 +315,10 @@ class ImageGenerator:
             
             for i, (label, value) in enumerate(metas):
                 draw.text((cx + 15, meta_y + i * 22), label, font=font_label, fill=self.muted_text)
-                # Valor alinhado à direita - Agora DOURADO
+                # Valor alinhado à direita - Agora BRANCO
                 bbox = draw.textbbox((0, 0), str(value), font=font_value)
                 vw = bbox[2] - bbox[0]
-                draw.text((cx + card_w - 15 - vw, meta_y + i * 22), str(value), font=font_value, fill=self.accent_color)
+                draw.text((cx + card_w - 15 - vw, meta_y + i * 22), str(value), font=font_value, fill=self.text_color)
             
             # Realizado na parte inferior
             realizado = dep.get("realizado", "-")
@@ -332,7 +332,7 @@ class ImageGenerator:
                 realizado_text += f"  ({percent})"
             bbox = draw.textbbox((0, 0), realizado_text, font=font_value)
             rw = bbox[2] - bbox[0]
-            draw.text((cx + card_w - 15 - rw, ry), realizado_text, font=font_value, fill=self.accent_color)
+            draw.text((cx + card_w - 15 - rw, ry), realizado_text, font=font_value, fill=self.text_color)
         
         # Rodapé
         draw.text((25, height - 30), "Grupo Studio • Automação Power BI", font=font_small, fill=(120, 120, 120))
@@ -401,9 +401,9 @@ class ImageGenerator:
         col_width = (cw - 50) // 3
         for i, (label, value) in enumerate(metas):
             mx = cx + 25 + i * col_width
-            # Labels em BRANCO (muted_text atualizado), Valores em DOURADO
+            # Labels em DOURADO (muted_text), Valores em BRANCO
             draw.text((mx, meta_y), label, font=font_label, fill=self.muted_text)
-            draw.text((mx, meta_y + 22), str(value), font=font_value, fill=self.accent_color)
+            draw.text((mx, meta_y + 22), str(value), font=font_value, fill=self.text_color)
         
         # Linha separadora
         sep_y = y + 115
@@ -412,14 +412,14 @@ class ImageGenerator:
         # Realizado - destaque maior
         ry = y + 130
         draw.text((cx + 25, ry), "REALIZADO", font=font_label, fill=self.muted_text)
-        draw.text((cx + 25, ry + 22), departamento.get("realizado", "-"), font=font_big_value, fill=self.accent_color)
+        draw.text((cx + 25, ry + 22), departamento.get("realizado", "-"), font=font_big_value, fill=self.text_color)
         
         # Percentual à direita
         percent = departamento.get("percent", "")
         if percent:
             bbox = draw.textbbox((0, 0), percent, font=font_big_value)
             pw = bbox[2] - bbox[0]
-            draw.text((cx + cw - 25 - pw, ry + 22), percent, font=font_big_value, fill=self.accent_color)
+            draw.text((cx + cw - 25 - pw, ry + 22), percent, font=font_big_value, fill=self.text_color)
         
         # Rodapé
         draw.text((25, height - 28), "Grupo Studio • Automação Power BI", font=font_small, fill=(120, 120, 120))
