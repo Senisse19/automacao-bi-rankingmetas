@@ -27,7 +27,7 @@ EVOLUTION_CONFIG = {
     "server_url": os.environ.get("EVOLUTION_SERVER_URL", "https://evolution.grupostudio.tec.br"),
     "api_key": os.environ.get("EVOLUTION_API_KEY", "1FE27459CF28-42B3-AEB2-57B5EE084B21"),
     "instance_name": os.environ.get("EVOLUTION_INSTANCE_NAME", "automation indicator"),
-    "group_id": os.environ.get("EVOLUTION_GROUP_ID", "120363407075752057@g.us"),
+    "group_id": os.environ.get("EVOLUTION_GROUP_ID", "5551998129077@s.whatsapp.net"),
 }
 
 # Configuração de agendamento
