@@ -18,7 +18,7 @@ class ImageGenerator:
         self.silver_color = (180, 180, 180)  # Prata
         self.bronze_color = (160, 120, 80)  # Bronze
         self.header_color = (26, 26, 26)  # Header preto
-        self.muted_text = (255, 255, 255)  # Texto secundário agora BRANCO para contraste máximo
+        self.muted_text = (201, 169, 98)  # Texto secundário agora DOURADO para máxima visibilidade
         
         # Dimensões
         self.width = 800
@@ -224,7 +224,7 @@ class ImageGenerator:
         font_title = self._get_font(24, bold=True)
         font_periodo = self._get_font(14)
         font_card_title = self._get_font(14, bold=True)
-        font_label = self._get_font(13) # Aumentado de 11
+        font_label = self._get_font(13, bold=True) # Aumentado e BOLD
         font_value = self._get_font(15, bold=True) # Aumentado de 14
         font_big_value = self._get_font(28, bold=True)
         font_small = self._get_font(12)
@@ -354,8 +354,8 @@ class ImageGenerator:
         # Fontes
         font_logo = self._get_font(28, bold=True)
         font_title = self._get_font(24, bold=True)
-        font_periodo = self._get_font(14)
-        font_label = self._get_font(14) # Aumentado de 12
+        font_periodo = self._get_font(14, bold=True) # Periodo em bold
+        font_label = self._get_font(14, bold=True) # Aumentado e BOLD
         font_value = self._get_font(18, bold=True) # Aumentado de 16
         font_big_value = self._get_font(36, bold=True)
         font_small = self._get_font(12)
