@@ -13,6 +13,7 @@ from config import (
     EVOLUTION_CONFIG, 
     GRUPOS_WHATSAPP, 
     DEPARTAMENTOS,
+    DISPLAY_NAMES,
     SCHEDULE_TIME,
     IMAGES_DIR,
     METAS_CAPTION
@@ -117,8 +118,10 @@ class MetasAutomation:
                 continue
             
             try:
-                # Formatar mensagem
-                departamento = grupo_key.title() if grupo_key != "diretoria" else "Grupo Studio"
+                # Formatar mensagem com nome correto (acentuado)
+                # departmento = grupo_key.title() if grupo_key != "diretoria" else "Grupo Studio"
+                departamento = DISPLAY_NAMES.get(grupo_key, grupo_key.title())
+                
                 caption = METAS_CAPTION.format(
                     departamento=departamento,
                     data=data_referencia  # D-1
