@@ -58,6 +58,19 @@ DEPARTAMENTOS = [
     "tecnologia",
 ]
 
+# Nomes para exibição (com acentos)
+DISPLAY_NAMES = {
+    "diretoria": "Grupo Studio",
+    "comercial": "Comercial",
+    "operacional": "Operacional", 
+    "expansao": "Expansão",
+    "franchising": "Franchising",
+    "educacao": "Educação",
+    "tax": "Tax",
+    "corporate": "Corporate",
+    "tecnologia": "Tecnologia",
+}
+
 # Agendamento do disparo diário
 SCHEDULE_TIME = os.environ.get("SCHEDULE_TIME", "09:00")  # Horário do disparo diário
 
