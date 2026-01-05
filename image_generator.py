@@ -18,7 +18,7 @@ class ImageGenerator:
         self.silver_color = (180, 180, 180)  # Prata
         self.bronze_color = (160, 120, 80)  # Bronze
         self.header_color = (26, 26, 26)  # Header preto
-        self.muted_text = (235, 235, 235)  # Texto secundário ainda mais claro
+        self.muted_text = (255, 255, 255)  # Texto secundário agora BRANCO para contraste máximo
         
         # Dimensões
         self.width = 800
@@ -224,10 +224,10 @@ class ImageGenerator:
         font_title = self._get_font(24, bold=True)
         font_periodo = self._get_font(14)
         font_card_title = self._get_font(14, bold=True)
-        font_label = self._get_font(11)
-        font_value = self._get_font(14, bold=True)
+        font_label = self._get_font(13) # Aumentado de 11
+        font_value = self._get_font(15, bold=True) # Aumentado de 14
         font_big_value = self._get_font(28, bold=True)
-        font_small = self._get_font(11)
+        font_small = self._get_font(12)
         
         y = 25
         
@@ -315,10 +315,10 @@ class ImageGenerator:
             
             for i, (label, value) in enumerate(metas):
                 draw.text((cx + 15, meta_y + i * 22), label, font=font_label, fill=self.muted_text)
-                # Valor alinhado à direita
+                # Valor alinhado à direita - Agora DOURADO
                 bbox = draw.textbbox((0, 0), str(value), font=font_value)
                 vw = bbox[2] - bbox[0]
-                draw.text((cx + card_w - 15 - vw, meta_y + i * 22), str(value), font=font_value, fill=self.text_color)
+                draw.text((cx + card_w - 15 - vw, meta_y + i * 22), str(value), font=font_value, fill=self.accent_color)
             
             # Realizado na parte inferior
             realizado = dep.get("realizado", "-")
@@ -354,11 +354,11 @@ class ImageGenerator:
         # Fontes
         font_logo = self._get_font(28, bold=True)
         font_title = self._get_font(24, bold=True)
-        font_periodo = self._get_font(13)
-        font_label = self._get_font(12)
-        font_value = self._get_font(16, bold=True)
+        font_periodo = self._get_font(14)
+        font_label = self._get_font(14) # Aumentado de 12
+        font_value = self._get_font(18, bold=True) # Aumentado de 16
         font_big_value = self._get_font(36, bold=True)
-        font_small = self._get_font(11)
+        font_small = self._get_font(12)
         
         y = 25
         
@@ -401,8 +401,9 @@ class ImageGenerator:
         col_width = (cw - 50) // 3
         for i, (label, value) in enumerate(metas):
             mx = cx + 25 + i * col_width
+            # Labels em BRANCO (muted_text atualizado), Valores em DOURADO
             draw.text((mx, meta_y), label, font=font_label, fill=self.muted_text)
-            draw.text((mx, meta_y + 20), str(value), font=font_value, fill=self.text_color)
+            draw.text((mx, meta_y + 22), str(value), font=font_value, fill=self.accent_color)
         
         # Linha separadora
         sep_y = y + 115
