@@ -18,7 +18,7 @@ class ImageGenerator:
         self.silver_color = (180, 180, 180)  # Prata
         self.bronze_color = (160, 120, 80)  # Bronze
         self.header_color = (26, 26, 26)  # Header preto
-        self.muted_text = (150, 150, 150)  # Texto secundário
+        self.muted_text = (210, 210, 210)  # Texto secundário (mais claro para melhor leitura)
         
         # Dimensões
         self.width = 800
@@ -232,12 +232,21 @@ class ImageGenerator:
         y = 25
         
         # Logo GS
+        # Logo GS (Centralizado)
         logo_size = 50
+        logo_x = 25
         draw.rounded_rectangle(
-            [(25, y), (25 + logo_size, y + logo_size)], 
+            [(logo_x, y), (logo_x + logo_size, y + logo_size)], 
             radius=8, fill=self.card_color, outline=self.accent_color, width=2
         )
-        draw.text((35, y + 8), "GS", font=font_logo, fill=self.accent_color)
+        
+        # Centralizar texto GS
+        gs_text = "GS"
+        bbox = draw.textbbox((0, 0), gs_text, font=font_logo)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+        # Ajuste fino manual para fonte
+        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 4), gs_text, font=font_logo, fill=self.accent_color)
         
         # Título e período
         draw.text((95, y + 5), "METAS", font=font_title, fill=self.card_color)
@@ -354,9 +363,17 @@ class ImageGenerator:
         y = 25
         
         # Logo e título
+        # Logo e título (Centralizado)
         logo_size = 50
-        draw.rounded_rectangle([(25, y), (75, y + logo_size)], radius=8, fill=self.card_color, outline=self.accent_color, width=2)
-        draw.text((35, y + 8), "GS", font=font_logo, fill=self.accent_color)
+        logo_x = 25
+        draw.rounded_rectangle([(logo_x, y), (logo_x + logo_size, y + logo_size)], radius=8, fill=self.card_color, outline=self.accent_color, width=2)
+        
+        # Centralizar texto GS
+        gs_text = "GS"
+        bbox = draw.textbbox((0, 0), gs_text, font=font_logo)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 4), gs_text, font=font_logo, fill=self.accent_color)
         
         nome = departamento.get("nome", "DEPARTAMENTO").upper()
         draw.text((95, y + 8), nome, font=font_title, fill=self.card_color)
