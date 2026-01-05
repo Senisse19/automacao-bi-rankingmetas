@@ -10,7 +10,7 @@ import os
 class ImageGenerator:
     def __init__(self):
         # Cores do tema - Paleta do Dashboard GS
-        self.bg_color = (217, 217, 217)  # Cinza claro fundo
+        self.bg_color = (195, 195, 195)  # Cinza mais escuro (menos branco)
         self.card_color = (26, 26, 26)  # Preto dos cards
         self.text_color = (255, 255, 255)  # Texto branco
         self.accent_color = (201, 169, 98)  # Dourado/champagne
@@ -18,7 +18,7 @@ class ImageGenerator:
         self.silver_color = (180, 180, 180)  # Prata
         self.bronze_color = (160, 120, 80)  # Bronze
         self.header_color = (26, 26, 26)  # Header preto
-        self.muted_text = (210, 210, 210)  # Texto secundário (mais claro para melhor leitura)
+        self.muted_text = (235, 235, 235)  # Texto secundário ainda mais claro
         
         # Dimensões
         self.width = 800
@@ -245,8 +245,8 @@ class ImageGenerator:
         bbox = draw.textbbox((0, 0), gs_text, font=font_logo)
         tw = bbox[2] - bbox[0]
         th = bbox[3] - bbox[1]
-        # Ajuste fino manual para fonte
-        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 4), gs_text, font=font_logo, fill=self.accent_color)
+        # Centralização matemática pura (sem offset manual)
+        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 2), gs_text, font=font_logo, fill=self.accent_color)
         
         # Título e período
         draw.text((95, y + 5), "METAS", font=font_title, fill=self.card_color)
@@ -373,7 +373,7 @@ class ImageGenerator:
         bbox = draw.textbbox((0, 0), gs_text, font=font_logo)
         tw = bbox[2] - bbox[0]
         th = bbox[3] - bbox[1]
-        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 4), gs_text, font=font_logo, fill=self.accent_color)
+        draw.text((logo_x + (logo_size - tw) / 2, y + (logo_size - th) / 2 - 2), gs_text, font=font_logo, fill=self.accent_color)
         
         nome = departamento.get("nome", "DEPARTAMENTO").upper()
         draw.text((95, y + 8), nome, font=font_title, fill=self.card_color)
