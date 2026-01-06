@@ -216,8 +216,8 @@ class ImageGenerator:
         
         # Calcular altura dinamicamente
         header_h = 60
-        gs_card_h = 200  # Altura compacta
-        dept_row_h = 175 # Altura compacta para departamentos
+        gs_card_h = 240  # Aumentado para caber barras de progresso
+        dept_row_h = 210 # Aumentado para caber barras de progresso
         num_dept_rows = 4
         receitas_h = 100 if receitas else 0
         padding = 15
@@ -278,24 +278,38 @@ class ImageGenerator:
             # Título
             draw.text((margin + 20, y + 15), "GS - RESUMO GERAL", font=font_title, fill=self.accent_color)
             
-            # 3 Metas com barras de progresso
+            # 3 Metas com barras de progresso e porcentagem
             pad = 20
             meta_y = y + 42
+            pct_keys = ["pct_meta1", "pct_meta2", "pct_meta3"]
             for i, key in enumerate(["meta1", "meta2", "meta3"]):
                 val = total_gs.get(key, "-")
-                label = f"Meta {i+1}:"
+                pct = total_gs.get(pct_keys[i], 0)
+                pct_text = f"{pct:.0f}%" if pct else "0%"
+                label = f"Meta {i+1}"
                 
+                # Label (Meta 1, Meta 2, Meta 3)
                 draw.text((margin + pad, meta_y), label, font=font_label, fill=self.muted_text)
                 
+                # Valor à direita
                 bbox = draw.textbbox((0, 0), val, font=font_value)
                 val_w = bbox[2] - bbox[0]
                 draw.text((margin + card_w - pad - val_w, meta_y), val, font=font_value, fill=self.text_color)
                 
-                # Barra de progresso
-                bar_y = meta_y + 16
-                draw.rounded_rectangle([(margin + pad, bar_y), (margin + card_w - pad, bar_y + 5)], radius=3, fill=self.accent_color)
+                # Porcentagem abaixo do label
+                draw.text((margin + pad, meta_y + 14), pct_text, font=font_small, fill=self.muted_text)
                 
-                meta_y += 30
+                # Barra de progresso (fundo cinza escuro)
+                bar_y = meta_y + 28
+                bar_width = card_w - 2 * pad
+                draw.rounded_rectangle([(margin + pad, bar_y), (margin + pad + bar_width, bar_y + 6)], radius=3, fill=(60, 60, 60))
+                
+                # Barra de progresso (preenchimento dourado proporcional)
+                fill_width = max(0, min(bar_width, bar_width * (pct / 100)))
+                if fill_width > 0:
+                    draw.rounded_rectangle([(margin + pad, bar_y), (margin + pad + fill_width, bar_y + 6)], radius=3, fill=self.accent_color)
+                
+                meta_y += 40
             
             # Realizado (logo após a última meta)
             real_y = meta_y + 5
@@ -333,30 +347,48 @@ class ImageGenerator:
             
             draw.rounded_rectangle([(margin, rec_y), (margin + rec_w, rec_y + rec_h)], radius=12, fill=self.card_color)
             
-            # Título
-            draw.text((margin + (rec_w // 2) - 30, rec_y + 12), "RECEITAS", font=font_title, fill=self.accent_color)
+            # Título centralizado
+            title_text = "RECEITAS"
+            title_bbox = draw.textbbox((0, 0), title_text, font=font_title)
+            title_w = title_bbox[2] - title_bbox[0]
+            draw.text((margin + (rec_w - title_w) / 2, rec_y + 12), title_text, font=font_title, fill=self.accent_color)
             
-            # 3 colunas: Outras Receitas, Intercompany, Não Identificadas
-            col_w = (rec_w - 40) // 3
+            # 3 colunas centralizadas: Outras Receitas, Intercompany, Não Identificadas
+            col_w = rec_w // 3
             col_y = rec_y + 45
-            pad = 20
             
-            # Coluna 1: Outras Receitas
+            # Coluna 1: Outras Receitas (centralizada na primeira terça parte)
             outras = receitas.get("outras", "R$ 0,00")
-            draw.text((margin + pad, col_y), "Outras Receitas:", font=font_small, fill=self.muted_text)
-            draw.text((margin + pad, col_y + 16), outras, font=font_value, fill=self.text_color)
+            label1 = "Outras Receitas:"
+            bbox1 = draw.textbbox((0, 0), label1, font=font_small)
+            lw1 = bbox1[2] - bbox1[0]
+            col1_center = margin + col_w // 2
+            draw.text((col1_center - lw1 // 2, col_y), label1, font=font_small, fill=self.muted_text)
+            bbox1v = draw.textbbox((0, 0), outras, font=font_value)
+            vw1 = bbox1v[2] - bbox1v[0]
+            draw.text((col1_center - vw1 // 2, col_y + 16), outras, font=font_value, fill=self.text_color)
             
-            # Coluna 2: Intercompany
+            # Coluna 2: Intercompany (centralizada na segunda terça parte)
             intercompany = receitas.get("intercompany", "R$ 0,00")
-            col2_x = margin + pad + col_w
-            draw.text((col2_x, col_y), "Intercompany:", font=font_small, fill=self.muted_text)
-            draw.text((col2_x, col_y + 16), intercompany, font=font_value, fill=self.text_color)
+            label2 = "Intercompany:"
+            bbox2 = draw.textbbox((0, 0), label2, font=font_small)
+            lw2 = bbox2[2] - bbox2[0]
+            col2_center = margin + col_w + col_w // 2
+            draw.text((col2_center - lw2 // 2, col_y), label2, font=font_small, fill=self.muted_text)
+            bbox2v = draw.textbbox((0, 0), intercompany, font=font_value)
+            vw2 = bbox2v[2] - bbox2v[0]
+            draw.text((col2_center - vw2 // 2, col_y + 16), intercompany, font=font_value, fill=self.text_color)
             
-            # Coluna 3: Não Identificadas
+            # Coluna 3: Não Identificadas (centralizada na terceira terça parte)
             nao_ident = receitas.get("nao_identificadas", "R$ 0,00")
-            col3_x = margin + pad + col_w * 2
-            draw.text((col3_x, col_y), "Não Identificadas:", font=font_small, fill=self.muted_text)
-            draw.text((col3_x, col_y + 16), nao_ident, font=font_value, fill=self.text_color)
+            label3 = "Não Identificadas:"
+            bbox3 = draw.textbbox((0, 0), label3, font=font_small)
+            lw3 = bbox3[2] - bbox3[0]
+            col3_center = margin + col_w * 2 + col_w // 2
+            draw.text((col3_center - lw3 // 2, col_y), label3, font=font_small, fill=self.muted_text)
+            bbox3v = draw.textbbox((0, 0), nao_ident, font=font_value)
+            vw3 = bbox3v[2] - bbox3v[0]
+            draw.text((col3_center - vw3 // 2, col_y + 16), nao_ident, font=font_value, fill=self.text_color)
 
         img.save(output_path, "PNG")
         return output_path
@@ -415,13 +447,17 @@ class ImageGenerator:
         tw = bbox[2] - bbox[0]
         draw.text((x + (w - tw)/2, y + 15), title, font=font_title, fill=self.muted_text)
         
-        # Metas (barras de progresso simuladas + texto)
+        # Metas (barras de progresso com porcentagem real)
         meta_keys = ["meta1", "meta2", "meta3"]
+        pct_keys = ["pct_meta1", "pct_meta2", "pct_meta3"]
         if is_small:
-            # Layout simplificado para cards pquenos
+            # Layout simplificado para cards pequenos
             my = y + 45
-            for k in meta_keys:
+            for i, k in enumerate(meta_keys):
                 val = data.get(k, "-")
+                pct = data.get(pct_keys[i], 0)
+                pct_text = f"{pct:.0f}%"
+                
                 draw.text((x + 10, my), f"Meta {k[-1]}", font=self._get_font(9), fill=self.muted_text)
                 
                 # Valor direita
@@ -429,24 +465,46 @@ class ImageGenerator:
                 vw = bbox[2] - bbox[0]
                 draw.text((x + w - 10 - vw, my), val, font=self._get_font(9, bold=True), fill=self.text_color)
                 
-                # Barra dourada
-                draw.rounded_rectangle([(x + 10, my + 12), (x + w - 10, my + 16)], radius=2, fill=self.gold_color)
-                my += 23
-        else:
-            # Layout padrão com espaçamentos compactos
-            my = y + 42
-            for k in meta_keys:
-                val = data.get(k, "-")
+                # Porcentagem
+                draw.text((x + 10, my + 11), pct_text, font=self._get_font(8), fill=self.muted_text)
                 
-                # Usar pad = 18 definido acima
+                # Barra de progresso (fundo + preenchimento)
+                bar_width = w - 20
+                draw.rounded_rectangle([(x + 10, my + 20), (x + w - 10, my + 24)], radius=2, fill=(60, 60, 60))
+                fill_width = max(0, min(bar_width, bar_width * (pct / 100)))
+                if fill_width > 0:
+                    draw.rounded_rectangle([(x + 10, my + 20), (x + 10 + fill_width, my + 24)], radius=2, fill=self.gold_color)
+                my += 30
+        else:
+            # Layout padrão com barras de progresso e porcentagem
+            my = y + 42
+            for i, k in enumerate(meta_keys):
+                val = data.get(k, "-")
+                pct = data.get(pct_keys[i], 0)
+                pct_text = f"{pct:.0f}%"
+                
+                # Label Meta
                 draw.text((x + pad, my), f"Meta {k[-1]}", font=self._get_font(11, bold=True), fill=self.muted_text)
                 
+                # Valor à direita
                 bbox = draw.textbbox((0, 0), val, font=self._get_font(11, bold=True))
                 vw = bbox[2] - bbox[0]
                 draw.text((x + w - pad - vw, my), val, font=self._get_font(11, bold=True), fill=self.text_color)
                 
-                draw.rounded_rectangle([(x + pad, my + 15), (x + w - pad, my + 19)], radius=2, fill=self.gold_color)
-                my += 25
+                # Porcentagem abaixo do label
+                draw.text((x + pad, my + 13), pct_text, font=self._get_font(9, bold=True), fill=self.muted_text)
+                
+                # Barra de progresso (fundo cinza escuro)
+                bar_y = my + 24
+                bar_width = w - 2 * pad
+                draw.rounded_rectangle([(x + pad, bar_y), (x + w - pad, bar_y + 5)], radius=2, fill=(60, 60, 60))
+                
+                # Barra de progresso (preenchimento dourado proporcional)
+                fill_width = max(0, min(bar_width, bar_width * (pct / 100)))
+                if fill_width > 0:
+                    draw.rounded_rectangle([(x + pad, bar_y), (x + pad + fill_width, bar_y + 5)], radius=2, fill=self.gold_color)
+                
+                my += 35
 
         # Realizado rodapé (sempre mostrar, logo após metas)
         realizado = data.get("realizado", "-")
@@ -469,7 +527,7 @@ class ImageGenerator:
         if output_path is None:
             output_path = f"metas_{departamento.get('nome', 'dept').lower()}.png"
         
-        height = 400  # Mais espaço para rodapé visível
+        height = 480  # Aumentado para caber as barras de progresso
         img = Image.new("RGB", (self.width, height), self.bg_color)
         draw = ImageDraw.Draw(img)
         
@@ -498,29 +556,36 @@ class ImageGenerator:
         
         nome = departamento.get("nome", "DEPARTAMENTO").upper()
         draw.text((95, y + 8), nome, font=font_title, fill=self.card_color)
-        draw.text((95, y + 38), f"Período: {periodo}", font=font_periodo, fill=(100, 100, 100))
+        
+        # Data de geração no formato dd/mm/aaaa (mesmo padrão do metas_geral)
+        data_geracao = datetime.now().strftime("%d/%m/%Y")
+        draw.text((95, y + 38), f"Período: {data_geracao}", font=font_periodo, fill=(100, 100, 100))
         
         y = 95
         
-        # Card único - altura ajustada para layout vertical
+        # Card único - altura ajustada para layout vertical com barras
         cx, cw = 25, self.width - 50
-        card_h = 250
+        card_h = 300  # Aumentado para caber as barras
         draw.rounded_rectangle([(cx, y), (cx + cw, y + card_h)], radius=12, fill=self.card_color)
         
         # Título do card
         draw.text((cx + 25, y + 18), "METAS", font=self._get_font(14, bold=True), fill=self.accent_color)
         draw.line([(cx + 25, y + 45), (cx + cw - 25, y + 45)], fill=self.accent_color, width=1)
         
-        # Metas - layout vertical (uma por linha)
+        # Metas com porcentagem e barra de progresso
         metas = [
-            ("Meta 1", departamento.get("meta1", "-")),
-            ("Meta 2", departamento.get("meta2", "-")),
-            ("Meta 3", departamento.get("meta3", "-"))
+            ("Meta 1", departamento.get("meta1", "-"), departamento.get("pct_meta1", 0)),
+            ("Meta 2", departamento.get("meta2", "-"), departamento.get("pct_meta2", 0)),
+            ("Meta 3", departamento.get("meta3", "-"), departamento.get("pct_meta3", 0))
         ]
         
         meta_y = y + 55
         pad = 25
-        for label, value in metas:
+        bar_width = cw - 2 * pad
+        
+        for label, value, pct in metas:
+            pct_text = f"{pct:.0f}%" if pct else "0%"
+            
             # Label à esquerda
             draw.text((cx + pad, meta_y), label, font=font_label, fill=self.muted_text)
             
@@ -529,23 +594,28 @@ class ImageGenerator:
             val_w = bbox[2] - bbox[0]
             draw.text((cx + cw - pad - val_w, meta_y), str(value), font=font_value, fill=self.text_color)
             
-            meta_y += 28
+            # Porcentagem abaixo do label
+            draw.text((cx + pad, meta_y + 18), pct_text, font=self._get_font(11, bold=True), fill=self.muted_text)
+            
+            # Barra de progresso (fundo cinza escuro)
+            bar_y = meta_y + 32
+            draw.rounded_rectangle([(cx + pad, bar_y), (cx + cw - pad, bar_y + 6)], radius=3, fill=(60, 60, 60))
+            
+            # Barra de progresso (preenchimento dourado proporcional)
+            fill_width = max(0, min(bar_width, bar_width * (pct / 100)))
+            if fill_width > 0:
+                draw.rounded_rectangle([(cx + pad, bar_y), (cx + pad + fill_width, bar_y + 6)], radius=3, fill=self.accent_color)
+            
+            meta_y += 50
         
         # Linha separadora
         sep_y = meta_y + 5
         draw.line([(cx + pad, sep_y), (cx + cw - pad, sep_y)], fill=(60, 60, 60), width=1)
         
-        # Realizado - destaque maior
+        # Realizado - destaque maior (sem porcentagem grande)
         ry = sep_y + 15
         draw.text((cx + pad, ry), "REALIZADO", font=font_label, fill=self.muted_text)
         draw.text((cx + pad, ry + 25), departamento.get("realizado", "-"), font=font_big_value, fill=self.text_color)
-        
-        # Percentual à direita
-        percent = departamento.get("percent", "")
-        if percent:
-            bbox = draw.textbbox((0, 0), percent, font=font_big_value)
-            pw = bbox[2] - bbox[0]
-            draw.text((cx + cw - pad - pw, ry + 25), percent, font=font_big_value, fill=self.text_color)
         
         # Rodapé (visível abaixo do card)
         draw.text((25, height - 25), "Grupo Studio • Automação Power BI", font=font_small, fill=(80, 80, 80))
@@ -563,7 +633,7 @@ if __name__ == "__main__":
     
     # Buscar dados reais do Power BI
     print("Buscando dados do Power BI...")
-    total_gs, departamentos = fetcher.fetch_all_data()
+    total_gs, departamentos, receitas = fetcher.fetch_all_data()
     
     if total_gs is None or departamentos is None:
         print("Erro ao buscar dados. Usando dados de exemplo...")
@@ -585,13 +655,12 @@ if __name__ == "__main__":
             {"nome": "Corporate", "meta1": "R$ 2.004.875", "meta2": "R$ 2.004.875", "meta3": "R$ 2.004.875", "realizado": "-", "percent": ""},
             {"nome": "Tecnologia", "meta1": "R$ 210.378", "meta2": "R$ 210.378", "meta3": "R$ 216.378", "realizado": "R$ 114.934", "percent": "53%"},
         ]
-    
-    # Dados de receitas (buscar do Power BI se disponível)
-    receitas = {
-        "outras": "R$ 1.211",
-        "intercompany": "R$ 0,00",
-        "nao_identificadas": "R$ 0,00"
-    }
+        # Fallback receitas
+        receitas = {
+            "outras": "R$ 0,00",
+            "intercompany": "R$ 0,00",
+            "nao_identificadas": "R$ 285.403"
+        }
     
     # Gerar imagem geral (metas_geral.png) na pasta images/
     print("\nGerando imagem geral...")
