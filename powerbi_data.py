@@ -91,16 +91,29 @@ class PowerBIDataFetcher:
         return {}
     
     def fetch_metas_comercial_operacional(self):
-        """Busca metas de Comercial e Operacional (da tabela Medidas)"""
-        query = """
+        """Busca metas de Comercial e Operacional (da tabela Medidas) com filtro de data"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+            
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        
+        query = f"""
         EVALUATE
-        ROW(
-            "Comercial_Meta1", [Total_Comercial_Meta1],
-            "Comercial_Meta2", [Total_Comercial_Meta2],
-            "Comercial_Meta3", [Total_Comercial_Meta3],
-            "Operacional_Meta1", [Total_Operacional_Meta1],
-            "Operacional_Meta2", [Total_Operacional_Meta2],
-            "Operacional_Meta3", [Total_Operacional_Meta3]
+        CALCULATETABLE(
+            ROW(
+                "Comercial_Meta1", [Total_Comercial_Meta1],
+                "Comercial_Meta2", [Total_Comercial_Meta2],
+                "Comercial_Meta3", [Total_Comercial_Meta3],
+                "Operacional_Meta1", [Total_Operacional_Meta1],
+                "Operacional_Meta2", [Total_Operacional_Meta2],
+                "Operacional_Meta3", [Total_Operacional_Meta3]
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
         )
         """
         
@@ -124,6 +137,130 @@ class PowerBIDataFetcher:
             print(f"Erro ao buscar metas Comercial/Operacional: {e}")
         
         return {}
+    
+    def fetch_percentuais_gs(self):
+        """Busca percentuais das metas GS (% Meta 1 GS, % Meta 2 GS, % Meta 3 GS)"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+            
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        
+        query = f"""
+        EVALUATE
+        CALCULATETABLE(
+            ROW(
+                "Pct_Meta1", [% Meta 1 GS],
+                "Pct_Meta2", [% Meta 2 GS],
+                "Pct_Meta3", [% Meta 3 GS]
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
+        )
+        """
+        
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "pct_meta1": (row.get("[Pct_Meta1]") or 0) * 100,  # Converter para percentual
+                    "pct_meta2": (row.get("[Pct_Meta2]") or 0) * 100,
+                    "pct_meta3": (row.get("[Pct_Meta3]") or 0) * 100,
+                }
+        except Exception as e:
+            print(f"Erro ao buscar percentuais GS: {e}")
+        
+        return {"pct_meta1": 0, "pct_meta2": 0, "pct_meta3": 0}
+    
+    def fetch_percentuais_comercial_operacional(self):
+        """Busca percentuais de Comercial e Operacional"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+            
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        
+        query = f"""
+        EVALUATE
+        CALCULATETABLE(
+            ROW(
+                "Com_Pct1", [% Meta 1 COMERCIAL],
+                "Com_Pct2", [% Meta 2 COMERCIAL],
+                "Com_Pct3", [% Meta 3 COMERCIAL],
+                "Op_Pct1", [% Meta 1 OPERACIONAL],
+                "Op_Pct2", [% Meta 2 OPERACIONAL],
+                "Op_Pct3", [% Meta 3 OPERACIONAL]
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
+        )
+        """
+        
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "Comercial": {
+                        "pct_meta1": (row.get("[Com_Pct1]") or 0) * 100,
+                        "pct_meta2": (row.get("[Com_Pct2]") or 0) * 100,
+                        "pct_meta3": (row.get("[Com_Pct3]") or 0) * 100,
+                    },
+                    "Operacional": {
+                        "pct_meta1": (row.get("[Op_Pct1]") or 0) * 100,
+                        "pct_meta2": (row.get("[Op_Pct2]") or 0) * 100,
+                        "pct_meta3": (row.get("[Op_Pct3]") or 0) * 100,
+                    }
+                }
+        except Exception as e:
+            print(f"Erro ao buscar percentuais Comercial/Operacional: {e}")
+        
+        return {"Comercial": {"pct_meta1": 0, "pct_meta2": 0, "pct_meta3": 0}, 
+                "Operacional": {"pct_meta1": 0, "pct_meta2": 0, "pct_meta3": 0}}
+    
+    def fetch_receitas(self):
+        """Busca valores de receitas (Outras Receitas, Intercompany) da tabela Medidas"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        # Calcular último dia do mês
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+            
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        
+        query = f"""
+        EVALUATE
+        CALCULATETABLE(
+            ROW(
+                "OutrasReceitas", [Valor_OutrasReceitas],
+                "InterCompany", [Valor_InterCompany]
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
+        )
+        """
+        
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "outras": row.get("[OutrasReceitas]") or 0,
+                    "intercompany": row.get("[InterCompany]") or 0,
+                }
+        except Exception as e:
+            print(f"Erro ao buscar receitas: {e}")
+        
+        return {"outras": 0, "intercompany": 0}
     
     def fetch_metas_departamento(self, tabela, prefixo):
         """Busca metas de um departamento específico"""
@@ -158,38 +295,88 @@ class PowerBIDataFetcher:
         
         return {"meta1": 0, "meta2": 0, "meta3": 0}
     
+    def fetch_percentuais_departamento(self, prefixo):
+        """Busca percentuais de um departamento específico (% Meta 1/2/3 PREFIXO)"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+            
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        
+        query = f"""
+        EVALUATE
+        CALCULATETABLE(
+            ROW(
+                "Pct1", [% Meta 1 {prefixo}],
+                "Pct2", [% Meta 2 {prefixo}],
+                "Pct3", [% Meta 3 {prefixo}]
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
+        )
+        """
+        
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "pct_meta1": (row.get("[Pct1]") or 0) * 100,
+                    "pct_meta2": (row.get("[Pct2]") or 0) * 100,
+                    "pct_meta3": (row.get("[Pct3]") or 0) * 100,
+                }
+        except Exception as e:
+            print(f"Erro ao buscar percentuais {prefixo}: {e}")
+        
+        return {"pct_meta1": 0, "pct_meta2": 0, "pct_meta3": 0}
+    
     def fetch_all_data(self):
         """Busca todos os dados necessários para a automação"""
         if not self.authenticate():
             print("Falha na autenticação com Power BI")
-            return None, None
+            return None, None, None
         
         print("Buscando dados do Power BI...")
         
         # 1. Buscar valores realizados
         realizados = self.fetch_valores_realizados()
         
-        # 2. Buscar metas GS (total)
+        # 2. Buscar receitas (Outras Receitas, Intercompany)
+        receitas_raw = self.fetch_receitas()
+        
+        # 3. Buscar metas GS (total)
         metas_gs = self.fetch_metas_departamento("GS_Metas", "GS")
         
-        # 3. Buscar metas Comercial/Operacional
+        # 4. Buscar percentuais GS
+        pct_gs = self.fetch_percentuais_gs()
+        
+        # 5. Buscar metas Comercial/Operacional
         metas_com_op = self.fetch_metas_comercial_operacional()
         
-        # 4. Buscar metas dos outros departamentos
+        # 6. Buscar percentuais Comercial/Operacional
+        pct_com_op = self.fetch_percentuais_comercial_operacional()
+        
+        # 7. Configuração dos outros departamentos
         departamentos_config = [
             ("Corporate", "Corporate_Metas", "CORPORATE"),
-            ("Educação", "Educação_Metas", "EDUCAÇAO"),
+            ("Educação", "Educação_Metas", "EDUCACAO"),
             ("Expansão", "Expansão_Metas", "EXPANSAO"),
             ("Franchising", "Franchising_Metas", "FRANCHISING"),
-            ("Tax", "TAX_Metas", "Tax"),
+            ("Tax", "TAX_Metas", "TAX"),
             ("Tecnologia", "PJ360_Metas", "PJ"),
         ]
         
-        # Montar dados formatados
+        # Montar dados formatados para GS
         total_gs = {
             "meta1": format_currency(metas_gs.get("meta1", 0)),
             "meta2": format_currency(metas_gs.get("meta2", 0)),
             "meta3": format_currency(metas_gs.get("meta3", 0)),
+            "pct_meta1": pct_gs.get("pct_meta1", 0),
+            "pct_meta2": pct_gs.get("pct_meta2", 0),
+            "pct_meta3": pct_gs.get("pct_meta3", 0),
             "realizado": format_currency(sum(realizados.values())),
             "percent": format_percent(
                 (sum(realizados.values()) / metas_gs.get("meta1", 1)) * 100 
@@ -201,12 +388,16 @@ class PowerBIDataFetcher:
         
         # Comercial
         com_metas = metas_com_op.get("Comercial", {})
+        com_pct = pct_com_op.get("Comercial", {})
         com_real = realizados.get("Comercial", 0)
         departamentos.append({
             "nome": "Comercial",
             "meta1": format_currency(com_metas.get("meta1", 0)),
             "meta2": format_currency(com_metas.get("meta2", 0)),
             "meta3": format_currency(com_metas.get("meta3", 0)),
+            "pct_meta1": com_pct.get("pct_meta1", 0),
+            "pct_meta2": com_pct.get("pct_meta2", 0),
+            "pct_meta3": com_pct.get("pct_meta3", 0),
             "realizado": format_currency(com_real),
             "percent": format_percent(
                 (com_real / com_metas.get("meta1", 1)) * 100 
@@ -216,12 +407,16 @@ class PowerBIDataFetcher:
         
         # Operacional
         op_metas = metas_com_op.get("Operacional", {})
+        op_pct = pct_com_op.get("Operacional", {})
         op_real = realizados.get("Operacional", 0)
         departamentos.append({
             "nome": "Operacional",
             "meta1": format_currency(op_metas.get("meta1", 0)),
             "meta2": format_currency(op_metas.get("meta2", 0)),
             "meta3": format_currency(op_metas.get("meta3", 0)),
+            "pct_meta1": op_pct.get("pct_meta1", 0),
+            "pct_meta2": op_pct.get("pct_meta2", 0),
+            "pct_meta3": op_pct.get("pct_meta3", 0),
             "realizado": format_currency(op_real),
             "percent": format_percent(
                 (op_real / op_metas.get("meta1", 1)) * 100 
@@ -232,6 +427,7 @@ class PowerBIDataFetcher:
         # Outros departamentos
         for nome, tabela, prefixo in departamentos_config:
             metas = self.fetch_metas_departamento(tabela, prefixo)
+            pct = self.fetch_percentuais_departamento(prefixo)
             
             # Mapeamento de nome para chave de realizado (Tecnologia -> PJ)
             key_realizado = "PJ" if nome == "Tecnologia" else nome
@@ -242,6 +438,9 @@ class PowerBIDataFetcher:
                 "meta1": format_currency(metas.get("meta1", 0)),
                 "meta2": format_currency(metas.get("meta2", 0)),
                 "meta3": format_currency(metas.get("meta3", 0)),
+                "pct_meta1": pct.get("pct_meta1", 0),
+                "pct_meta2": pct.get("pct_meta2", 0),
+                "pct_meta3": pct.get("pct_meta3", 0),
                 "realizado": format_currency(real),
                 "percent": format_percent(
                     (real / metas.get("meta1", 1)) * 100 
@@ -249,8 +448,15 @@ class PowerBIDataFetcher:
                 )
             })
         
+        # Formatar receitas
+        receitas = {
+            "outras": format_currency(receitas_raw.get("outras", 0)),
+            "intercompany": format_currency(receitas_raw.get("intercompany", 0)),
+            "nao_identificadas": "R$ 285.403"  # Valor fixo por enquanto - medida não encontrada no Power BI
+        }
+        
         print(f"OK - Dados de {len(departamentos)} departamentos obtidos")
-        return total_gs, departamentos
+        return total_gs, departamentos, receitas
 
 
 # Teste
