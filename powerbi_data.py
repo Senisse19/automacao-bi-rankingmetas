@@ -226,7 +226,7 @@ class PowerBIDataFetcher:
                 "Operacional": {"pct_meta1": 0, "pct_meta2": 0, "pct_meta3": 0}}
     
     def fetch_receitas(self):
-        """Busca valores de receitas (Outras Receitas, Intercompany) da tabela Medidas"""
+        """Busca valores de receitas (Outras Receitas, Intercompany, Não Identificadas) da tabela Medidas"""
         now = datetime.now()
         start_date = datetime(now.year, now.month, 1)
         # Calcular último dia do mês
@@ -243,7 +243,9 @@ class PowerBIDataFetcher:
         CALCULATETABLE(
             ROW(
                 "OutrasReceitas", [Valor_OutrasReceitas],
-                "InterCompany", [Valor_InterCompany]
+                "InterCompany", [Valor_InterCompany],
+                "NaoIdentificada", [Valor_NaoIdentificada],
+                "SemCategoria", [Valor_Sem_Categoria]
             ),
             DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
         )
@@ -256,11 +258,13 @@ class PowerBIDataFetcher:
                 return {
                     "outras": row.get("[OutrasReceitas]") or 0,
                     "intercompany": row.get("[InterCompany]") or 0,
+                    "nao_identificadas": row.get("[NaoIdentificada]") or 0,
+                    "sem_categoria": row.get("[SemCategoria]") or 0,
                 }
         except Exception as e:
             print(f"Erro ao buscar receitas: {e}")
         
-        return {"outras": 0, "intercompany": 0}
+        return {"outras": 0, "intercompany": 0, "nao_identificadas": 0, "sem_categoria": 0}
     
     def fetch_metas_departamento(self, tabela, prefixo):
         """Busca metas de um departamento específico"""
@@ -377,9 +381,9 @@ class PowerBIDataFetcher:
             "pct_meta1": pct_gs.get("pct_meta1", 0),
             "pct_meta2": pct_gs.get("pct_meta2", 0),
             "pct_meta3": pct_gs.get("pct_meta3", 0),
-            "realizado": format_currency(sum(realizados.values())),
+            "realizado": format_currency(realizados.get("Comercial", 0) + realizados.get("Operacional", 0)),
             "percent": format_percent(
-                (sum(realizados.values()) / metas_gs.get("meta1", 1)) * 100 
+                ((realizados.get("Comercial", 0) + realizados.get("Operacional", 0)) / metas_gs.get("meta1", 1)) * 100 
                 if metas_gs.get("meta1", 0) > 0 else 0
             )
         }
@@ -452,7 +456,8 @@ class PowerBIDataFetcher:
         receitas = {
             "outras": format_currency(receitas_raw.get("outras", 0)),
             "intercompany": format_currency(receitas_raw.get("intercompany", 0)),
-            "nao_identificadas": "R$ 285.403"  # Valor fixo por enquanto - medida não encontrada no Power BI
+            "nao_identificadas": format_currency(receitas_raw.get("nao_identificadas", 0)),
+            "sem_categoria": format_currency(receitas_raw.get("sem_categoria", 0))
         }
         
         print(f"OK - Dados de {len(departamentos)} departamentos obtidos")
@@ -462,11 +467,14 @@ class PowerBIDataFetcher:
 # Teste
 if __name__ == "__main__":
     fetcher = PowerBIDataFetcher()
-    total, deps = fetcher.fetch_all_data()
+    total, deps, receitas = fetcher.fetch_all_data()
     
     print("\n" + "=" * 60)
     print("TOTAL GS:")
     print(json.dumps(total, indent=2, ensure_ascii=False))
+
+    print("\nRECEITAS:")
+    print(json.dumps(receitas, indent=2, ensure_ascii=False))
     
     print("\nDEPARTAMENTOS:")
     for d in deps:

@@ -353,11 +353,11 @@ class ImageGenerator:
             title_w = title_bbox[2] - title_bbox[0]
             draw.text((margin + (rec_w - title_w) / 2, rec_y + 12), title_text, font=font_title, fill=self.accent_color)
             
-            # 3 colunas centralizadas: Outras Receitas, Intercompany, Não Identificadas
-            col_w = rec_w // 3
+            # 4 colunas centralizadas: Outras Receitas, Intercompany, Não Identificadas, Sem Categoria
+            col_w = rec_w // 4
             col_y = rec_y + 45
             
-            # Coluna 1: Outras Receitas (centralizada na primeira terça parte)
+            # Coluna 1: Outras Receitas
             outras = receitas.get("outras", "R$ 0,00")
             label1 = "Outras Receitas:"
             bbox1 = draw.textbbox((0, 0), label1, font=font_small)
@@ -368,7 +368,7 @@ class ImageGenerator:
             vw1 = bbox1v[2] - bbox1v[0]
             draw.text((col1_center - vw1 // 2, col_y + 16), outras, font=font_value, fill=self.text_color)
             
-            # Coluna 2: Intercompany (centralizada na segunda terça parte)
+            # Coluna 2: Intercompany
             intercompany = receitas.get("intercompany", "R$ 0,00")
             label2 = "Intercompany:"
             bbox2 = draw.textbbox((0, 0), label2, font=font_small)
@@ -379,7 +379,7 @@ class ImageGenerator:
             vw2 = bbox2v[2] - bbox2v[0]
             draw.text((col2_center - vw2 // 2, col_y + 16), intercompany, font=font_value, fill=self.text_color)
             
-            # Coluna 3: Não Identificadas (centralizada na terceira terça parte)
+            # Coluna 3: Não Identificadas
             nao_ident = receitas.get("nao_identificadas", "R$ 0,00")
             label3 = "Não Identificadas:"
             bbox3 = draw.textbbox((0, 0), label3, font=font_small)
@@ -389,6 +389,17 @@ class ImageGenerator:
             bbox3v = draw.textbbox((0, 0), nao_ident, font=font_value)
             vw3 = bbox3v[2] - bbox3v[0]
             draw.text((col3_center - vw3 // 2, col_y + 16), nao_ident, font=font_value, fill=self.text_color)
+            
+            # Coluna 4: Sem Categoria
+            sem_cat = receitas.get("sem_categoria", "R$ 0,00")
+            label4 = "Sem Categoria:"
+            bbox4 = draw.textbbox((0, 0), label4, font=font_small)
+            lw4 = bbox4[2] - bbox4[0]
+            col4_center = margin + col_w * 3 + col_w // 2
+            draw.text((col4_center - lw4 // 2, col_y), label4, font=font_small, fill=self.muted_text)
+            bbox4v = draw.textbbox((0, 0), sem_cat, font=font_value)
+            vw4 = bbox4v[2] - bbox4v[0]
+            draw.text((col4_center - vw4 // 2, col_y + 16), sem_cat, font=font_value, fill=self.text_color)
 
         img.save(output_path, "PNG")
         return output_path
@@ -659,7 +670,8 @@ if __name__ == "__main__":
         receitas = {
             "outras": "R$ 0,00",
             "intercompany": "R$ 0,00",
-            "nao_identificadas": "R$ 285.403"
+            "nao_identificadas": "R$ 285.403",
+            "sem_categoria": "R$ 15.000"
         }
     
     # Gerar imagem geral (metas_geral.png) na pasta images/
