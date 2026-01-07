@@ -56,16 +56,16 @@ class MetasAutomation:
         from powerbi_data import PowerBIDataFetcher
         
         fetcher = PowerBIDataFetcher()
-        total_gs, departamentos = fetcher.fetch_all_data()
+        total_gs, departamentos, receitas = fetcher.fetch_all_data()
         
         if total_gs and departamentos:
             print(f"   OK - Dados de {len(departamentos)} departamentos obtidos")
-            return total_gs, departamentos
+            return total_gs, departamentos, receitas
         else:
             print("   ERRO: Falha ao obter dados do Power BI")
-            return None, None
+            return None, None, None
     
-    def generate_images(self, total_gs, departamentos, periodo):
+    def generate_images(self, total_gs, departamentos, receitas, periodo):
         """Gera todas as imagens necessárias"""
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Gerando imagens...")
         
@@ -77,6 +77,7 @@ class MetasAutomation:
             periodo=periodo,
             departamentos=departamentos,
             total_gs=total_gs,
+            receitas=receitas,
             output_path=geral_path
         )
         images["diretoria"] = geral_path
@@ -154,14 +155,14 @@ class MetasAutomation:
         print("=" * 60)
         
         # 1. Buscar dados
-        total_gs, departamentos = self.fetch_metas_data()
+        total_gs, departamentos, receitas = self.fetch_metas_data()
         if not departamentos:
             print("ERRO: Não foi possível obter dados")
             return False
         
         # 2. Gerar imagens
         periodo = self.get_periodo()
-        images = self.generate_images(total_gs, departamentos, periodo)
+        images = self.generate_images(total_gs, departamentos, receitas, periodo)
         
         # 3. Enviar para WhatsApp
         enviados, erros = self.send_to_whatsapp(images)
@@ -199,9 +200,9 @@ def main():
             # Apenas gerar imagens sem enviar
             print("Gerando imagens de exemplo...")
             periodo = automation.get_periodo()
-            total_gs, departamentos = automation.fetch_metas_data()
+            total_gs, departamentos, receitas = automation.fetch_metas_data()
             if departamentos:
-                images = automation.generate_images(total_gs, departamentos, periodo)
+                images = automation.generate_images(total_gs, departamentos, receitas, periodo)
                 print(f"\nImagens geradas em: {IMAGES_DIR}")
                 for key, path in images.items():
                     print(f"  - {key}: {path}")
