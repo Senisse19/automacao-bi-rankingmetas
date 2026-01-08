@@ -33,7 +33,7 @@ EVOLUTION_CONFIG = {
 # IDs obtidos automaticamente via Evolution API
 GRUPOS_WHATSAPP = {
     # Geral - imagem completa com todos os departamentos
-    "diretoria": os.environ.get("GRUPO_DIRETORIA", "120363406578477836@g.us"),
+    "diretoria": os.environ.get("GRUPO_DIRETORIA", "120363407075752057@g.us"),
     
     # Grupos por departamento
     "comercial": os.environ.get("GRUPO_COMERCIAL", "120363424554621359@g.us"),
