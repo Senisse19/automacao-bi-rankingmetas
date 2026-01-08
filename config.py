@@ -72,7 +72,7 @@ DISPLAY_NAMES = {
 }
 
 # Agendamento do disparo diário
-SCHEDULE_TIME = os.environ.get("SCHEDULE_TIME", "09:00")  # Horário do disparo diário
+SCHEDULE_TIME = os.environ.get("SCHEDULE_TIME", "14:00")  # Horário do disparo diário
 
 # Configuração de monitoramento SharePoint (automação existente)
 MONITOR_INTERVAL_SECONDS = int(os.environ.get("MONITOR_INTERVAL_SECONDS", "60"))
@@ -83,8 +83,10 @@ KNOWN_FILES_PATH = os.path.join(DATA_DIR, "known_files.json")
 IMAGES_DIR = os.path.join(DATA_DIR, "images")
 
 # Mensagem padrão para o relatório de metas
-METAS_CAPTION = os.environ.get("METAS_CAPTION", """📊 *Metas {departamento}*
+METAS_CAPTION = os.environ.get("METAS_CAPTION", """📊 Acompanhamento Metas Caixa {departamento}
 
 Dados consolidados até {data} (D-1).
 
-🎯 Acompanhe seu progresso!""")
+🎯 Acompanhe seu progresso:
+
+https://dashboards.grupostudio.tec.br""")
