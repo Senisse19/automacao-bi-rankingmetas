@@ -222,9 +222,11 @@ class ImageGenerator:
         receitas_h = 100 if receitas else 0
         padding = 15
         
-        height = header_h + gs_card_h + (num_dept_rows * (dept_row_h + padding)) + receitas_h + 40
+
+        height = header_h + gs_card_h + (num_dept_rows * (dept_row_h + padding)) + receitas_h + 80
         
         img = Image.new("RGB", (self.width, height), self.bg_color)
+
         draw = ImageDraw.Draw(img)
         
         # Fontes (todas bold para maior visibilidade)
@@ -631,6 +633,155 @@ class ImageGenerator:
         # Rodapé (visível abaixo do card)
         draw.text((25, height - 25), "Grupo Studio • Automação Power BI", font=font_small, fill=(80, 80, 80))
         
+
+        img.save(output_path, "PNG")
+        return output_path
+
+    def generate_resumo_image(self, periodo, total_gs=None, receitas=None, output_path="metas_resumo.png"):
+        """
+        Gera imagem resumida contendo APENAS:
+        1. GS - Resumo Geral
+        2. Receitas
+        
+        Args:
+            periodo: String do período
+            total_gs: Dict com metas totais
+            receitas: Dict com dados de receitas
+            output_path: Caminho para salvar
+        """
+        # Canvas vertical
+        self.width = 500
+        
+        # Calcular altura dinamicamente
+        header_h = 60
+        gs_card_h = 240
+        receitas_h = 100 if receitas else 0
+        padding = 15
+        
+
+        height = header_h + gs_card_h + padding + receitas_h + 80
+        
+        img = Image.new("RGB", (self.width, height), self.bg_color)
+
+        draw = ImageDraw.Draw(img)
+        
+        # Fontes
+        font_header = self._get_font(18, bold=True)
+        font_title = self._get_font(15, bold=True)
+        font_label = self._get_font(12, bold=True)
+        font_value = self._get_font(13, bold=True)
+        font_big_value = self._get_font(22, bold=True)
+        font_small = self._get_font(11, bold=True)
+        
+        margin = 15
+        y = 0
+        
+        # === HEADER ===
+        # Fundo do header
+        draw.rectangle([(0, 0), (self.width, header_h)], fill=self.bg_color)
+        
+        # Título
+        data_atual = datetime.now().strftime("%d/%m/%Y")
+        header_text = f"RELATÓRIO GERAL - {data_atual}"
+        draw.text((margin, 18), header_text, font=font_header, fill=self.card_color)
+        
+        # Logo GS
+        logo_size = 40
+        logo_x = self.width - margin - logo_size
+        draw.rounded_rectangle(
+            [(logo_x, 10), (logo_x + logo_size, 10 + logo_size)],
+            radius=6, fill=self.card_color, outline=self.accent_color, width=2
+        )
+        gs_bbox = draw.textbbox((0, 0), "GS", font=self._get_font(18, bold=True))
+        gs_tw = gs_bbox[2] - gs_bbox[0]
+        gs_th = gs_bbox[3] - gs_bbox[1]
+        draw.text((logo_x + (logo_size - gs_tw)/2, 10 + (logo_size - gs_th)/2 - 2), "GS", font=self._get_font(18, bold=True), fill=self.accent_color)
+        
+        # Linha dourada
+        draw.rectangle([(0, header_h - 4), (self.width, header_h)], fill=self.accent_color)
+        
+        y = header_h + padding
+        
+        # === GS - RESUMO GERAL ===
+        if total_gs:
+            card_w = self.width - 2 * margin
+            card_h = gs_card_h
+            
+            draw.rounded_rectangle([(margin, y), (margin + card_w, y + card_h)], radius=12, fill=self.card_color, outline=self.accent_color, width=2)
+            
+            # Título
+            draw.text((margin + 20, y + 15), "GS - RESUMO GERAL", font=font_title, fill=self.accent_color)
+            
+            # 3 Metas
+            pad = 20
+            meta_y = y + 42
+            pct_keys = ["pct_meta1", "pct_meta2", "pct_meta3"]
+            for i, key in enumerate(["meta1", "meta2", "meta3"]):
+                val = total_gs.get(key, "-")
+                pct = total_gs.get(pct_keys[i], 0)
+                pct_text = f"{pct:.0f}%" if pct else "0%"
+                label = f"Meta {i+1}"
+                
+                draw.text((margin + pad, meta_y), label, font=font_label, fill=self.muted_text)
+                
+                bbox = draw.textbbox((0, 0), val, font=font_value)
+                val_w = bbox[2] - bbox[0]
+                draw.text((margin + card_w - pad - val_w, meta_y), val, font=font_value, fill=self.text_color)
+                
+                draw.text((margin + pad, meta_y + 14), pct_text, font=font_small, fill=self.muted_text)
+                
+                bar_y = meta_y + 28
+                bar_width = card_w - 2 * pad
+                draw.rounded_rectangle([(margin + pad, bar_y), (margin + pad + bar_width, bar_y + 6)], radius=3, fill=(60, 60, 60))
+                
+                fill_width = max(0, min(bar_width, bar_width * (pct / 100)))
+                if fill_width > 0:
+                    draw.rounded_rectangle([(margin + pad, bar_y), (margin + pad + fill_width, bar_y + 6)], radius=3, fill=self.accent_color)
+                
+                meta_y += 40
+            
+            # Realizado
+            real_y = meta_y + 5
+            draw.text((margin + pad, real_y), "REALIZADO:", font=font_small, fill=self.muted_text)
+            realizado = total_gs.get("realizado", "R$ 0,00")
+            draw.text((margin + pad, real_y + 16), realizado, font=font_big_value, fill=self.text_color)
+            
+            y += card_h + padding
+        
+        # === RECEITAS ===
+        if receitas:
+            rec_y = y
+            rec_h = receitas_h
+            rec_w = self.width - 2 * margin
+            
+            draw.rounded_rectangle([(margin, rec_y), (margin + rec_w, rec_y + rec_h)], radius=12, fill=self.card_color)
+            
+            title_text = "RECEITAS"
+            title_bbox = draw.textbbox((0, 0), title_text, font=font_title)
+            title_w = title_bbox[2] - title_bbox[0]
+            draw.text((margin + (rec_w - title_w) / 2, rec_y + 12), title_text, font=font_title, fill=self.accent_color)
+            
+            col_w = rec_w // 4
+            col_y = rec_y + 45
+            
+            keys = [("outras", "Outras Receitas:"), ("intercompany", "Intercompany:"), 
+                    ("nao_identificadas", "Não Identificadas:"), ("sem_categoria", "Sem Categoria:")]
+            
+            for i, (key, label) in enumerate(keys):
+                val = receitas.get(key, "R$ 0,00")
+                center = margin + (col_w * i) + col_w // 2
+                
+                bbox_l = draw.textbbox((0, 0), label, font=font_small)
+                wl = bbox_l[2] - bbox_l[0]
+                draw.text((center - wl // 2, col_y), label, font=font_small, fill=self.muted_text)
+                
+                bbox_v = draw.textbbox((0, 0), val, font=font_value)
+                wv = bbox_v[2] - bbox_v[0]
+                draw.text((center - wv // 2, col_y + 16), val, font=font_value, fill=self.text_color)
+
+        # Rodapé
+        draw.text((30, height - 30), "Grupo Studio • Automação Power BI", font=font_small, fill=(120, 120, 120))
+
         img.save(output_path, "PNG")
         return output_path
 
