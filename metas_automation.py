@@ -83,17 +83,37 @@ class MetasAutomation:
         images["diretoria"] = geral_path
         print(f"   Gerada: metas_geral.png")
         
-        # 2. Imagens individuais por departamento
+
+
+        # 2. Imagem Resumo (para todos os grupos individuais)
+        resumo_path = os.path.join(IMAGES_DIR, "metas_resumo.png")
+        self.image_gen.generate_resumo_image(
+            periodo=periodo,
+            total_gs=total_gs,
+            receitas=receitas,
+            output_path=resumo_path
+        )
+        print(f"   Gerada: metas_resumo.png")
+
+        # 3. Gerar imagens individuais (mas NÃO enviar)
+        # O usuário pediu para "continuar sendo geradas" mas enviar o resumo
+        print("   Gerando imagens individuais (backup)...")
         for dep in departamentos:
             nome_lower = dep["nome"].lower().replace("ã", "a").replace("ç", "c")
+            
+            # Gerar o arquivo físico
             dep_path = os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")
             self.image_gen.generate_departamento_image(
                 departamento=dep,
                 periodo=periodo,
                 output_path=dep_path
             )
-            images[nome_lower] = dep_path
-            print(f"   Gerada: metas_{nome_lower}.png")
+            # print(f"   Gerada (backup): metas_{nome_lower}.png")
+
+            # Mapear o envio para a imagem de RESUMO
+            images[nome_lower] = resumo_path
+
+
         
         return images
     
