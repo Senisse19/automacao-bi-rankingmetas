@@ -208,32 +208,11 @@ class MetasAutomation:
 
 
 def main():
-    import sys
-    
     automation = MetasAutomation()
     
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--now":
-            # Executar imediatamente
-            automation.run_once()
-        elif sys.argv[1] == "--generate":
-            # Apenas gerar imagens sem enviar
-            print("Gerando imagens de exemplo...")
-            periodo = automation.get_periodo()
-            total_gs, departamentos, receitas = automation.fetch_metas_data()
-            if departamentos:
-                images = automation.generate_images(total_gs, departamentos, receitas, periodo)
-                print(f"\nImagens geradas em: {IMAGES_DIR}")
-                for key, path in images.items():
-                    print(f"  - {key}: {path}")
-        else:
-            print("Uso:")
-            print("  python metas_automation.py          # Executar com agendamento")
-            print("  python metas_automation.py --now    # Executar imediatamente")
-            print("  python metas_automation.py --generate  # Apenas gerar imagens")
-    else:
-        # Executar com agendamento
-        automation.run_scheduled()
+    # Executar com agendamento
+    print("Iniciando automação em modo agendado...")
+    automation.run_scheduled()
 
 
 if __name__ == "__main__":
