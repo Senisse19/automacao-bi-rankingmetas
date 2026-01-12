@@ -39,9 +39,9 @@ GRUPOS_WHATSAPP = {
     "comercial": os.environ.get("GRUPO_COMERCIAL", "120363424554621359@g.us"),
     "operacional": os.environ.get("GRUPO_OPERACIONAL", "120363420901876738@g.us"),
     "expansao": os.environ.get("GRUPO_EXPANSAO", "120363424510427324@g.us"),
-    "franchising": os.environ.get("GRUPO_FRANCHISING", "120363424019706255@g.us"),
+    "franchising": os.environ.get("GRUPO_FRANCHISING", "120363403123930135@g.us"),
     "educacao": os.environ.get("GRUPO_EDUCACAO", "120363421821150511@g.us"),
-    "tax": os.environ.get("GRUPO_TAX", "120363422634608724@g.us"),
+    "tax": os.environ.get("GRUPO_TAX", "120363405591729270@g.us"),
     "corporate": os.environ.get("GRUPO_CORPORATE", "120363420686125971@g.us"),
     "tecnologia": os.environ.get("GRUPO_PJ", "120363421733361621@g.us"),
 }
