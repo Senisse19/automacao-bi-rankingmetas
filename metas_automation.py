@@ -199,8 +199,12 @@ class MetasAutomation:
         print(f"Agendamento: Todos os dias às {SCHEDULE_TIME}")
         print(f"Aguardando próxima execução...\n")
         
-        # Agendar execução diária
-        schedule.every().day.at(SCHEDULE_TIME).do(self.run_once)
+        # Agendar execução de segunda a sexta
+        schedule.every().monday.at(SCHEDULE_TIME).do(self.run_once)
+        schedule.every().tuesday.at(SCHEDULE_TIME).do(self.run_once)
+        schedule.every().wednesday.at(SCHEDULE_TIME).do(self.run_once)
+        schedule.every().thursday.at(SCHEDULE_TIME).do(self.run_once)
+        schedule.every().friday.at(SCHEDULE_TIME).do(self.run_once)
         
         while True:
             schedule.run_pending()
