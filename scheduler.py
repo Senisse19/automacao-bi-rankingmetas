@@ -41,25 +41,50 @@ def run_schedule():
     logger.info(f"Metas Reports:    Seg-Sex às {SCHEDULE_TIME}")
     
     # Unidades Daily (Mon-Fri)
-    schedule.every().monday.at(UNIDADES_SCHEDULE_TIME).do(job_unidades_daily)
-    schedule.every().tuesday.at(UNIDADES_SCHEDULE_TIME).do(job_unidades_daily)
-    schedule.every().wednesday.at(UNIDADES_SCHEDULE_TIME).do(job_unidades_daily)
-    schedule.every().thursday.at(UNIDADES_SCHEDULE_TIME).do(job_unidades_daily)
-    schedule.every().friday.at(UNIDADES_SCHEDULE_TIME).do(job_unidades_daily)
+    schedule.every().monday.at(UNIDADES_SCHEDULE_TIME).do(safe_run, job_unidades_daily)
+    schedule.every().tuesday.at(UNIDADES_SCHEDULE_TIME).do(safe_run, job_unidades_daily)
+    schedule.every().wednesday.at(UNIDADES_SCHEDULE_TIME).do(safe_run, job_unidades_daily)
+    schedule.every().thursday.at(UNIDADES_SCHEDULE_TIME).do(safe_run, job_unidades_daily)
+    schedule.every().friday.at(UNIDADES_SCHEDULE_TIME).do(safe_run, job_unidades_daily)
     
     # Unidades Weekly (Monday Only)
-    schedule.every().monday.at(UNIDADES_WEEKLY_TIME).do(job_unidades_weekly)
+    schedule.every().monday.at(UNIDADES_WEEKLY_TIME).do(safe_run, job_unidades_weekly)
     
     # Metas (Mon-Fri)
-    schedule.every().monday.at(SCHEDULE_TIME).do(job_metas)
-    schedule.every().tuesday.at(SCHEDULE_TIME).do(job_metas)
-    schedule.every().wednesday.at(SCHEDULE_TIME).do(job_metas)
-    schedule.every().thursday.at(SCHEDULE_TIME).do(job_metas)
-    schedule.every().friday.at(SCHEDULE_TIME).do(job_metas)
+    schedule.every().monday.at(SCHEDULE_TIME).do(safe_run, job_metas)
+    schedule.every().tuesday.at(SCHEDULE_TIME).do(safe_run, job_metas)
+    schedule.every().wednesday.at(SCHEDULE_TIME).do(safe_run, job_metas)
+    schedule.every().thursday.at(SCHEDULE_TIME).do(safe_run, job_metas)
+    schedule.every().friday.at(SCHEDULE_TIME).do(safe_run, job_metas)
     
     while True:
-        schedule.run_pending()
+        try:
+            schedule.run_pending()
+        except Exception as e:
+            logger.critical(f"CRITICAL SCHEDULER ERROR: {e}")
+            alert_admin(f"CRITICAL SCHEDULER CRASH: {e}")
+            
         time.sleep(60)
+
+def safe_run(job_func):
+    """Wrapper para executar jobs com tratamento de erro e alerta."""
+    try:
+        job_func()
+    except Exception as e:
+        error_msg = f"❌ Erro na execução de '{job_func.__name__}': {str(e)}"
+        logger.error(error_msg)
+        alert_admin(error_msg)
+
+def alert_admin(message):
+    """Envia alerta de erro para o admin via WhatsApp."""
+    try:
+        from clients.evolution_client import EvolutionClient
+        from config import ADMIN_PHONE
+        
+        evo = EvolutionClient()
+        evo.send_text_message(message, number_override=ADMIN_PHONE)
+    except Exception as e:
+        logger.error(f"Falha ao enviar alerta para admin: {e}")
 
 if __name__ == "__main__":
     if "--now" in sys.argv:
