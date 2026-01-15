@@ -139,6 +139,7 @@ class UnidadesAutomation:
             logger.error(f"Erro no processamento Unidades: {e}")
             import traceback
             traceback.print_exc()
+            raise  # Re-raise para o scheduler detectar o erro
 
 def main():
     automation = UnidadesAutomation()
