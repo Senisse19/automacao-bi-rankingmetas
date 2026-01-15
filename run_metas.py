@@ -102,51 +102,53 @@ class MetasAutomation:
                 telefone = pessoa.get("telefone", "")
                 if not telefone: continue
                 
-                    # Carregar histórico de mensagens
-                    history_file = "message_history.json"
-                    try:
-                        if os.path.exists(history_file):
-                            with open(history_file, "r") as f:
-                                message_history = json.load(f)
-                        else:
-                            message_history = []
-                    except Exception:
+                # Carregar histórico de mensagens
+                history_file = "message_history.json"
+                try:
+                    if os.path.exists(history_file):
+                        with open(history_file, "r") as f:
+                            message_history = json.load(f)
+                    else:
                         message_history = []
+                except Exception:
+                    message_history = []
 
-                    # Saudação
-                    hora = datetime.now().hour
-                    if 5 <= hora < 12: saudacao = "Bom dia"
-                    elif 12 <= hora < 18: saudacao = "Boa tarde"
-                    else: saudacao = "Boa noite"
-                    
-                    # Base Greeting Variations
-                    saudacao_lower = saudacao.lower()
-                    variations = [
-                        f"{saudacao}, {primeiro_nome}!",
-                        f"Olá, {primeiro_nome}! {saudacao}.",
-                        f"{saudacao}, {primeiro_nome}, tudo bem?",
-                        f"{primeiro_nome}, {saudacao_lower}!",
-                        f"Oi, {primeiro_nome}. {saudacao}!"
-                    ]
-                    selected_greeting = random.choice(variations)
-                    
-                    # Base Caption
-                    caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
+                # Saudação
+                primeiro_nome = nome.split()[0].title()
+                hora = datetime.now().hour
+                if 5 <= hora < 12: saudacao = "Bom dia"
+                elif 12 <= hora < 18: saudacao = "Boa tarde"
+                else: saudacao = "Boa noite"
+                
+                # Base Greeting Variations
+                saudacao_lower = saudacao.lower()
+                variations = [
+                    f"{saudacao}, {primeiro_nome}!",
+                    f"Olá, {primeiro_nome}! {saudacao}.",
+                    f"{saudacao}, {primeiro_nome}, tudo bem?",
+                    f"{primeiro_nome}, {saudacao_lower}!",
+                    f"Oi, {primeiro_nome}. {saudacao}!"
+                ]
+                selected_greeting = random.choice(variations)
+                
+                # Base Caption
+                caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
 
-                    # Lógica de Primeiro Envio (Aviso Importante)
-                    clean_phone = str(telefone).replace("@s.whatsapp.net", "") # Armazenar apenas números limpos por consistência
-                    if clean_phone not in message_history:
-                        warning_msg = '\n\n⚠️ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que *responda sempre* todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
-                        caption += warning_msg
-                        
-                        # Atualizar histórico
-                        message_history.append(clean_phone)
-                        try:
-                            with open(history_file, "w") as f:
-                                json.dump(message_history, f)
-                        except Exception as e:
-                            logger.error(f"Erro ao salvar message_history: {e}")
+                # Lógica de Primeiro Envio (Aviso Importante)
+                clean_phone = str(telefone).replace("@s.whatsapp.net", "") # Armazenar apenas números limpos por consistência
+                if clean_phone not in message_history:
+                    warning_msg = '\n\n⚠️ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que *responda sempre* todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
+                    caption += warning_msg
                     
+                    # Atualizar histórico
+                    message_history.append(clean_phone)
+                    try:
+                        with open(history_file, "w") as f:
+                            json.dump(message_history, f)
+                    except Exception as e:
+                        logger.error(f"Erro ao salvar message_history: {e}")
+                
+                try:
                     # Send
                     self.whatsapp.set_presence(telefone, "composing", delay=5000)
                     time.sleep(random.randint(4, 8))
