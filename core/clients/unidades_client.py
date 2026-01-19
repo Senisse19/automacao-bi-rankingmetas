@@ -5,6 +5,7 @@ import json
 import math
 from datetime import datetime, timedelta
 from config import UNIDADES_CONFIG
+from core.services.supabase_service import SupabaseService
 from utils.logger import get_logger
 
 logger = get_logger("unidades_client")
@@ -29,8 +30,9 @@ class UnidadesClient:
         self.session.mount("http://", adapter)
         self.session.mount("https://", adapter)
         
-        self.model_map = UNIDADES_CONFIG.get("model_map", {})
-        self.type_map = UNIDADES_CONFIG.get("type_map", {})
+        svc = SupabaseService()
+        self.model_map = svc.get_setting("nexus_model_map", {})
+        self.type_map = svc.get_setting("unidades_type_map", {})
 
     def _get_paginated_latest(self, endpoint: str, min_date: str | None = None) -> list:
         """

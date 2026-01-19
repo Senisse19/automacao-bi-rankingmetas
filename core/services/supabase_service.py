@@ -198,6 +198,38 @@ class SupabaseService:
             print(f"❌ Erro ao buscar schedule {schedule_id}: {e}")
             return None
 
+    # --- Configuration Methods ---
+
+    _settings_cache = {}
+    _settings_last_fetch = 0
+
+    def get_setting(self, key, default=None):
+        """Busca uma configuração do sistema (com cache de 5 minutos)."""
+        import time
+        now = time.time()
+        
+        # Check cache if fresh (300s = 5min)
+        if key in self._settings_cache and (now - self._settings_last_fetch < 300):
+            return self._settings_cache[key]
+            
+        try:
+            # Fetch specific key from DB
+            params = {
+                "key": f"eq.{key}",
+                "select": "value"
+            }
+            data = self._get("system_settings", params)
+            if data:
+                val = data[0]['value']
+                self._settings_cache[key] = val
+                self._settings_last_fetch = now
+                return val
+            else:
+                return default
+        except Exception as e:
+            print(f"⚠ Erro ao buscar setting '{key}': {e}")
+            return default
+
 if __name__ == "__main__":
     # Teste
     svc = SupabaseService()
