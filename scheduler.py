@@ -268,7 +268,7 @@ def run_scheduler_loop():
         except Exception as e:
             logger.critical(f"CRITICAL SCHEDULER ERROR: {e}")
             
-        time.sleep(5) # Reduzido para 5s para maior responsividade
+        time.sleep(1) # Reduced to 1s for immediate responsiveness
 
 if __name__ == "__main__":
     if "--test-all" in sys.argv:
