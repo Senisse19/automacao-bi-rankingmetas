@@ -29,4 +29,4 @@ COPY . .
 RUN mkdir -p images
 
 # Comando para iniciar a aplicação
-CMD ["python", "metas_automation.py"]
+CMD ["python", "scheduler.py"]

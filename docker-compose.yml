@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  automation:
+    build: .
+    container_name: ranking_metas_automation
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./images:/app/images
+      - ./logs:/app/logs
+      - ./clients:/app/clients
+      - ./services:/app/services
+      - ./utils:/app/utils
+      - ./config.py:/app/config.py
+      - ./run_metas.py:/app/run_metas.py
+      - ./run_unidades.py:/app/run_unidades.py
+      - ./generate_weekly_unidades.py:/app/generate_weekly_unidades.py
+      - ./scheduler.py:/app/scheduler.py
+    environment:
+      - TZ=America/Sao_Paulo

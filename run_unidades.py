@@ -9,11 +9,11 @@ import random
 from datetime import datetime, timedelta
 
 from config import (
-    IMAGES_DIR, 
-    DESTINATARIOS_WHATSAPP
+    IMAGES_DIR
 )
 from clients.unidades_client import UnidadesClient
 from services.image_generator import ImageGenerator
+from services.supabase_service import SupabaseService
 from clients.evolution_client import EvolutionClient
 from utils.logger import get_logger
 
@@ -28,16 +28,32 @@ class UnidadesAutomation:
         self.image_gen = ImageGenerator()
         self.whatsapp = EvolutionClient()
         self.unidades_client = UnidadesClient()
+        self.supabase = SupabaseService()
         
         # Garantir diretório de imagens
         os.makedirs(IMAGES_DIR, exist_ok=True)
 
-    def _send_image_to_group(self, grupo_key, image_path, caption_prefix):
+    def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None):
         """Helper para enviar imagem de Unidades para um grupo específico."""
-        destinatarios = DESTINATARIOS_WHATSAPP.get(grupo_key, [])
-        if not destinatarios:
-             # Fallback logic if needed or just skip
-             pass
+        
+        # Determine recipients source
+        if not custom_recipients:
+             logger.warning("Nenhum destinatário fornecido para Unidades. Config legacy removido.")
+             return
+
+        # Filter based on department if needed, or send to all given recipients
+        # For Unidades, it usually goes to 'diretoria' which receives everything.
+        # Or we check if the recipient belongs to the target group.
+        destinatarios = []
+        for r in custom_recipients:
+             # If custom recipients are passed for a specific job, we usually just send to them all
+             # regardless of 'grupo_key' unless we have multiple groups in one job.
+             # For Unidades Daily/Weekly, it's usually just one target audience.
+             destinatarios.append({
+                "nome": r.get('name') or r.get('nome'),
+                "telefone": r.get('phone') or r.get('telefone'),
+                "id": r.get('id')
+            })
              
         for pessoa in destinatarios:
             nome = pessoa.get("nome", "Colaborador")
@@ -45,7 +61,30 @@ class UnidadesAutomation:
             if not telefone: continue
             
             try:
-                caption = f"📊 {caption_prefix}\n\nOlá, {nome.split()[0]}! Segue resumo atualizado."
+                primeiro_nome = nome.split()[0].title()
+                
+                # Dynamic Template Support
+                if template_content:
+                    try:
+                        # Determine greeting based on time
+                        hora = datetime.now().hour
+                        if 5 <= hora < 12: saudacao = "Bom dia"
+                        elif 12 <= hora < 18: saudacao = "Boa tarde"
+                        else: saudacao = "Boa noite"
+                        
+                        caption = template_content.format(
+                            nome=primeiro_nome,
+                            nome_completo=nome,
+                            saudacao=saudacao,
+                            titulo=caption_prefix, # Specifically for Unidades reports
+                            data=datetime.now().strftime("%d/%m/%Y")
+                        )
+                    except Exception as e:
+                        logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
+                        caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
+                else:
+                    caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
+                
                 logger.info(f"   Enviando Unidades para {nome}...")
                 
                 # Presença digitando
@@ -53,9 +92,11 @@ class UnidadesAutomation:
                 time.sleep(random.randint(3, 6))
                 
                 self.whatsapp.send_file(telefone, image_path, caption)
+                self.supabase.log_event("message_sent", {"recipient": nome, "type": "unidades"}, contact_id=pessoa.get('id'))
                 time.sleep(random.randint(5, 10))
             except Exception as e:
                 logger.error(f"   Erro env Unidades {nome}: {e}")
+                self.supabase.log_event("message_error", {"recipient": nome, "type": "unidades", "error": str(e)}, contact_id=pessoa.get('id'))
 
     def _cleanup_old_images(self, prefix):
         """
@@ -74,7 +115,7 @@ class UnidadesAutomation:
         except Exception as e:
             logger.error(f"   [Cleanup] Erro ao listar diretório: {e}")
 
-    def process_reports(self, daily=True, weekly=False, force_weekly=False, generate_only=False):
+    def process_reports(self, daily=True, weekly=False, force_weekly=False, generate_only=False, recipients=None, template_content=None):
         """
         Processa relatórios de Unidades com flags explícitas para Diário e Semanal.
         Pode executar ambos em sequência se solicitado.
@@ -82,9 +123,11 @@ class UnidadesAutomation:
         logger.info("\n--- Processando Unidades ---")
         try:
             # Determine Date Reference for Daily
-            # Determine Date Reference for Daily
-            # Always generate for yesterday as per user requirement (never today)
-            data_ref = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+            # If today is Monday (0), fetch data from Friday (D-3)
+            # Else fetch Yesterday (D-1)
+            today = datetime.now()
+            days_back = 3 if today.weekday() == 0 else 1
+            data_ref = (today - timedelta(days=days_back)).strftime("%Y-%m-%d")
             
             # 1. Relatório Diário
             if daily:
@@ -99,7 +142,7 @@ class UnidadesAutomation:
                 
                 # Enviar Diário
                 if not generate_only:
-                    self._send_image_to_group("diretoria", daily_path, f"Relatório Unidades - Diário {data_ref}")
+                    self._send_image_to_group("diretoria", daily_path, f"Relatório Unidades - Diário {data_ref}", custom_recipients=recipients, template_content=template_content)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {daily_path}")
             
@@ -131,7 +174,7 @@ class UnidadesAutomation:
                 
                 # Enviar Semanal
                 if not generate_only:
-                    self._send_image_to_group("diretoria", weekly_path, f"Relatório Unidades - Semanal ({start_weekly} a {data_ref_weekly})")
+                    self._send_image_to_group("diretoria", weekly_path, f"Relatório Unidades - Semanal ({start_weekly} a {data_ref_weekly})", custom_recipients=recipients, template_content=template_content)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
                 

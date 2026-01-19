@@ -8,7 +8,52 @@ class UnidadesRenderer(BaseRenderer):
     """
     def __init__(self):
         super().__init__()
+        print(f"DEBUG: UnidadesRenderer loaded from: {__file__}")
         self.light_gold = (235, 215, 140) # Dourado Claro
+
+    def _truncate_text(self, draw, text, font, max_width):
+        """Truncates text to fit within max_width."""
+        if not text:
+            return ""
+        current_text = text
+        if draw.textlength(current_text, font=font) <= max_width:
+            return current_text
+        
+        while draw.textlength(current_text + "...", font=font) > max_width and len(current_text) > 0:
+            current_text = current_text[:-1]
+        return current_text + "..."
+
+    def _get_wrapped_lines(self, draw, text, font, max_width):
+        """Splits text into lines that fit within max_width."""
+        if not text:
+            return []
+        
+        words = text.split(' ')
+        lines = []
+        current_line = []
+        
+        for word in words:
+            test_line = ' '.join(current_line + [word])
+            if draw.textlength(test_line, font=font) <= max_width:
+                current_line.append(word)
+            else:
+                if current_line:
+                    lines.append(' '.join(current_line))
+                    current_line = [word]
+                else:
+                    # Single word longer than width, force split or just keep it (overflow)
+                    # For simplicity, we keep it to avoid infinite loop or complex char splitting
+                    lines.append(word)
+                    current_line = []
+        
+        if current_line:
+            lines.append(' '.join(current_line))
+            
+        return lines
+
+    def _draw_text_autofit(self, draw, xy, text, max_width, initial_size=16, color=(0,0,0), font_func=None):
+        pass # Removed/Deprecated
+
 
     def generate_unidades_reports(self, data, report_type="daily", output_path="unidades_report.png"):
         """
@@ -113,21 +158,59 @@ class UnidadesRenderer(BaseRenderer):
                 draw.text((margin + (card_w - text_w)/2, y + (empty_h - text_h)/2 - 2), msg, font=font_empty_bold, fill=label_color_bright)
                 y += empty_h + 20
             else:
-                block_height = len(items) * item_h
-                draw.rounded_rectangle([(margin, y), (margin + card_w, y + block_height + 10)], radius=8, fill=self.card_color)
+                # Pre-calculate HEIGHTS for dynamic sizing
+                # The block height needs to be sum of all item heights
+                # We can draw and check constraints, unrolling the loop slightly to calculate layout first?
+                # Or we can just draw on the fly but we need the background rectangle first.
+                
+                # First pass: Calculate total height needed
+                total_content_height = 0
+                item_heights = []
+                
+                for item in items:
+                    modelo = item.get("modelo", "-") or "-"
+                    rede_distribuicao = item.get("rede_distribuicao", "-") or "-"
+                    rd_display = f"Tipo {rede_distribuicao}" if rede_distribuicao != "-" else "-"
+                    
+                    # Calculate wrapped lines
+                    lines_modelo = self._get_wrapped_lines(draw, modelo, font_value, 240)
+                    lines_rede = self._get_wrapped_lines(draw, rd_display, font_value, 240)
+                    
+                    # Base height for "City/Val" row + spacing
+                    # Structure:
+                    # Name row (~35px)
+                    # City/Val Row (~50px)
+                    # Modelo/Rede Row (Variable)
+                    # Footer Row (~30px)
+                    # Padding (20px)
+                    
+                    max_lines = max(len(lines_modelo), len(lines_rede), 1)
+                    text_height = max_lines * 18 # approx line height
+                    
+                    # 10 (top pad) + 35 (name) + 50 (row1) + text_height + 50 (footer) + 20 (bottom pad)
+                    computed_h = 10 + 35 + 50 + text_height + 40 + 20 
+                    item_heights.append({
+                        "h": computed_h, 
+                        "lines_modelo": lines_modelo,
+                        "lines_rede": lines_rede
+                    })
+                    total_content_height += computed_h
+                
+                # Draw Background Block
+                draw.rounded_rectangle([(margin, y), (margin + card_w, y + total_content_height + 10)], radius=8, fill=self.card_color)
                 
                 current_y = y + 10 
                 
                 for i, item in enumerate(items):
+                    layout_info = item_heights[i]
+                    this_h = layout_info["h"]
+                    
                     codigo = item.get("codigo", "")
                     nome = item.get("nome", "-") or "-"
                     cidade = item.get("cidade", "-") or "-"
                     uf = item.get("uf", "-") or "-"
-                    modelo = item.get("modelo", "-") or "-"
-                    tipo = item.get("tipo", "-") or "-"
                     
                     valor_aquisicao = item.get("valor", 0)
-                    rede_distribuicao = item.get("rede_distribuicao", "-") or "-"
                     retencao = item.get("percentual_retencao", 0)
                     anos = item.get("anos_contrato", 0)
                     
@@ -142,38 +225,59 @@ class UnidadesRenderer(BaseRenderer):
                          display_name = f"Unid: {codigo} - {nome}"
                     else:
                          display_name = nome
-
+                    
+                    # 1. Name
                     draw.text((margin + 20, current_y + 10), display_name[:50], font=self._get_font(18, bold=True), fill=self.light_gold)
                     
                     col1_x = margin + 20
                     col2_x = margin + 280
                     
+                    # 2. Row 1: City | Value
                     row1_y = current_y + 45
-                    row2_y = current_y + 95
-                    row3_y = current_y + 145 
-                    
                     draw.text((col1_x, row1_y), "CIDADE / UF", font=font_label, fill=label_color_bright)
                     draw.text((col1_x, row1_y + 18), f"{cidade} - {uf}", font=font_value, fill=self.text_color)
                     
                     draw.text((col2_x, row1_y), "VALOR AQUISIÇÃO", font=font_money_label, fill=label_color_bright)
                     draw.text((col2_x, row1_y + 18), fmt_moeda(valor_aquisicao), font=font_money, fill=self.text_color)
                     
+                    # 3. Row 2: Modelo | Rede (Variable Height)
+                    row2_y = current_y + 95
+                    
                     draw.text((col1_x, row2_y), "MODELO", font=font_label, fill=label_color_bright)
-                    draw.text((col1_x, row2_y + 18), f"{modelo}  |  {tipo}", font=font_value, fill=self.text_color)
+                    # Draw Wrapped Modelo
+                    dy = row2_y + 18
+                    for line in layout_info["lines_modelo"]:
+                        draw.text((col1_x, dy), line, font=font_value, fill=self.text_color)
+                        dy += 18
+                        
+                    draw.text((col2_x, row2_y), "REDE DE DISTRIBUIÇÃO", font=font_label, fill=label_color_bright)
+                    # Draw Wrapped Rede
+                    dy = row2_y + 18
                      
                     draw.text((col2_x, row2_y), "REDE DE DISTRIBUIÇÃO", font=font_label, fill=label_color_bright)
-                    draw.text((col2_x, row2_y + 18), str(rede_distribuicao), font=font_value, fill=self.text_color)
-
+                    
+                    # Format: Tipo {rede_distribuicao}
+                    rd_display = f"Tipo {rede_distribuicao}" if rede_distribuicao != "-" else "-"
+                    
+                    for line in layout_info["lines_rede"]:
+                        draw.text((col2_x, dy), line, font=font_value, fill=self.text_color)
+                        dy += 18
+                        
+                    # 4. Footer Row (Pushed down by max lines)
+                    max_lines = max(len(layout_info["lines_modelo"]), len(layout_info["lines_rede"]), 1)
+                    # row2_y + 18 (first line) + (max_lines * 18) + padding
+                    row3_y = row2_y + 18 + (max_lines * 18) + 15
+                    
                     line_detail = f"Tempo de Contrato: {anos} anos   •   Retenção: {retencao}%"
                     draw.text((col1_x, row3_y), line_detail, font=self._get_font(14, bold=True), fill=(180, 180, 180))
                     
                     if i < len(items) - 1:
-                        sep_y = current_y + item_h
+                        sep_y = current_y + this_h
                         draw.line([(margin + 10, sep_y), (margin + card_w - 10, sep_y)], fill=(50, 50, 50), width=1)
                     
-                    current_y += item_h
+                    current_y += this_h
                 
-                y += block_height + 20
+                y += total_content_height + 20
             
             y += 20 
             

@@ -25,6 +25,16 @@ def format_percent(value):
     return f"{value:.2f}%".replace(".", ",")
 
 
+from services.dax_queries import (
+    get_realizado_query,
+    get_metas_com_op_query,
+    get_percentuais_gs_query,
+    get_percentuais_com_op_query,
+    get_receitas_query,
+    get_metas_dept_query,
+    get_percentuais_dept_query
+)
+
 class PowerBIDataFetcher:
     """
     Classe responsável por buscar dados de metas do Power BI via consultas DAX.
@@ -50,7 +60,6 @@ class PowerBIDataFetcher:
         """Busca os valores REALIZADOS de cada departamento (da tabela Medidas)."""
         now = datetime.now()
         start_date = datetime(now.year, now.month, 1)
-        # Calcular último dia do mês
         if now.month == 12:
             end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
         else:
@@ -59,24 +68,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        # Filtra a tabela Calendario pelo período selecionado
-        # Isso deve propagar para ContasReceber[data_pagamento] se houver relacionamento
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Comercial", [Comercial_Total],
-                "Operacional", [Operacional_Total],
-                "Corporate", [Valor_Corporate],
-                "Educacao", [Valor_Educacao],
-                "Expansao", [Valor_Expansao],
-                "Franchising", [Valor_Franchising],
-                "PJ", [Valor_PJ],
-                "Tax", [valor_Tax]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_realizado_query(date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
@@ -109,20 +101,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Comercial_Meta1", [Total_Comercial_Meta1],
-                "Comercial_Meta2", [Total_Comercial_Meta2],
-                "Comercial_Meta3", [Total_Comercial_Meta3],
-                "Operacional_Meta1", [Total_Operacional_Meta1],
-                "Operacional_Meta2", [Total_Operacional_Meta2],
-                "Operacional_Meta3", [Total_Operacional_Meta3]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_metas_com_op_query(date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
@@ -157,17 +136,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Pct_Meta1", [% Meta 1 GS],
-                "Pct_Meta2", [% Meta 2 GS],
-                "Pct_Meta3", [% Meta 3 GS]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_percentuais_gs_query(date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
@@ -195,20 +164,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Com_Pct1", [% Meta 1 COMERCIAL],
-                "Com_Pct2", [% Meta 2 COMERCIAL],
-                "Com_Pct3", [% Meta 3 COMERCIAL],
-                "Op_Pct1", [% Meta 1 OPERACIONAL],
-                "Op_Pct2", [% Meta 2 OPERACIONAL],
-                "Op_Pct3", [% Meta 3 OPERACIONAL]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_percentuais_com_op_query(date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
@@ -236,7 +192,6 @@ class PowerBIDataFetcher:
         """Busca valores de receitas (Outras Receitas, Intercompany, Não Identificadas) da tabela Medidas"""
         now = datetime.now()
         start_date = datetime(now.year, now.month, 1)
-        # Calcular último dia do mês
         if now.month == 12:
             end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
         else:
@@ -245,18 +200,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "OutrasReceitas", [Valor_OutrasReceitas],
-                "InterCompany", [Valor_InterCompany],
-                "NaoIdentificada", [Valor_NaoIdentificada],
-                "SemCategoria", [Valor_Sem_Categoria]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_receitas_query(date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
@@ -276,14 +220,7 @@ class PowerBIDataFetcher:
     def fetch_metas_departamento(self, tabela, prefixo):
         """Busca metas de um departamento específico"""
         month_filter = self._get_month_filter()
-        
-        query = f"""
-        EVALUATE
-        FILTER(
-            '{tabela}',
-            '{tabela}'[Mês] = {month_filter}
-        )
-        """
+        query = get_metas_dept_query(tabela, month_filter)
         
         try:
             result = self.client.execute_dax(query)
@@ -318,17 +255,7 @@ class PowerBIDataFetcher:
         date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
         date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
         
-        query = f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Pct1", [% Meta 1 {prefixo}],
-                "Pct2", [% Meta 2 {prefixo}],
-                "Pct3", [% Meta 3 {prefixo}]
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_filter_start}, {date_filter_end})
-        )
-        """
+        query = get_percentuais_dept_query(prefixo, date_filter_start, date_filter_end)
         
         try:
             result = self.client.execute_dax(query)
