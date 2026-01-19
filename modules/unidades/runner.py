@@ -206,20 +206,52 @@ class UnidadesAutomation:
             raise  # Re-raise para o scheduler detectar o erro
 
 def main():
+    import argparse
+    import json
+    
+    parser = argparse.ArgumentParser(description='Run Unidades Automation')
+    parser.add_argument('--generate-only', action='store_true', help='Only generate images')
+    parser.add_argument('--weekly-only', action='store_true', help='Run only weekly report')
+    parser.add_argument('--daily-only', action='store_true', help='Run only daily report')
+    parser.add_argument('--payload', type=str, help='JSON payload with recipients and template.')
+    
+    args = parser.parse_args()
+    
     automation = UnidadesAutomation()
     
-    generate_only = "--generate-only" in sys.argv
+    recipients = None
+    template_content = None
     
-    # CLI Argument Handling
-    if "--weekly-only" in sys.argv:
-        automation.process_reports(daily=False, force_weekly=True, generate_only=generate_only)
-    elif "--daily-only" in sys.argv:
-        automation.process_reports(daily=True, weekly=False, generate_only=generate_only)
-    else:
-        # Default run (usually called by scheduler or manual test)
-        # We can default to Daily, or both if needed. 
-        # For manual execution without args, let's run Daily.
-        automation.process_reports(daily=True, weekly=False, generate_only=generate_only)
+    if args.payload:
+        try:
+            data = json.loads(args.payload)
+            recipients = data.get('recipients')
+            template_content = data.get('template_content')
+            logger.info(f"Recebido payload via CLI com {len(recipients) if recipients else 0} destinatários.")
+        except Exception as e:
+            logger.error(f"Erro ao fazer parse do payload JSON: {e}")
+            return
+            
+    # Default behavior logic
+    daily = True
+    weekly = False
+    force_weekly = False
+    
+    if args.weekly_only:
+        daily = False
+        force_weekly = True
+    elif args.daily_only:
+        daily = True
+        weekly = False
+        
+    automation.process_reports(
+        daily=daily, 
+        weekly=weekly, 
+        force_weekly=force_weekly, 
+        generate_only=args.generate_only,
+        recipients=recipients,
+        template_content=template_content
+    )
 
 if __name__ == "__main__":
     main()

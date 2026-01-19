@@ -242,9 +242,29 @@ class MetasAutomation:
         logger.info("=== FIM AUTOMAÇÃO METAS ===\n")
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='Run Metas Automation')
+    parser.add_argument('--generate-only', action='store_true', help='Only generate images, do not send.')
+    parser.add_argument('--payload', type=str, help='JSON payload with recipients and template.')
+    
+    args = parser.parse_args()
+    
     automation = MetasAutomation()
-    generate_only = "--generate-only" in sys.argv
-    automation.run(generate_only=generate_only)
+    
+    recipients = None
+    template_content = None
+    
+    if args.payload:
+        try:
+            data = json.loads(args.payload)
+            recipients = data.get('recipients')
+            template_content = data.get('template_content')
+            logger.info(f"Recebido payload via CLI com {len(recipients) if recipients else 0} destinatários.")
+        except Exception as e:
+            logger.error(f"Erro ao fazer parse do payload JSON: {e}")
+            return
+
+    automation.run(generate_only=args.generate_only, recipients=recipients, template_content=template_content)
 
 if __name__ == "__main__":
     main()
