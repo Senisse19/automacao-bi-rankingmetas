@@ -39,7 +39,7 @@ class UnidadesAutomation:
         # Garantir diretório de imagens
         os.makedirs(IMAGES_DIR, exist_ok=True)
 
-    def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None):
+    def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None, data_ref_str=None):
         """Helper para enviar imagem de Unidades usando o NotificationService."""
         
         # Determine recipients source
@@ -80,8 +80,10 @@ class UnidadesAutomation:
                         nome=primeiro_nome,
                         nome_completo=nome,
                         saudacao=saudacao,
+                        saudacao_lower=saudacao.lower(),
                         titulo=caption_prefix, # Specifically for Unidades reports
-                        data=datetime.now().strftime("%d/%m/%Y")
+                        data=data_ref_str or datetime.now().strftime("%d/%m/%Y"),
+                        grupo=grupo_key.title()
                     )
                 except Exception as e:
                     logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
@@ -158,7 +160,9 @@ class UnidadesAutomation:
                 
                 # Enviar Diário
                 if not generate_only:
-                    self._send_image_to_group("diretoria", daily_path, f"Relatório Unidades - Diário {data_ref}", custom_recipients=recipients, template_content=template_content)
+                    # Format data for diplay: 2026-01-16 -> 16/01/2026
+                    data_display = datetime.strptime(data_ref, "%Y-%m-%d").strftime("%d/%m/%Y")
+                    self._send_image_to_group("diretoria", daily_path, f"Relatório Unidades - Diário {data_display}", custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {daily_path}")
             
@@ -190,7 +194,8 @@ class UnidadesAutomation:
                 
                 # Enviar Semanal
                 if not generate_only:
-                    self._send_image_to_group("diretoria", weekly_path, f"Relatório Unidades - Semanal ({start_weekly} a {data_ref_weekly})", custom_recipients=recipients, template_content=template_content)
+                    data_display = f"{datetime.strptime(start_weekly, '%Y-%m-%d').strftime('%d/%m')} a {datetime.strptime(data_ref_weekly, '%Y-%m-%d').strftime('%d/%m')}"
+                    self._send_image_to_group("diretoria", weekly_path, f"Relatório Unidades - Semanal ({data_display})", custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
                 
