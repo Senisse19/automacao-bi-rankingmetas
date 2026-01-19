@@ -9,6 +9,12 @@ import random
 import json
 from datetime import datetime, timedelta
 
+# Fix path for standalone execution
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, "../../"))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from config import (
     IMAGES_DIR, 
     IMAGES_DIR, 
@@ -17,11 +23,11 @@ from config import (
     METAS_CAPTION,
     EMAIL_CONFIG
 )
-from clients.powerbi_client import PowerBIClient
-from services.image_generator import ImageGenerator
-from services.supabase_service import SupabaseService
-from clients.evolution_client import EvolutionClient
-from clients.email_client import EmailClient
+from core.clients.powerbi_client import PowerBIClient
+from core.services.image_generator import ImageGenerator
+from core.services.supabase_service import SupabaseService
+from core.clients.evolution_client import EvolutionClient
+from core.clients.email_client import EmailClient
 from utils.logger import get_logger
 
 logger = get_logger("run_metas")
@@ -57,7 +63,7 @@ class MetasAutomation:
     def fetch_data(self):
         """Busca todos os dados necessários do Power BI."""
         logger.info("Buscando dados do Power BI...")
-        from services.powerbi_data import PowerBIDataFetcher
+        from core.services.powerbi_data import PowerBIDataFetcher
         fetcher = PowerBIDataFetcher()
         return fetcher.fetch_all_data()
 
@@ -120,7 +126,6 @@ class MetasAutomation:
         except Exception as e:
              logger.error(f"Erro ao carregar templates do DB: {e}")
 
-        # Determine source of recipients
         if not custom_recipients:
             logger.error("Nenhum destinatário fornecido (custom_recipients empty).")
             return
@@ -139,6 +144,10 @@ class MetasAutomation:
             
         source_data = recipients_map
         logger.info(f"Processando envio para {len(custom_recipients)} destinatários dinâmicos.")
+        
+        # Instantiate Notification Service
+        from core.services.notification_service import NotificationService
+        notification_service = NotificationService(self.supabase)
 
         for grupo_key, image_path in images.items():
             destinatarios = source_data.get(grupo_key, [])
@@ -195,22 +204,16 @@ class MetasAutomation:
                     selected_greeting = random.choice(variations)
                     caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
 
-                try:
-                    # Send
-                    self.whatsapp.set_presence(telefone, "composing", delay=5000)
-                    time.sleep(random.randint(4, 8))
-                    self.whatsapp.send_file(telefone, image_path, caption)
-                    logger.info(f"   OK: WhatsApp para {nome} ({grupo_key})")
-                    self.supabase.log_event("message_sent", {"recipient": nome, "type": "metas", "group": grupo_key}, contact_id)
-                    
-                    if is_welcome_msg:
-                        self.supabase.mark_welcome_sent(contact_id)
-                        
-                    time.sleep(random.randint(45, 120)) # Delay humanizado entre envios
-                    
-                except Exception as e:
-                    logger.error(f"   ERRO WhatsApp {nome}: {e}")
-                    self.supabase.log_event("message_error", {"recipient": nome, "type": "metas", "error": str(e)}, contact_id)
+                # --- Send via Service ---
+                success = notification_service.send_whatsapp_report(
+                    recipient_data=pessoa,
+                    image_path=image_path,
+                    caption=caption,
+                    context_tag="metas"
+                )
+                
+                if success and is_welcome_msg:
+                    self.supabase.mark_welcome_sent(contact_id)
 
     def send_email(self, images):
         # Email logic remains unchanged for now, using hardcoded templates or separate implementation

@@ -1,1 +1,0 @@
-Module file: c:\Users\victor.senisse.GRUPOSTUDIO\Desktop\Plataforma BI\ranking-metas-automation\services\image_renderer\unidades_renderer.py

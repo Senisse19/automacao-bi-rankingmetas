@@ -9,6 +9,29 @@ from dotenv import load_dotenv
 # Carregar variáveis do arquivo .env
 load_dotenv()
 
+# --- LOAD EXTERNAL SETTINGS ---
+SETTINGS_PATH = os.path.join(os.path.dirname(__file__), "data", "settings.json")
+SETTINGS = {
+    "model_map": {},
+    "nexus_type_map": {},
+    "unidades_type_map": {},
+    "departamentos": [],
+    "display_names": {}
+}
+
+try:
+    with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
+        loaded = json.load(f)
+        SETTINGS.update(loaded)
+except Exception as e:
+    print(f"CRITICAL WARNING: Could not load data/settings.json: {e}")
+
+# Helper to convert string keys to int (JSON doesn't support int keys)
+def _int_keys(d):
+    return {int(k): v for k, v in d.items()}
+
+# --- CONFIGURATIONS ---
+
 # Configurações SharePoint
 SHAREPOINT_CONFIG = {
     "client_id": os.getenv("SHAREPOINT_CLIENT_ID"),
@@ -38,158 +61,21 @@ EVOLUTION_CONFIG = {
 NEXUS_CONFIG = {
     "api_url": os.getenv("NEXUS_API_URL"),
     "token": os.getenv("NEXUS_TOKEN"),
-    "model_map": {
-        1: "Studio Fiscal",
-        2: "Studio Law",
-        3: "Studio Brokers",
-        4: "E-Fiscal",
-        5: "Braga & Monteiro",
-        6: "SF Braga",
-        7: "Studio Alimentos",
-        8: "Studio Collection",
-        9: "Studio Law II",
-        10: "SF Gonzalo",
-        11: "SF Claudio",
-        12: "E-Contabil",
-        13: "Studio Corporate",
-        14: "SCI",
-        15: "Audit Tecnologia",
-        16: "Studio Agro",
-        17: "Studio Energy",
-        18: "Economix",
-        19: "Spacew",
-        20: "Banana",
-        21: "Studio Assessoria Financeira",
-        22: "Studio Par",
-        23: "Studio Family Business",
-        24: "Studio Adm",
-        25: "Studio Log",
-        26: "Studio Grow",
-        27: "Studio Revisão Bancária",
-        28: "Studio X",
-        29: "GS Educação",
-        30: "Studio RH",
-        31: "Loja",
-        32: "Studio Bank",
-        33: "Studio Law Litigation",
-        34: "Exohub",
-        35: "Orb",
-        36: "EF Comercial",
-        37: "SF Comercial",
-        38: "SL Comercial",
-        39: "Studio Management",
-        40: "Studio Store",
-        41: "Studio Varejo",
-        42: "Studio Contabilidade",
-        43: "SBS Store",
-    },
-    "type_map": {
-        1: "Franquia",
-        2: "Licença",
-        3: "Parceria",
-    }
+    "model_map": _int_keys(SETTINGS["model_map"]),
+    "type_map": _int_keys(SETTINGS["nexus_type_map"])
 }
 
 # Configurações Unidades (Data Lake)
 UNIDADES_CONFIG = {
     "api_url": os.getenv("UNIDADES_API_URL"),
     "token": os.getenv("UNIDADES_TOKEN"),
-    "model_map": {
-        1: "Studio Fiscal",
-        2: "Studio Law",
-        3: "Studio Brokers",
-        4: "E-Fiscal",
-        5: "Braga & Monteiro",
-        6: "SF Braga",
-        7: "Studio Alimentos",
-        8: "Studio Collection",
-        9: "Studio Law II",
-        10: "SF Gonzalo",
-        11: "SF Claudio",
-        12: "E-Contabil",
-        13: "Studio Corporate",
-        14: "SCI",
-        15: "Audit Tecnologia",
-        16: "Studio Agro",
-        17: "Studio Energy",
-        18: "Economix",
-        19: "Spacew",
-        20: "Banana",
-        21: "Studio Assessoria Financeira",
-        22: "Studio Par",
-        23: "Studio Family Business",
-        24: "Studio Adm",
-        25: "Studio Log",
-        26: "Studio Grow",
-        27: "Studio Revisão Bancária",
-        28: "Studio X",
-        29: "GS Educação",
-        30: "Studio RH",
-        31: "Loja",
-        32: "Studio Bank",
-        33: "Studio Law Litigation",
-        34: "Exohub",
-        35: "Orb",
-        36: "EF Comercial",
-        37: "SF Comercial",
-        38: "SL Comercial",
-        39: "Studio Management",
-        40: "Studio Store",
-        41: "Studio Varejo",
-        42: "Studio Contabilidade",
-        43: "SBS Store",
-    },
-    "type_map": {
-        1: "Franquia",
-        2: "TAX",
-        3: "Corporate",
-        4: "Segmento",
-        5: "Platinum",
-        6: "GS Partner",
-        7: "Flagship",
-        8: "JV",
-        9: "XP",
-        10: "BTG",
-        11: "Safra",
-        12: "Parceiros",
-        13: "NTW",
-        14: "Rede de Distribuição B2C",
-        15: "PAR",
-        16: "PJ360",
-        17: "Flagship",
-    }
+    "model_map": _int_keys(SETTINGS["model_map"]),
+    "type_map": _int_keys(SETTINGS["unidades_type_map"])
 }
 
-# Mapeamento de destinatários
-# OBS: Destinatários agora são gerenciados 100% via Supabase (Portal Admin).
-# A variável DESTINATARIOS_WHATSAPP foi removida para evitar uso de arquivo local.
-
-# Lista de departamentos para gerar imagens
-DEPARTAMENTOS = [
-    "comercial",
-    "operacional", 
-    "expansao",
-    "franchising",
-    "educacao",
-    "tax",
-    "corporate",
-    "tecnologia",
-    "financeiro",
-]
-
-# Nomes para exibição (com acentos)
-DISPLAY_NAMES = {
-    "diretoria": "Grupo Studio",
-    "comercial": "Comercial",
-    "operacional": "Operacional", 
-    "expansao": "Expansão",
-    "franchising": "Franchising",
-    "educacao": "Educação",
-    "tax": "Tax",
-    "corporate": "Corporate",
-    "tecnologia": "Tecnologia",
-    "financeiro": "Financeiro",
-}
+# Lista de departamentos e Nomes
+DEPARTAMENTOS = SETTINGS["departamentos"]
+DISPLAY_NAMES = SETTINGS["display_names"]
 
 # Agendamento
 SCHEDULE_TIME = os.getenv("SCHEDULE_TIME", "14:00")
@@ -213,11 +99,22 @@ EMAIL_CONFIG = {
     "sender_email": os.getenv("EMAIL_SENDER"),
 }
 
-# Mapeamento de emails
-# Mapeamento de emails
-# Email também deve ser gerido via Supabase futuramente ou adaptado aqui se necessário.
-# Por enquanto, mantemos vazio pois a origem será dinâmica.
+# Destinatários (WhatsApp) - Carregamento legado mantido mas preparado para Supabase
+DESTINATARIOS_WHATSAPP = {}
+try:
+    contacts_path = os.path.join(os.path.dirname(__file__), "contacts.json")
+    if os.path.exists(contacts_path):
+        with open(contacts_path, "r", encoding="utf-8") as f:
+            DESTINATARIOS_WHATSAPP = json.load(f)
+except Exception as e:
+    print(f"Warning: Could not load contacts.json: {e}")
+
+# Mapeamento de emails (Derivado de WhatsApp por enquanto)
 EMAILS_DESTINO = {}
+for departamento, lista_contatos in DESTINATARIOS_WHATSAPP.items():
+    EMAILS_DESTINO[departamento] = [
+        c for c in lista_contatos if "email" in c and c["email"]
+    ]
 
 # Mensagem padrão
 METAS_CAPTION = os.getenv("METAS_CAPTION", """📊 Acompanhamento Metas Caixa Grupo Studio
@@ -228,5 +125,5 @@ Dados consolidados até {data} (D-1).
 
 https://bi.grupostudio.tec.br/""")
 
-# Telefone do Admin para alertas de erro (padrão: seu número)
+# Admin Settings
 ADMIN_PHONE = os.getenv("ADMIN_PHONE", "5551998129077@s.whatsapp.net")

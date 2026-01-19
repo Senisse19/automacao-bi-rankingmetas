@@ -3,10 +3,10 @@ import os
 import sys
 
 # Add project root to path explicitly
-project_root = r"c:\Users\victor.senisse.GRUPOSTUDIO\Desktop\Plataforma BI\ranking-metas-automation"
+project_root = r"c:\Users\victor.senisse.GRUPOSTUDIO\Desktop\Plataforma BI\studio-automation-core"
 sys.path.append(project_root)
 
-from services.image_renderer.unidades_renderer import UnidadesRenderer
+from core.services.image_renderer.unidades_renderer import UnidadesRenderer
 
 def generate_mock():
     renderer = UnidadesRenderer()

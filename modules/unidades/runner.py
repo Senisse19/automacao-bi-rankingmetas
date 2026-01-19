@@ -8,13 +8,19 @@ import time
 import random
 from datetime import datetime, timedelta
 
+# Fix path for standalone execution
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, "../../"))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from config import (
     IMAGES_DIR
 )
-from clients.unidades_client import UnidadesClient
-from services.image_generator import ImageGenerator
-from services.supabase_service import SupabaseService
-from clients.evolution_client import EvolutionClient
+from core.clients.unidades_client import UnidadesClient
+from core.services.image_generator import ImageGenerator
+from core.services.supabase_service import SupabaseService
+from core.clients.evolution_client import EvolutionClient
 from utils.logger import get_logger
 
 logger = get_logger("run_unidades")
@@ -34,21 +40,20 @@ class UnidadesAutomation:
         os.makedirs(IMAGES_DIR, exist_ok=True)
 
     def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None):
-        """Helper para enviar imagem de Unidades para um grupo específico."""
+        """Helper para enviar imagem de Unidades usando o NotificationService."""
         
         # Determine recipients source
         if not custom_recipients:
              logger.warning("Nenhum destinatário fornecido para Unidades. Config legacy removido.")
              return
 
-        # Filter based on department if needed, or send to all given recipients
-        # For Unidades, it usually goes to 'diretoria' which receives everything.
-        # Or we check if the recipient belongs to the target group.
+        # Instantiate Notification Service
+        from core.services.notification_service import NotificationService
+        notification_service = NotificationService(self.supabase)
+
+        # Filter recipients
         destinatarios = []
         for r in custom_recipients:
-             # If custom recipients are passed for a specific job, we usually just send to them all
-             # regardless of 'grupo_key' unless we have multiple groups in one job.
-             # For Unidades Daily/Weekly, it's usually just one target audience.
              destinatarios.append({
                 "nome": r.get('name') or r.get('nome'),
                 "telefone": r.get('phone') or r.get('telefone'),
@@ -60,43 +65,37 @@ class UnidadesAutomation:
             telefone = pessoa.get("telefone", "")
             if not telefone: continue
             
-            try:
-                primeiro_nome = nome.split()[0].title()
-                
-                # Dynamic Template Support
-                if template_content:
-                    try:
-                        # Determine greeting based on time
-                        hora = datetime.now().hour
-                        if 5 <= hora < 12: saudacao = "Bom dia"
-                        elif 12 <= hora < 18: saudacao = "Boa tarde"
-                        else: saudacao = "Boa noite"
-                        
-                        caption = template_content.format(
-                            nome=primeiro_nome,
-                            nome_completo=nome,
-                            saudacao=saudacao,
-                            titulo=caption_prefix, # Specifically for Unidades reports
-                            data=datetime.now().strftime("%d/%m/%Y")
-                        )
-                    except Exception as e:
-                        logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
-                        caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
-                else:
+            primeiro_nome = nome.split()[0].title()
+            
+            # Dynamic Template Support
+            if template_content:
+                try:
+                    # Determine greeting based on time
+                    hora = datetime.now().hour
+                    if 5 <= hora < 12: saudacao = "Bom dia"
+                    elif 12 <= hora < 18: saudacao = "Boa tarde"
+                    else: saudacao = "Boa noite"
+                    
+                    caption = template_content.format(
+                        nome=primeiro_nome,
+                        nome_completo=nome,
+                        saudacao=saudacao,
+                        titulo=caption_prefix, # Specifically for Unidades reports
+                        data=datetime.now().strftime("%d/%m/%Y")
+                    )
+                except Exception as e:
+                    logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
                     caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
-                
-                logger.info(f"   Enviando Unidades para {nome}...")
-                
-                # Presença digitando
-                self.whatsapp.set_presence(telefone, "composing", delay=5000)
-                time.sleep(random.randint(3, 6))
-                
-                self.whatsapp.send_file(telefone, image_path, caption)
-                self.supabase.log_event("message_sent", {"recipient": nome, "type": "unidades"}, contact_id=pessoa.get('id'))
-                time.sleep(random.randint(5, 10))
-            except Exception as e:
-                logger.error(f"   Erro env Unidades {nome}: {e}")
-                self.supabase.log_event("message_error", {"recipient": nome, "type": "unidades", "error": str(e)}, contact_id=pessoa.get('id'))
+            else:
+                caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
+            
+            # --- Send via Service ---
+            notification_service.send_whatsapp_report(
+                recipient_data=pessoa,
+                image_path=image_path,
+                caption=caption,
+                context_tag="unidades"
+            )
 
     def _cleanup_old_images(self, prefix):
         """

@@ -4,6 +4,8 @@ Responsável por delegar a criação das imagens para os renderizadores especial
 """
 import os
 from datetime import datetime
+# from services.image_renderer.metas_renderer import MetasRenderer
+# from services.image_renderer.unidades_renderer import UnidadesRenderer
 from .image_renderer.metas_renderer import MetasRenderer
 from .image_renderer.unidades_renderer import UnidadesRenderer
 
@@ -41,8 +43,8 @@ if __name__ == "__main__":
     sys.path.append(root_dir)
 
     # Imports que dependem do path ajustado
-    from services.powerbi_data import PowerBIDataFetcher
-    from clients.unidades_client import UnidadesClient
+    from core.services.powerbi_data import PowerBIDataFetcher
+    from core.clients.unidades_client import UnidadesClient
     from config import IMAGES_DIR
 
     print("\n=== GERADOR DE IMAGENS (FACADE TEST) ===")

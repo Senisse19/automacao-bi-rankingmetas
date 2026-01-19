@@ -5,7 +5,7 @@ integrando diretamente com o modelo semântico mapeado.
 """
 import json
 from datetime import datetime, timedelta
-from clients.powerbi_client import PowerBIClient
+from core.clients.powerbi_client import PowerBIClient
 from utils.logger import get_logger
 
 logger = get_logger("powerbi_data")
@@ -25,7 +25,7 @@ def format_percent(value):
     return f"{value:.2f}%".replace(".", ",")
 
 
-from services.dax_queries import (
+from core.services.dax_queries import (
     get_realizado_query,
     get_metas_com_op_query,
     get_percentuais_gs_query,
