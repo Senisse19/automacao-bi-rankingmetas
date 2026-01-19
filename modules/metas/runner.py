@@ -17,9 +17,6 @@ if project_root not in sys.path:
 
 from config import (
     IMAGES_DIR, 
-    IMAGES_DIR, 
-    DEPARTAMENTOS,
-    DISPLAY_NAMES,
     METAS_CAPTION,
     EMAIL_CONFIG
 )

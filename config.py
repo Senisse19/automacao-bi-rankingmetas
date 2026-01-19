@@ -9,27 +9,6 @@ from dotenv import load_dotenv
 # Carregar variáveis do arquivo .env
 load_dotenv()
 
-# --- LOAD EXTERNAL SETTINGS ---
-SETTINGS_PATH = os.path.join(os.path.dirname(__file__), "data", "settings.json")
-SETTINGS = {
-    "model_map": {},
-    "nexus_type_map": {},
-    "unidades_type_map": {},
-    "departamentos": [],
-    "display_names": {}
-}
-
-try:
-    with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
-        loaded = json.load(f)
-        SETTINGS.update(loaded)
-except Exception as e:
-    print(f"CRITICAL WARNING: Could not load data/settings.json: {e}")
-
-# Helper to convert string keys to int (JSON doesn't support int keys)
-def _int_keys(d):
-    return {int(k): v for k, v in d.items()}
-
 # --- CONFIGURATIONS ---
 
 # Configurações SharePoint
@@ -61,21 +40,17 @@ EVOLUTION_CONFIG = {
 NEXUS_CONFIG = {
     "api_url": os.getenv("NEXUS_API_URL"),
     "token": os.getenv("NEXUS_TOKEN"),
-    "model_map": _int_keys(SETTINGS["model_map"]),
-    "type_map": _int_keys(SETTINGS["nexus_type_map"])
 }
 
 # Configurações Unidades (Data Lake)
 UNIDADES_CONFIG = {
     "api_url": os.getenv("UNIDADES_API_URL"),
     "token": os.getenv("UNIDADES_TOKEN"),
-    "model_map": _int_keys(SETTINGS["model_map"]),
-    "type_map": _int_keys(SETTINGS["unidades_type_map"])
 }
 
-# Lista de departamentos e Nomes
-DEPARTAMENTOS = SETTINGS["departamentos"]
-DISPLAY_NAMES = SETTINGS["display_names"]
+# Lista de departamentos e Nomes (Legacy/Unused - Removed)
+# DEPARTAMENTOS = []
+# DISPLAY_NAMES = {}
 
 # Agendamento
 SCHEDULE_TIME = os.getenv("SCHEDULE_TIME", "14:00")
@@ -99,22 +74,11 @@ EMAIL_CONFIG = {
     "sender_email": os.getenv("EMAIL_SENDER"),
 }
 
-# Destinatários (WhatsApp) - Carregamento legado mantido mas preparado para Supabase
+# Destinatários (WhatsApp) - Deprecated (Use Supabase Database)
 DESTINATARIOS_WHATSAPP = {}
-try:
-    contacts_path = os.path.join(os.path.dirname(__file__), "contacts.json")
-    if os.path.exists(contacts_path):
-        with open(contacts_path, "r", encoding="utf-8") as f:
-            DESTINATARIOS_WHATSAPP = json.load(f)
-except Exception as e:
-    print(f"Warning: Could not load contacts.json: {e}")
 
-# Mapeamento de emails (Derivado de WhatsApp por enquanto)
+# Mapeamento de emails (Legacy)
 EMAILS_DESTINO = {}
-for departamento, lista_contatos in DESTINATARIOS_WHATSAPP.items():
-    EMAILS_DESTINO[departamento] = [
-        c for c in lista_contatos if "email" in c and c["email"]
-    ]
 
 # Mensagem padrão
 METAS_CAPTION = os.getenv("METAS_CAPTION", """📊 Acompanhamento Metas Caixa Grupo Studio
