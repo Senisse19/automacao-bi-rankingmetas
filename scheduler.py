@@ -10,9 +10,9 @@ from functools import partial
 from datetime import datetime
 
 # Importa as automações modulares
-from run_unidades import UnidadesAutomation
-from run_metas import MetasAutomation
-from services.supabase_service import SupabaseService
+from modules.unidades.runner import UnidadesAutomation
+from modules.metas.runner import MetasAutomation
+from core.services.supabase_service import SupabaseService
 from utils.logger import get_logger
 
 logger = get_logger("scheduler")
@@ -77,7 +77,7 @@ def safe_run_dynamic(job_func, recipients=None, template_content=None):
 def alert_admin(message):
     """Envia alerta de erro para o admin via WhatsApp."""
     try:
-        from clients.evolution_client import EvolutionClient
+        from core.clients.evolution_client import EvolutionClient
         from config import ADMIN_PHONE
         
         evo = EvolutionClient()
