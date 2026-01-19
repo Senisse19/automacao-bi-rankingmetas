@@ -169,6 +169,41 @@ def run_scheduler_loop():
     
     # Carga inicial
     refresh_schedule()
+
+    # --- SINGLE INSTANCE LOCK ---
+    import os
+    import atexit
+    
+    LOCK_FILE = "scheduler.lock"
+    
+    if os.path.exists(LOCK_FILE):
+        try:
+            with open(LOCK_FILE, "r") as f:
+                pid = f.read().strip()
+            logger.warning(f"⚠️ Lock file encontrado (PID {pid}). Verificando se processo existe...")
+            # Aqui poderíamos checar se o PID está vivo, mas por simplicidade no Windows/Docker
+            # vamos assumir que se o arquivo existe, o scheduler já está rodando.
+            # Se for um crash anterior, o usuário deve remover o lock manualmente ou reiniciar o container (que não persistirá o lock se não estiver em volume persistente).
+            # Mas como o diretório pode ser montado, é melhor avisar e sair.
+            logger.critical(f"❌ Scheduler já está rodando (PID {pid}). Abortando execução para evitar duplicidade.")
+            # Opcional: Remover e continuar se tiver certeza que é stale, mas é arriscado.
+            # Vamos abortar.
+            return 
+        except Exception:
+            pass
+            
+    # Criar Lock
+    with open(LOCK_FILE, "w") as f:
+        f.write(str(os.getpid()))
+        
+    def remove_lock():
+        if os.path.exists(LOCK_FILE):
+            os.remove(LOCK_FILE)
+            logger.info("🔓 Lock file removido.")
+            
+    atexit.register(remove_lock)
+    logger.info(f"🔒 Single Instance Lock adquirido (PID {os.getpid()})")
+    # ----------------------------
     
     while True:
         try:
