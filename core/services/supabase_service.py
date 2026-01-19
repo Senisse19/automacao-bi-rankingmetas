@@ -156,6 +156,48 @@ class SupabaseService:
             print(f"❌ Erro ao buscar template '{name}': {e}")
             return None
 
+    # --- Job Queue Methods ---
+
+    def get_pending_jobs(self):
+        """Busca jobs pendentes na fila de execução."""
+        try:
+            params = {
+                "status": "eq.pending",
+                "select": "*",
+                "order": "created_at.asc"
+            }
+            return self._get("automation_queue", params)
+        except Exception as e:
+            print(f"❌ Erro ao buscar jobs pendentes: {e}")
+            return []
+
+    def update_job_status(self, job_id, status, logs=None):
+        """Atualiza o status de um job na fila."""
+        try:
+            payload = { "status": status, "updated_at": "now()" }
+            if logs:
+                payload["logs"] = logs
+            
+            endpoint = f"{self.url}/rest/v1/automation_queue?id=eq.{job_id}"
+            resp = requests.patch(endpoint, headers=self.headers, json=payload)
+            if resp.status_code >= 400:
+                print(f"⚠ Falha ao atualizar job {job_id}: {resp.text}")
+        except Exception as e:
+            print(f"⚠ Erro ao atualizar job {job_id}: {e}")
+
+    def get_schedule_by_id(self, schedule_id):
+        """Busca detalhes de um agendamento específico."""
+        try:
+            params = {
+                "id": f"eq.{schedule_id}",
+                "select": "*, definition:automation_definitions(*)"
+            }
+            data = self._get("automation_schedules", params)
+            return data[0] if data else None
+        except Exception as e:
+            print(f"❌ Erro ao buscar schedule {schedule_id}: {e}")
+            return None
+
 if __name__ == "__main__":
     # Teste
     svc = SupabaseService()

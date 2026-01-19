@@ -163,6 +163,56 @@ def refresh_schedule():
 
     logger.info(f"✅ Total de jobs agendados: {count}")
 
+def check_queue():
+    """Verifica e executa jobs da fila (Job Queue Pattern)."""
+    try:
+        svc = SupabaseService()
+        jobs = svc.get_pending_jobs()
+        
+        if not jobs:
+            return
+
+        for job in jobs:
+            job_id = job['id']
+            logger.info(f"🚀 [QUEUE] Processando Job {job_id}...")
+            svc.update_job_status(job_id, "processing")
+            
+            try:
+                # 1. Parse Payload
+                payload = job['payload']
+                recipients = payload.get('recipients')
+                template_content = payload.get('template_content')
+                
+                # 2. Determine Job Type
+                schedule_id = job.get('schedule_id')
+                def_key = None
+                
+                if schedule_id:
+                    sched_data = svc.get_schedule_by_id(schedule_id)
+                    if sched_data and sched_data.get('definition'):
+                        def_key = sched_data['definition']['key']
+                
+                if not def_key:
+                    raise Exception("Não foi possível identificar a definição da automação (schedule_id inválido ou ausente)")
+                
+                job_func = JOB_MAPPING.get(def_key)
+                if not job_func:
+                     raise Exception(f"Job desconhecido: {def_key}")
+                     
+                # 3. Execute
+                logger.info(f"  > Executando lógica para: {def_key}")
+                safe_run_dynamic(job_func, recipients=recipients, template_content=template_content)
+                
+                svc.update_job_status(job_id, "completed", logs="Executado com sucesso via Queue")
+                logger.info(f"✅ [QUEUE] Job {job_id} concluído.")
+                
+            except Exception as e:
+                logger.error(f"❌ [QUEUE] Falha no Job {job_id}: {e}")
+                svc.update_job_status(job_id, "failed", logs=str(e))
+                
+    except Exception as e:
+        logger.error(f"❌ Erro no loop de verificação da fila: {e}")
+
 def run_scheduler_loop():
     """Loop principal."""
     logger.info(">>> SCHEDULER (DB MODE) INICIADO <<<")
@@ -208,10 +258,11 @@ def run_scheduler_loop():
     while True:
         try:
             schedule.run_pending()
+            check_queue() # Verifica fila a cada iteração
         except Exception as e:
             logger.critical(f"CRITICAL SCHEDULER ERROR: {e}")
             
-        time.sleep(10)
+        time.sleep(5) # Reduzido para 5s para maior responsividade
 
 if __name__ == "__main__":
     if "--test-all" in sys.argv:
