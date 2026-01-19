@@ -16,9 +16,10 @@ class SupabaseService:
         return cls._instance
 
     def _init_client(self):
-        self.url = os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
-        anon_key = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "").strip()
-        service_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+        # Try standard/backend env vars first, then frontend/legacy ones
+        self.url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
+        anon_key = os.getenv("SUPABASE_ANON_KEY") or os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "").strip()
+        service_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_KEY", "").strip()
         
         # Use Service Role Key to bypass RLS (Required for Backend Scripts)
         self.key = service_key

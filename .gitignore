@@ -29,4 +29,5 @@ Thumbs.db
 
 # Dados locais e imagens geradas
 data/*.json
+!data/settings.json
 images/*.png
