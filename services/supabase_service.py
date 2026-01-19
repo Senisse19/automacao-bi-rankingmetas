@@ -1,0 +1,167 @@
+import os
+import requests
+import json
+from dotenv import load_dotenv
+
+# Force reload of .env
+load_dotenv()
+
+class SupabaseService:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(SupabaseService, cls).__new__(cls)
+            cls._instance._init_client()
+        return cls._instance
+
+    def _init_client(self):
+        self.url = os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
+        anon_key = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "").strip()
+        service_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+        
+        # Use Service Role Key to bypass RLS (Required for Backend Scripts)
+        self.key = service_key
+        
+        if not self.key or self.key == "":
+             # Fallback warning or check
+             print("⚠ Aviso: SERVICE_ROLE_KEY não encontrada. Tentando Anon Key (pode falhar com RLS)...")
+             self.key = anon_key 
+        
+        if not self.url or not self.key:
+            print("❌ Erro: Credenciais do Supabase não encontradas no .env")
+            return
+
+        self.headers = {
+            "apikey": self.key,
+            "Authorization": f"Bearer {self.key}",
+            "Content-Type": "application/json"
+        }
+
+
+    def _get(self, table, params=None):
+        """Helper para fazer requests GET na API REST."""
+        try:
+            endpoint = f"{self.url}/rest/v1/{table}"
+            response = requests.get(endpoint, headers=self.headers, params=params)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"❌ Erro HTTP Supabase ({table}): {e}")
+            return []
+
+    def get_active_schedules(self):
+        """Busca todos os agendamentos ativos e seus destinatários."""
+        if not self.url:
+            return []
+
+        try:
+            # 1. Fetch schedules with definitions
+            # Supabase API syntax for join: select=*,definition:automation_definitions(*)
+            params = {
+                # Fetch schedule, its direct template (if any), definition, and definition's default template
+                "select": "*, template:automation_templates(*), definition:automation_definitions(*, default_template:automation_templates(*))",
+                "active": "eq.true"
+            }
+            schedules = self._get("automation_schedules", params)
+            
+            if not schedules:
+                return []
+
+            # 2. Fetch recipients
+            # To optimize, we could do one big query or multiple.
+            # Let's fetch all recipients for active schedules.
+            # Simplest is one query per schedule as before, or one big query if we had schedule_ids.
+            # Let's stick to simple logic: for each schedule, fetch recipients.
+            
+            for sched in schedules:
+                # Query automation_recipients join automation_contacts
+                rec_params = {
+                    "select": "contact:automation_contacts(*)",
+                    "schedule_id": f"eq.{sched['id']}"
+                }
+                # Also filter where contact is active? 
+                # The join syntax checks foreign key. To filter on joined table:
+                # automation_contacts.active=eq.true.
+                # Syntax: select=contact:automation_contacts(*)&contact.active=eq.true
+                # But we have map table.
+                
+                resp_data = self._get("automation_recipients", rec_params)
+                
+                # Flatten and filter active
+                contacts = []
+                for r in resp_data:
+                    c = r.get('contact')
+                    if c and c.get('active'):
+                        contacts.append(c)
+                
+                sched['recipients'] = contacts
+
+            return schedules
+
+        except Exception as e:
+            print(f"❌ Erro ao buscar agendamentos do Supabase: {e}")
+            return []
+
+    def check_welcome_sent(self, contact_id):
+        """Verifica se já enviamos mensagem de boas-vindas para este contato."""
+        try:
+            # Check in 'automation_logs' table for type='welcome_msg'
+            params = {
+                "contact_id": f"eq.{contact_id}",
+                "event_type": "eq.welcome_msg",
+                "select": "id"
+            }
+            logs = self._get("automation_logs", params)
+            return len(logs) > 0
+        except Exception:
+            # Fallback safe: se der erro (tabela nao existe), assume que já enviou para não floodar
+            return True
+
+    def log_event(self, event_type, details, contact_id=None):
+        """Registra um evento de execução no Supabase."""
+        try:
+            payload = {
+                "event_type": event_type,
+                "details": details,  # dict
+                "contact_id": contact_id
+            }
+            # Remove keys with None values (like contact_id if unused) to avoid FK errors if strict
+            # but JSON payload usually handles null fine if column allows it.
+            
+            endpoint = f"{self.url}/rest/v1/automation_logs"
+            resp = requests.post(endpoint, headers=self.headers, json=payload)
+            if resp.status_code >= 400:
+                print(f"⚠ Falha ao gravar log {event_type}: {resp.text}")
+        except Exception as e:
+            print(f"⚠ Erro ao gravar log {event_type}: {e}")
+
+    def mark_welcome_sent(self, contact_id):
+        """Registra que enviamos boas-vindas."""
+        self.log_event("welcome_msg", {"timestamp": "now()"}, contact_id)
+
+    def get_template_by_name(self, name):
+        """Busca um template pelo nome exato."""
+        try:
+            params = {
+                "name": f"eq.{name}",
+                "select": "*"
+            }
+            templates = self._get("automation_templates", params)
+            if templates:
+                return templates[0]
+            return None
+        except Exception as e:
+            print(f"❌ Erro ao buscar template '{name}': {e}")
+            return None
+
+if __name__ == "__main__":
+    # Teste
+    svc = SupabaseService()
+    schedules = svc.get_active_schedules()
+    print(f"Encontrados {len(schedules)} agendamentos ativos.")
+    for s in schedules:
+        def_name = s.get('definition', {}).get('name', 'Unknown')
+        recipients = s.get('recipients', [])
+        print(f"- [{s['scheduled_time']}] {s['name']} ({def_name}) -> {len(recipients)} contatos")
+

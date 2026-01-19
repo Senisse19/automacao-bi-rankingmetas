@@ -1,22 +1,43 @@
 """
-Cliente Power BI - Extrai dados via DAX
-Funciona com licença Premium Per User (PPU)
+Cliente Power BI - Extrai dados via DAX.
+Funciona com licença Premium Per User (PPU).
+Gerencia autenticação Azure AD e execução de queries.
 """
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import os
+from utils.logger import get_logger
+
+logger = get_logger("powerbi_client")
 
 
 class PowerBIClient:
     def __init__(self):
-        self.tenant = os.environ.get("POWERBI_TENANT", "audittecnologia.onmicrosoft.com")
-        self.client_id = os.environ.get("SHAREPOINT_CLIENT_ID", "75342350-912b-496c-8e37-9db1881a3c7e")
-        self.client_secret = os.environ.get("SHAREPOINT_CLIENT_SECRET", "REDACTED")
-        self.workspace_id = os.environ.get("POWERBI_WORKSPACE_ID", "4600324e-148c-4aae-a743-601628c04d29")
-        self.dataset_id = os.environ.get("POWERBI_DATASET_ID", "5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4")
+        self.tenant = os.environ.get("SHAREPOINT_TENANT")
+        self.client_id = os.environ.get("SHAREPOINT_CLIENT_ID")
+        self.client_secret = os.environ.get("SHAREPOINT_CLIENT_SECRET")
+        self.workspace_id = os.environ.get("POWERBI_WORKSPACE_ID")
+        self.dataset_id = os.environ.get("POWERBI_DATASET_ID")
+
+        # Validate critical env vars
+        if not self.tenant or not self.client_id or not self.client_secret:
+            raise ValueError("CRITICAL: Missing required environment variables (SHAREPOINT_TENANT, SHAREPOINT_CLIENT_ID, SHAREPOINT_CLIENT_SECRET).")
+
         self.token = None
+
+        # Configure Autoscaling Retry
+        self.session = requests.Session()
+        retries = Retry(total=3, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
+        adapter = HTTPAdapter(max_retries=retries)
+        self.session.mount("http://", adapter)
+        self.session.mount("https://", adapter)
     
-    def authenticate(self):
-        """Autentica no Azure AD e obtém token de acesso"""
+    def authenticate(self) -> bool:
+        """
+        Autentica no Azure AD usando credenciais de Service Principal.
+        Obtém e armazena o token de acesso (Bearer Token).
+        """
         token_url = f"https://login.microsoftonline.com/{self.tenant}/oauth2/v2.0/token"
         
         data = {
@@ -27,16 +48,19 @@ class PowerBIClient:
         }
         
         try:
-            response = requests.post(token_url, data=data)
+            response = self.session.post(token_url, data=data, timeout=10)
             response.raise_for_status()
             self.token = response.json().get("access_token")
             return True
         except requests.exceptions.RequestException as e:
-            print(f"Erro na autenticacao: {e}")
+            logger.error(f"Erro na autenticacao: {e}")
             return False
     
-    def execute_dax(self, query):
-        """Executa uma query DAX e retorna os resultados"""
+    def execute_dax(self, query: str) -> list | None:
+        """
+        Executa uma consulta DAX no dataset configurado.
+        Retorna uma lista de linhas (dicionários) ou lista vazia em caso de erro.
+        """
         if not self.token:
             if not self.authenticate():
                 return None
@@ -54,7 +78,7 @@ class PowerBIClient:
         }
         
         try:
-            response = requests.post(url, json=payload, headers=headers)
+            response = self.session.post(url, json=payload, headers=headers, timeout=30)
             response.raise_for_status()
             
             result = response.json()
@@ -66,19 +90,19 @@ class PowerBIClient:
             return []
             
         except requests.exceptions.RequestException as e:
-            print(f"Erro ao executar DAX: {e}")
+            logger.error(f"Erro ao executar DAX: {e}")
             if hasattr(e, 'response') and e.response is not None:
-                print(f"Detalhes: {e.response.text[:500]}")
+                logger.error(f"Detalhes: {e.response.text[:500]}")
             return None
     
-    def get_sample_data(self):
-        """Retorna dados de exemplo para testar a conexao"""
+    def get_sample_data(self) -> list | None:
+        """Retorna dados de exemplo (teste de conexão simples)."""
         # Query simples para testar conexao
         query = 'EVALUATE ROW("Status", "Conexao OK", "Timestamp", NOW())'
         return self.execute_dax(query)
     
-    def list_datasets(self):
-        """Lista todos os datasets do workspace"""
+    def list_datasets(self) -> list:
+        """Lista todos os datasets disponíveis no workspace configurado."""
         if not self.token:
             if not self.authenticate():
                 return []
@@ -87,7 +111,7 @@ class PowerBIClient:
         headers = {"Authorization": f"Bearer {self.token}"}
         
         try:
-            response = requests.get(url, headers=headers)
+            response = self.session.get(url, headers=headers, timeout=10)
             response.raise_for_status()
             return response.json().get("value", [])
         except:

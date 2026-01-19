@@ -160,17 +160,9 @@ UNIDADES_CONFIG = {
     }
 }
 
-# Mapeamento de destinatários individuais por departamento
-# Preencha com os números no formato internacional: 55 + DDD + Numero
-# Carregar destinatários do JSON
-DESTINATARIOS_WHATSAPP = {}
-try:
-    contacts_path = os.path.join(os.path.dirname(__file__), "contacts.json")
-    with open(contacts_path, "r", encoding="utf-8") as f:
-        DESTINATARIOS_WHATSAPP = json.load(f)
-except Exception as e:
-    print(f"Warning: Could not load contacts.json: {e}")
-    DESTINATARIOS_WHATSAPP = {}
+# Mapeamento de destinatários
+# OBS: Destinatários agora são gerenciados 100% via Supabase (Portal Admin).
+# A variável DESTINATARIOS_WHATSAPP foi removida para evitar uso de arquivo local.
 
 # Lista de departamentos para gerar imagens
 DEPARTAMENTOS = [
@@ -182,6 +174,7 @@ DEPARTAMENTOS = [
     "tax",
     "corporate",
     "tecnologia",
+    "financeiro",
 ]
 
 # Nomes para exibição (com acentos)
@@ -195,6 +188,7 @@ DISPLAY_NAMES = {
     "tax": "Tax",
     "corporate": "Corporate",
     "tecnologia": "Tecnologia",
+    "financeiro": "Financeiro",
 }
 
 # Agendamento
@@ -221,12 +215,9 @@ EMAIL_CONFIG = {
 
 # Mapeamento de emails
 # Mapeamento de emails
+# Email também deve ser gerido via Supabase futuramente ou adaptado aqui se necessário.
+# Por enquanto, mantemos vazio pois a origem será dinâmica.
 EMAILS_DESTINO = {}
-# Copia a estrutura de DESTINATARIOS_WHATSAPP mas filtrando quem tem email
-for departamento, lista_contatos in DESTINATARIOS_WHATSAPP.items():
-    EMAILS_DESTINO[departamento] = [
-        c for c in lista_contatos if "email" in c and c["email"]
-    ]
 
 # Mensagem padrão
 METAS_CAPTION = os.getenv("METAS_CAPTION", """📊 Acompanhamento Metas Caixa Grupo Studio
