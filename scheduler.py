@@ -176,7 +176,9 @@ def check_queue():
             job_id = job['id']
             logger.info(f"🚀 [QUEUE] Processando Job {job_id}...")
             svc.update_job_status(job_id, "processing")
+            svc.log_event("job_queue_start", {"job_id": job_id, "schedule_id": job.get('schedule_id')})
             
+            start_time = time.time()
             try:
                 # 1. Parse Payload
                 payload = job['payload']
@@ -203,12 +205,16 @@ def check_queue():
                 logger.info(f"  > Executando lógica para: {def_key}")
                 safe_run_dynamic(job_func, recipients=recipients, template_content=template_content)
                 
-                svc.update_job_status(job_id, "completed", logs="Executado com sucesso via Queue")
-                logger.info(f"✅ [QUEUE] Job {job_id} concluído.")
+                duration = round(time.time() - start_time, 2)
+                svc.update_job_status(job_id, "completed", logs=f"Executado com sucesso via Queue em {duration}s")
+                svc.log_event("job_queue_success", {"job_id": job_id, "duration": duration, "def_key": def_key})
+                logger.info(f"✅ [QUEUE] Job {job_id} concluído em {duration}s.")
                 
             except Exception as e:
+                duration = round(time.time() - start_time, 2)
                 logger.error(f"❌ [QUEUE] Falha no Job {job_id}: {e}")
                 svc.update_job_status(job_id, "failed", logs=str(e))
+                svc.log_event("job_queue_error", {"job_id": job_id, "error": str(e), "duration": duration}, level="error")
                 
     except Exception as e:
         logger.error(f"❌ Erro no loop de verificação da fila: {e}")
