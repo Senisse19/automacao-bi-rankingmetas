@@ -170,14 +170,11 @@ class MetasAutomation:
                 
                 # --- Template Logic ---
                 current_template = template_content or fallback_template_str
-                is_welcome_msg = False
+                is_first_time = not self.supabase.check_welcome_sent(contact_id)
                 
-                # Check for Welcome (Anti-Ban / Orientation)
-                if not self.supabase.check_welcome_sent(contact_id) and welcome_template_str:
-                    logger.info(f"   ℹ Novo usuário detectado: {nome}. Enviando Boas-Vindas.")
-                    current_template = welcome_template_str
-                    is_welcome_msg = True
-                
+                # Warning Message for First-Time Users
+                warning_msg = "\n\n⚠ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre todas as mensagens confirmando o recebimento (ex: \"ok\", \"recebido\")."
+
                 if current_template:
                     # Dynamic Template
                     try:
@@ -204,6 +201,11 @@ class MetasAutomation:
                     selected_greeting = random.choice(variations)
                     caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
 
+                # Append warning if new user
+                if is_first_time:
+                    logger.info(f"   ℹ Novo usuário detectado: {nome}. Adicionando aviso de primeiro envio.")
+                    caption += warning_msg
+
                 # --- Send via Service ---
                 success = notification_service.send_whatsapp_report(
                     recipient_data=pessoa,
@@ -212,7 +214,7 @@ class MetasAutomation:
                     context_tag="metas"
                 )
                 
-                if success and is_welcome_msg:
+                if success and is_first_time:
                     self.supabase.mark_welcome_sent(contact_id)
 
     def send_email(self, images):

@@ -89,13 +89,30 @@ class UnidadesAutomation:
             else:
                 caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
             
+            # Check First Shot Logic
+            # We need contact_id to check welcome status. 
+            # In Unidades, 'pessoa' dict has 'id' key based on line 60: "id": r.get('id')
+            contact_id = pessoa.get("id")
+            if contact_id:
+                is_first_time = not self.supabase.check_welcome_sent(contact_id)
+                if is_first_time:
+                    logger.info(f"   ℹ Novo usuário detectado (Unidades): {nome}. Adicionando aviso.")
+                    warning_msg = "\n\n⚠ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre todas as mensagens confirmando o recebimento (ex: \"ok\", \"recebido\")."
+                    caption += warning_msg
+            else:
+                is_first_time = False
+
+            
             # --- Send via Service ---
-            notification_service.send_whatsapp_report(
+            success = notification_service.send_whatsapp_report(
                 recipient_data=pessoa,
                 image_path=image_path,
                 caption=caption,
                 context_tag="unidades"
             )
+
+            if success and is_first_time and contact_id:
+                self.supabase.mark_welcome_sent(contact_id)
 
     def _cleanup_old_images(self, prefix):
         """
