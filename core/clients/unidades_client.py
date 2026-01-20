@@ -57,13 +57,10 @@ class UnidadesClient:
                 # but we need 2026 which might be on Page 50+.
                 # Restoring full scan loop.
 
-                while len(data) >= 10: 
-                    if len(all_items) > 100000: # Original safety limit
-                        logger.warning("Max items limit reached (100k), stopping.")
-                        break
-                        
+                while len(data) > 0: 
+                    # Removed artificial 100k limit to ensure full sync
                     if page % 5 == 0:
-                        logger.info(f"Fetching {endpoint} page {page}...")
+                        logger.info(f"Fetching {endpoint} page {page}. Total items so far: {len(all_items)}")
                         
                     try:
                         p_resp = self.session.get(f"{url}?page={page}", headers=self.headers, timeout=10)
