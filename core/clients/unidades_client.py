@@ -69,6 +69,12 @@ class UnidadesClient:
                         p_data = p_resp.json()
                         if not p_data or not isinstance(p_data, list):
                             break
+                        
+                        # Infinite Loop / Duplicate Page Protection
+                        if p_data == data: 
+                            logger.warning(f"Page {page} is identical to previous page. Breaking loop.")
+                            break
+                            
                         data = p_data
                         
                         all_items.extend(data)
