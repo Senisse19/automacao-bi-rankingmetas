@@ -230,6 +230,63 @@ class SupabaseService:
             print(f"⚠ Erro ao buscar setting '{key}': {e}")
             return default
 
+    # --- Report Snapshot Methods ---
+
+    def save_report_snapshot(self, report_type: str, date_ref: str, data: dict) -> str | None:
+        """
+        Salva um snapshot do relatório para geração de link dinâmico.
+        Retorna o ID do relatório criado (UUID) ou None em caso de erro.
+        """
+        try:
+            payload = {
+                "type": report_type,
+                "date_ref": date_ref,
+                "data": data,
+                "created_at": "now()"
+            }
+            endpoint = f"{self.url}/rest/v1/automation_reports"
+            # Return representation to get the ID back
+            headers = self.headers.copy()
+            headers["Prefer"] = "return=representation"
+            
+            resp = requests.post(endpoint, headers=headers, json=payload)
+            if resp.status_code >= 400:
+                 print(f"⚠ Falha ao salvar snapshot do relatório: {resp.text}")
+                 return None
+            
+            result = resp.json()
+            if result and len(result) > 0:
+                report_id = result[0].get('id')
+                print(f"✅ Snapshot salvo com sucesso: {report_id}")
+                return report_id
+            return None
+        except Exception as e:
+            print(f"⚠ Erro ao salvar snapshot: {e}")
+            return None
+
+    def upsert_data(self, table: str, data: list | dict, on_conflict: str = "id") -> bool:
+        """
+        Realiza um UPSERT (Insert ou Update) na tabela especificada.
+        Utiliza o header 'Prefer: resolution=merge-duplicates'.
+        Args:
+            table: Nome da tabela
+            data: Dicionário ou Lista de Dicionários com os dados.
+            on_conflict: Coluna para verificação de duplicidade (default: id)
+        """
+        try:
+            endpoint = f"{self.url}/rest/v1/{table}?on_conflict={on_conflict}"
+            headers = self.headers.copy()
+            headers["Prefer"] = "resolution=merge-duplicates"
+            
+            resp = requests.post(endpoint, headers=headers, json=data)
+            if resp.status_code >= 400:
+                print(f"⚠ Falha ao fazer upsert em {table}: {resp.text}")
+                return False
+            return True
+        except Exception as e:
+            print(f"⚠ Erro ao fazer upsert em {table}: {e}")
+            return False
+
 if __name__ == "__main__":
     # Teste
     svc = SupabaseService()
