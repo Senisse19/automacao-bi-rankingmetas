@@ -205,7 +205,7 @@ class UnidadesClient:
             
             # Resolve Type (Franquia/Licença)
             type_id = m.get("tipo_franquia") or m.get("tipo_contrato")
-            type_name = self.type_map.get(type_id, f"Tipo {type_id}")
+            type_name = self.type_map.get(str(type_id), f"Tipo {type_id}")
             
             # Additional Fields requested
             # (taxa de aquisição, valor de crm -> rede, percentual de retenção, periodo de contrato)

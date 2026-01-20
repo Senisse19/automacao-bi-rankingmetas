@@ -139,6 +139,11 @@ class UnidadesAutomation:
         Pode executar ambos em sequência se solicitado.
         """
         logger.info("\n--- Processando Unidades ---")
+        
+        # Base URL for dynamic reports (should be in env, defaulting to portal URL)
+        # TODO: Move to config properly
+        base_url = os.getenv("PORTAL_URL", "https://dashboards.grupostudio.com.br")
+        
         try:
             # Determine Date Reference for Daily
             # If today is Monday (0), fetch data from Friday (D-3)
@@ -155,6 +160,11 @@ class UnidadesAutomation:
                 self._cleanup_old_images("unidades_daily_")
                 
                 daily_data = self.unidades_client.fetch_data_for_range(data_ref, data_ref)
+                
+                # --- LIVE LINK ---
+                # Link aponta para a página dinâmica com filtro de data
+                report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
+                
                 daily_path = os.path.join(IMAGES_DIR, f"unidades_daily_{data_ref}.png")
                 self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
                 
@@ -162,9 +172,15 @@ class UnidadesAutomation:
                 if not generate_only:
                     # Format data for diplay: 2026-01-16 -> 16/01/2026
                     data_display = datetime.strptime(data_ref, "%Y-%m-%d").strftime("%d/%m/%Y")
-                    self._send_image_to_group("diretoria", daily_path, f"Relatório Unidades - Diário {data_display}", custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                    
+                    base_caption = f"Relatório Unidades - Diário {data_display}"
+                    if report_link:
+                        base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
+                        
+                    self._send_image_to_group("diretoria", daily_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {daily_path}")
+                    logger.info(f"   [INFO] Link: {report_link}")
             
             # 2. Relatório Semanal
             should_run_weekly = weekly or force_weekly
@@ -185,6 +201,10 @@ class UnidadesAutomation:
                 logger.info(f"   [Processando] Relatório Semanal (Semana Anterior Completa): {start_weekly} a {data_ref_weekly}")
 
                 weekly_data = self.unidades_client.fetch_data_for_range(start_weekly, data_ref_weekly)
+                
+                # --- LIVE LINK ---
+                report_link = f"{base_url}/reports/unidades?start={start_weekly}&end={data_ref_weekly}&type=weekly"
+
                 weekly_path = os.path.join(IMAGES_DIR, f"unidades_weekly_{data_ref_weekly}.png")
                 
                 # Cleanup old weekly images
@@ -195,9 +215,15 @@ class UnidadesAutomation:
                 # Enviar Semanal
                 if not generate_only:
                     data_display = f"{datetime.strptime(start_weekly, '%Y-%m-%d').strftime('%d/%m')} a {datetime.strptime(data_ref_weekly, '%Y-%m-%d').strftime('%d/%m')}"
-                    self._send_image_to_group("diretoria", weekly_path, f"Relatório Unidades - Semanal ({data_display})", custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                    
+                    base_caption = f"Relatório Unidades - Semanal ({data_display})"
+                    if report_link:
+                         base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
+                         
+                    self._send_image_to_group("diretoria", weekly_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
+                    if report_id: logger.info(f"   [INFO] Snapshot ID: {report_id}")
                 
         except Exception as e:
             logger.error(f"Erro no processamento Unidades: {e}")
