@@ -74,20 +74,33 @@ def sync_participantes(client, svc):
 
 def sync_modelos(client, svc):
     print("\n--- Sincronizando MODELOS (Vendas/Contratos) ---")
-    # This might be heavy
     data = client._get_paginated_latest("modelos")
     print(f"Encontrados {len(data)} modelos no Nexus.")
     
+    # Pre-Fetch Known Unit IDs to avoid FK errors
+    try:
+        known_unit_ids = svc.get_all_ids("nexus_unidades")
+        print(f"Unidades conhecidas no DB: {len(known_unit_ids)}")
+    except:
+        known_unit_ids = set()
+
     batch = []
+    missing_unidade_ids = set()
+
     for item in data:
         # Map fields
-        # Check if dates are empty strings
         dt_contrato = item.get("data_contrato") or item.get("data")
         if dt_contrato == "": dt_contrato = None
         
+        uid = item.get("unidade")
+        
+        # Check integrity
+        if uid and str(uid) not in known_unit_ids:
+            missing_unidade_ids.add(str(uid))
+
         row = {
             "id": item.get("id") or item.get("codigo"),
-            "unidade_id": item.get("unidade"),
+            "unidade_id": uid,
             "consultor_id": item.get("consultor_venda"),
             "data_contrato": dt_contrato,
             "valor": item.get("valor") or 0,
@@ -96,7 +109,31 @@ def sync_modelos(client, svc):
             "updated_at": datetime.now().isoformat()
         }
         batch.append(row)
+    
+    # Handle Missing Units (Placeholders)
+    if missing_unidade_ids:
+        print(f"⚠ Encontradas {len(missing_unidade_ids)} unidades referenciadas mas inexistentes. Criando placeholders...")
+        placeholder_batch = []
+        for miss_uid in missing_unidade_ids:
+            placeholder_batch.append({
+                "id": miss_uid,
+                "nome": f"Unidade {miss_uid} (Legado)",
+                "cidade": "-",
+                "uf": "-",
+                "raw_data": {"placeholder": True, "reason": "Missing in source"},
+                "updated_at": datetime.now().isoformat()
+            })
+            # Add to known so we don't try to re-add? (SVC handles duplicates by upsert)
+            known_unit_ids.add(miss_uid)
         
+        # Insert Placeholders in chunks
+        chunk_size = 500
+        for i in range(0, len(placeholder_batch), chunk_size):
+            chunk = placeholder_batch[i:i + chunk_size]
+            svc.upsert_data("nexus_unidades", chunk)
+            print(f"  -> Inserted placeholders {i} - {i+len(chunk)}")
+
+    # Sync Models
     chunk_size = 500
     for i in range(0, len(batch), chunk_size):
         chunk = batch[i:i + chunk_size]

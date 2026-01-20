@@ -287,6 +287,19 @@ class SupabaseService:
             print(f"⚠ Erro ao fazer upsert em {table}: {e}")
             return False
 
+    def get_all_ids(self, table: str) -> set:
+        """Retorna um set com todos os IDs da tabela para validação rápida."""
+        try:
+            # Fetch minimal data
+            endpoint = f"{self.url}/rest/v1/{table}?select=id"
+            resp = requests.get(endpoint, headers=self.headers)
+            resp.raise_for_status()
+            data = resp.json()
+            return {str(item['id']) for item in data}
+        except Exception as e:
+            print(f"⚠ Erro ao buscar IDs de {table}: {e}")
+            return set()
+
 if __name__ == "__main__":
     # Teste
     svc = SupabaseService()
