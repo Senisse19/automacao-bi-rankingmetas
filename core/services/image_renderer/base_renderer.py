@@ -26,8 +26,15 @@ class BaseRenderer:
         self.font_path = self._find_font()
     
     def _find_font(self):
-        """Encontra uma fonte disponível no sistema (Prioridade: Montserrat)"""
+        """Encontra uma fonte disponível no sistema (Prioridade: Assets > Montserrat)"""
+        # Caminho relativo para assets/fonts
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.abspath(os.path.join(current_dir, "../../../"))
+        
+        local_font = os.path.join(project_root, "core", "assets", "fonts", "arial.ttf")
+        
         possible_fonts = [
+            local_font,
             "C:/Windows/Fonts/Montserrat-Regular.ttf",
             "C:/Windows/Fonts/Montserrat-Medium.ttf",
             "C:/Windows/Fonts/segoeuil.ttf",
@@ -36,6 +43,8 @@ class BaseRenderer:
             "C:/Windows/Fonts/calibril.ttf",
             "C:/Windows/Fonts/calibri.ttf",
             "C:/Windows/Fonts/arial.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", # Linux fallback
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf" # Linux fallback
         ]
         for font in possible_fonts:
             if os.path.exists(font):
