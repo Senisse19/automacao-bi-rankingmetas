@@ -290,9 +290,12 @@ class SupabaseService:
     def get_all_ids(self, table: str) -> set:
         """Retorna um set com todos os IDs da tabela para validação rápida."""
         try:
-            # Fetch minimal data
+            # Fetch minimal data, use Range header to get more items (limit 1000 default)
             endpoint = f"{self.url}/rest/v1/{table}?select=id"
-            resp = requests.get(endpoint, headers=self.headers)
+            headers = self.headers.copy()
+            headers["Range"] = "0-99999" # Fetch up to 100k rows
+            
+            resp = requests.get(endpoint, headers=headers)
             resp.raise_for_status()
             data = resp.json()
             return {str(item['id']) for item in data}
