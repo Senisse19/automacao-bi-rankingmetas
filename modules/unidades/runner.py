@@ -142,7 +142,7 @@ class UnidadesAutomation:
         
         # Base URL for dynamic reports (should be in env, defaulting to portal URL)
         # TODO: Move to config properly
-        base_url = os.getenv("PORTAL_URL", "https://dashboards.grupostudio.com.br")
+        base_url = os.getenv("PORTAL_URL", "https://bi.grupostudio.tec.br")
         
         try:
             # Determine Date Reference for Daily
