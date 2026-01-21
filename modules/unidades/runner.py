@@ -15,10 +15,12 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from config import (
-    IMAGES_DIR
+    IMAGES_DIR,
+    PORTAL_URL
 )
 from core.clients.unidades_client import UnidadesClient
 from core.services.image_generator import ImageGenerator
+from core.services.pdf_generator import PdfGenerator
 from core.services.supabase_service import SupabaseService
 from core.clients.evolution_client import EvolutionClient
 from utils.logger import get_logger
@@ -32,6 +34,7 @@ class UnidadesAutomation:
     """
     def __init__(self):
         self.image_gen = ImageGenerator()
+        self.pdf_gen = PdfGenerator(base_url=PORTAL_URL)
         self.whatsapp = EvolutionClient()
         self.unidades_client = UnidadesClient()
         self.supabase = SupabaseService()
@@ -133,7 +136,7 @@ class UnidadesAutomation:
         except Exception as e:
             logger.error(f"   [Cleanup] Erro ao listar diretório: {e}")
 
-    def process_reports(self, daily=True, weekly=False, force_weekly=False, generate_only=False, recipients=None, template_content=None):
+    def process_reports(self, daily=True, weekly=False, force_weekly=False, generate_only=False, recipients=None, template_content=None, date_override=None):
         """
         Processa relatórios de Unidades com flags explícitas para Diário e Semanal.
         Pode executar ambos em sequência se solicitado.
@@ -146,11 +149,14 @@ class UnidadesAutomation:
         
         try:
             # Determine Date Reference for Daily
-            # If today is Monday (0), fetch data from Friday (D-3)
-            # Else fetch Yesterday (D-1)
-            today = datetime.now()
-            days_back = 3 if today.weekday() == 0 else 1
-            data_ref = (today - timedelta(days=days_back)).strftime("%Y-%m-%d")
+            if date_override:
+                data_ref = date_override
+            else:
+                # If today is Monday (0), fetch data from Friday (D-3)
+                # Else fetch Yesterday (D-1)
+                today = datetime.now()
+                days_back = 3 if today.weekday() == 0 else 1
+                data_ref = (today - timedelta(days=days_back)).strftime("%Y-%m-%d")
             
             # 1. Relatório Diário
             if daily:
@@ -165,8 +171,10 @@ class UnidadesAutomation:
                 # Link aponta para a página dinâmica com filtro de data
                 report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
                 
-                daily_path = os.path.join(IMAGES_DIR, f"unidades_daily_{data_ref}.png")
-                self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
+                report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
+                
+                daily_path = os.path.join(IMAGES_DIR, f"unidades_daily_{data_ref}.pdf")
+                self.pdf_gen.generate_unidades_pdf(daily_data, "daily", daily_path)
                 
                 # Enviar Diário
                 if not generate_only:
@@ -205,12 +213,12 @@ class UnidadesAutomation:
                 # --- LIVE LINK ---
                 report_link = f"{base_url}/reports/unidades?start={start_weekly}&end={data_ref_weekly}&type=weekly"
 
-                weekly_path = os.path.join(IMAGES_DIR, f"unidades_weekly_{data_ref_weekly}.png")
+                weekly_path = os.path.join(IMAGES_DIR, f"unidades_weekly_{data_ref_weekly}.pdf")
                 
                 # Cleanup old weekly images
                 self._cleanup_old_images("unidades_weekly_")
                 
-                self.image_gen.generate_unidades_reports(weekly_data, "weekly", weekly_path)
+                self.pdf_gen.generate_unidades_pdf(weekly_data, "weekly", weekly_path)
                 
                 # Enviar Semanal
                 if not generate_only:
@@ -223,7 +231,6 @@ class UnidadesAutomation:
                     self._send_image_to_group("diretoria", weekly_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
                 else:
                     logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
-                    if report_id: logger.info(f"   [INFO] Snapshot ID: {report_id}")
                 
         except Exception as e:
             logger.error(f"Erro no processamento Unidades: {e}")
@@ -239,6 +246,7 @@ def main():
     parser.add_argument('--generate-only', action='store_true', help='Only generate images')
     parser.add_argument('--weekly-only', action='store_true', help='Run only weekly report')
     parser.add_argument('--daily-only', action='store_true', help='Run only daily report')
+    parser.add_argument('--date', type=str, help='Override reference date (YYYY-MM-DD)')
     parser.add_argument('--payload', type=str, help='JSON payload with recipients and template.')
     
     args = parser.parse_args()
@@ -276,7 +284,8 @@ def main():
         force_weekly=force_weekly, 
         generate_only=args.generate_only,
         recipients=recipients,
-        template_content=template_content
+        template_content=template_content,
+        date_override=args.date
     )
 
 if __name__ == "__main__":
