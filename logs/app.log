@@ -3013,3 +3013,414 @@
 2026-01-21 15:02:19 - scheduler - INFO - ✅ Total de jobs agendados: 10
 2026-01-21 15:02:19 - scheduler - WARNING - ⚠️ Lock file encontrado (PID 62708). Verificando se processo existe...
 2026-01-21 15:02:19 - scheduler - CRITICAL - ❌ Scheduler já está rodando (PID 62708). Abortando execução para evitar duplicidade.
+2026-01-21 15:05:49 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 15:05:49 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:05:50 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:05:50 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_semanal) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:05:50 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:05:50 - scheduler - INFO - 🔒 Single Instance Lock adquirido (PID 38952)
+2026-01-21 15:10:49 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:10:50 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:10:50 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_semanal) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:10:50 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:11:04 - scheduler - INFO - 🚀 [QUEUE] Processando Job 53ec9b99-c833-4b69-9b29-cef7aa6c2f5d...
+2026-01-21 15:11:07 - scheduler - INFO -   > Executando lógica para: unidades_semanal
+2026-01-21 15:11:07 - scheduler - INFO - Iniciando Unidades Weekly (Dynamic)
+2026-01-21 15:11:09 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 15:11:09 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 15:11:09 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 15:11:09 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 15:11:36 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 15:11:36 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 15:11:36 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 15:11:39 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 15:11:39 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 15:11:46 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 15:11:46 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 15:11:49 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 15:11:50 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 15:11:51 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 15:12:06 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_weekly_2026-01-18.pdf | Extensão: pdf
+2026-01-21 15:12:06 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:12:10 - evolution_client - INFO - ✅ Documento 'unidades_weekly_2026-01-18.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:12:10 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (unidades)
+2026-01-21 15:12:21 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_weekly_2026-01-18.pdf | Extensão: pdf
+2026-01-21 15:12:21 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:12:24 - evolution_client - INFO - ✅ Documento 'unidades_weekly_2026-01-18.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:12:24 - notification_service - INFO -    [Notification] OK: WhatsApp para Douglas Fraga (unidades)
+2026-01-21 15:12:28 - scheduler - INFO - ✅ [QUEUE] Job 53ec9b99-c833-4b69-9b29-cef7aa6c2f5d concluído em 81.58s.
+2026-01-21 15:12:32 - scheduler - INFO - 🚀 [QUEUE] Processando Job 46b56772-5f9d-48e3-99fb-82d45f6079cb...
+2026-01-21 15:12:38 - scheduler - INFO -   > Executando lógica para: unidades_semanal
+2026-01-21 15:12:38 - scheduler - INFO - Iniciando Unidades Weekly (Dynamic)
+2026-01-21 15:12:40 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 15:12:40 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 15:12:40 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 15:12:40 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 15:13:01 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 15:13:01 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 15:13:01 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 15:13:05 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 15:13:05 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 15:13:12 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 15:13:12 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 15:13:13 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 15:13:14 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 15:13:15 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 15:13:31 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_weekly_2026-01-18.pdf | Extensão: pdf
+2026-01-21 15:13:31 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:13:34 - evolution_client - INFO - ✅ Documento 'unidades_weekly_2026-01-18.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:13:34 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (unidades)
+2026-01-21 15:13:49 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_weekly_2026-01-18.pdf | Extensão: pdf
+2026-01-21 15:13:49 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:13:53 - evolution_client - INFO - ✅ Documento 'unidades_weekly_2026-01-18.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:13:53 - notification_service - INFO -    [Notification] OK: WhatsApp para Douglas Fraga (unidades)
+2026-01-21 15:13:56 - scheduler - INFO - ✅ [QUEUE] Job 46b56772-5f9d-48e3-99fb-82d45f6079cb concluído em 77.95s.
+2026-01-21 15:15:49 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:15:51 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:15:51 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_semanal) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:15:51 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:18:11 - scheduler - INFO - 🚀 [QUEUE] Processando Job 03ac1e59-2857-4cd2-9991-d91e1c5e8b33...
+2026-01-21 15:18:12 - scheduler - INFO -   > Executando lógica para: unidades_diario
+2026-01-21 15:18:12 - scheduler - INFO - Iniciando Unidades Daily (Dynamic)
+2026-01-21 15:18:12 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 15:18:12 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-20)
+2026-01-21 15:18:12 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 15:18:12 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 15:18:26 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 15:18:26 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 15:18:26 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 15:18:28 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 15:18:28 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 15:18:32 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 15:18:46 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_daily_2026-01-20.pdf | Extensão: pdf
+2026-01-21 15:18:46 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:18:49 - evolution_client - INFO - ✅ Documento 'unidades_daily_2026-01-20.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:18:49 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (unidades)
+2026-01-21 15:19:01 - evolution_client - INFO -    [SEND_FILE] Arquivo: unidades_daily_2026-01-20.pdf | Extensão: pdf
+2026-01-21 15:19:01 - evolution_client - INFO -    [SEND_FILE] Modo: DOCUMENTO
+2026-01-21 15:19:04 - evolution_client - INFO - ✅ Documento 'unidades_daily_2026-01-20.pdf' enviado com sucesso para o grupo!
+2026-01-21 15:19:04 - notification_service - INFO -    [Notification] OK: WhatsApp para Douglas Fraga (unidades)
+2026-01-21 15:19:05 - scheduler - INFO - ✅ [QUEUE] Job 03ac1e59-2857-4cd2-9991-d91e1c5e8b33 concluído em 53.39s.
+2026-01-21 15:19:20 - scheduler - INFO - 🚀 [QUEUE] Processando Job dd4ada77-f9ab-469e-90d3-a4e0d4a08420...
+2026-01-21 15:19:21 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 15:19:21 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 15:19:22 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 15:19:22 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 15:19:23 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 15:19:28 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 15:19:28 - run_metas - INFO - Gerando imagens...
+2026-01-21 15:19:28 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 15:19:29 - run_metas - INFO - Processando envio para 2 destinatários dinâmicos.
+2026-01-21 15:19:29 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 15:19:30 - scheduler - INFO - ✅ [QUEUE] Job dd4ada77-f9ab-469e-90d3-a4e0d4a08420 concluído em 7.83s.
+2026-01-21 15:20:49 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:20:51 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:20:51 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:20:51 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:21:01 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 15:21:01 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 15:21:02 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 15:21:05 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 15:21:05 - run_metas - INFO - Gerando imagens...
+2026-01-21 15:21:05 - run_metas - INFO -    [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/
+2026-01-21 15:21:05 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 15:24:46 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 15:24:46 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:24:47 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:24:47 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:24:47 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:24:47 - scheduler - WARNING - ⚠️ Lock file encontrado (PID 38952). Verificando se processo existe...
+2026-01-21 15:24:47 - scheduler - CRITICAL - ❌ Scheduler já está rodando (PID 38952). Abortando execução para evitar duplicidade.
+2026-01-21 15:26:10 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 15:26:10 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:26:10 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:26:10 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:26:10 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:26:10 - scheduler - INFO - 🔒 Single Instance Lock adquirido (PID 18848)
+2026-01-21 15:27:29 - scheduler - INFO - 🚀 [QUEUE] Processando Job 736578ee-0b2d-4048-8862-6e0da238a06e...
+2026-01-21 15:27:31 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 15:27:31 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 15:27:31 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 15:27:31 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 15:27:32 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 15:27:35 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 15:27:35 - run_metas - INFO - Gerando imagens...
+2026-01-21 15:27:35 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 15:27:36 - run_metas - INFO - Processando envio para 2 destinatários dinâmicos.
+2026-01-21 15:27:50 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:27:50 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:27:53 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (metas)
+2026-01-21 15:28:07 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:28:07 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:28:09 - notification_service - INFO -    [Notification] OK: WhatsApp para Douglas Fraga (metas)
+2026-01-21 15:28:09 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 15:28:11 - scheduler - INFO - ✅ [QUEUE] Job 736578ee-0b2d-4048-8862-6e0da238a06e concluído em 39.68s.
+2026-01-21 15:29:03 - scheduler - INFO - 🚀 [QUEUE] Processando Job 46ac3eed-0050-4d48-91c3-209330040050...
+2026-01-21 15:29:04 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 15:29:04 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 15:29:05 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 15:29:05 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 15:29:05 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 15:29:08 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 15:29:08 - run_metas - INFO - Gerando imagens...
+2026-01-21 15:29:08 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 15:29:09 - run_metas - INFO - Processando envio para 13 destinatários dinâmicos.
+2026-01-21 15:29:19 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:29:19 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:29:21 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (metas)
+2026-01-21 15:29:32 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:29:32 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:29:35 - notification_service - INFO -    [Notification] OK: WhatsApp para Douglas Fraga (metas)
+2026-01-21 15:29:36 - run_metas - INFO -    ℹ Novo usuário detectado: Aline Dall'Agnol. Adicionando aviso de primeiro envio.
+2026-01-21 15:29:50 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:29:50 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:29:53 - notification_service - INFO -    [Notification] OK: WhatsApp para Aline Dall'Agnol (metas)
+2026-01-21 15:29:54 - run_metas - INFO -    ℹ Novo usuário detectado: André Maciel. Adicionando aviso de primeiro envio.
+2026-01-21 15:30:04 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:30:04 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:30:08 - notification_service - INFO -    [Notification] OK: WhatsApp para André Maciel (metas)
+2026-01-21 15:30:09 - run_metas - INFO -    ℹ Novo usuário detectado: Graziela Mondin. Adicionando aviso de primeiro envio.
+2026-01-21 15:30:19 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:30:19 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:30:23 - notification_service - INFO -    [Notification] OK: WhatsApp para Graziela Mondin (metas)
+2026-01-21 15:30:25 - run_metas - INFO -    ℹ Novo usuário detectado: Gustavo Fragoso. Adicionando aviso de primeiro envio.
+2026-01-21 15:30:34 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:30:34 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:30:35 - notification_service - INFO -    [Notification] OK: WhatsApp para Gustavo Fragoso (metas)
+2026-01-21 15:30:36 - run_metas - INFO -    ℹ Novo usuário detectado: José Carlos. Adicionando aviso de primeiro envio.
+2026-01-21 15:30:47 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:30:47 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:30:49 - notification_service - INFO -    [Notification] OK: WhatsApp para José Carlos (metas)
+2026-01-21 15:30:50 - run_metas - INFO -    ℹ Novo usuário detectado: Juliana Tescaro. Adicionando aviso de primeiro envio.
+2026-01-21 15:31:03 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:31:03 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:31:06 - notification_service - INFO -    [Notification] OK: WhatsApp para Juliana Tescaro (metas)
+2026-01-21 15:31:07 - run_metas - INFO -    ℹ Novo usuário detectado: Mauricio Ferreira. Adicionando aviso de primeiro envio.
+2026-01-21 15:31:20 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:31:20 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:31:21 - notification_service - INFO -    [Notification] OK: WhatsApp para Mauricio Ferreira (metas)
+2026-01-21 15:31:22 - run_metas - INFO -    ℹ Novo usuário detectado: Nelcis Braga Monteiro. Adicionando aviso de primeiro envio.
+2026-01-21 15:31:33 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:31:33 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:31:35 - notification_service - INFO -    [Notification] OK: WhatsApp para Nelcis Braga Monteiro (metas)
+2026-01-21 15:31:36 - run_metas - INFO -    ℹ Novo usuário detectado: Nicholas Lopes. Adicionando aviso de primeiro envio.
+2026-01-21 15:31:45 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:31:45 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:31:48 - notification_service - INFO -    [Notification] OK: WhatsApp para Nicholas Lopes (metas)
+2026-01-21 15:31:49 - run_metas - INFO -    ℹ Novo usuário detectado: Pedro Gasparetto. Adicionando aviso de primeiro envio.
+2026-01-21 15:32:02 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:32:02 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:32:04 - notification_service - INFO -    [Notification] OK: WhatsApp para Pedro Gasparetto (metas)
+2026-01-21 15:32:05 - run_metas - INFO -    ℹ Novo usuário detectado: Yuri Ghabril. Adicionando aviso de primeiro envio.
+2026-01-21 15:32:15 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:32:15 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:32:18 - notification_service - INFO -    [Notification] OK: WhatsApp para Yuri Ghabril (metas)
+2026-01-21 15:32:18 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 15:32:19 - scheduler - INFO - ✅ [QUEUE] Job 46ac3eed-0050-4d48-91c3-209330040050 concluído em 194.72s.
+2026-01-21 15:32:20 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:32:21 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:32:21 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:32:21 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:33:58 - scheduler - INFO - 🚀 [QUEUE] Processando Job cd63a2cb-d69e-423c-b78a-18e574c2364d...
+2026-01-21 15:33:59 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 15:33:59 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 15:34:00 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 15:34:00 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 15:34:01 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 15:34:03 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 15:34:03 - run_metas - INFO - Gerando imagens...
+2026-01-21 15:34:04 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 15:34:04 - run_metas - INFO - Processando envio para 1 destinatários dinâmicos.
+2026-01-21 15:34:16 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 15:34:16 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 15:34:18 - notification_service - INFO -    [Notification] OK: WhatsApp para Nicholas Lopes (metas)
+2026-01-21 15:34:19 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 15:34:20 - scheduler - INFO - ✅ [QUEUE] Job cd63a2cb-d69e-423c-b78a-18e574c2364d concluído em 20.41s.
+2026-01-21 15:37:21 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:37:23 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:37:23 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:37:23 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:37:23 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 15:42:23 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:42:24 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:42:24 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:42:24 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:42:24 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 15:47:24 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:47:25 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:47:25 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:47:25 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:47:25 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 15:52:25 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:52:26 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:52:26 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:52:26 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:52:26 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 15:57:26 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:57:27 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:57:27 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:57:27 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:57:27 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:02:26 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:02:27 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:27 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:27 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:27 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:02:49 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 16:02:49 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:02:50 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:50 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:50 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:02:50 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:02:50 - scheduler - INFO - 🔒 Single Instance Lock adquirido (PID 1716)
+2026-01-21 16:07:50 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:07:52 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:07:52 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:07:52 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:07:52 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:12:51 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:12:52 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:12:52 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:12:52 - scheduler - INFO -   [OK] Agendado 'disparo nicholas' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:12:52 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:17:51 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:17:52 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:17:52 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:17:52 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 16:19:10 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 16:19:10 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:19:11 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:19:11 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:19:11 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 16:19:11 - scheduler - INFO - 🔒 Single Instance Lock adquirido (PID 45468)
+2026-01-21 16:22:19 - scheduler - INFO - 🚀 [QUEUE] Processando Job d3ded771-a33a-469d-936b-8028a878b7f7...
+2026-01-21 16:22:20 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 16:22:20 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 16:22:20 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 16:22:20 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 16:22:21 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 16:22:24 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 16:22:24 - run_metas - INFO - Gerando imagens...
+2026-01-21 16:22:25 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 16:22:25 - run_metas - INFO - Processando envio para 1 destinatários dinâmicos.
+2026-01-21 16:22:37 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-01-21 16:22:37 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 16:22:40 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (metas)
+2026-01-21 16:22:40 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 16:22:41 - scheduler - INFO - ✅ [QUEUE] Job d3ded771-a33a-469d-936b-8028a878b7f7 concluído em 21.08s.
+2026-01-21 16:23:00 - scheduler - INFO - 🚀 [QUEUE] Processando Job 62d27c7a-4de4-45c4-94ed-ffc60b44a6a2...
+2026-01-21 16:23:01 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 16:23:01 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 16:23:01 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 16:23:01 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 16:23:02 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 16:23:05 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 16:23:05 - run_metas - INFO - Gerando imagens...
+2026-01-21 16:23:05 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 16:23:05 - run_metas - INFO - Processando envio para 1 destinatários dinâmicos.
+2026-01-21 16:23:19 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_resumo.png | Extensão: png
+2026-01-21 16:23:19 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 16:23:22 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (metas)
+2026-01-21 16:23:22 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 16:23:23 - scheduler - INFO - ✅ [QUEUE] Job 62d27c7a-4de4-45c4-94ed-ffc60b44a6a2 concluído em 21.94s.
+2026-01-21 16:24:10 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:24:12 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:24:12 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:24:12 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas para Líderes' (metas_diarias) às 09:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:24:12 - scheduler - INFO - ✅ Total de jobs agendados: 15
+2026-01-21 16:25:14 - scheduler - INFO - 🚀 [QUEUE] Processando Job f0ec4112-dff6-4922-a10b-95767603cc0d...
+2026-01-21 16:25:15 - scheduler - INFO -   > Executando lógica para: metas_diarias
+2026-01-21 16:25:15 - scheduler - INFO - Iniciando Metas Automation (Dynamic)
+2026-01-21 16:25:15 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-01-21 16:25:15 - run_metas - INFO - Buscando dados do Power BI...
+2026-01-21 16:25:16 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-01-21 16:25:19 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-01-21 16:25:19 - run_metas - INFO - Gerando imagens...
+2026-01-21 16:25:19 - run_metas - INFO - Enviando para WhatsApp...
+2026-01-21 16:25:19 - run_metas - INFO - Processando envio para 3 destinatários dinâmicos.
+2026-01-21 16:25:20 - run_metas - INFO -    ℹ Novo usuário detectado: Ana Claudia Lopes. Adicionando aviso de primeiro envio.
+2026-01-21 16:25:32 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_resumo.png | Extensão: png
+2026-01-21 16:25:32 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 16:25:34 - notification_service - INFO -    [Notification] OK: WhatsApp para Ana Claudia Lopes (metas)
+2026-01-21 16:25:35 - run_metas - INFO -    ℹ Novo usuário detectado: Guilherme Rossini. Adicionando aviso de primeiro envio.
+2026-01-21 16:25:46 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_resumo.png | Extensão: png
+2026-01-21 16:25:46 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 16:25:48 - notification_service - INFO -    [Notification] OK: WhatsApp para Guilherme Rossini (metas)
+2026-01-21 16:26:01 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_resumo.png | Extensão: png
+2026-01-21 16:26:01 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-01-21 16:26:02 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor de Almeida Senisse (metas)
+2026-01-21 16:26:02 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-01-21 16:26:03 - scheduler - INFO - ✅ [QUEUE] Job f0ec4112-dff6-4922-a10b-95767603cc0d concluído em 48.25s.
+2026-01-21 16:29:11 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:29:12 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:29:12 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:29:12 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 16:34:12 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:34:13 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:34:13 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:34:13 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 16:38:54 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 16:38:54 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-16)
+2026-01-21 16:38:54 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 16:38:54 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 16:39:07 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 16:39:07 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 16:39:07 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 16:39:09 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 16:39:09 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 16:39:12 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 16:39:12 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-16.pdf
+2026-01-21 16:39:12 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-16&end=2026-01-16&type=daily
+2026-01-21 16:39:13 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 16:39:14 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 16:39:14 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 16:39:14 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 16:41:41 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 16:41:41 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-16)
+2026-01-21 16:41:41 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 16:41:41 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 16:41:52 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 16:41:52 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 16:41:52 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 16:41:54 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 16:41:54 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 16:41:57 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 16:41:57 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-16.pdf
+2026-01-21 16:41:57 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-16&end=2026-01-16&type=daily
+2026-01-21 16:43:07 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 16:43:07 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 16:43:07 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 16:43:07 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 16:43:19 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 16:43:19 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 16:43:19 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 16:43:20 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 16:43:20 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 16:43:23 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 16:43:23 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 16:43:27 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 16:43:28 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 16:43:28 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 16:43:28 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_weekly_2026-01-18.pdf

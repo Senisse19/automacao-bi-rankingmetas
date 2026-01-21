@@ -47,11 +47,10 @@ class NotificationService:
                 except Exception as log_err:
                      logger.warning(f"   [Supabase Log Error]: {log_err}")
             
-            # 4. Delay Humanizado removed from here to allow faster job completion feedback.
-            # Batch scripts should handle inter-message delays.
-            # delay = random.randint(45, 120)
-            # logger.debug(f"   [Anti-Ban] Aguardando {delay}s...")
-            # time.sleep(delay)
+            # 4. Delay Humanizado (Reativado)
+            delay = random.randint(45, 120)
+            logger.debug(f"   [Anti-Ban] Aguardando {delay}s...")
+            time.sleep(delay)
             return True
 
         except Exception as e:
