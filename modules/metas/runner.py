@@ -134,6 +134,10 @@ class MetasAutomation:
             dept_key = (r.get('department') or 'geral').lower()
             dept_key = dept_key.replace("ã", "a").replace("ç", "c").replace("õ", "o").replace("é", "e").replace("á", "a")
             
+            # Map 'geral' to 'diretoria' (where the General Image is stored)
+            if dept_key == 'geral':
+                dept_key = 'diretoria'
+            
             if dept_key not in recipients_map:
                 recipients_map[dept_key] = []
             
