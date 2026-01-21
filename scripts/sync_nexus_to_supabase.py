@@ -18,6 +18,7 @@ def sync_unidades(client, svc):
     for item in data:
         row = {
             "id": item.get("codigo"),
+
             "nome": item.get("nome"),
             "cidade": item.get("cidade"),
             "uf": item.get("uf"),
@@ -53,6 +54,7 @@ def sync_participantes(client, svc):
         for item in data:
             row = {
                 "id": item.get("id") or item.get("codigo"),
+
                 "nome": item.get("nome"),
                 "email": item.get("email"),
                 "ativo": item.get("ativo", True), # Assume active if not specified
@@ -94,6 +96,11 @@ def sync_modelos(client, svc):
         
         uid = item.get("unidade")
         
+        # Filter Legacy Data (< 2024)
+        if dt_contrato and dt_contrato < "2024-01-01":
+            continue
+
+        
         # Check integrity
         if uid and str(uid) not in known_unit_ids:
             missing_unidade_ids.add(str(uid))
@@ -110,17 +117,23 @@ def sync_modelos(client, svc):
         }
         batch.append(row)
     
-    # Handle Missing Units (Placeholders)
+    # Handle Missing Units (Placeholders with real names from API)
     if missing_unidade_ids:
-        print(f"⚠ Encontradas {len(missing_unidade_ids)} unidades referenciadas mas inexistentes. Criando placeholders...")
+        print(f"⚠ Encontradas {len(missing_unidade_ids)} unidades referenciadas mas inexistentes. Buscando nomes via API...")
         placeholder_batch = []
         for miss_uid in missing_unidade_ids:
+            # Try to fetch real name from Nexus API
+            try:
+                nome_real = client.fetch_unit_name(int(miss_uid))
+            except:
+                nome_real = f"Unidade {miss_uid}"
+            
             placeholder_batch.append({
                 "id": miss_uid,
-                "nome": f"Unidade {miss_uid} (Legado)",
+                "nome": nome_real,
                 "cidade": "-",
                 "uf": "-",
-                "raw_data": {"placeholder": True, "reason": "Missing in source"},
+                "raw_data": {"fetched_from_api": True, "original_id": miss_uid},
                 "updated_at": datetime.now().isoformat()
             })
             # Add to known so we don't try to re-add? (SVC handles duplicates by upsert)
