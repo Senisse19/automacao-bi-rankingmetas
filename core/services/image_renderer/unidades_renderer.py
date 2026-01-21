@@ -83,11 +83,36 @@ class UnidadesRenderer(BaseRenderer):
         card_w = self.width - 2 * margin
 
         for title, items in sections:
+            # 1. Calculate Metrics
             section_count = len(items)
-            display_title = f"{title} ({section_count})"
+            total_value = sum(item.get("valor", 0) for item in items)
             
-            # Check Title Space
-            if current_h_used + (60 * s) > MAX_H - (60 * s): 
+            def fmt_moeda_title(val):
+                return f"R$ {val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+            
+            # 2. Prepare Display Strings
+            # Old: display_title = f"{title} ({section_count})"
+            display_title = title  # "NOVAS UNIDADES"
+            
+            label_qtd = "QTD:"
+            val_qtd = str(section_count)
+            
+            label_valor = "VALOR TOTAL:"
+            val_valor = fmt_moeda_title(total_value)
+            
+            # 3. Orphan Header Logic
+            # Calculate required space: Title Block + (First Card OR Empty Block)
+            title_block_h = (28 * s) + (3 * s) + (25 * s) # Text + Line + Margin
+            
+            if items:
+                first_content_h = 160 * s # Item height
+            else:
+                first_content_h = 80 * s  # Empty state height
+            
+            required_h = title_block_h + first_content_h
+            
+            # Check Page Break
+            if current_h_used + required_h > MAX_H - (60 * s): 
                  self._draw_footer(current_draw, MAX_H)
                  pages.append(current_img)
                  
@@ -97,8 +122,51 @@ class UnidadesRenderer(BaseRenderer):
                  y = header_h + padding + (10 * s)
                  current_h_used = y
             
-            # Draw Title
+            # 4. Draw Title & Metrics
+            
+            # --- UX/UI IMPROVEMENT: Right Align Metrics ---
+            # Title (Left)
             current_draw.text((margin, y), display_title, font=font_section, fill=(40, 40, 40))
+            
+            # Metrics (Right Aligned to card_w)
+            right_edge = margin + card_w
+            
+            # Fonts for Metrics
+            font_metric_label = self._get_font(12, bold=True)
+            font_metric_val = self._get_font(18, bold=True)
+            
+            # Helper to draw metric pair aligned to the right: [LABEL] [VALUE]
+            def draw_metric_right_aligned(end_x, baseline_y, label, value, val_color=(0, 0, 0)):
+                # 1. Calc Value width
+                bbox_val = current_draw.textbbox((0, 0), value, font=font_metric_val)
+                w_val = bbox_val[2] - bbox_val[0]
+                
+                # 2. Calc Label width
+                bbox_lbl = current_draw.textbbox((0, 0), label, font=font_metric_label)
+                w_lbl = bbox_lbl[2] - bbox_lbl[0]
+                
+                spacing = 10 * s
+                
+                # Draw Value (at end_x - w_val)
+                val_x = end_x - w_val
+                # Align baseline manually or use anchor? Let's use manual baseline adjustment.
+                # Assuming font_section (Title) height ~22px.
+                # We want visually centered or baseline aligned.
+                current_draw.text((val_x, baseline_y), value, font=font_metric_val, fill=val_color)
+                
+                # Draw Label (to left of Value)
+                lbl_x = val_x - spacing - w_lbl
+                current_draw.text((lbl_x, baseline_y + (4 * s)), label, font=font_metric_label, fill=(100, 100, 100)) # Small offset for visual centering
+                
+                return lbl_x - (30 * s) # Return new end_x for next item (with extra padding)
+
+            # Draw "VALOR TOTAL" (Rightmost)
+            next_right = right_edge
+            next_right = draw_metric_right_aligned(next_right, y, "VALOR:", val_valor) # Simplified Label
+            
+            # Draw "QTD" (Left of Valor)
+            draw_metric_right_aligned(next_right, y, "QTD:", val_qtd)
+
             y += 28 * s
             current_draw.rectangle([(margin, y), (margin + (300 * s), y + (3 * s))], fill=self.accent_color)
             y += 25 * s
@@ -106,14 +174,7 @@ class UnidadesRenderer(BaseRenderer):
             
             if not items:
                  empty_h = 80 * s
-                 if current_h_used + empty_h > MAX_H - (60 * s):
-                     self._draw_footer(current_draw, MAX_H)
-                     pages.append(current_img)
-                     current_img = Image.new("RGB", (self.width, MAX_H), self.bg_color)
-                     current_draw = ImageDraw.Draw(current_img)
-                     header_h = self._draw_header(current_draw, title_text, date_display)
-                     y = header_h + padding + (10 * s)
-                     current_h_used = y
+                 # Space check already done above, but safe to keep logic consistent or just draw
                  
                  current_draw.rounded_rectangle([(margin, y), (margin + card_w, y + empty_h)], radius=int(6*s), fill=self.card_color)
                  
