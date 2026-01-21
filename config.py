@@ -60,6 +60,9 @@ UNIDADES_WEEKLY_TIME = os.getenv("UNIDADES_WEEKLY_TIME", "09:30")
 # Configuração de monitoramento SharePoint
 MONITOR_INTERVAL_SECONDS = int(os.getenv("MONITOR_INTERVAL_SECONDS", "60"))
 
+# Portal URL (for links)
+PORTAL_URL = os.getenv("PORTAL_URL", "https://bi.grupostudio.tec.br")
+
 # Caminho para arquivos de dados
 DATA_DIR = os.getenv("DATA_DIR", ".")
 KNOWN_FILES_PATH = os.path.join(DATA_DIR, "known_files.json")

@@ -289,19 +289,34 @@ class SupabaseService:
 
     def get_all_ids(self, table: str) -> set:
         """Retorna um set com todos os IDs da tabela para validação rápida."""
-        try:
-            # Fetch minimal data, use Range header to get more items (limit 1000 default)
-            endpoint = f"{self.url}/rest/v1/{table}?select=id"
-            headers = self.headers.copy()
-            headers["Range"] = "0-99999" # Fetch up to 100k rows
-            
-            resp = requests.get(endpoint, headers=headers)
-            resp.raise_for_status()
-            data = resp.json()
-            return {str(item['id']) for item in data}
-        except Exception as e:
-            print(f"⚠ Erro ao buscar IDs de {table}: {e}")
-            return set()
+        all_ids = set()
+        offset = 0
+        limit = 1000
+        
+        while True:
+            try:
+                endpoint = f"{self.url}/rest/v1/{table}?select=id"
+                headers = self.headers.copy()
+                headers["Range"] = f"{offset}-{offset + limit - 1}"
+                
+                resp = requests.get(endpoint, headers=headers)
+                resp.raise_for_status()
+                data = resp.json()
+                
+                if not data:
+                    break
+                    
+                for item in data:
+                    all_ids.add(str(item['id']))
+                
+                if len(data) < limit:
+                    break
+                    
+                offset += limit
+            except Exception as e:
+                print(f"⚠ Erro ao buscar IDs de {table} no offset {offset}: {e}")
+                break
+        return all_ids
 
 if __name__ == "__main__":
     # Teste
