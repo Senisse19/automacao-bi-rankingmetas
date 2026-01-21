@@ -85,10 +85,13 @@ class MetasAutomation:
         for dep in departamentos:
             nome_lower = dep["nome"].lower().replace("ã", "a").replace("ç", "c")
             dep_path = os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")
-            self.image_gen.generate_departamento_image(dep, periodo, dep_path)
             
-            # Map valid departments to their SPECIFIC Image
-            images[nome_lower] = dep_path
+            # [CHANGED] User requested to send RESUMO to everyone for now.
+            # We skip generating individual specific images, but we map the key to RESUMO path.
+            # self.image_gen.generate_departamento_image(dep, periodo, dep_path)
+            
+            # Map valid departments to their SPECIFIC Image (Now overridden to RESUMO)
+            images[nome_lower] = resumo_path
             
         return images
 
