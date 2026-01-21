@@ -36,124 +36,106 @@ class UnidadesClient:
 
     def _get_paginated_latest(self, endpoint: str, min_date: str | None = None) -> list:
         """
-        Busca os dados mais recentes da API.
-        Nota: A ordenação da API parece ser ASC ou mista (mais antigos primeiro?),
-        então precisamos escanear TODAS as páginas para encontrar os dados mais novos (ex: 2026).
-        O filtro de `min_date` é aplicado somente nos RESULTADOS finais, não interrompe a busca.
+        Busca dados do Supabase (Mirror) em vez da API Externa.
+        Mapeia 'endpoint' para tabelas 'nexus_*'.
         """
-        url = f"{self.api_url}/{endpoint}/"
-        try:
-            # 1. Fetch first page to determine type
-            logger.info(f"Fetching {endpoint} page 1...")
-            resp = self.session.get(url, headers=self.headers, timeout=15)
-            resp.raise_for_status()
-            data = resp.json()
-            
-            if isinstance(data, list):
-                all_items = data
-                page = 2
-                
-                # We cannot rely on dates to stop early because Page 1 has 2015/2012 
-                # but we need 2026 which might be on Page 50+.
-                # Restoring full scan loop.
-
-                while len(data) > 0: 
-                    # Removed artificial 100k limit to ensure full sync
-                    if page % 5 == 0:
-                        logger.info(f"Fetching {endpoint} page {page}. Total items so far: {len(all_items)}")
-                        
-                    try:
-                        p_resp = self.session.get(f"{url}?page={page}", headers=self.headers, timeout=10)
-                        if p_resp.status_code == 404:
-                            break
-                        p_data = p_resp.json()
-                        if not p_data or not isinstance(p_data, list):
-                            break
-                        
-                        # Infinite Loop / Duplicate Page Protection
-                        if p_data == data: 
-                            logger.warning(f"Page {page} is identical to previous page. Breaking loop.")
-                            break
-                            
-                        data = p_data
-                        
-                        all_items.extend(data)
-                        page += 1
-                    except Exception as e:
-                        logger.error(f"Stop fetching: {e}")
-                        break
-                
-                # Filter results by date if min_date provided
-                if min_date:
-                    logger.info(f"Filtering {len(all_items)} items for min_date {min_date}...")
-                    filtered = []
-                    for x in all_items:
-                        d_contrato = x.get("data")
-                        d_cancel = x.get("data_cancelamento")
-                        
-                        # Keep if Contract is recent OR Cancellation is recent
-                        if (d_contrato and d_contrato >= min_date) or \
-                           (d_cancel and d_cancel >= min_date):
-                            filtered.append(x)
-                            
-                    logger.info(f"Found {len(filtered)} items.")
-                    return filtered
-                    
-                return all_items
-                
-            elif isinstance(data, dict):
-                # Standard pagination logic
-                count = data.get("count", 0)
-                results = data.get("results", [])
-                
-                if count == 0:
-                    return results
-                    
-                page_size = len(results) if results else 100
-                if page_size == 0: page_size = 100
-                    
-                total_pages = math.ceil(count / page_size)
-                logger.info(f"Total: {count}, Pages: {total_pages}")
-                
-                all_items = []
-                start_page = max(1, total_pages - pages_to_fetch + 1)
-                
-                for p in range(start_page, total_pages + 1):
-                    # We already have page 1 if start_page==1, but let's just refetch for simplicity logic
-                    # or optimize.
-                    if p == 1 and start_page == 1:
-                        all_items.extend(results)
-                        continue
-                        
-                    logger.info(f"Fetching page {p}...")
-                    p_resp = self.session.get(f"{url}?page={p}", headers=self.headers)
-                    if p_resp.status_code == 200:
-                        all_items.extend(p_resp.json().get("results", []))
-                
-                return all_items
-            
+        svc = SupabaseService()
+        table_map = {
+            "unidades": "nexus_unidades",
+            "modelos": "nexus_modelos",
+            "participantes": "nexus_participantes"
+        }
+        table = table_map.get(endpoint)
+        if not table:
+            logger.error(f"Endpoint/Tabela desconhecido: {endpoint}")
             return []
             
+        try:
+            logger.info(f"Fetching data from Supabase table: {table}")
+            
+            # Build Query
+            # We want ALL data effectively, or filter by date if column exists
+            params = {
+                "select": "*"
+            }
+            
+            # Optimization: If fetching 'modelos' with min_date, apply filter directly
+            if endpoint == "modelos" and min_date:
+                # Filter by data_contrato OR data (legacy)
+                # Supabase REST doesn't support complex OR easily in one param without raw string
+                # So we fetch slightly more and filter in Python, or use 'gte'
+                # Let's simple fetch all for now or order by date desc limit 1000? 
+                # Ideally we synchronise ALL history so we should just fetch all.
+                # However, syncing 500k rows via REST might be slow.
+                # But 'nexus_modelos' only has ~600 rows in test?
+                pass
+                
+            # Fetch ALL rows (pagination helper)
+            all_items = []
+            offset = 0
+            limit = 1000
+            
+            while True:
+                p = params.copy()
+                p["offset"] = offset
+                p["limit"] = limit
+                # Order by id to ensure consistency
+                p["order"] = "id.asc"
+                
+                chunk = svc._get(table, p)
+                if not chunk:
+                    break
+                    
+                all_items.extend(chunk)
+                if len(chunk) < limit:
+                    break
+                    
+                offset += limit
+                
+            logger.info(f"Fetched {len(all_items)} rows from {table}.")
+            
+            # Post-Filter by min_date if requested (for 'modelos')
+            if min_date and endpoint == "modelos":
+                 filtered = []
+                 for x in all_items:
+                    d_contrato = x.get("data_contrato") or x.get("data")
+                    d_cancel = x.get("data_cancelamento")
+                    
+                    if (d_contrato and d_contrato >= min_date) or \
+                       (d_cancel and d_cancel >= min_date):
+                        filtered.append(x)
+                 return filtered
+                 
+            return all_items
+
         except Exception as e:
-            logger.error(f"Error in _get_paginated_latest: {e}")
+            logger.error(f"Error fetching from Supabase ({endpoint}): {e}")
             return []
 
     def _get_all_participantes(self) -> dict:
-        """Busca todos os participantes (consultores/gerentes) para lookup."""
-        logger.debug("Skipping participantes fetch.")
-        return {}
+        """Busca todos os participantes (consultores/gerentes) para lookup via Supabase."""
+        logger.info("Fetching lookups: Participantes...")
+        results = self._get_paginated_latest("participantes")
+        # Map ID -> Nome (Assume 'nome' or 'NOME' field)
+        pmap = {}
+        for p in results:
+            uid = p.get("id") or p.get("codigo")
+            pmap[uid] = p.get("nome") or p.get("NOME") or f"Partic. {uid}"
+        return pmap
 
     def _get_all_unidades(self) -> dict:
         """Busca TODAS as unidades para lookup (cache local)."""
         logger.info("Fetching lookups: Unidades...")
         results = self._get_paginated_latest("unidades")
-        # Map ID -> {nome, cidade, uf}
+        # Map ID -> {nome, cidade, uf, raw_data}
         unidades_map = {}
         for u in results:
-            unidades_map[u.get("codigo")] = {
-                "nome": u.get("nome", f"Unidade {u.get('codigo')}"),
+            uid = u.get("codigo") or u.get("id")
+            unidades_map[uid] = {
+                "nome": u.get("nome", f"Unidade {uid}"),
                 "cidade": u.get("cidade", ""),
-                "uf": u.get("uf", "")
+                "uf": u.get("uf", ""),
+                "raw_data": u.get("raw_data") or {}
             }
         return unidades_map
 
@@ -182,15 +164,38 @@ class UnidadesClient:
         end_dt = datetime.strptime(end_date, "%Y-%m-%d")
         
         for m in modelos:
-            # Check dates
-            # Check dates - prefer data_contrato as per user mapping, fallback to data
-            data_contrato_str = m.get("data_contrato") or m.get("data")
+            # Check dates - prefer data (Supabase view) or fallback
+            data_contrato_str = m.get("data") or m.get("data_contrato")
             data_cancelamento_str = m.get("data_cancelamento")
+            
+            raw_data = m.get("raw_data") or {}
+            
+            # Temporary Fix: Hardcode missing Model 40 (Studio Store)
+            if 40 not in self.model_map:
+                self.model_map[40] = "Studio Store"
+            if "40" not in self.model_map:
+                self.model_map["40"] = "Studio Store"
             
             # LINK: Unidade Data (from Unidades lookup)
             uid = m.get("unidade")
-            unit_data = unidades_map.get(uid, {"nome": f"Unidade {uid}", "cidade": "-", "uf": "-"})
-            unit_name = unit_data["nome"]
+            unit_data = unidades_map.get(uid)
+            
+            # Fallback: If unit not in cache, fetch name from Nexus API
+            if not unit_data:
+                logger.info(f"Unit {uid} not in cache, fetching from API...")
+                fetched_name = self.fetch_unit_name(uid)
+                unit_data = {"nome": fetched_name, "cidade": "-", "uf": "-", "raw_data": {}}
+                # Cache for future lookups in this session
+                unidades_map[uid] = unit_data
+            
+            # Use nome from nexus_unidades directly
+            base_unit_name = unit_data["nome"]
+            # Format: "Unidade {ID} - {Nome}" if nome is not already formatted
+            if base_unit_name and "Unidade" not in str(base_unit_name):
+                unit_name = f"Unidade {uid} - {base_unit_name}"
+            else:
+                unit_name = base_unit_name or f"Unidade {uid}"
+
             unit_cidade = unit_data["cidade"]
             unit_uf = unit_data["uf"]
             
@@ -202,20 +207,22 @@ class UnidadesClient:
             gerente_id = m.get("gerente_venda")
             gerente_nome = participantes_map.get(gerente_id, "N/A")
             
-            # Resolve Model Name and Type
-            model_id = m.get("modelo")
-            model_name = self.model_map.get(model_id, f"Modelo {model_id}")
+            # Resolve Model Name and Type (Prefer raw_data from Data Lake)
+            model_name = raw_data.get("modelo_nome")
+            if not model_name:
+                model_id = m.get("modelo")
+                model_name = self.model_map.get(model_id, f"Modelo {model_id}")
             
-            # Resolve Type (Franquia/Licença)
-            type_id = m.get("tipo_franquia") or m.get("tipo_contrato")
-            type_name = self.type_map.get(str(type_id), f"Tipo {type_id}")
+            # Resolve Type (Rede Distribuição)
+            type_name = raw_data.get("tipo_nome")
+            if not type_name:
+                type_id = m.get("tipo_franquia") or m.get("tipo_contrato")
+                type_name = self.type_map.get(str(type_id), f"Tipo {type_id}")
             
             # Additional Fields requested
-            # (taxa de aquisição, valor de crm -> rede, percentual de retenção, periodo de contrato)
             valor_aquisicao = m.get("valor", 0)
             
-            # Rede de distribuição (Solicitado: Tipo Franquia ID - Nome)
-            rede_distribuicao = f"{type_id} - {type_name}" if type_id else "-"
+            rede_distribuicao = type_name # Use full type name as Rede
             
             percentual_retencao = m.get("percentual_retencao", 0)
             anos_contrato = m.get("anos", 0)
@@ -233,29 +240,55 @@ class UnidadesClient:
                 "rede_distribuicao": rede_distribuicao,
                 "percentual_retencao": percentual_retencao,
                 "anos_contrato": anos_contrato,
-                "data": data_contrato_str
+                "data": data_contrato_str,
+                "raw_data": raw_data,
+                "unit_raw_data": unit_data.get("raw_data", {})
             }
             
             # Logic: New Unit (Check if data_contrato is in range)
+            # Filter active status
+            status = m.get("status")
+            
             if data_contrato_str:
                 try:
-                    dt = datetime.strptime(data_contrato_str, "%Y-%m-%d")
+                    clean_date = data_contrato_str[:10]
+                    dt = datetime.strptime(clean_date, "%Y-%m-%d")
+                    
                     if start_dt <= dt <= end_dt:
-                        new_units.append(item)
-                except:
+                        # Logic from page.tsx:
+                        # newUnits = items.filter(i => i.status === "Ativo")
+                        # upsellUnits = ... raw_data.tipo_venda === 'Upsell' or is_upsell
+                        
+                        is_upsell = raw_data.get("tipo_venda") == "Upsell" or raw_data.get("is_upsell") is True
+                        
+                        if is_upsell:
+                            upsell_units.append(item)
+                        elif status == "Ativo": 
+                            new_units.append(item)
+                        else:
+                            # Might be Cancelled in the same period? Handled below.
+                            pass
+                            
+                except Exception as e:
                     pass
                  
             # Logic: Cancelled
-            if m.get("cancelamento") == 1 and data_cancelamento_str:
+            # page.tsx: i.status === "Cancelado" || i.raw_data?.cancelamento === 1
+            is_cancelled = status == "Cancelado" or raw_data.get("cancelamento") == 1
+            
+            if is_cancelled and data_cancelamento_str:
                 try:
-                    dt = datetime.strptime(data_cancelamento_str, "%Y-%m-%d")
+                    clean_cancel = data_cancelamento_str[:10]
+                    dt = datetime.strptime(clean_cancel, "%Y-%m-%d")
                     if start_dt <= dt <= end_dt:
                         cancelled_units.append(item)
-                except:
-                    pass
+                except Exception as e:
+                     pass
             
-            # Upsell Logic (Placeholder)
-            
+            # Fallback for data lake cancelamento flag without date?
+            # Usually we need the date to know IF it was cancelled TODAY.
+            # Assuming data_cancelamento matches.
+                        
         return {
             "date": end_date,
             "start_date": start_date,
