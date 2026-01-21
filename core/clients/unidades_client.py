@@ -211,7 +211,7 @@ class UnidadesClient:
             model_name = raw_data.get("modelo_nome")
             if not model_name:
                 model_id = m.get("modelo")
-                model_name = self.model_map.get(model_id, f"Modelo {model_id}")
+                model_name = self.model_map.get(str(model_id), f"Modelo {model_id}")
             
             # Resolve Type (Rede Distribuição)
             type_name = raw_data.get("tipo_nome")
