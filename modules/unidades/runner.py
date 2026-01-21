@@ -20,7 +20,6 @@ from config import (
 )
 from core.clients.unidades_client import UnidadesClient
 from core.services.image_generator import ImageGenerator
-from core.services.pdf_generator import PdfGenerator
 from core.services.supabase_service import SupabaseService
 from core.clients.evolution_client import EvolutionClient
 from utils.logger import get_logger
@@ -34,7 +33,7 @@ class UnidadesAutomation:
     """
     def __init__(self):
         self.image_gen = ImageGenerator()
-        self.pdf_gen = PdfGenerator(base_url=PORTAL_URL)
+        # PdfGenerator removed (replaced by ImageGenerator/UnidadesRenderer)
         self.whatsapp = EvolutionClient()
         self.unidades_client = UnidadesClient()
         self.supabase = SupabaseService()
