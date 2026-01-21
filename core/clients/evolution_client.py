@@ -186,11 +186,14 @@ class EvolutionClient:
             
             # Detectar tipo de mídia
             extension = file_path.lower().split(".")[-1]
+            logger.info(f"   [SEND_FILE] Arquivo: {os.path.basename(file_path)} | Extensão: {extension}")
             
             if extension in ["png", "jpg", "jpeg", "gif"]:
+                logger.info("   [SEND_FILE] Modo: IMAGEM")
                 # Enviar como imagem
                 return self.send_image(file_base64, caption, group_id)
             else:
+                logger.info("   [SEND_FILE] Modo: DOCUMENTO")
                 # Enviar como documento
                 file_name = os.path.basename(file_path)
                 return self.send_document(file_base64, file_name, caption, group_id)

@@ -1636,3 +1636,1380 @@
 2026-01-20 15:24:47 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
 2026-01-20 15:24:48 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
 2026-01-20 15:24:48 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 15:28:26 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 15:28:27 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 15:28:27 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 15:28:27 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 15:28:28 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 15:28:28 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 15:28:28 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 15:28:29 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 15:28:29 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 15:28:29 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 15:28:36 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 15:28:37 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 15:28:37 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 15:28:38 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 15:28:38 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 15:28:39 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 15:28:39 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 15:28:40 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 15:28:40 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 15:28:41 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 15:28:41 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 15:28:42 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 15:28:42 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 15:28:43 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 15:28:43 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 15:28:44 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 15:28:45 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 15:28:45 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 15:28:46 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 15:28:47 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 15:28:47 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 15:28:48 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 15:28:48 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 15:28:49 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 15:28:49 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 15:28:50 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 15:28:50 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 15:28:51 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 15:28:52 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 15:28:52 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 15:28:53 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 15:28:53 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 15:28:54 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 15:28:54 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 15:28:55 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 15:28:56 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 15:28:56 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 15:28:57 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 15:28:57 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 15:28:58 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 15:28:58 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 15:28:59 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 15:28:59 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 15:29:00 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 15:29:01 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 15:29:01 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 15:29:02 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 15:29:02 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 15:29:03 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 15:29:03 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 15:29:04 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 15:29:05 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 15:29:05 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 15:29:06 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 15:29:06 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 15:29:07 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 15:29:07 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 15:29:08 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 15:30:30 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 15:30:32 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 15:30:32 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 15:30:33 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 15:30:33 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 15:30:33 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 15:30:34 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 15:30:34 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 15:30:34 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 15:30:35 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 15:30:35 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 15:30:35 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 15:30:36 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 15:30:36 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 15:30:36 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 15:40:25 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-20 15:40:25 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-19)
+2026-01-20 15:40:25 - run_unidades - INFO -    [Cleanup] Removido arquivo antigo: unidades_daily_2026-01-16.png
+2026-01-20 15:40:25 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-20 15:40:25 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 15:40:28 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 15:40:28 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 15:40:28 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 15:40:28 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 15:40:29 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 15:40:29 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 15:40:29 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 15:40:29 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 15:40:29 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 15:40:30 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 15:40:30 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 15:40:30 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 15:40:31 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 15:40:31 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 15:40:31 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 15:40:32 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 15:40:32 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 15:40:32 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 15:40:33 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 15:40:33 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 15:40:33 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 15:40:34 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 15:40:34 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 15:40:34 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 15:40:35 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-19...
+2026-01-20 15:40:35 - unidades_client - INFO - Found 0 items.
+2026-01-20 15:40:35 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-19.png
+2026-01-20 15:40:35 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-19&end=2026-01-19&type=daily
+2026-01-20 15:40:59 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-20 15:40:59 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-19)
+2026-01-20 15:40:59 - run_unidades - INFO -    [Cleanup] Removido arquivo antigo: unidades_daily_2026-01-19.png
+2026-01-20 15:40:59 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-20 15:40:59 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 15:41:00 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 15:41:00 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 15:41:00 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 15:41:00 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 15:41:01 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 15:41:01 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 15:41:01 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 15:41:01 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 15:41:02 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 15:41:02 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 15:41:02 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 15:41:03 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 15:41:03 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 15:41:04 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 15:41:04 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 15:41:04 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 15:41:05 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 15:41:05 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 15:41:06 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 15:41:06 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 15:41:07 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 15:41:07 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 15:41:07 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 15:41:07 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 15:41:08 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-19...
+2026-01-20 15:41:08 - unidades_client - INFO - Found 0 items.
+2026-01-20 15:41:08 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-19.png
+2026-01-20 15:41:08 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-19&end=2026-01-19&type=daily
+2026-01-20 16:49:57 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 16:49:58 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 16:49:58 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 16:49:59 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 16:49:59 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 16:49:59 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 16:49:59 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 16:50:00 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 16:50:00 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 16:50:00 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 16:50:06 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 16:50:06 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 16:50:07 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 16:50:07 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 16:50:08 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 16:50:08 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 16:50:09 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 16:50:09 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 16:50:10 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 16:50:10 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 16:50:11 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 16:50:11 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 16:50:12 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 16:50:12 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 16:50:13 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 16:50:13 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 16:50:14 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 16:50:14 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 16:50:14 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 16:50:15 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 16:50:16 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 16:50:17 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 16:50:17 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 16:50:18 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 16:50:18 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 16:50:19 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 16:50:19 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 16:50:20 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 16:50:20 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 16:50:21 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 16:50:21 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 16:50:22 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 16:50:22 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 16:50:23 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 16:50:23 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 16:50:24 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 16:50:24 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 16:50:25 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 16:50:25 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 16:50:26 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 16:50:26 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 16:50:27 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 16:50:27 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 16:50:28 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 16:50:28 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 16:50:29 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 16:50:30 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 16:50:30 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 16:50:31 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 16:50:31 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 16:50:31 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 16:50:32 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 16:50:33 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 16:50:33 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 16:50:33 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 16:50:34 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 16:50:34 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 16:50:35 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 16:50:42 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:50:43 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:50:43 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:50:43 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:50:44 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:50:44 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:50:44 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:50:44 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:50:45 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:50:45 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:50:45 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:50:45 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:50:46 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:50:46 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:50:46 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:51:12 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 16:51:13 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 16:51:13 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 16:51:14 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 16:51:14 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 16:51:14 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 16:51:14 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 16:51:14 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 16:51:15 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 16:51:15 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 16:51:21 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 16:51:23 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 16:51:24 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 16:51:25 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 16:51:25 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 16:51:25 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 16:51:26 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 16:51:26 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 16:51:26 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 16:51:27 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 16:51:27 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 16:51:28 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 16:51:28 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 16:51:29 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 16:51:29 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 16:51:29 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 16:51:30 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 16:51:30 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 16:51:31 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 16:51:31 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 16:51:32 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 16:51:32 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 16:51:33 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 16:51:33 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 16:51:34 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 16:51:34 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 16:51:35 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 16:51:35 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 16:51:36 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 16:51:36 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 16:51:37 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 16:51:37 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 16:51:38 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 16:51:38 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 16:51:38 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 16:51:39 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 16:51:40 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 16:51:40 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 16:51:40 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 16:51:41 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 16:51:41 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 16:51:42 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 16:51:42 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 16:51:43 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 16:51:43 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 16:51:44 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 16:51:44 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 16:51:44 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 16:51:45 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 16:51:45 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 16:51:46 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 16:51:46 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 16:51:46 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 16:51:47 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 16:51:47 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 16:51:48 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 16:51:48 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 16:51:48 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 16:52:41 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:52:41 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:52:41 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:52:42 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:52:42 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:52:42 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:52:42 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:52:43 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:52:43 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:52:43 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:52:43 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:52:44 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:52:44 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:52:44 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:52:44 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:53:54 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:53:55 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:53:55 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:53:55 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:53:56 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:53:56 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:53:56 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:53:56 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:53:57 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:53:57 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:53:57 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:53:57 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:53:58 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:53:58 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:53:58 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:54:32 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:54:32 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:54:33 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:54:33 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:54:33 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:54:33 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:54:34 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:54:34 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:54:34 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:54:34 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:54:35 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:54:35 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:54:35 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:54:35 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:54:36 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:55:10 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:55:11 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:55:11 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:55:11 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:55:12 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:55:12 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:55:13 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:55:14 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:55:14 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:55:15 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:55:16 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:55:17 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:55:17 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:55:18 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:55:18 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:55:37 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:55:38 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:55:38 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:55:38 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:55:38 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:55:39 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:55:39 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:55:39 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:55:39 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:55:40 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:55:40 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:55:40 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:55:40 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:55:41 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:55:41 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:56:54 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 16:56:55 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 16:56:55 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 16:56:55 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 16:56:55 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 16:56:55 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 16:56:56 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 16:56:56 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 16:56:56 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 16:56:56 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 16:57:04 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 16:57:04 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 16:57:05 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 16:57:05 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 16:57:05 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 16:57:06 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 16:57:06 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 16:57:07 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 16:57:07 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 16:57:07 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 16:57:08 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 16:57:08 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 16:57:08 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 16:57:09 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 16:57:09 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 16:57:09 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 16:57:10 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 16:57:10 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 16:57:11 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 16:57:11 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 16:57:11 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 16:57:12 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 16:57:12 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 16:57:12 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 16:57:13 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 16:57:13 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 16:57:14 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 16:57:14 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 16:57:14 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 16:57:15 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 16:57:15 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 16:57:15 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 16:57:16 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 16:57:16 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 16:57:17 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 16:57:17 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 16:57:18 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 16:57:18 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 16:57:18 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 16:57:19 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 16:57:19 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 16:57:19 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 16:57:20 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 16:57:20 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 16:57:21 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 16:57:21 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 16:57:22 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 16:57:22 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 16:57:22 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 16:57:23 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 16:57:23 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 16:57:24 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 16:57:24 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 16:57:25 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 16:57:25 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 16:57:25 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 16:57:26 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 16:57:26 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 16:58:44 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:58:46 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:58:48 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:58:49 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:58:50 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:58:50 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:58:51 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:58:52 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:58:53 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:58:53 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:58:53 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:58:53 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:58:54 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:58:54 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:58:54 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 16:59:40 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 16:59:40 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 16:59:41 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 16:59:41 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 16:59:41 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 16:59:41 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 16:59:42 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 16:59:42 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 16:59:42 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 16:59:42 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 16:59:43 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 16:59:43 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 16:59:43 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 16:59:43 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 16:59:44 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:02:51 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:02:51 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:02:52 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:02:52 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:02:52 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:02:52 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:02:53 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:02:53 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:02:53 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:02:53 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:02:54 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:02:54 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:02:55 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:02:56 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:02:57 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:03:49 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:03:49 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:03:49 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:03:50 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:03:50 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:03:50 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:03:50 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:03:51 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:03:51 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:03:51 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:03:51 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:03:52 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:03:52 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:03:52 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:03:52 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:04:07 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:04:08 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:04:08 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:04:09 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:04:09 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:04:09 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:04:09 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:04:10 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:04:10 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:04:11 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:04:11 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:04:11 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:04:11 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:04:11 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:04:12 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:04:36 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:04:37 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:04:37 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:04:37 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:04:38 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:04:38 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:04:38 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:04:38 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:04:39 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:04:39 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:04:39 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:04:39 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:04:40 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:04:40 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:04:40 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:05:45 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:05:46 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:05:46 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:05:46 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:05:47 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:05:47 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:05:47 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:05:47 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:05:48 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:05:48 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:05:48 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:05:48 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:05:49 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:05:49 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:05:49 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:06:02 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:06:03 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:06:04 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:06:04 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:06:04 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:06:05 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:06:05 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:06:05 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:06:05 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:06:06 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:06:06 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:06:06 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:06:06 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:06:07 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:06:07 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:06:25 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:06:38 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:06:38 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:06:39 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:06:39 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:06:39 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:06:39 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:06:40 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:06:40 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:06:40 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:06:40 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:06:41 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:06:41 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:06:41 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:06:41 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:07:39 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:07:40 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:07:41 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:07:41 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:07:42 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:07:42 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:07:42 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:07:42 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:07:43 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:07:43 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:07:43 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:07:43 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:07:44 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:07:44 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:07:44 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:08:01 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:08:02 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:08:03 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:08:05 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:08:05 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:08:05 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:08:05 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:08:06 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:08:06 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:08:06 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:08:06 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:08:07 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:08:07 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:08:07 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:08:07 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:09:45 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:09:46 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:09:46 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:09:46 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:09:46 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:09:47 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:09:47 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:09:47 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:09:47 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:09:48 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:09:48 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:09:48 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:09:48 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:09:49 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:09:49 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:10:31 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:10:32 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:10:32 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:10:33 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:10:33 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:10:33 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:10:33 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:10:33 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:10:34 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:10:34 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:10:34 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:10:34 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:10:35 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:10:35 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:10:35 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:21:21 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 17:21:40 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 17:21:41 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 17:21:42 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 17:21:43 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 17:21:43 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 17:21:45 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 17:21:46 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 17:21:47 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 17:21:49 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 17:22:18 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 17:22:33 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 17:22:47 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 17:23:45 - unidades_client - ERROR - Stop fetching: HTTPSConnectionPool(host='nexusdata.duckdns.org', port=443): Read timed out.
+2026-01-20 17:24:24 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:24:26 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 17:24:30 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 17:24:37 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 17:24:39 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:24:41 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 17:24:54 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 17:24:59 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:25:01 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 17:25:14 - unidades_client - ERROR - Stop fetching: HTTPSConnectionPool(host='nexusdata.duckdns.org', port=443): Read timed out.
+2026-01-20 17:25:23 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 17:25:28 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 17:25:41 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 17:25:45 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 17:26:40 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 17:26:46 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 17:27:01 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 17:27:13 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 17:27:25 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 17:27:33 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 17:27:47 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 17:27:55 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 17:28:02 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 17:28:29 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 17:29:05 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 17:29:27 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 17:30:14 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 17:30:50 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 17:31:31 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 17:32:09 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 17:33:01 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 17:33:21 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 17:33:41 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 17:33:52 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 17:34:09 - unidades_client - ERROR - Stop fetching: HTTPSConnectionPool(host='nexusdata.duckdns.org', port=443): Read timed out.
+2026-01-20 17:34:27 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 17:34:44 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 17:35:39 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 17:36:01 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 17:36:02 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 17:36:03 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 17:36:11 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 17:36:14 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 17:36:50 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:36:57 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:37:01 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:37:04 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:37:09 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:37:12 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:37:14 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:37:16 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:37:17 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:37:21 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:37:23 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:37:25 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:37:27 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:37:35 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:37:44 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 17:44:50 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 17:44:51 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 17:44:51 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 17:44:51 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 17:44:51 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 17:44:52 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 17:44:52 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 17:44:52 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 17:44:52 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 17:44:52 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 17:44:59 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 17:44:59 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 17:45:00 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 17:45:00 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 17:45:01 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 17:45:02 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 17:45:02 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 17:45:03 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 17:45:03 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 17:45:04 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 17:45:04 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 17:45:05 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 17:45:05 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 17:45:06 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 17:45:06 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 17:45:06 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 17:45:07 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 17:45:07 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 17:45:09 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 17:45:09 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 17:45:10 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 17:45:10 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 17:45:11 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 17:45:11 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 17:45:12 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 17:45:12 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 17:45:14 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 17:45:14 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 17:45:15 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 17:45:15 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 17:45:16 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 17:45:16 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 17:45:17 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 17:45:17 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 17:45:18 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 17:45:18 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 17:45:19 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 17:45:19 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 17:45:19 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 17:45:20 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 17:45:20 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 17:45:21 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 17:45:21 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 17:45:22 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 17:45:22 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 17:45:23 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 17:45:25 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 17:45:26 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 17:45:26 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 17:45:27 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 17:45:27 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 17:45:28 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 17:45:29 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 17:45:29 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 17:45:29 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 17:45:31 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 17:45:31 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 17:45:32 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 17:46:49 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 17:46:51 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 17:46:51 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 17:46:52 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 17:46:52 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 17:46:53 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 17:46:53 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 17:46:53 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 17:46:54 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 17:46:54 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 17:46:54 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 17:46:54 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 17:46:55 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 17:46:55 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 17:46:55 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-20 18:03:10 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-20 18:03:13 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-20 18:03:13 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-20 18:03:13 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-20 18:03:13 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-20 18:03:14 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-20 18:03:14 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-20 18:03:15 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-20 18:03:15 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-20 18:03:16 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-20 18:03:24 - unidades_client - INFO - Fetching participantes page 1...
+2026-01-20 18:03:26 - unidades_client - INFO - Fetching participantes page 5. Total items so far: 400
+2026-01-20 18:03:28 - unidades_client - INFO - Fetching participantes page 10. Total items so far: 900
+2026-01-20 18:03:28 - unidades_client - INFO - Fetching participantes page 15. Total items so far: 1399
+2026-01-20 18:03:29 - unidades_client - INFO - Fetching participantes page 20. Total items so far: 1899
+2026-01-20 18:03:30 - unidades_client - INFO - Fetching participantes page 25. Total items so far: 2399
+2026-01-20 18:03:30 - unidades_client - INFO - Fetching participantes page 30. Total items so far: 2899
+2026-01-20 18:03:31 - unidades_client - INFO - Fetching participantes page 35. Total items so far: 3399
+2026-01-20 18:03:31 - unidades_client - INFO - Fetching participantes page 40. Total items so far: 3899
+2026-01-20 18:03:32 - unidades_client - INFO - Fetching participantes page 45. Total items so far: 4399
+2026-01-20 18:03:33 - unidades_client - INFO - Fetching participantes page 50. Total items so far: 4899
+2026-01-20 18:03:33 - unidades_client - INFO - Fetching participantes page 55. Total items so far: 5399
+2026-01-20 18:03:34 - unidades_client - INFO - Fetching participantes page 60. Total items so far: 5899
+2026-01-20 18:03:35 - unidades_client - INFO - Fetching participantes page 65. Total items so far: 6399
+2026-01-20 18:03:35 - unidades_client - INFO - Fetching participantes page 70. Total items so far: 6899
+2026-01-20 18:03:36 - unidades_client - INFO - Fetching participantes page 75. Total items so far: 7399
+2026-01-20 18:03:37 - unidades_client - INFO - Fetching participantes page 80. Total items so far: 7899
+2026-01-20 18:03:37 - unidades_client - INFO - Fetching participantes page 85. Total items so far: 8399
+2026-01-20 18:03:38 - unidades_client - INFO - Fetching participantes page 90. Total items so far: 8899
+2026-01-20 18:03:38 - unidades_client - INFO - Fetching participantes page 95. Total items so far: 9399
+2026-01-20 18:03:39 - unidades_client - INFO - Fetching participantes page 100. Total items so far: 9899
+2026-01-20 18:03:40 - unidades_client - INFO - Fetching participantes page 105. Total items so far: 10399
+2026-01-20 18:03:40 - unidades_client - INFO - Fetching participantes page 110. Total items so far: 10899
+2026-01-20 18:03:41 - unidades_client - INFO - Fetching participantes page 115. Total items so far: 11399
+2026-01-20 18:03:41 - unidades_client - INFO - Fetching participantes page 120. Total items so far: 11899
+2026-01-20 18:03:42 - unidades_client - INFO - Fetching participantes page 125. Total items so far: 12399
+2026-01-20 18:03:42 - unidades_client - INFO - Fetching participantes page 130. Total items so far: 12899
+2026-01-20 18:03:43 - unidades_client - INFO - Fetching participantes page 135. Total items so far: 13399
+2026-01-20 18:03:43 - unidades_client - INFO - Fetching participantes page 140. Total items so far: 13899
+2026-01-20 18:03:44 - unidades_client - INFO - Fetching participantes page 145. Total items so far: 14399
+2026-01-20 18:03:45 - unidades_client - INFO - Fetching participantes page 150. Total items so far: 14899
+2026-01-20 18:03:45 - unidades_client - INFO - Fetching participantes page 155. Total items so far: 15399
+2026-01-20 18:03:46 - unidades_client - INFO - Fetching participantes page 160. Total items so far: 15899
+2026-01-20 18:03:46 - unidades_client - INFO - Fetching participantes page 165. Total items so far: 16399
+2026-01-20 18:03:47 - unidades_client - INFO - Fetching participantes page 170. Total items so far: 16899
+2026-01-20 18:03:47 - unidades_client - INFO - Fetching participantes page 175. Total items so far: 17399
+2026-01-20 18:03:48 - unidades_client - INFO - Fetching participantes page 180. Total items so far: 17899
+2026-01-20 18:03:48 - unidades_client - INFO - Fetching participantes page 185. Total items so far: 18399
+2026-01-20 18:03:49 - unidades_client - INFO - Fetching participantes page 190. Total items so far: 18899
+2026-01-20 18:03:49 - unidades_client - INFO - Fetching participantes page 195. Total items so far: 19399
+2026-01-20 18:03:50 - unidades_client - INFO - Fetching participantes page 200. Total items so far: 19899
+2026-01-20 18:03:50 - unidades_client - INFO - Fetching participantes page 205. Total items so far: 20399
+2026-01-20 18:03:51 - unidades_client - INFO - Fetching participantes page 210. Total items so far: 20899
+2026-01-20 18:03:51 - unidades_client - INFO - Fetching participantes page 215. Total items so far: 21399
+2026-01-20 18:03:52 - unidades_client - INFO - Fetching participantes page 220. Total items so far: 21899
+2026-01-20 18:03:53 - unidades_client - INFO - Fetching participantes page 225. Total items so far: 22399
+2026-01-20 18:03:53 - unidades_client - INFO - Fetching participantes page 230. Total items so far: 22899
+2026-01-20 18:03:54 - unidades_client - INFO - Fetching participantes page 235. Total items so far: 23399
+2026-01-20 18:03:54 - unidades_client - INFO - Fetching participantes page 240. Total items so far: 23899
+2026-01-20 18:03:55 - unidades_client - INFO - Fetching participantes page 245. Total items so far: 24399
+2026-01-20 18:03:55 - unidades_client - INFO - Fetching participantes page 250. Total items so far: 24899
+2026-01-20 18:03:56 - unidades_client - INFO - Fetching participantes page 255. Total items so far: 25399
+2026-01-20 18:03:56 - unidades_client - INFO - Fetching participantes page 260. Total items so far: 25899
+2026-01-20 18:03:57 - unidades_client - INFO - Fetching participantes page 265. Total items so far: 26399
+2026-01-20 18:03:57 - unidades_client - INFO - Fetching participantes page 270. Total items so far: 26899
+2026-01-20 18:03:58 - unidades_client - INFO - Fetching participantes page 275. Total items so far: 27399
+2026-01-20 18:03:58 - unidades_client - INFO - Fetching participantes page 280. Total items so far: 27899
+2026-01-20 18:03:59 - unidades_client - INFO - Fetching participantes page 285. Total items so far: 28399
+2026-01-20 18:05:12 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-20 18:05:16 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-20 18:05:16 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-20 18:05:17 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-20 18:05:17 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-20 18:05:17 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-20 18:05:18 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-20 18:05:18 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-20 18:05:18 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-20 18:05:19 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-20 18:05:19 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-20 18:05:20 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-20 18:05:20 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-20 18:05:20 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-20 18:05:20 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 09:37:39 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 09:37:39 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-20)
+2026-01-21 09:37:39 - run_unidades - INFO -    [Cleanup] Removido arquivo antigo: unidades_daily_2026-01-19.png
+2026-01-21 09:37:39 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 09:37:39 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 09:37:40 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 09:37:40 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 09:37:40 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 09:37:41 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 09:37:41 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 09:37:41 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 09:37:42 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 09:37:42 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 09:37:42 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 09:37:42 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 09:37:42 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 09:37:43 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 09:37:43 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 09:37:44 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 09:37:44 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 09:37:45 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 09:37:45 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 09:37:45 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 09:37:46 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 09:37:46 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 09:37:46 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 09:37:46 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 09:37:47 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 09:37:47 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 09:37:48 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-20...
+2026-01-21 09:37:48 - unidades_client - INFO - Found 0 items.
+2026-01-21 09:37:48 - run_unidades - ERROR - Erro no processamento Unidades: Character "🚀" at index 0 in text is outside the range of characters supported by the font used: "helveticaB". Please consider using a Unicode font.
+2026-01-21 09:38:58 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 09:38:58 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-20)
+2026-01-21 09:38:58 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 09:38:58 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 09:39:01 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 09:39:01 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 09:39:01 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 09:39:02 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 09:39:02 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 09:39:02 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 09:39:03 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 09:39:03 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 09:39:03 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 09:39:03 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 09:39:04 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 09:39:04 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 09:39:05 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 09:39:05 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 09:39:06 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 09:39:06 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 09:39:07 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 09:39:07 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 09:39:08 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 09:39:08 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 09:39:09 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 09:39:09 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 09:39:10 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 09:39:11 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 09:39:12 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-20...
+2026-01-21 09:39:12 - unidades_client - INFO - Found 0 items.
+2026-01-21 09:39:12 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-20.pdf
+2026-01-21 09:39:12 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-20&end=2026-01-20&type=daily
+2026-01-21 09:45:22 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 09:45:22 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-20)
+2026-01-21 09:45:22 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 09:45:22 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 09:45:26 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 09:45:26 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 09:45:26 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 09:45:27 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 09:45:27 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 09:45:28 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 09:45:28 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 09:45:28 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 09:45:28 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 09:45:29 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 09:45:29 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 09:45:29 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 09:45:30 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 09:45:30 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 09:45:30 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 09:45:31 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 09:45:31 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 09:45:31 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 09:45:32 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 09:45:32 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 09:45:32 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 09:45:33 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 09:45:33 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 09:45:33 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 09:45:34 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-20...
+2026-01-21 09:45:34 - unidades_client - INFO - Found 0 items.
+2026-01-21 09:45:34 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-20.pdf
+2026-01-21 09:45:34 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-20&end=2026-01-20&type=daily
+2026-01-21 09:55:10 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 09:55:10 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2026-01-20)
+2026-01-21 09:55:10 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 09:55:10 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 09:55:11 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 09:55:11 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 09:55:11 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 09:55:11 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 09:55:12 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 09:55:15 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 09:55:15 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 09:55:15 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 09:55:15 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 09:55:15 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 09:55:16 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 09:55:16 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 09:55:17 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 09:55:17 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 09:55:17 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 09:55:17 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 09:55:18 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 09:55:18 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 09:55:19 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 09:55:19 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 09:55:19 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 09:55:20 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 09:55:20 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 09:55:20 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 09:55:21 - unidades_client - INFO - Filtering 7220 items for min_date 2026-01-20...
+2026-01-21 09:55:21 - unidades_client - INFO - Found 0 items.
+2026-01-21 09:55:21 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2026-01-20.pdf
+2026-01-21 09:55:21 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2026-01-20&end=2026-01-20&type=daily
+2026-01-21 09:59:45 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 09:59:45 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-12-01)
+2026-01-21 09:59:45 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 09:59:45 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 09:59:49 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 09:59:49 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 09:59:49 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 09:59:50 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 09:59:50 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 09:59:50 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 09:59:50 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 09:59:51 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 09:59:51 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 09:59:51 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 09:59:51 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 09:59:52 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 09:59:52 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 09:59:52 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 09:59:53 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 09:59:53 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 09:59:56 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 09:59:56 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 09:59:57 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 09:59:57 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 09:59:58 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 09:59:59 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 09:59:59 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 09:59:59 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 10:00:00 - unidades_client - INFO - Filtering 7220 items for min_date 2025-12-01...
+2026-01-21 10:00:00 - unidades_client - INFO - Found 31 items.
+2026-01-21 10:00:00 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-12-01.pdf
+2026-01-21 10:00:00 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-12-01&end=2025-12-01&type=daily
+2026-01-21 10:05:38 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 10:05:38 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-11-14)
+2026-01-21 10:05:38 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:05:38 - unidades_client - INFO - Fetching unidades page 1...
+2026-01-21 10:05:40 - unidades_client - INFO - Fetching unidades page 5. Total items so far: 400
+2026-01-21 10:05:40 - unidades_client - INFO - Fetching unidades page 10. Total items so far: 900
+2026-01-21 10:05:40 - unidades_client - INFO - Fetching unidades page 15. Total items so far: 1400
+2026-01-21 10:05:41 - unidades_client - INFO - Fetching unidades page 20. Total items so far: 1900
+2026-01-21 10:05:41 - unidades_client - INFO - Fetching unidades page 25. Total items so far: 2400
+2026-01-21 10:05:41 - unidades_client - INFO - Fetching unidades page 30. Total items so far: 2900
+2026-01-21 10:05:42 - unidades_client - INFO - Fetching unidades page 35. Total items so far: 3400
+2026-01-21 10:05:42 - unidades_client - INFO - Fetching unidades page 40. Total items so far: 3900
+2026-01-21 10:05:42 - unidades_client - INFO - Fetching unidades page 45. Total items so far: 4400
+2026-01-21 10:05:42 - unidades_client - INFO - Fetching modelos page 1...
+2026-01-21 10:05:43 - unidades_client - INFO - Fetching modelos page 5. Total items so far: 400
+2026-01-21 10:05:43 - unidades_client - INFO - Fetching modelos page 10. Total items so far: 900
+2026-01-21 10:05:44 - unidades_client - INFO - Fetching modelos page 15. Total items so far: 1400
+2026-01-21 10:05:45 - unidades_client - INFO - Fetching modelos page 20. Total items so far: 1900
+2026-01-21 10:05:45 - unidades_client - INFO - Fetching modelos page 25. Total items so far: 2400
+2026-01-21 10:05:46 - unidades_client - INFO - Fetching modelos page 30. Total items so far: 2900
+2026-01-21 10:05:47 - unidades_client - INFO - Fetching modelos page 35. Total items so far: 3400
+2026-01-21 10:05:47 - unidades_client - INFO - Fetching modelos page 40. Total items so far: 3900
+2026-01-21 10:05:48 - unidades_client - INFO - Fetching modelos page 45. Total items so far: 4400
+2026-01-21 10:05:48 - unidades_client - INFO - Fetching modelos page 50. Total items so far: 4900
+2026-01-21 10:05:48 - unidades_client - INFO - Fetching modelos page 55. Total items so far: 5400
+2026-01-21 10:05:49 - unidades_client - INFO - Fetching modelos page 60. Total items so far: 5900
+2026-01-21 10:05:50 - unidades_client - INFO - Fetching modelos page 65. Total items so far: 6400
+2026-01-21 10:05:50 - unidades_client - INFO - Fetching modelos page 70. Total items so far: 6900
+2026-01-21 10:05:51 - unidades_client - INFO - Filtering 7220 items for min_date 2025-11-14...
+2026-01-21 10:05:51 - unidades_client - INFO - Found 40 items.
+2026-01-21 10:05:51 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-11-14.pdf
+2026-01-21 10:05:51 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-11-14&end=2025-11-14&type=daily
+2026-01-21 10:12:38 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 10:12:38 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-11-14)
+2026-01-21 10:12:38 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 10:12:38 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 10:12:59 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 10:12:59 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:12:59 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 10:13:01 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 10:13:01 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 10:13:06 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 10:13:06 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-11-14.pdf
+2026-01-21 10:13:06 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-11-14&end=2025-11-14&type=daily
+2026-01-21 10:14:25 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 10:14:25 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-11-14)
+2026-01-21 10:14:25 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 10:14:25 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 10:14:41 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 10:14:41 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:14:41 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 10:14:43 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 10:14:43 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 10:14:47 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 10:14:47 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-11-14.pdf
+2026-01-21 10:14:47 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-11-14&end=2025-11-14&type=daily
+2026-01-21 10:15:21 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 10:15:21 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 10:15:38 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 10:15:38 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:15:38 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 10:15:40 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 10:15:40 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 10:15:44 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 10:17:22 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 10:17:22 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-12-22)
+2026-01-21 10:17:22 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 10:17:22 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 10:17:41 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 10:17:41 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:17:41 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 10:17:43 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 10:17:43 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 10:17:47 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 10:17:47 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-12-22.pdf
+2026-01-21 10:17:47 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-12-22&end=2025-12-22&type=daily
+2026-01-21 10:18:27 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 10:18:27 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-12-22)
+2026-01-21 10:18:27 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 10:18:27 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 10:18:41 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 10:18:41 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 10:18:41 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 10:18:44 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 10:18:44 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 10:18:47 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 10:18:48 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-12-22.pdf
+2026-01-21 10:18:48 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-12-22&end=2025-12-22&type=daily
+2026-01-21 11:40:41 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:40:41 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:40:55 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:40:55 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:40:55 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:40:57 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:40:57 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:41:00 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:41:22 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:41:22 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:41:36 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:41:36 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:41:36 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:41:38 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:41:38 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:41:41 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:44:17 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:44:17 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:44:32 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:44:32 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:44:32 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:44:34 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:44:34 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:44:38 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:50:49 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:50:49 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:51:01 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:51:01 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:51:01 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:51:02 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:51:02 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:51:05 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:51:25 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:51:25 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:51:36 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:51:36 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:51:36 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:51:37 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:51:37 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:51:40 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:51:44 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:51:44 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:51:55 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:51:55 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:51:55 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:51:56 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:51:56 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:51:59 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 11:52:59 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 11:52:59 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 11:53:09 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 11:53:09 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 11:53:09 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 11:53:11 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 11:53:11 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 11:53:13 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:20:30 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:20:30 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:20:42 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:20:42 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:20:42 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:20:44 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:20:44 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:20:47 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:24:57 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:24:57 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:25:08 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:25:08 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:25:08 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:25:10 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:25:10 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:25:13 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:33:50 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:33:50 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:34:05 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:34:05 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:34:05 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:34:07 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:34:07 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:34:11 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:34:39 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:34:39 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:34:53 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:34:53 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:34:53 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:34:55 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:34:55 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:34:59 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:35:59 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:35:59 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:36:13 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:36:13 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:36:13 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:36:15 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:36:15 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:36:19 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 13:47:22 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 13:47:22 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 13:47:37 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 13:47:37 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 13:47:37 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 13:47:39 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 13:47:39 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 13:47:45 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:24:00 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:24:03 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:24:08 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:24:24 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:25:13 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:25:19 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:26:27 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 14:26:27 - run_unidades - INFO -    [Processando] Relatório Diário (Ref: 2025-12-26)
+2026-01-21 14:26:27 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:26:27 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:26:42 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:26:43 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:26:43 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:26:45 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:26:45 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:26:48 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:26:48 - unidades_client - INFO - Unit 2353 not in cache, fetching from API...
+2026-01-21 14:26:49 - unidades_client - INFO - Unit 2358 not in cache, fetching from API...
+2026-01-21 14:26:49 - unidades_client - INFO - Unit 2360 not in cache, fetching from API...
+2026-01-21 14:26:50 - unidades_client - INFO - Unit 2363 not in cache, fetching from API...
+2026-01-21 14:26:50 - unidades_client - INFO - Unit 0 not in cache, fetching from API...
+2026-01-21 14:26:51 - unidades_client - INFO - Unit 2375 not in cache, fetching from API...
+2026-01-21 14:26:51 - unidades_client - INFO - Unit 2376 not in cache, fetching from API...
+2026-01-21 14:26:52 - unidades_client - INFO - Unit 2377 not in cache, fetching from API...
+2026-01-21 14:26:52 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:26:53 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:26:53 - unidades_client - INFO - Unit 2370 not in cache, fetching from API...
+2026-01-21 14:26:54 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:26:55 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:26:57 - unidades_client - INFO - Unit 2365 not in cache, fetching from API...
+2026-01-21 14:26:58 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_daily_2025-12-26.pdf
+2026-01-21 14:26:58 - run_unidades - INFO -    [INFO] Link: https://bi.grupostudio.tec.br/reports/unidades?start=2025-12-26&end=2025-12-26&type=daily
+2026-01-21 14:28:08 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:28:08 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:28:28 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:28:28 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:28:28 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:28:33 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:28:33 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:28:37 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:28:37 - unidades_client - INFO - Unit 2353 not in cache, fetching from API...
+2026-01-21 14:28:38 - unidades_client - INFO - Unit 2358 not in cache, fetching from API...
+2026-01-21 14:28:38 - unidades_client - INFO - Unit 2360 not in cache, fetching from API...
+2026-01-21 14:28:39 - unidades_client - INFO - Unit 2363 not in cache, fetching from API...
+2026-01-21 14:28:39 - unidades_client - INFO - Unit 0 not in cache, fetching from API...
+2026-01-21 14:28:40 - unidades_client - INFO - Unit 2375 not in cache, fetching from API...
+2026-01-21 14:28:41 - unidades_client - INFO - Unit 2376 not in cache, fetching from API...
+2026-01-21 14:28:41 - unidades_client - INFO - Unit 2377 not in cache, fetching from API...
+2026-01-21 14:28:42 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:28:42 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:28:43 - unidades_client - INFO - Unit 2370 not in cache, fetching from API...
+2026-01-21 14:28:43 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:28:44 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:28:44 - unidades_client - INFO - Unit 2365 not in cache, fetching from API...
+2026-01-21 14:30:38 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 14:30:38 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 14:30:38 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:30:38 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:30:53 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:30:53 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:30:53 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:30:55 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:30:55 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:30:59 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:30:59 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:31:00 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:31:00 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:31:01 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:31:01 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_weekly_2026-01-18.pdf
+2026-01-21 14:31:01 - run_unidades - ERROR - Erro no processamento Unidades: name 'report_id' is not defined
+2026-01-21 14:31:45 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 14:31:45 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 14:31:45 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:31:45 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:31:59 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:31:59 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:31:59 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:32:01 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:32:01 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:32:05 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:32:05 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:32:06 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:32:07 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:32:07 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:32:08 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_weekly_2026-01-18.pdf
+2026-01-21 14:38:29 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 14:38:29 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 14:38:29 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:38:29 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:38:46 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:38:46 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:38:46 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:38:48 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:38:48 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:38:52 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:38:52 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:39:03 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:39:05 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:39:05 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:39:05 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_weekly_2026-01-18.pdf
+2026-01-21 14:48:15 - run_unidades - INFO - 
+--- Processando Unidades ---
+2026-01-21 14:48:15 - run_unidades - INFO -    [Processando] Relatório Semanal (Semana Anterior Completa): 2026-01-12 a 2026-01-18
+2026-01-21 14:48:15 - unidades_client - INFO - Fetching lookups: Participantes...
+2026-01-21 14:48:15 - unidades_client - INFO - Fetching data from Supabase table: nexus_participantes
+2026-01-21 14:48:30 - unidades_client - INFO - Fetched 28781 rows from nexus_participantes.
+2026-01-21 14:48:30 - unidades_client - INFO - Fetching lookups: Unidades...
+2026-01-21 14:48:30 - unidades_client - INFO - Fetching data from Supabase table: nexus_unidades
+2026-01-21 14:48:32 - unidades_client - INFO - Fetched 4419 rows from nexus_unidades.
+2026-01-21 14:48:32 - unidades_client - INFO - Fetching data from Supabase table: nexus_modelos
+2026-01-21 14:48:36 - unidades_client - INFO - Fetched 7220 rows from nexus_modelos.
+2026-01-21 14:48:36 - unidades_client - INFO - Unit 2290 not in cache, fetching from API...
+2026-01-21 14:48:37 - unidades_client - INFO - Unit 2380 not in cache, fetching from API...
+2026-01-21 14:48:38 - unidades_client - INFO - Unit 2381 not in cache, fetching from API...
+2026-01-21 14:48:38 - unidades_client - INFO - Unit 2383 not in cache, fetching from API...
+2026-01-21 14:48:39 - run_unidades - INFO -    [INFO] Imagem gerada (apenas geração): .\images\unidades_weekly_2026-01-18.pdf
+2026-01-21 14:52:53 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 14:52:53 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 14:52:54 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 14:52:54 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 14:52:54 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 14:52:54 - scheduler - INFO - 🔒 Single Instance Lock adquirido (PID 62708)
+2026-01-21 14:57:54 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 14:57:55 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 14:57:55 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 14:57:55 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:02:18 - scheduler - INFO - >>> SCHEDULER (DB MODE) INICIADO <<<
+2026-01-21 15:02:18 - scheduler - INFO - 🔄 Atualizando agendamentos do Supabase...
+2026-01-21 15:02:19 - scheduler - INFO -   [OK] Agendado 'Relatório de Metas por Departamento' (metas_diarias) às 14:00 em [1, 2, 3, 4, 5]
+2026-01-21 15:02:19 - scheduler - INFO -   [OK] Agendado 'Relatorio Unidades' (unidades_diario) às 14:25 em [1, 2, 3, 4, 5]
+2026-01-21 15:02:19 - scheduler - INFO - ✅ Total de jobs agendados: 10
+2026-01-21 15:02:19 - scheduler - WARNING - ⚠️ Lock file encontrado (PID 62708). Verificando se processo existe...
+2026-01-21 15:02:19 - scheduler - CRITICAL - ❌ Scheduler já está rodando (PID 62708). Abortando execução para evitar duplicidade.

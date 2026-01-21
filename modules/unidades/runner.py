@@ -171,8 +171,6 @@ class UnidadesAutomation:
                 # Link aponta para a página dinâmica com filtro de data
                 report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
                 
-                report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
-                
                 daily_path = os.path.join(IMAGES_DIR, f"unidades_daily_{data_ref}.pdf")
                 # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
                 self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
