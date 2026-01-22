@@ -233,25 +233,23 @@ def run_scheduler_loop():
     LOCK_FILE = "scheduler.lock"
     
     if os.path.exists(LOCK_FILE):
-            try:
-                with open(LOCK_FILE, "r") as f:
-                    pid = int(f.read().strip())
-                
-                # Verifica se o processo realmente existe
-                try:
-                    os.kill(pid, 0) # 0 é o sinal nulo, serve para checar existência
-                    # Se não lançar exceção, o processo existe
-                    logger.critical(f"❌ Scheduler já está rodando (PID {pid}). Abortando.")
-                    return
-                except OSError:
-                    # Se der erro (ex: ProcessLookupError), o processo não existe
-                    logger.warning(f"⚠️ Lock file antigo encontrado (PID {pid}), mas processo não está rodando. Removendo lock invalido.")
+        try:
+            # HEARTBEAT CHECK: Se o arquivo existir e não for atualizado há > 60s, é stale.
+            mtime = os.path.getmtime(LOCK_FILE)
+            if time.time() - mtime > 60:
+                 logger.warning(f"⚠️ Lock file antigo encontrado (última atualização há {time.time() - mtime:.0f}s). Assumindo crash anterior e removendo.")
+                 try:
                     os.remove(LOCK_FILE)
-                    
-            except ValueError:
-                 logger.warning("⚠️ Lock file corrompido. Removendo.")
-                 if os.path.exists(LOCK_FILE):
-                    os.remove(LOCK_FILE)
+                 except OSError:
+                    pass # Race condition
+            else:
+                 # Ainda está ativo (heartbeat recente)
+                 with open(LOCK_FILE, "r") as f:
+                     pid = f.read().strip()
+                 logger.critical(f"❌ Scheduler já está rodando (PID {pid}, Heartbeat < 60s). Abortando.")
+                 return  
+        except OSError:
+             pass # File deletion race condition
             
     # Criar Lock
     with open(LOCK_FILE, "w") as f:
@@ -266,10 +264,20 @@ def run_scheduler_loop():
     logger.info(f"🔒 Single Instance Lock adquirido (PID {os.getpid()})")
     # ----------------------------
     
+    last_heartbeat = 0
+
     while True:
         try:
             schedule.run_pending()
             check_queue() # Verifica fila a cada iteração
+            
+            # --- LOCK HEARTBEAT ---
+            # Atualiza timestamp do arquivo a cada ~10s para indicar que estamos vivos
+            if time.time() - last_heartbeat > 10:
+                if os.path.exists(LOCK_FILE):
+                     os.utime(LOCK_FILE, None)
+                last_heartbeat = time.time()
+            
         except Exception as e:
             logger.critical(f"CRITICAL SCHEDULER ERROR: {e}")
             
