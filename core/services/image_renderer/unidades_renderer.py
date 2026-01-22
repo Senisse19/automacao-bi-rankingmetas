@@ -105,7 +105,7 @@ class UnidadesRenderer(BaseRenderer):
             title_block_h = (28 * s) + (3 * s) + (25 * s) # Text + Line + Margin
             
             if items:
-                first_content_h = 160 * s # Item height
+                first_content_h = 210 * s # Item height increased for 3 rows
             else:
                 first_content_h = 80 * s  # Empty state height
             
@@ -199,7 +199,7 @@ class UnidadesRenderer(BaseRenderer):
                  
             else:
                 current_y = y 
-                item_h = 160 * s  # Reduced height for 2 rows
+                item_h = 210 * s  # Increased height for 3 rows
                 items_idx = 0
                 
                 while items_idx < len(items):
@@ -286,6 +286,14 @@ class UnidadesRenderer(BaseRenderer):
                         draw_field(col1_x, row2_y, "VALOR AQUISIÇÃO", fmt_moeda(valor_aquisicao), val_color=text_white, is_money=True)
                         draw_field(col2_x, row2_y, "TEMPO DE CONTRATO", f"{anos_contrato} Anos" if anos_contrato else "-")
                         draw_field(col3_x, row2_y, "% RETENÇÃO", f"{percentual_retencao}%" if percentual_retencao else "-")
+
+                        # Row 3: Royalties | CRM
+                        row3_y = inner_y + (130 * s)
+                        royalties = item.get("royalties", 0)
+                        crm = item.get("crm", 0)
+                        
+                        draw_field(col1_x, row3_y, "ROYALTIES", f"{royalties}%" if royalties else "-")
+                        draw_field(col2_x, row3_y, "CRM", fmt_moeda(crm) if crm else "-")
 
                         # Separator
                         if i < len(chunk_items) - 1:

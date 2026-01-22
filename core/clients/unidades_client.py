@@ -239,6 +239,8 @@ class UnidadesClient:
                 "valor": valor_aquisicao,
                 "rede_distribuicao": rede_distribuicao,
                 "percentual_retencao": percentual_retencao,
+                "royalties": m.get("royalties", 0),
+                "crm": m.get("crm", 0),
                 "anos_contrato": anos_contrato,
                 "data": data_contrato_str,
                 "raw_data": raw_data,
