@@ -233,20 +233,25 @@ def run_scheduler_loop():
     LOCK_FILE = "scheduler.lock"
     
     if os.path.exists(LOCK_FILE):
-        try:
-            with open(LOCK_FILE, "r") as f:
-                pid = f.read().strip()
-            logger.warning(f"⚠️ Lock file encontrado (PID {pid}). Verificando se processo existe...")
-            # Aqui poderíamos checar se o PID está vivo, mas por simplicidade no Windows/Docker
-            # vamos assumir que se o arquivo existe, o scheduler já está rodando.
-            # Se for um crash anterior, o usuário deve remover o lock manualmente ou reiniciar o container (que não persistirá o lock se não estiver em volume persistente).
-            # Mas como o diretório pode ser montado, é melhor avisar e sair.
-            logger.critical(f"❌ Scheduler já está rodando (PID {pid}). Abortando execução para evitar duplicidade.")
-            # Opcional: Remover e continuar se tiver certeza que é stale, mas é arriscado.
-            # Vamos abortar.
-            return 
-        except Exception:
-            pass
+            try:
+                with open(LOCK_FILE, "r") as f:
+                    pid = int(f.read().strip())
+                
+                # Verifica se o processo realmente existe
+                try:
+                    os.kill(pid, 0) # 0 é o sinal nulo, serve para checar existência
+                    # Se não lançar exceção, o processo existe
+                    logger.critical(f"❌ Scheduler já está rodando (PID {pid}). Abortando.")
+                    return
+                except OSError:
+                    # Se der erro (ex: ProcessLookupError), o processo não existe
+                    logger.warning(f"⚠️ Lock file antigo encontrado (PID {pid}), mas processo não está rodando. Removendo lock invalido.")
+                    os.remove(LOCK_FILE)
+                    
+            except ValueError:
+                 logger.warning("⚠️ Lock file corrompido. Removendo.")
+                 if os.path.exists(LOCK_FILE):
+                    os.remove(LOCK_FILE)
             
     # Criar Lock
     with open(LOCK_FILE, "w") as f:
