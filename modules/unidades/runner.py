@@ -80,6 +80,7 @@ class UnidadesAutomation:
             
             # Dynamic Template Support
             if template_content:
+                # logger.info(f"   [TEMPLATE] Formatando template personalizada...") 
                 try:
                     # Determine greeting based on time
                     hora = datetime.now().hour
@@ -98,10 +99,12 @@ class UnidadesAutomation:
                         grupo=grupo_key.title()
                     )
                 except Exception as e:
-                    logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
+                    logger.error(f"❌ [ERRO DE TEMPLATE] Falha ao formatar para {nome}: {e}")
+                    logger.error(f"   Conteúdo do Template: {template_content}")
                     # Fallback com erro logado
                     caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
             else:
+                # logger.info("   [TEMPLATE] Nenhum template (None). Usando padrão.")
                 caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
             
             # Check First Shot Logic
