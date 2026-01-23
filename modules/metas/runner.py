@@ -56,6 +56,14 @@ class MetasAutomation:
         """Retorna a data de referência (ontem) formatada."""
         ontem = datetime.now() - timedelta(days=1)
         return ontem.strftime("%d/%m/%Y")
+
+    def get_periodo_semanal(self):
+        """Retorna o período da semana anterior (seg-dom) formatado (ex: 15/01 a 21/01)."""
+        hoje = datetime.now()
+        inicio_semana_atual = hoje - timedelta(days=hoje.weekday())
+        inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
+        fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
+        return f"{inicio_semana_anterior.strftime('%d/%m')} a {fim_semana_anterior.strftime('%d/%m')}"
     
     def fetch_data(self):
         """Busca todos os dados necessários do Power BI."""
@@ -188,6 +196,7 @@ class MetasAutomation:
                             saudacao=saudacao,
                             saudacao_lower=saudacao_lower,
                             data=data_ref,
+                            data_semanal=self.get_periodo_semanal(),
                             grupo=grupo_key.title()
                         )
                     except Exception as e:

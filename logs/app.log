@@ -1,0 +1,29 @@
+2026-01-23 11:30:27 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/unidades/
+2026-01-23 11:30:27 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-01-23 11:30:27 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-01-23 11:30:27 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-01-23 11:30:27 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-01-23 11:30:28 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-01-23 11:30:28 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-01-23 11:30:28 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-01-23 11:30:28 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-01-23 11:30:28 - unidades_client - INFO - Page 9 fetched 419 items. Total so far: 4419
+2026-01-23 11:30:33 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/participantes/
+2026-01-23 11:30:33 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-01-23 11:30:33 - unidades_client - INFO - Page 2 fetched 499 items. Total so far: 999
+2026-01-23 11:30:34 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/modelos/
+2026-01-23 11:30:34 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-01-23 11:30:35 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-01-23 11:30:35 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-01-23 11:30:35 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-01-23 11:30:35 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-01-23 11:30:35 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-01-23 11:30:35 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-01-23 11:30:35 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-01-23 11:30:35 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-01-23 11:30:35 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-01-23 11:30:36 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-01-23 11:30:36 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-01-23 11:30:36 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-01-23 11:30:36 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-01-23 11:30:36 - unidades_client - INFO - Page 15 fetched 227 items. Total so far: 7227
