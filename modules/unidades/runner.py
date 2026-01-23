@@ -41,6 +41,15 @@ class UnidadesAutomation:
         # Garantir diretório de imagens
         os.makedirs(IMAGES_DIR, exist_ok=True)
 
+    def get_periodo_semanal(self):
+        """Retorna o período da semana anterior (seg-dom) formatado (ex: 15/01 a 21/01)."""
+        hoje = datetime.now()
+        inicio_semana_atual = hoje - timedelta(days=hoje.weekday())
+        inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
+        fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
+        return f"{inicio_semana_anterior.strftime('%d/%m')} a {fim_semana_anterior.strftime('%d/%m')}"
+
+
     def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None, data_ref_str=None):
         """Helper para enviar imagem de Unidades usando o NotificationService."""
         
@@ -85,10 +94,12 @@ class UnidadesAutomation:
                         saudacao_lower=saudacao.lower(),
                         titulo=caption_prefix, # Specifically for Unidades reports
                         data=data_ref_str or datetime.now().strftime("%d/%m/%Y"),
+                        data_semanal=self.get_periodo_semanal(),
                         grupo=grupo_key.title()
                     )
                 except Exception as e:
                     logger.error(f"Erro ao formatar template Unidades para {nome}: {e}")
+                    # Fallback com erro logado
                     caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
             else:
                 caption = f"📊 {caption_prefix}\n\nOlá, {primeiro_nome}! Segue resumo atualizado."
