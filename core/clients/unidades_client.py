@@ -23,7 +23,7 @@ class UnidadesClient:
             "X-API-KEY": self.token
         }
         
-        # Configure Autoscaling Retry
+        # Configurar Repetição com Escalonamento Automático
         self.session = requests.Session()
         retries = Retry(total=3, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
         adapter = HTTPAdapter(max_retries=retries)
@@ -33,6 +33,60 @@ class UnidadesClient:
         svc = SupabaseService()
         self.model_map = svc.get_setting("nexus_model_map", {})
         self.type_map = svc.get_setting("unidades_type_map", {})
+
+    def fetch_all_from_source(self, endpoint: str) -> list:
+        """
+        Busca TODOS os dados da API Nexus (Source) paginando via 'page'.
+        Ignora o mirror Supabase.
+        """
+        all_items = []
+        page = 1
+        limit = 500  # Safe batch size
+        
+        url = f"{self.api_url}/{endpoint}/"
+        logger.info(f"Fetching full data from SOURCE API: {url}")
+        
+        while True:
+            try:
+                params = {"page": page, "limit": limit}
+                
+                # Direct Request using Session
+                resp = self.session.get(url, headers=self.headers, params=params, timeout=30)
+                
+                if resp.status_code != 200:
+                    logger.error(f"Failed to fetch page {page}: {resp.status_code} - {resp.text[:100]}")
+                    break
+                    
+                data = resp.json()
+                
+                # Handle potential wrappers
+                if isinstance(data, dict):
+                    if 'data' in data: items = data['data']
+                    elif 'results' in data: items = data['results']
+                    else: items = [] # Unknown format or empty dict
+                elif isinstance(data, list):
+                    items = data
+                else:
+                    logger.error(f"Unknown response format: {type(data)}")
+                    break
+                    
+                if not items:
+                    break
+                    
+                all_items.extend(items)
+                logger.info(f"Page {page} fetched {len(items)} items. Total so far: {len(all_items)}")
+                
+                if len(items) < limit:
+                    # Last page
+                    break
+                    
+                page += 1
+                
+            except Exception as e:
+                logger.error(f"Exception on page {page}: {e}")
+                break
+                
+        return all_items
 
     def _get_paginated_latest(self, endpoint: str, min_date: str | None = None) -> list:
         """
@@ -53,24 +107,24 @@ class UnidadesClient:
         try:
             logger.info(f"Fetching data from Supabase table: {table}")
             
-            # Build Query
-            # We want ALL data effectively, or filter by date if column exists
+            # Construir Consulta
+            # Queremos TODOS os dados efetivamente, ou filtrar por data se a coluna existir
             params = {
                 "select": "*"
             }
             
-            # Optimization: If fetching 'modelos' with min_date, apply filter directly
+            # Otimização: Se buscar 'modelos' com min_date, aplicar filtro diretamente
             if endpoint == "modelos" and min_date:
-                # Filter by data_contrato OR data (legacy)
-                # Supabase REST doesn't support complex OR easily in one param without raw string
-                # So we fetch slightly more and filter in Python, or use 'gte'
-                # Let's simple fetch all for now or order by date desc limit 1000? 
-                # Ideally we synchronise ALL history so we should just fetch all.
-                # However, syncing 500k rows via REST might be slow.
-                # But 'nexus_modelos' only has ~600 rows in test?
+                # Filtrar por data_contrato OU data (legado)
+                # Supabase REST não suporta OR complexo facilmente em um parâmetro sem string raw
+                # Então buscamos um pouco mais e filtramos em Python, ou usamos 'gte'
+                # Vamos simplesmente buscar tudo por enquanto ou ordenar por data decrescente com limite de 1000? 
+                # Idealmente sincronizamos TODO o histórico, então devemos buscar tudo.
+                # No entanto, sincronizar 500k linhas via REST pode ser lento.
+                # Mas 'nexus_modelos' tem apenas ~600 linhas no teste?
                 pass
                 
-            # Fetch ALL rows (pagination helper)
+            # Buscar TODAS as linhas (auxiliar de paginação)
             all_items = []
             offset = 0
             limit = 1000
@@ -79,7 +133,7 @@ class UnidadesClient:
                 p = params.copy()
                 p["offset"] = offset
                 p["limit"] = limit
-                # Order by id to ensure consistency
+                # Ordenar por id para garantir consistência
                 p["order"] = "id.asc"
                 
                 chunk = svc._get(table, p)
@@ -94,7 +148,7 @@ class UnidadesClient:
                 
             logger.info(f"Fetched {len(all_items)} rows from {table}.")
             
-            # Post-Filter by min_date if requested (for 'modelos')
+            # Pós-filtrar por min_date se solicitado (para 'modelos')
             if min_date and endpoint == "modelos":
                  filtered = []
                  for x in all_items:
@@ -116,7 +170,7 @@ class UnidadesClient:
         """Busca todos os participantes (consultores/gerentes) para lookup via Supabase."""
         logger.info("Fetching lookups: Participantes...")
         results = self._get_paginated_latest("participantes")
-        # Map ID -> Nome (Assume 'nome' or 'NOME' field)
+        # Mapear ID -> Nome (Assumir campo 'nome' ou 'NOME')
         pmap = {}
         for p in results:
             uid = p.get("id") or p.get("codigo")
@@ -127,7 +181,7 @@ class UnidadesClient:
         """Busca TODAS as unidades para lookup (cache local)."""
         logger.info("Fetching lookups: Unidades...")
         results = self._get_paginated_latest("unidades")
-        # Map ID -> {nome, cidade, uf, raw_data}
+        # Mapear ID -> {nome, cidade, uf, raw_data}
         unidades_map = {}
         for u in results:
             uid = u.get("codigo") or u.get("id")
@@ -147,50 +201,50 @@ class UnidadesClient:
             start_date: string "YYYY-MM-DD"
             end_date: string "YYYY-MM-DD"
         """
-        # 1. Fetch Lookups (Dimension Tables)
+        # 1. Buscar Lookups (Tabelas de Dimensão)
         participantes_map = self._get_all_participantes()
         unidades_map = self._get_all_unidades()
         
-        # 2. Fetch Facts (Modelos) filtered by min_date
-        # Note: We filter by min_date to avoid fetching 10 years of sales
+        # 2. Buscar Fatos (Modelos) filtrados por min_date
+        # Nota: Filtramos por min_date para evitar buscar 10 anos de vendas
         modelos = self._get_paginated_latest("modelos", min_date=start_date)
         
         new_units = []
         cancelled_units = []
         upsell_units = []
         
-        # Parse dates for comparison
+        # Parsear datas para comparação
         start_dt = datetime.strptime(start_date, "%Y-%m-%d")
         end_dt = datetime.strptime(end_date, "%Y-%m-%d")
         
         for m in modelos:
-            # Check dates - prefer data (Supabase view) or fallback
+            # Verificar datas - preferir data (view Supabase) ou fallback
             data_contrato_str = m.get("data") or m.get("data_contrato")
             data_cancelamento_str = m.get("data_cancelamento")
             
             raw_data = m.get("raw_data") or {}
             
-            # Temporary Fix: Hardcode missing Model 40 (Studio Store)
+            # Correção Temporária: Hardcode Modelo 40 ausente (Studio Store)
             if 40 not in self.model_map:
                 self.model_map[40] = "Studio Store"
             if "40" not in self.model_map:
                 self.model_map["40"] = "Studio Store"
             
-            # LINK: Unidade Data (from Unidades lookup)
+            # LINK: Dados da Unidade (do lookup de Unidades)
             uid = m.get("unidade")
             unit_data = unidades_map.get(uid)
             
-            # Fallback: If unit not in cache, fetch name from Nexus API
+            # Fallback: Se unidade não estiver no cache, buscar nome na API Nexus
             if not unit_data:
                 logger.info(f"Unit {uid} not in cache, fetching from API...")
                 fetched_name = self.fetch_unit_name(uid)
                 unit_data = {"nome": fetched_name, "cidade": "-", "uf": "-", "raw_data": {}}
-                # Cache for future lookups in this session
+                # Armazenar em cache para buscas futuras nesta sessão
                 unidades_map[uid] = unit_data
             
-            # Use nome from nexus_unidades directly
+            # Usar nome de nexus_unidades diretamente
             base_unit_name = unit_data["nome"]
-            # Format: "Unidade {ID} - {Nome}" if nome is not already formatted
+            # Formato: "Unidade {ID} - {Nome}" se o nome ainda não estiver formatado
             if base_unit_name and "Unidade" not in str(base_unit_name):
                 unit_name = f"Unidade {uid} - {base_unit_name}"
             else:
@@ -199,30 +253,30 @@ class UnidadesClient:
             unit_cidade = unit_data["cidade"]
             unit_uf = unit_data["uf"]
             
-            # LINK: Consultant Name (from Participantes lookup)
+            # LINK: Nome do Consultor (do lookup de Participantes)
             consultor_id = m.get("consultor_venda")
             consultor_nome = participantes_map.get(consultor_id, "N/A")
 
-            # LINK: Manager Name (from Participantes lookup)
+            # LINK: Nome do Gerente (do lookup de Participantes)
             gerente_id = m.get("gerente_venda")
             gerente_nome = participantes_map.get(gerente_id, "N/A")
             
-            # Resolve Model Name and Type (Prefer raw_data from Data Lake)
+            # Resolver Nome do Modelo e Tipo (Preferir raw_data do Data Lake)
             model_name = raw_data.get("modelo_nome")
             if not model_name:
                 model_id = m.get("modelo")
                 model_name = self.model_map.get(str(model_id), f"Modelo {model_id}")
             
-            # Resolve Type (Rede Distribuição)
+            # Resolver Tipo (Rede Distribuição)
             type_name = raw_data.get("tipo_nome")
             if not type_name:
                 type_id = m.get("tipo_franquia") or m.get("tipo_contrato")
                 type_name = self.type_map.get(str(type_id), f"Tipo {type_id}")
             
-            # Additional Fields requested
+            # Campos Adicionais solicitados
             valor_aquisicao = m.get("valor", 0)
             
-            rede_distribuicao = type_name # Use full type name as Rede
+            rede_distribuicao = type_name # Usar nome completo do tipo como Rede
             
             percentual_retencao = m.get("percentual_retencao", 0)
             anos_contrato = m.get("anos", 0)
@@ -247,8 +301,8 @@ class UnidadesClient:
                 "unit_raw_data": unit_data.get("raw_data", {})
             }
             
-            # Logic: New Unit (Check if data_contrato is in range)
-            # Filter active status
+            # Lógica: Nova Unidade (Verificar se data_contrato está no intervalo)
+            # Filtrar status ativo
             status = m.get("status")
             
             if data_contrato_str:
@@ -257,7 +311,7 @@ class UnidadesClient:
                     dt = datetime.strptime(clean_date, "%Y-%m-%d")
                     
                     if start_dt <= dt <= end_dt:
-                        # Logic from page.tsx:
+                        # Lógica de page.tsx:
                         # newUnits = items.filter(i => i.status === "Ativo")
                         # upsellUnits = ... raw_data.tipo_venda === 'Upsell' or is_upsell
                         
@@ -268,13 +322,13 @@ class UnidadesClient:
                         elif status == "Ativo": 
                             new_units.append(item)
                         else:
-                            # Might be Cancelled in the same period? Handled below.
+                            # Pode estar Cancelada no mesmo período? Tratado abaixo.
                             pass
                             
                 except Exception as e:
                     pass
                  
-            # Logic: Cancelled
+            # Lógica: Cancelada
             # page.tsx: i.status === "Cancelado" || i.raw_data?.cancelamento === 1
             is_cancelled = status == "Cancelado" or raw_data.get("cancelamento") == 1
             
@@ -287,9 +341,9 @@ class UnidadesClient:
                 except Exception as e:
                      pass
             
-            # Fallback for data lake cancelamento flag without date?
-            # Usually we need the date to know IF it was cancelled TODAY.
-            # Assuming data_cancelamento matches.
+            # Fallback para flag de cancelamento no data lake sem data?
+            # Geralmente precisamos da data para saber SE foi cancelada HOJE.
+            # Assumindo que data_cancelamento corresponde.
                         
         return {
             "date": end_date,
@@ -300,7 +354,7 @@ class UnidadesClient:
         }
 
     def fetch_unit_name(self, uid: int | str) -> str:
-        """Fallback to fetch single unit name"""
+        """Fallback para buscar nome de unidade única"""
         try:
             url = f"{self.api_url}/unidades/{uid}/"
             resp = requests.get(url, headers=self.headers, timeout=5)
