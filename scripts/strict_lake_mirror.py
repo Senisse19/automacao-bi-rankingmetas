@@ -32,7 +32,7 @@ def strict_mirror():
     
     # 1. Sync Unidades (Strictly 1:1)
     print("\n[1/3] Sincronizando Unidades...")
-    unidades_data = robust_fetch(client, "unidades")
+    unidades_data = client.fetch_all_from_source("unidades")
     print(f"Encontradas {len(unidades_data)} unidades na API.")
     
     unidades_batch = []
@@ -60,7 +60,7 @@ def strict_mirror():
 
     # 2. Sync Participantes (Strictly 1:1)
     print("\n[2/3] Sincronizando Participantes...")
-    participantes_data = robust_fetch(client, "participantes")
+    participantes_data = client.fetch_all_from_source("participantes")
     print(f"Encontrados {len(participantes_data)} participantes na API.")
     
     participantes_batch = []
@@ -86,7 +86,7 @@ def strict_mirror():
 
     # 3. Sync Modelos (Strictly 1:1)
     print("\n[3/3] Sincronizando Modelos (Vendas/Contratos)...")
-    modelos_data = robust_fetch(client, "modelos")
+    modelos_data = client.fetch_all_from_source("modelos")
     print(f"Encontrados {len(modelos_data)} modelos na API.")
     
     modelos_batch = []
