@@ -63,7 +63,7 @@ class MetasAutomation:
         inicio_semana_atual = hoje - timedelta(days=hoje.weekday())
         inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
         fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
-        return f"{inicio_semana_anterior.strftime('%d/%m')} a {fim_semana_anterior.strftime('%d/%m')}"
+        return f"{inicio_semana_anterior.strftime('%d/%m/%Y')} a {fim_semana_anterior.strftime('%d/%m/%Y')}"
     
     def fetch_data(self):
         """Busca todos os dados necessários do Power BI."""
