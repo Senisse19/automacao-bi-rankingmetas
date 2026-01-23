@@ -47,7 +47,7 @@ class UnidadesAutomation:
         inicio_semana_atual = hoje - timedelta(days=hoje.weekday())
         inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
         fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
-        return f"{inicio_semana_anterior.strftime('%d/%m')} a {fim_semana_anterior.strftime('%d/%m')}"
+        return f"{inicio_semana_anterior.strftime('%d/%m/%Y')} a {fim_semana_anterior.strftime('%d/%m/%Y')}"
 
 
     def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None, data_ref_str=None):
