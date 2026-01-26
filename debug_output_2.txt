@@ -1,6 +1,0 @@
-2026-01-26 16:35:31 - jobs_automation - INFO - --- Processing Jobs Reports ---
-2026-01-26 16:35:31 - jobs_automation - INFO - Generating DAILY Report for 2026-01-23
-[ERROR] Erro HTTP Supabase (nexus_jobs): 500 Server Error: Internal Server Error for url: https://vfbfnucseymoxjdwrvpz.supabase.co/rest/v1/nexus_jobs?data_cadastro=gte.2026-01-23T00%3A00%3A00&data_cadastro=lte.2026-01-23T23%3A59%3A59&select=%2A
-2026-01-26 16:35:40 - jobs_automation - INFO - Found 0 new jobs.
-2026-01-26 16:35:47 - jobs_automation - INFO - Found 0 cancelled jobs.
-2026-01-26 16:35:47 - jobs_automation - INFO - No new jobs found for daily report.
