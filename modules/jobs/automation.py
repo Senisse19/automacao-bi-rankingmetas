@@ -68,19 +68,13 @@ class JobsAutomation:
             logger.info(f"Generating DAILY Report for {ref_date}")
             new_jobs, cnc_jobs = self.fetch_jobs(ref_date, ref_date)
             
-            # Generate Report NEW
-            if new_jobs:
-                path_new = os.path.join(IMAGES_DIR, f"Relatório de Novos Jobs Diário {ref_date}.pdf")
-                self.image_gen.generate_jobs_report(new_jobs, f"NOVOS JOBS - {ref_date_display}", path_new)
-                self._send_report("Novos Jobs Diário", path_new, recipients, template_content)
+            if new_jobs or cnc_jobs:
+                path = os.path.join(IMAGES_DIR, f"Relatório de Jobs Diário {ref_date}.pdf")
+                # Ensure we pass both lists to the renderer
+                self.image_gen.generate_jobs_report(new_jobs, cnc_jobs, f"RELATÓRIO DE JOBS - {ref_date_display}", path)
+                self._send_report("Relatório de Jobs Diário", path, recipients, template_content)
             else:
-                logger.info("No new jobs found for daily report.")
-
-            # Generate Report CANCELLED
-            if cnc_jobs:
-                path_cnc = os.path.join(IMAGES_DIR, f"Relatório de Jobs Cancelados Diário {ref_date}.pdf")
-                self.image_gen.generate_jobs_report(cnc_jobs, f"JOBS CANCELADOS - {ref_date_display}", path_cnc)
-                self._send_report("Jobs Cancelados Diário", path_cnc, recipients, template_content)
+                logger.info("No jobs (new or cancelled) found for daily report.")
 
         # 2. Weekly Report
         if weekly:
@@ -96,15 +90,12 @@ class JobsAutomation:
             
             new_w, cnc_w = self.fetch_jobs(start_weekly, end_weekly)
             
-            if new_w:
-                path_w_new = os.path.join(IMAGES_DIR, f"Relatório de Novos Jobs Semanal {start_weekly}.pdf")
-                self.image_gen.generate_jobs_report(new_w, f"NOVOS JOBS SEMANAL - {start_display} a {end_display}", path_w_new)
-                self._send_report("Novos Jobs Semanal", path_w_new, recipients, template_content)
-            
-            if cnc_w:
-                path_w_cnc = os.path.join(IMAGES_DIR, f"Relatório de Jobs Cancelados Semanal {start_weekly}.pdf")
-                self.image_gen.generate_jobs_report(cnc_w, f"JOBS CANCELADOS SEMANAL - {start_display} a {end_display}", path_w_cnc)
-                self._send_report("Jobs Cancelados Semanal", path_w_cnc, recipients, template_content)
+            if new_w or cnc_w:
+                path_w = os.path.join(IMAGES_DIR, f"Relatório de Jobs Semanal {start_weekly}.pdf")
+                self.image_gen.generate_jobs_report(new_w, cnc_w, f"RELATÓRIO DE JOBS SEMANAL - {start_display} a {end_display}", path_w)
+                self._send_report("Relatório de Jobs Semanal", path_w, recipients, template_content)
+            else:
+                logger.info("No jobs found for weekly report.")
 
     def _send_report(self, title, path, recipients, template):
         if not recipients:
