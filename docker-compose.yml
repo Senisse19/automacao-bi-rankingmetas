@@ -16,4 +16,4 @@ services:
       - ./config.py:/app/config.py
       - ./scheduler.py:/app/scheduler.py
     environment:
-      - TZ=America/Sao_Paulo
+      - TZ=America/Sao_Paulo  
