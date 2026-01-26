@@ -226,18 +226,21 @@ class UnidadesRenderer(BaseRenderer):
                     for i, item in enumerate(chunk_items):
                         # Data extraction
                         val_cod = item.get("codigo", "")
-                        nome = item.get("nome", "-") or "-" 
+                        nome = item.get("nome", "Não Informado") or "Não Informado" 
                         # UnidadesClient now returns "Unidade X - Partner Name" if possible
                         
-                        cidade = item.get("cidade", "-") or "-"
-                        uf = item.get("uf", "-") or "-"
+                        cidade = item.get("cidade", "Não Informado") or "Não Informado"
+                        uf = item.get("uf", "Não Informado") or "Não Informado"
+                        
+                        if cidade == "---" or cidade == "-": cidade = "Não Informado"
+                        if uf == "---" or uf == "-": uf = "Não Informado"
                         
                         valor_aquisicao = item.get("valor", 0)
                         
                         raw_data = item.get("raw_data") or item.get("unit_raw_data") or {}
                         
-                        modelo = item.get("modelo", "-") or "-"
-                        tipo_franquia = item.get("tipo", "-") or "-"
+                        modelo = item.get("modelo", "Não Informado") or "Não Informado"
+                        tipo_franquia = item.get("tipo", "Não Informado") or "Não Informado"
                         
                         anos_contrato = item.get("anos_contrato", 0)
                         percentual_retencao = item.get("percentual_retencao", 0)
@@ -278,22 +281,29 @@ class UnidadesRenderer(BaseRenderer):
                             current_draw.text((x, y + (14 * s)), str(value)[:28], font=f_val, fill=val_color)
                         
                         # Row 1: Cidade/UF | Modelo | Rede
-                        draw_field(col1_x, row1_y, "CIDADE / UF", f"{cidade} - {uf}")
+                        cidade_display = cidade
+                        uf_display = uf
+                        if cidade == "Não Informado" and uf == "Não Informado":
+                             local_full = "Não Informado"
+                        else:
+                             local_full = f"{cidade} - {uf}"
+                             
+                        draw_field(col1_x, row1_y, "CIDADE / UF", local_full)
                         draw_field(col2_x, row1_y, "MODELO DE NEGÓCIO", modelo)
                         draw_field(col3_x, row1_y, "REDE DE DISTRIBUIÇÃO", tipo_franquia)
                         
                         # Row 2: Valor Aquisição | Tempo Contrato | % Retenção
                         draw_field(col1_x, row2_y, "VALOR AQUISIÇÃO", fmt_moeda(valor_aquisicao), val_color=text_white, is_money=True)
-                        draw_field(col2_x, row2_y, "TEMPO DE CONTRATO", f"{anos_contrato} Anos" if anos_contrato else "-")
-                        draw_field(col3_x, row2_y, "% RETENÇÃO", f"{percentual_retencao}%" if percentual_retencao else "-")
+                        draw_field(col2_x, row2_y, "TEMPO DE CONTRATO", f"{anos_contrato} Anos" if anos_contrato else "Não Informado")
+                        draw_field(col3_x, row2_y, "% RETENÇÃO", f"{percentual_retencao}%" if percentual_retencao is not None and percentual_retencao != "" else "Não Informado")
 
                         # Row 3: Royalties | CRM
                         row3_y = inner_y + (130 * s)
                         royalties = item.get("royalties", 0)
                         crm = item.get("crm", 0)
                         
-                        draw_field(col1_x, row3_y, "ROYALTIES", f"{royalties}%" if royalties else "-")
-                        draw_field(col2_x, row3_y, "CRM", fmt_moeda(crm) if crm else "-")
+                        draw_field(col1_x, row3_y, "ROYALTIES", f"{royalties}%" if royalties else "Não Informado")
+                        draw_field(col2_x, row3_y, "CRM", fmt_moeda(crm) if crm else "Não Informado")
 
                         # Separator
                         if i < len(chunk_items) - 1:
