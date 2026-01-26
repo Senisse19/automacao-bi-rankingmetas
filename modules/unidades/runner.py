@@ -139,7 +139,7 @@ class UnidadesAutomation:
         """
         try:
             for filename in os.listdir(IMAGES_DIR):
-                if filename.startswith(prefix) and filename.endswith(".png"):
+                if filename.startswith(prefix) and filename.endswith(".pdf"):
                     file_path = os.path.join(IMAGES_DIR, filename)
                     try:
                         os.remove(file_path)
@@ -176,7 +176,7 @@ class UnidadesAutomation:
                 logger.info(f"   [Processando] Relatório Diário (Ref: {data_ref})")
                 
                 # Cleanup old daily images
-                self._cleanup_old_images("unidades_daily_")
+                self._cleanup_old_images("Relatório de Unidades Diárias")
                 
                 daily_data = self.unidades_client.fetch_data_for_range(data_ref, data_ref)
                 
@@ -184,7 +184,7 @@ class UnidadesAutomation:
                 # Link aponta para a página dinâmica com filtro de data
                 report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
                 
-                daily_path = os.path.join(IMAGES_DIR, f"unidades_daily_{data_ref}.pdf")
+                daily_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Diárias {data_ref}.pdf")
                 # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
                 self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
                 
@@ -225,10 +225,10 @@ class UnidadesAutomation:
                 # --- LIVE LINK ---
                 report_link = f"{base_url}/reports/unidades?start={start_weekly}&end={data_ref_weekly}&type=weekly"
 
-                weekly_path = os.path.join(IMAGES_DIR, f"unidades_weekly_{data_ref_weekly}.pdf")
+                weekly_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Semanal {start_weekly} a {data_ref_weekly}.pdf")
                 
                 # Cleanup old weekly images
-                self._cleanup_old_images("unidades_weekly_")
+                self._cleanup_old_images("Relatório de Unidades Semanal")
                 
                 # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
                 self.image_gen.generate_unidades_reports(weekly_data, "weekly", weekly_path)

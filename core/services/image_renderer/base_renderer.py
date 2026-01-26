@@ -114,7 +114,10 @@ class BaseRenderer:
         draw.rectangle([(0, 0), (self.width, header_h)], fill=self.bg_color)
         
         # Título composto
-        full_header = f"{title_text} - {date_text}"
+        if date_text:
+            full_header = f"{title_text} - {date_text}"
+        else:
+            full_header = title_text
         
         # Calcular largura disponível
         logo_size = 50 * self.scale

@@ -1,0 +1,10 @@
+2026-01-26 16:26:29 - jobs_automation - INFO - --- Processing Jobs Reports ---
+2026-01-26 16:26:29 - jobs_automation - INFO - Generating DAILY Report for 2026-01-23
+2026-01-26 16:26:29 - jobs_automation - INFO - Supabase Service URL: https://vfbfnucseymoxjdwrvpz.supabase.co
+2026-01-26 16:26:29 - jobs_automation - INFO - Supabase Key Prefix: eyJhbGciOi
+2026-01-26 16:26:30 - jobs_automation - INFO - DEBUG ITEMS RAW: [{'id': 61884, 'data_cadastro': '2021-08-19T10:15:57+00:00'}]
+2026-01-26 16:26:30 - jobs_automation - INFO - DEBUG SAMPLE: {'id': 61884, 'data_cadastro': '2021-08-19T10:15:57+00:00'}
+2026-01-26 16:26:37 - jobs_automation - INFO - DEBUG: Params New: {'data_cadastro': ['gte.2026-01-23T00:00:00', 'lte.2026-01-23T23:59:59'], 'select': '*'}
+2026-01-26 16:26:37 - jobs_automation - INFO - DEBUG: Found 21 new jobs.
+2026-01-26 16:26:44 - jobs_automation - INFO - DEBUG: Found 0 cancelled jobs.
+2026-01-26 16:26:44 - jobs_automation - INFO - Generated .\images\Relatório de Novos Jobs Diário 2026-01-23.pdf but no recipients to send.

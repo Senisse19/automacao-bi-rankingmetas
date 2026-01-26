@@ -44,11 +44,12 @@ class SupabaseService:
         """Helper para fazer requests GET na API REST."""
         try:
             endpoint = f"{self.url}/rest/v1/{table}"
-            response = requests.get(endpoint, headers=self.headers, params=params)
+            response = requests.get(endpoint, headers=self.headers, params=params, timeout=30)
+
             response.raise_for_status()
             return response.json()
         except Exception as e:
-            print(f"❌ Erro HTTP Supabase ({table}): {e}")
+            print(f"[ERROR] Erro HTTP Supabase ({table}): {e}")
             return []
 
     def get_active_schedules(self):
@@ -131,7 +132,8 @@ class SupabaseService:
             # but JSON payload usually handles null fine if column allows it.
             
             endpoint = f"{self.url}/rest/v1/automation_logs"
-            resp = requests.post(endpoint, headers=self.headers, json=payload)
+            resp = requests.post(endpoint, headers=self.headers, json=payload, timeout=30)
+
             if resp.status_code >= 400:
                 print(f"⚠ Falha ao gravar log {event_type}: {resp.text}")
         except Exception as e:
@@ -179,7 +181,8 @@ class SupabaseService:
                 payload["logs"] = logs
             
             endpoint = f"{self.url}/rest/v1/automation_queue?id=eq.{job_id}"
-            resp = requests.patch(endpoint, headers=self.headers, json=payload)
+            resp = requests.patch(endpoint, headers=self.headers, json=payload, timeout=30)
+
             if resp.status_code >= 400:
                 print(f"⚠ Falha ao atualizar job {job_id}: {resp.text}")
         except Exception as e:
@@ -249,7 +252,8 @@ class SupabaseService:
             headers = self.headers.copy()
             headers["Prefer"] = "return=representation"
             
-            resp = requests.post(endpoint, headers=headers, json=payload)
+            resp = requests.post(endpoint, headers=headers, json=payload, timeout=30)
+
             if resp.status_code >= 400:
                  print(f"⚠ Falha ao salvar snapshot do relatório: {resp.text}")
                  return None
@@ -278,7 +282,8 @@ class SupabaseService:
             headers = self.headers.copy()
             headers["Prefer"] = "resolution=merge-duplicates"
             
-            resp = requests.post(endpoint, headers=headers, json=data)
+            resp = requests.post(endpoint, headers=headers, json=data, timeout=30)
+
             if resp.status_code >= 400:
                 print(f"⚠ Falha ao fazer upsert em {table}: {resp.text}")
                 return False
@@ -299,7 +304,8 @@ class SupabaseService:
                 headers = self.headers.copy()
                 headers["Range"] = f"{offset}-{offset + limit - 1}"
                 
-                resp = requests.get(endpoint, headers=headers)
+                resp = requests.get(endpoint, headers=headers, timeout=30)
+
                 resp.raise_for_status()
                 data = resp.json()
                 
