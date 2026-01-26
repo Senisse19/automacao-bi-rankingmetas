@@ -31,3 +31,4 @@ Thumbs.db
 data/*.json
 !data/settings.json
 images/*.png
+images/*.pdf
