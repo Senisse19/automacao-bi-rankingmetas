@@ -1043,3 +1043,17 @@
 2026-01-26 16:57:17 - jobs_automation - INFO - Found 6 cancelled jobs.
 2026-01-26 16:57:17 - jobs_automation - INFO - Generated .\images\Relatório de Novos Jobs Diário 2025-11-25.pdf but no recipients to send.
 2026-01-26 16:57:17 - jobs_automation - INFO - Generated .\images\Relatório de Jobs Cancelados Diário 2025-11-25.pdf but no recipients to send.
+2026-01-26 17:29:30 - jobs_automation - INFO - --- Processing Jobs Reports ---
+2026-01-26 17:29:30 - jobs_automation - INFO - Generating DAILY Report for 2026-01-22
+2026-01-26 17:29:31 - jobs_automation - INFO - Found 12 new jobs.
+2026-01-26 17:29:31 - jobs_automation - INFO - Found 0 cancelled jobs.
+2026-01-26 17:29:31 - jobs_automation - INFO - Generated .\images\Relatório de Jobs Diário 2026-01-22.pdf but no recipients to send.
+2026-01-26 17:29:31 - jobs_automation - INFO - --- Processing Jobs Reports ---
+2026-01-26 17:29:31 - jobs_automation - INFO - Generating DAILY Report for 2026-01-23
+2026-01-26 17:29:32 - jobs_automation - INFO - Found 21 new jobs.
+2026-01-26 17:29:32 - jobs_automation - INFO - Found 0 cancelled jobs.
+2026-01-26 17:29:32 - jobs_automation - INFO - Generated .\images\Relatório de Jobs Diário 2026-01-23.pdf but no recipients to send.
+2026-01-26 17:29:32 - jobs_automation - INFO - Generating WEEKLY Report for 2026-01-19 to 2026-01-25
+2026-01-26 17:29:33 - jobs_automation - INFO - Found 79 new jobs.
+2026-01-26 17:29:33 - jobs_automation - INFO - Found 0 cancelled jobs.
+2026-01-26 17:29:34 - jobs_automation - INFO - Generated .\images\Relatório de Jobs Semanal 2026-01-19.pdf but no recipients to send.
