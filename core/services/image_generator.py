@@ -36,8 +36,8 @@ class ImageGenerator:
     def generate_unidades_reports(self, data, report_type="daily", output_path="unidades_report.png"):
         return self.unidades_renderer.generate_unidades_reports(data, report_type, output_path)
 
-    def generate_jobs_report(self, data, report_title="RELATÓRIO DE JOBS", output_path="jobs_report.pdf"):
-        return self.jobs_renderer.generate_jobs_report(data, report_title, output_path)
+    def generate_jobs_report(self, new_jobs, cancelled_jobs, report_title="RELATÓRIO DE JOBS", output_path="jobs_report.pdf"):
+        return self.jobs_renderer.generate_jobs_report(new_jobs, cancelled_jobs, report_title, output_path)
 
 
 if __name__ == "__main__":
