@@ -32,3 +32,4 @@ data/*.json
 !data/settings.json
 images/*.png
 images/*.pdf
+logs/
