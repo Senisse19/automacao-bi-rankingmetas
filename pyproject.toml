@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "studio-automation-core"
+version = "0.1.0"
+description = "Core automation services for Grupo Studio"
+authors = [
+    {name = "Tech Team", email = "tech@grupostudio.com.br"},
+]
+dependencies = [
+    "requests",
+    "python-dotenv",
+    "schedule",
+    "fpdf",
+    "Pillow",
+    "psycopg2-binary",
+    "supabase",
+    "jinja2",
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+automation-runner = "scheduler:main"
