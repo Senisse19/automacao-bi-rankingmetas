@@ -3,11 +3,7 @@ import sys
 from datetime import datetime, timedelta
 import json
 
-# Fix path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(current_dir, "../../"))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+
 
 from config import IMAGES_DIR
 from core.services.image_generator import ImageGenerator
@@ -23,6 +19,20 @@ class JobsAutomation:
         self.supabase = SupabaseService()
         self.whatsapp = EvolutionClient()
         os.makedirs(IMAGES_DIR, exist_ok=True)
+        
+    def _validate_jobs(self, jobs, label="jobs"):
+        """Filtra jobs inválidos ou vazios."""
+        valid = []
+        for j in jobs:
+            # Check ID and Job Title
+            if not j.get("id") or not j.get("job"):
+                logger.warning(f"   [FILTER] Job removido ({label}): IDs incompletos. Dump: {j}")
+                continue
+            valid.append(j)
+            
+        if len(valid) < len(jobs):
+             logger.info(f"   [FILTER] {len(jobs) - len(valid)} jobs inválidos removidos de '{label}'.")
+        return valid
 
     def fetch_jobs(self, start_date, end_date):
         """Fetch jobs from Nexus DB created or cancelled in range."""
@@ -68,6 +78,10 @@ class JobsAutomation:
             logger.info(f"Generating DAILY Report for {ref_date}")
             new_jobs, cnc_jobs = self.fetch_jobs(ref_date, ref_date)
             
+            # --- Strict Validation ---
+            new_jobs = self._validate_jobs(new_jobs or [], "Daily New")
+            cnc_jobs = self._validate_jobs(cnc_jobs or [], "Daily Cancelled")
+            
             if new_jobs or cnc_jobs:
                 path = os.path.join(IMAGES_DIR, f"Relatório de Jobs Diário {ref_date}.pdf")
                 # Ensure we pass both lists to the renderer
@@ -89,6 +103,10 @@ class JobsAutomation:
             logger.info(f"Generating WEEKLY Report for {start_weekly} to {end_weekly}")
             
             new_w, cnc_w = self.fetch_jobs(start_weekly, end_weekly)
+            
+            # --- Strict Validation ---
+            new_w = self._validate_jobs(new_w or [], "Weekly New")
+            cnc_w = self._validate_jobs(cnc_w or [], "Weekly Cancelled")
             
             if new_w or cnc_w:
                 path_w = os.path.join(IMAGES_DIR, f"Relatório de Jobs Semanal {start_weekly}.pdf")

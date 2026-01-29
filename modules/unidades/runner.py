@@ -8,11 +8,7 @@ import time
 import random
 from datetime import datetime, timedelta
 
-# Fix path for standalone execution
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(current_dir, "../../"))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+
 
 from config import (
     IMAGES_DIR,
@@ -49,6 +45,29 @@ class UnidadesAutomation:
         fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
         return f"{inicio_semana_anterior.strftime('%d/%m/%Y')} a {fim_semana_anterior.strftime('%d/%m/%Y')}"
 
+
+    def _validate_units(self, items, label="items"):
+        """Filtra itens inválidos ou vazios."""
+        valid = []
+        for item in items:
+            # Check ID
+            uid = item.get("codigo")
+            if not uid:
+                logger.warning(f"   [FILTER] Item removido ({label}): ID vazio. Dump: {item}")
+                continue
+            
+            # Check Name validity (ignoring "Unidade None" or similar fallbacks if critical)
+            nome = item.get("nome", "")
+            if not nome or "Unidade None" in nome:
+                 logger.warning(f"   [FILTER] Item removido ({label}): Nome inválido ({nome}). ID: {uid}")
+                 continue
+                 
+            valid.append(item)
+        
+        if len(valid) < len(items):
+            logger.info(f"   [FILTER] {len(items) - len(valid)} itens inválidos removidos de '{label}'.")
+            
+        return valid
 
     def _send_image_to_group(self, grupo_key, image_path, caption_prefix, custom_recipients=None, template_content=None, data_ref_str=None):
         """Helper para enviar imagem de Unidades usando o NotificationService."""
@@ -180,27 +199,37 @@ class UnidadesAutomation:
                 
                 daily_data = self.unidades_client.fetch_data_for_range(data_ref, data_ref)
                 
-                # --- LIVE LINK ---
-                # Link aponta para a página dinâmica com filtro de data
-                report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
+                # --- strict validation ---
+                daily_data['new'] = self._validate_units(daily_data.get('new', []), "Daily New")
+                daily_data['cancelled'] = self._validate_units(daily_data.get('cancelled', []), "Daily Cancelled")
+                daily_data['upsell'] = self._validate_units(daily_data.get('upsell', []), "Daily Upsell")
                 
-                daily_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Diárias {data_ref}.pdf")
-                # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
-                self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
-                
-                # Enviar Diário
-                if not generate_only:
-                    # Format data for diplay: 2026-01-16 -> 16/01/2026
-                    data_display = datetime.strptime(data_ref, "%Y-%m-%d").strftime("%d/%m/%Y")
-                    
-                    base_caption = f"Relatório Unidades - Diário {data_display}"
-                    if report_link:
-                        base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
-                        
-                    self._send_image_to_group("diretoria", daily_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                has_daily_items = (daily_data.get('new') or daily_data.get('cancelled') or daily_data.get('upsell'))
+
+                if not has_daily_items:
+                    logger.info(f"   [SKIP] Nenhum dado encontrado para o relatório diário ({data_ref}).")
                 else:
-                    logger.info(f"   [INFO] Imagem gerada (apenas geração): {daily_path}")
-                    logger.info(f"   [INFO] Link: {report_link}")
+                    # --- LIVE LINK ---
+                    # Link aponta para a página dinâmica com filtro de data
+                    report_link = f"{base_url}/reports/unidades?start={data_ref}&end={data_ref}&type=daily"
+                    
+                    daily_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Diárias {data_ref}.pdf")
+                    # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
+                    self.image_gen.generate_unidades_reports(daily_data, "daily", daily_path)
+                    
+                    # Enviar Diário
+                    if not generate_only:
+                        # Format data for diplay: 2026-01-16 -> 16/01/2026
+                        data_display = datetime.strptime(data_ref, "%Y-%m-%d").strftime("%d/%m/%Y")
+                        
+                        base_caption = f"Relatório Unidades - Diário {data_display}"
+                        if report_link:
+                            base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
+                            
+                        self._send_image_to_group("diretoria", daily_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                    else:
+                        logger.info(f"   [INFO] Imagem gerada (apenas geração): {daily_path}")
+                        logger.info(f"   [INFO] Link: {report_link}")
             
             # 2. Relatório Semanal
             should_run_weekly = weekly or force_weekly
@@ -222,28 +251,38 @@ class UnidadesAutomation:
 
                 weekly_data = self.unidades_client.fetch_data_for_range(start_weekly, data_ref_weekly)
                 
-                # --- LIVE LINK ---
-                report_link = f"{base_url}/reports/unidades?start={start_weekly}&end={data_ref_weekly}&type=weekly"
+                # --- strict validation ---
+                weekly_data['new'] = self._validate_units(weekly_data.get('new', []), "Weekly New")
+                weekly_data['cancelled'] = self._validate_units(weekly_data.get('cancelled', []), "Weekly Cancelled")
+                weekly_data['upsell'] = self._validate_units(weekly_data.get('upsell', []), "Weekly Upsell")
+                
+                has_weekly_items = (weekly_data.get('new') or weekly_data.get('cancelled') or weekly_data.get('upsell'))
 
-                weekly_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Semanal {start_weekly} a {data_ref_weekly}.pdf")
-                
-                # Cleanup old weekly images
-                self._cleanup_old_images("Relatório de Unidades Semanal")
-                
-                # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
-                self.image_gen.generate_unidades_reports(weekly_data, "weekly", weekly_path)
-                
-                # Enviar Semanal
-                if not generate_only:
-                    data_display = f"{datetime.strptime(start_weekly, '%Y-%m-%d').strftime('%d/%m')} a {datetime.strptime(data_ref_weekly, '%Y-%m-%d').strftime('%d/%m')}"
-                    
-                    base_caption = f"Relatório Unidades - Semanal ({data_display})"
-                    if report_link:
-                         base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
-                         
-                    self._send_image_to_group("diretoria", weekly_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                if not has_weekly_items:
+                    logger.info(f"   [SKIP] Nenhum dado encontrado para o relatório semanal ({start_weekly} a {data_ref_weekly}).")
                 else:
-                    logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
+                    # --- LIVE LINK ---
+                    report_link = f"{base_url}/reports/unidades?start={start_weekly}&end={data_ref_weekly}&type=weekly"
+
+                    weekly_path = os.path.join(IMAGES_DIR, f"Relatório de Unidades Semanal {start_weekly} a {data_ref_weekly}.pdf")
+                    
+                    # Cleanup old weekly images
+                    self._cleanup_old_images("Relatório de Unidades Semanal")
+                    
+                    # Use ImageGenerator (Facade) -> UnidadesRenderer (Dark Premium Layout)
+                    self.image_gen.generate_unidades_reports(weekly_data, "weekly", weekly_path)
+                    
+                    # Enviar Semanal
+                    if not generate_only:
+                        data_display = f"{datetime.strptime(start_weekly, '%Y-%m-%d').strftime('%d/%m')} a {datetime.strptime(data_ref_weekly, '%Y-%m-%d').strftime('%d/%m')}"
+                        
+                        base_caption = f"Relatório Unidades - Semanal ({data_display})"
+                        if report_link:
+                             base_caption += f"\n\n🔗 Ver lista completa:\n{report_link}"
+                             
+                        self._send_image_to_group("diretoria", weekly_path, base_caption, custom_recipients=recipients, template_content=template_content, data_ref_str=data_display)
+                    else:
+                        logger.info(f"   [INFO] Imagem gerada (apenas geração): {weekly_path}")
                 
         except Exception as e:
             logger.error(f"Erro no processamento Unidades: {e}")
