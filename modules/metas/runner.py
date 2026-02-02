@@ -8,12 +8,9 @@ import time
 import random
 import json
 from datetime import datetime, timedelta
+from jinja2 import Template
 
-# Fix path for standalone execution
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(current_dir, "../../"))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+
 
 from config import (
     IMAGES_DIR, 
@@ -190,17 +187,24 @@ class MetasAutomation:
                 if current_template:
                     # Dynamic Template
                     try:
-                        caption = current_template.format(
-                            nome=primeiro_nome,
-                            nome_completo=nome,
-                            saudacao=saudacao,
-                            saudacao_lower=saudacao_lower,
-                            data=data_ref,
-                            data_semanal=self.get_periodo_semanal(),
-                            grupo=grupo_key.title()
-                        )
+                        context = {
+                            "nome": primeiro_nome,
+                            "nome_completo": nome,
+                            "saudacao": saudacao,
+                            "saudacao_lower": saudacao_lower,
+                            "data": data_ref,
+                            "data_semanal": self.get_periodo_semanal(),
+                            "grupo": grupo_key.title()
+                        }
+                        
+                        if "{{" in current_template:
+                            # Use Jinja2 if template syntax detected
+                            caption = Template(current_template).render(**context)
+                        else:
+                            # Fallback to legacy .format()
+                            caption = current_template.format(**context)
                     except Exception as e:
-                        logger.error(f"Erro ao formatar template para {nome}: {e}")
+                        logger.error(f"Erro ao formatar template (Jinja/Format) para {nome}: {e}")
                         caption = f"{saudacao}, {primeiro_nome}!\n\nSegue o relatório de {data_ref}."
                 else:
                     # Legacy Hardcoded Fallback
@@ -243,6 +247,11 @@ class MetasAutomation:
         logger.info("\n=== AUTOMAÇÃO METAS ===")
         total_gs, deps, receitas = self.fetch_data()
         if not deps: return
+        
+        # [NEW] Check if there is valid data (Realizado != "-")
+        if total_gs.get("realizado") == "-":
+            logger.warning(f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). Abortando execução.")
+            return
         
         periodo = self.get_periodo()
         images = self.generate_images(total_gs, deps, receitas, periodo)
