@@ -1,0 +1,61 @@
+{
+    "servicos": {
+        "codigo": 1,
+        "nome": "MAPA FISCAL",
+        "sigla": "MF",
+        "modelo": 1,
+        "sub_produto": 1,
+        "ativo": 0
+    },
+    "contas_receber": {
+        "id": 60166,
+        "codigo_lancamento_omie": 1445627308,
+        "codigo_lancamento_integracao": "",
+        "codigo_cliente_omie": 1445622291,
+        "cnpj_cpf": "03565199962",
+        "razao_social": "NARA CRISTINA ALVES",
+        "nome_fantasia": "NARA CRISTINA ALVES",
+        "tags": [
+            {
+                "tag": "Funcionário"
+            },
+            {
+                "tag": "Fornecedor"
+            },
+            {
+                "tag": "Cliente"
+            }
+        ],
+        "data_emissao": "2022-09-15",
+        "data_vencimento": "2022-09-15",
+        "data_conciliacao": "2022-09-19",
+        "data_inclusao": "2022-09-16",
+        "data_lancamento": "2022-09-16",
+        "valor_conta_corrente": 10.0,
+        "numero_documento": null,
+        "numero_parcela": "001/001",
+        "status_titulo": "RECEBIDO",
+        "valor_contas_receber": 10.0,
+        "boleto": {
+            "cGerado": "N",
+            "cNumBoleto": "2",
+            "dDtEmBol": null,
+            "nPerJuros": 1.0,
+            "nPerMulta": 2.0,
+            "cCodBarra": null
+        },
+        "codigo": "1.01.97",
+        "descricao": "Receita de Empréstimos entre empresas",
+        "bandeira": "STUDIO ENERGY",
+        "codigo_lancamento_conta_corrente": 1445981929,
+        "situacao": null,
+        "data_previsao": "2022-09-15",
+        "departamentos": [
+            {
+                "cCodDep": "1444930372",
+                "nPerDep": 100,
+                "nValDep": 10
+            }
+        ]
+    }
+}

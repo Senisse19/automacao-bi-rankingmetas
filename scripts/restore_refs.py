@@ -11,7 +11,7 @@ from scripts.sync_nexus_to_supabase import sync_unidades, sync_participantes
 if __name__ == "__main__":
     client = UnidadesClient()
     svc = SupabaseService()
-    
+
     print("--- Restoring Unidades ---")
     sync_unidades(client, svc)
     print("--- Restoring Participantes ---")

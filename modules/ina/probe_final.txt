@@ -1,0 +1,12 @@
+=== QUERY FINAL: Top 10 nome_fantasia + SUM(valor_contas_receber) ===
+Total results: 10
+  1. 166 - R &amp; A INTELIGENCIA FISCAL | -672 D     | R$ 121.123,47
+  2. SEIVA PRODUTOS E SERVICOS LTDA      | -300 D     | R$ 140.291,15
+  3. A Panucci e Filhos LTDA             | -454 D     | R$ 154.910,00
+  4. RECICLAGEM INDUSTRIA E COMERCIO DE  | -314 D     | R$ 153.606,95
+  5. ORDENHADEIRAS SULINOX LTDA          | -303 D     | R$ 462.308,68
+  6. SUPERMERCADOS MACIEL                | -14 D      | R$ 204.884,31
+  7. FRIPREMIUM COMERCIAL DE ALIMENTOS L | 22 D       | R$ 10.190.249,02
+  8. CENTRO ELETRICO                     | -14 D      | R$ 197.996,45
+  9. RAFAEL DE SOUZA SILVA               | -499 D     | R$ 227.750,45
+  10. CREMER S.A.                         | -42 D      | R$ 465.612,93

@@ -3,6 +3,7 @@ Centralized DAX Queries for Power BI Data Fetching.
 Separating queries from logic makes it easier to maintain and update the semantic model references.
 """
 
+
 def get_realizado_query(date_start, date_end):
     return f"""
     EVALUATE
@@ -21,6 +22,7 @@ def get_realizado_query(date_start, date_end):
     )
     """
 
+
 def get_metas_com_op_query(date_start, date_end):
     return f"""
     EVALUATE
@@ -37,6 +39,7 @@ def get_metas_com_op_query(date_start, date_end):
     )
     """
 
+
 def get_percentuais_gs_query(date_start, date_end):
     return f"""
     EVALUATE
@@ -49,6 +52,7 @@ def get_percentuais_gs_query(date_start, date_end):
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )
     """
+
 
 def get_percentuais_com_op_query(date_start, date_end):
     return f"""
@@ -66,6 +70,7 @@ def get_percentuais_com_op_query(date_start, date_end):
     )
     """
 
+
 def get_receitas_query(date_start, date_end):
     return f"""
     EVALUATE
@@ -80,6 +85,7 @@ def get_receitas_query(date_start, date_end):
     )
     """
 
+
 def get_metas_dept_query(tabela, month_filter):
     return f"""
     EVALUATE
@@ -88,6 +94,7 @@ def get_metas_dept_query(tabela, month_filter):
         '{tabela}'[Mês] = {month_filter}
     )
     """
+
 
 def get_percentuais_dept_query(prefixo, date_start, date_end):
     return f"""

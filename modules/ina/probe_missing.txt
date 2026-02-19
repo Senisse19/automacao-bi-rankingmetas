@@ -1,0 +1,64 @@
+
+============================================================
+=== CLIENTE: VITOR M NUNES ===
+============================================================
+Total linhas: 0
+VALOR TOTAL (todas faixas): R$ 0.00
+Detalhes por faixa/status/area:
+VALOR FILTRADO (Ordem 1,2,3 apenas): R$ 0.00
+
+============================================================
+=== CLIENTE: M.B.F ===
+============================================================
+Total linhas: 0
+VALOR TOTAL (todas faixas): R$ 0.00
+Detalhes por faixa/status/area:
+VALOR FILTRADO (Ordem 1,2,3 apenas): R$ 0.00
+
+============================================================
+=== CLIENTE: TOYO INK ===
+============================================================
+Total linhas: 0
+VALOR TOTAL (todas faixas): R$ 0.00
+Detalhes por faixa/status/area:
+VALOR FILTRADO (Ordem 1,2,3 apenas): R$ 0.00
+
+============================================================
+=== CLIENTE: SAWEM ===
+============================================================
+Total linhas: 0
+VALOR TOTAL (todas faixas): R$ 0.00
+Detalhes por faixa/status/area:
+VALOR FILTRADO (Ordem 1,2,3 apenas): R$ 0.00
+
+============================================================
+=== CLIENTES NO NOSSO TOP10 MAS NAO NO DASHBOARD ===
+============================================================
+  DEPOSITO DE BEBIDAS            |    82 dias | R$    61,075.56 | Faixas: 61–90 dias | 31–60 dias | 0–30 dias
+  MOINHO HORTOLANDIA             |    88 dias | R$    54,804.75 | Faixas: 61–90 dias | 31–60 dias | 0–30 dias
+  AKSO CONSTRUTORA               |    82 dias | R$    42,128.87 | Faixas: 61–90 dias | 31–60 dias | 0–30 dias
+  NOVA PROSPER                   |    82 dias | R$    39,722.89 | Faixas: 61–90 dias | 31–60 dias
+
+============================================================
+=== TOP 20 COMPLETO (Ordem_Faixa IN {1,2,3}) ===
+============================================================
+   1. FRIPREMIUM COMERCIAL DE ALIMENTOS L |    68 dias | R$  10,184,179.61
+   2. CAPRETZ EMPREENDIMENTOS IMOBILIARIO |    13 dias | R$     120,576.05
+   3. GUILHERME QUEIROZ LIMA              |    54 dias | R$     111,182.45
+   4. FOCO EMPRESARIAL 360 LTDA           |    58 dias | R$      68,500.00
+   5. DEPOSITO DE BEBIDAS DUARTE LTDA     |    82 dias | R$      61,075.56
+   6. MOINHO HORTOLANDIA                  |    88 dias | R$      54,804.75
+   7. CATA TECIDOS E EMBALAGENS INDUSTRIA |    65 dias | R$      47,247.21
+   8. AKSO CONSTRUTORA                    |    82 dias | R$      42,128.87
+   9. FINEC SOLUCOES JURIDICAS E FINANCEI |    68 dias | R$      40,000.00
+  10. NOVA PROSPER DISTRIBUIDORA DE ALIME |    82 dias | R$      39,722.89
+  11. GSC - SAO CARLOS MANUTENCAO EM HVAC |    76 dias | R$      38,867.97
+  12. 1799 - MG ASSESSORIA E CONSULTORIA  |    11 dias | R$      37,159.06
+  13. LATICINIOS SANTA HELENA             |    56 dias | R$      35,746.18
+  14. DIEGO FERRAZ &amp; RENATA GOSH - AD |    42 dias | R$      35,000.00
+  15. PATRICIA LIMA BAHIA FARIAS FERNANDE |    11 dias | R$      31,750.00
+  16. MARCO YOSHIHISSA ASAHI              |    86 dias | R$      28,644.00
+  17. ME COMERCIO DE ALIMENTOS LTDA       |    77 dias | R$      27,845.77
+  18. CAMPWARE COMERCIO E DISTRIBUICAO DE |    50 dias | R$      25,674.86
+  19. MARCIO JUSTINO GODOY                |    79 dias | R$      25,408.33
+  20. 1767 - ANSELMO AFONSO FERREIRA      |    45 dias | R$      25,000.00

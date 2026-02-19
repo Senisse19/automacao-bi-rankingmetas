@@ -2,21 +2,15 @@
 Automação Metas (Power BI)
 Extrai dados de metas do Power BI e envia imagens para WhatsApp/Email.
 """
+
 import os
-import sys
-import time
 import random
 import json
 from datetime import datetime, timedelta
 from jinja2 import Template
 
 
-
-from config import (
-    IMAGES_DIR, 
-    METAS_CAPTION,
-    EMAIL_CONFIG
-)
+from config import IMAGES_DIR, METAS_CAPTION, EMAIL_CONFIG
 from core.clients.powerbi_client import PowerBIClient
 from core.services.image_generator import ImageGenerator
 from core.services.supabase_service import SupabaseService
@@ -26,29 +20,41 @@ from utils.logger import get_logger
 
 logger = get_logger("run_metas")
 
+
 class MetasAutomation:
     """
     Controlador principal da automação de Metas.
     Responsável por buscar dados, gerar imagens e enviar mensagens.
     """
+
     def __init__(self):
         self.powerbi = PowerBIClient()
         self.image_gen = ImageGenerator()
         self.whatsapp = EvolutionClient()
         self.supabase = SupabaseService()
         self.email_client = EmailClient(EMAIL_CONFIG)
-        
+
         os.makedirs(IMAGES_DIR, exist_ok=True)
-    
+
     def get_periodo(self):
         """Retorna o período atual formatado (ex: Janeiro/2024)."""
         meses = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
         ]
         now = datetime.now() - timedelta(days=1)
         return f"{meses[now.month - 1]}/{now.year}"
-    
+
     def get_data_referencia(self):
         """Retorna a data de referência (ontem) formatada."""
         ontem = datetime.now() - timedelta(days=1)
@@ -61,11 +67,12 @@ class MetasAutomation:
         inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
         fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
         return f"{inicio_semana_anterior.strftime('%d/%m/%Y')} a {fim_semana_anterior.strftime('%d/%m/%Y')}"
-    
+
     def fetch_data(self):
         """Busca todos os dados necessários do Power BI."""
         logger.info("Buscando dados do Power BI...")
         from core.services.powerbi_data import PowerBIDataFetcher
+
         fetcher = PowerBIDataFetcher()
         return fetcher.fetch_all_data()
 
@@ -76,28 +83,28 @@ class MetasAutomation:
         """
         logger.info("Gerando imagens...")
         images = {}
-        
+
         # 1. Geral
         geral_path = os.path.join(IMAGES_DIR, "metas_geral.png")
         self.image_gen.generate_metas_image(periodo, departamentos, total_gs, receitas, geral_path)
         images["diretoria"] = geral_path
-        
+
         # 2. Resumo
         resumo_path = os.path.join(IMAGES_DIR, "metas_resumo.png")
         self.image_gen.generate_resumo_image(periodo, total_gs, receitas, resumo_path)
-        
+
         # 3. Individuais (Backup / Mapping)
         for dep in departamentos:
             nome_lower = dep["nome"].lower().replace("ã", "a").replace("ç", "c")
-            dep_path = os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")
-            
+            os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")
+
             # [CHANGED] User requested to send RESUMO to everyone for now.
             # We skip generating individual specific images, but we map the key to RESUMO path.
             # self.image_gen.generate_departamento_image(dep, periodo, dep_path)
-            
+
             # Map valid departments to their SPECIFIC Image (Now overridden to RESUMO)
             images[nome_lower] = resumo_path
-            
+
         return images
 
     def send_whatsapp(self, images, custom_recipients=None, template_content=None):
@@ -110,26 +117,20 @@ class MetasAutomation:
 
         logger.info("Enviando para WhatsApp...")
         data_ref = self.get_data_referencia()
-        
+
         # Pre-fetch templates form DB
-        welcome_template_str = None
         fallback_template_str = None
-        
+
         try:
-            # 1. Welcome Template
-            welcome_tmpl = self.supabase.get_template_by_name("Boas Vindas (Orientação)")
-            if welcome_tmpl:
-                welcome_template_str = welcome_tmpl['content']
-                
             # 2. Daily Ranking Default (Fallback if no custom template provided)
             # Only needed if template_content is None (scheduler didn't find one)
             if not template_content:
                 default_tmpl = self.supabase.get_template_by_name("Ranking Diário (Padrão)")
                 if default_tmpl:
-                    fallback_template_str = default_tmpl['content']
-                    
+                    fallback_template_str = default_tmpl["content"]
+
         except Exception as e:
-             logger.error(f"Erro ao carregar templates do DB: {e}")
+            logger.error(f"Erro ao carregar templates do DB: {e}")
 
         if not custom_recipients:
             logger.error("Nenhum destinatário fornecido (custom_recipients empty).")
@@ -139,50 +140,58 @@ class MetasAutomation:
         recipients_map = {}
         for r in custom_recipients:
             # Normalize department name to match image keys (e.g. 'Diretoria' -> 'diretoria')
-            dept_key = (r.get('department') or 'geral').lower()
-            dept_key = dept_key.replace("ã", "a").replace("ç", "c").replace("õ", "o").replace("é", "e").replace("á", "a")
-            
+            dept_key = (r.get("department") or "geral").lower()
+            dept_key = (
+                dept_key.replace("ã", "a").replace("ç", "c").replace("õ", "o").replace("é", "e").replace("á", "a")
+            )
+
             # Map 'geral' to 'diretoria' (where the General Image is stored)
-            if dept_key == 'geral':
-                dept_key = 'diretoria'
-            
+            if dept_key == "geral":
+                dept_key = "diretoria"
+
             if dept_key not in recipients_map:
                 recipients_map[dept_key] = []
-            
-            recipients_map[dept_key].append(r) # Keep full object
-            
+
+            recipients_map[dept_key].append(r)  # Keep full object
+
         source_data = recipients_map
         logger.info(f"Processando envio para {len(custom_recipients)} destinatários dinâmicos.")
-        
+
         # Instantiate Notification Service
         from core.services.notification_service import NotificationService
+
         notification_service = NotificationService(self.supabase)
 
         for grupo_key, image_path in images.items():
             destinatarios = source_data.get(grupo_key, [])
-            if not destinatarios: continue
-            
+            if not destinatarios:
+                continue
+
             for pessoa in destinatarios:
                 nome = pessoa.get("nome") or pessoa.get("name", "Colaborador")
                 telefone = pessoa.get("telefone") or pessoa.get("phone")
-                contact_id = pessoa.get("id") # Supabase ID
-                
-                if not telefone: continue
-                
+                contact_id = pessoa.get("id")  # Supabase ID
+
+                if not telefone:
+                    continue
+
                 # Saudação Variables
                 primeiro_nome = nome.split()[0].title()
                 hora = datetime.now().hour
-                if 5 <= hora < 12: saudacao = "Bom dia"
-                elif 12 <= hora < 18: saudacao = "Boa tarde"
-                else: saudacao = "Boa noite"
+                if 5 <= hora < 12:
+                    saudacao = "Bom dia"
+                elif 12 <= hora < 18:
+                    saudacao = "Boa tarde"
+                else:
+                    saudacao = "Boa noite"
                 saudacao_lower = saudacao.lower()
-                
+
                 # --- Template Logic ---
                 current_template = template_content or fallback_template_str
                 is_first_time = not self.supabase.check_welcome_sent(contact_id)
-                
+
                 # Warning Message for First-Time Users
-                warning_msg = "\n\n⚠ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre todas as mensagens confirmando o recebimento (ex: \"ok\", \"recebido\")."
+                warning_msg = '\n\n⚠ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
 
                 if current_template:
                     # Dynamic Template
@@ -194,9 +203,9 @@ class MetasAutomation:
                             "saudacao_lower": saudacao_lower,
                             "data": data_ref,
                             "data_semanal": self.get_periodo_semanal(),
-                            "grupo": grupo_key.title()
+                            "grupo": grupo_key.title(),
                         }
-                        
+
                         if "{{" in current_template:
                             # Use Jinja2 if template syntax detected
                             caption = Template(current_template).render(**context)
@@ -213,7 +222,7 @@ class MetasAutomation:
                         f"Olá, {primeiro_nome}! {saudacao}.",
                         f"{saudacao}, {primeiro_nome}, tudo bem?",
                         f"{primeiro_nome}, {saudacao_lower}!",
-                        f"Oi, {primeiro_nome}. {saudacao}!"
+                        f"Oi, {primeiro_nome}. {saudacao}!",
                     ]
                     selected_greeting = random.choice(variations)
                     caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
@@ -228,9 +237,9 @@ class MetasAutomation:
                     recipient_data=pessoa,
                     image_path=image_path,
                     caption=caption,
-                    context_tag="metas"
+                    context_tag="metas",
                 )
-                
+
                 if success and is_first_time:
                     self.supabase.mark_welcome_sent(contact_id)
 
@@ -246,47 +255,61 @@ class MetasAutomation:
         """
         logger.info("\n=== AUTOMAÇÃO METAS ===")
         total_gs, deps, receitas = self.fetch_data()
-        if not deps: return
-        
+        if not deps:
+            return
+
         # [NEW] Check if there is valid data (Realizado != "-")
         if total_gs.get("realizado") == "-":
-            logger.warning(f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). Abortando execução.")
+            logger.warning(
+                f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). Abortando execução."
+            )
             return
-        
+
         periodo = self.get_periodo()
         images = self.generate_images(total_gs, deps, receitas, periodo)
-        
+
         if not generate_only:
             self.send_whatsapp(images, custom_recipients=recipients, template_content=template_content)
             # self.send_email(images) # Commenting out email for now to focus on WA
         else:
-            logger.info(f"   [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/")
+            logger.info("   [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/")
         logger.info("=== FIM AUTOMAÇÃO METAS ===\n")
+
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description='Run Metas Automation')
-    parser.add_argument('--generate-only', action='store_true', help='Only generate images, do not send.')
-    parser.add_argument('--payload', type=str, help='JSON payload with recipients and template.')
-    
+
+    parser = argparse.ArgumentParser(description="Run Metas Automation")
+    parser.add_argument(
+        "--generate-only",
+        action="store_true",
+        help="Only generate images, do not send.",
+    )
+    parser.add_argument("--payload", type=str, help="JSON payload with recipients and template.")
+
     args = parser.parse_args()
-    
+
     automation = MetasAutomation()
-    
+
     recipients = None
     template_content = None
-    
+
     if args.payload:
         try:
             data = json.loads(args.payload)
-            recipients = data.get('recipients')
-            template_content = data.get('template_content')
+            recipients = data.get("recipients")
+            template_content = data.get("template_content")
             logger.info(f"Recebido payload via CLI com {len(recipients) if recipients else 0} destinatários.")
         except Exception as e:
             logger.error(f"Erro ao fazer parse do payload JSON: {e}")
             return
 
-    automation.run(generate_only=args.generate_only, recipients=recipients, template_content=template_content)
+    automation.run(
+        generate_only=args.generate_only,
+        recipients=recipients,
+        template_content=template_content,
+    )
+
 
 if __name__ == "__main__":
     main()

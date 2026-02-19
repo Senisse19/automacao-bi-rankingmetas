@@ -3,13 +3,14 @@ import os
 import json
 
 # Add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from core.services.supabase_service import SupabaseService
 
+
 def check_unit():
     svc = SupabaseService()
-    
+
     unit_id = 2183
     print(f"Checking Unit ID: {unit_id}")
 
@@ -30,6 +31,7 @@ def check_unit():
     print(f"Unit by Code Count: {len(res_unit_code)}")
     if res_unit_code:
         print("Unit by Code:", json.dumps(res_unit_code[0], indent=2, default=str))
+
 
 if __name__ == "__main__":
     check_unit()

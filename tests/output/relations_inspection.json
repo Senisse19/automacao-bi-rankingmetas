@@ -1,0 +1,21 @@
+{
+    "unidade": {
+        "codigo": 535,
+        "nome": "BBLA INTELIGÊNCIA CORPORATIVA EIRELI",
+        "uf": "SC",
+        "data": "2017-09-27",
+        "cidade": "",
+        "user": 803,
+        "consultor": 0,
+        "avalizado": 1,
+        "avalizado_user_log": 0,
+        "avalizado_data_log": null,
+        "avalizado_data_limite": null,
+        "possui_garantia": 1,
+        "lista_garantia": "",
+        "envia_emails": 0,
+        "email": "sp.antoniojunior@grupostudio.com.br",
+        "profissao": 2,
+        "id_bitrix": 0
+    }
+}

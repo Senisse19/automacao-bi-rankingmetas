@@ -1,3 +1,4 @@
+
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
@@ -23,3 +24,16 @@ requires-python = ">=3.10"
 
 [project.scripts]
 automation-runner = "scheduler:main"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.per-file-ignores]
+"scripts/*.py" = ["E402"]
+"modules/ina/debug_*.py" = ["E402", "E722"]
+"modules/ina/deep_compare*.py" = ["E722"]
+"scripts/archive/*.py" = ["E722"]
+"tests/*.py" = ["E402"]
+"modules/**/inspect_*.py" = ["E402"]
+"core/services/powerbi_data.py" = ["E402"]
+"modules/ina/runner.py" = ["E402"]

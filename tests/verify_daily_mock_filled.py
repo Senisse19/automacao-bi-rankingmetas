@@ -1,4 +1,3 @@
-
 import os
 import sys
 
@@ -8,13 +7,14 @@ sys.path.append(project_root)
 
 from core.services.image_renderer.unidades_renderer import UnidadesRenderer
 
+
 def generate_mock():
     renderer = UnidadesRenderer()
-    
+
     # Save to images dir
     output_dir = os.path.join(project_root, "images")
     output_path = os.path.join(output_dir, "unidades_daily_mock_filled.png")
-    
+
     # Mock data with rich content to test layout
     data = {
         "date": "2026-01-19",
@@ -32,7 +32,7 @@ def generate_mock():
                 "rede_distribuicao": "14 - Rede B2C",
                 "percentual_retencao": 10.0,
                 "anos_contrato": 5,
-                "data": "2026-01-19"
+                "data": "2026-01-19",
             },
             {
                 "codigo": "5678",
@@ -47,11 +47,11 @@ def generate_mock():
                 "rede_distribuicao": "3 - Corporate | Area de Distribuição Especializada",
                 "percentual_retencao": 5.0,
                 "anos_contrato": 2,
-                "data": "2026-01-19"
-            }
+                "data": "2026-01-19",
+            },
         ],
         "cancelled": [
-             {
+            {
                 "codigo": "9999",
                 "nome": "Unidade Cancelada Teste",
                 "cidade": "Belo Horizonte",
@@ -64,15 +64,16 @@ def generate_mock():
                 "rede_distribuicao": "-",
                 "percentual_retencao": 0,
                 "anos_contrato": 0,
-                "data_cancelamento": "2026-01-19"
+                "data_cancelamento": "2026-01-19",
             }
         ],
-        "upsell": [] # Keep empty to test partial sections
+        "upsell": [],  # Keep empty to test partial sections
     }
-    
+
     print("Generating Mock Daily Report...")
     renderer.generate_unidades_reports(data, "daily", output_path)
     print(f"Mock Daily Image generated at: {output_path}")
+
 
 if __name__ == "__main__":
     generate_mock()

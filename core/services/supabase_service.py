@@ -1,10 +1,10 @@
 import os
 import requests
-import json
 from dotenv import load_dotenv
 
 # Force reload of .env
 load_dotenv()
+
 
 class SupabaseService:
     _instance = None
@@ -20,15 +20,15 @@ class SupabaseService:
         self.url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
         anon_key = os.getenv("SUPABASE_ANON_KEY") or os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "").strip()
         service_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_KEY", "").strip()
-        
+
         # Use Service Role Key to bypass RLS (Required for Backend Scripts)
         self.key = service_key
-        
+
         if not self.key or self.key == "":
-             # Fallback warning or check
-             print("⚠ Aviso: SERVICE_ROLE_KEY não encontrada. Tentando Anon Key (pode falhar com RLS)...")
-             self.key = anon_key 
-        
+            # Fallback warning or check
+            print("⚠ Aviso: SERVICE_ROLE_KEY não encontrada. Tentando Anon Key (pode falhar com RLS)...")
+            self.key = anon_key
+
         if not self.url or not self.key:
             print("❌ Erro: Credenciais do Supabase não encontradas no .env")
             return
@@ -36,9 +36,8 @@ class SupabaseService:
         self.headers = {
             "apikey": self.key,
             "Authorization": f"Bearer {self.key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
-
 
     def _get(self, table, params=None):
         """Helper para fazer requests GET na API REST."""
@@ -63,10 +62,10 @@ class SupabaseService:
             params = {
                 # Fetch schedule, its direct template (if any), definition, and definition's default template
                 "select": "*, template:automation_templates(*), definition:automation_definitions(*, default_template:automation_templates(*))",
-                "active": "eq.true"
+                "active": "eq.true",
             }
             schedules = self._get("automation_schedules", params)
-            
+
             if not schedules:
                 return []
 
@@ -75,29 +74,29 @@ class SupabaseService:
             # Let's fetch all recipients for active schedules.
             # Simplest is one query per schedule as before, or one big query if we had schedule_ids.
             # Let's stick to simple logic: for each schedule, fetch recipients.
-            
+
             for sched in schedules:
                 # Query automation_recipients join automation_contacts
                 rec_params = {
                     "select": "contact:automation_contacts(*)",
-                    "schedule_id": f"eq.{sched['id']}"
+                    "schedule_id": f"eq.{sched['id']}",
                 }
-                # Also filter where contact is active? 
+                # Also filter where contact is active?
                 # The join syntax checks foreign key. To filter on joined table:
                 # automation_contacts.active=eq.true.
                 # Syntax: select=contact:automation_contacts(*)&contact.active=eq.true
                 # But we have map table.
-                
+
                 resp_data = self._get("automation_recipients", rec_params)
-                
+
                 # Flatten and filter active
                 contacts = []
                 for r in resp_data:
-                    c = r.get('contact')
-                    if c and c.get('active'):
+                    c = r.get("contact")
+                    if c and c.get("active"):
                         contacts.append(c)
-                
-                sched['recipients'] = contacts
+
+                sched["recipients"] = contacts
 
             return schedules
 
@@ -112,7 +111,7 @@ class SupabaseService:
             params = {
                 "contact_id": f"eq.{contact_id}",
                 "event_type": "eq.welcome_msg",
-                "select": "id"
+                "select": "id",
             }
             logs = self._get("automation_logs", params)
             return len(logs) > 0
@@ -126,11 +125,11 @@ class SupabaseService:
             payload = {
                 "event_type": event_type,
                 "details": details,  # dict
-                "contact_id": contact_id
+                "contact_id": contact_id,
             }
             # Remove keys with None values (like contact_id if unused) to avoid FK errors if strict
             # but JSON payload usually handles null fine if column allows it.
-            
+
             endpoint = f"{self.url}/rest/v1/automation_logs"
             resp = requests.post(endpoint, headers=self.headers, json=payload, timeout=30)
 
@@ -146,10 +145,7 @@ class SupabaseService:
     def get_template_by_name(self, name):
         """Busca um template pelo nome exato."""
         try:
-            params = {
-                "name": f"eq.{name}",
-                "select": "*"
-            }
+            params = {"name": f"eq.{name}", "select": "*"}
             templates = self._get("automation_templates", params)
             if templates:
                 return templates[0]
@@ -163,11 +159,7 @@ class SupabaseService:
     def get_pending_jobs(self):
         """Busca jobs pendentes na fila de execução."""
         try:
-            params = {
-                "status": "eq.pending",
-                "select": "*",
-                "order": "created_at.asc"
-            }
+            params = {"status": "eq.pending", "select": "*", "order": "created_at.asc"}
             return self._get("automation_queue", params)
         except Exception as e:
             print(f"❌ Erro ao buscar jobs pendentes: {e}")
@@ -176,10 +168,10 @@ class SupabaseService:
     def update_job_status(self, job_id, status, logs=None):
         """Atualiza o status de um job na fila."""
         try:
-            payload = { "status": status, "updated_at": "now()" }
+            payload = {"status": status, "updated_at": "now()"}
             if logs:
                 payload["logs"] = logs
-            
+
             endpoint = f"{self.url}/rest/v1/automation_queue?id=eq.{job_id}"
             resp = requests.patch(endpoint, headers=self.headers, json=payload, timeout=30)
 
@@ -193,7 +185,7 @@ class SupabaseService:
         try:
             params = {
                 "id": f"eq.{schedule_id}",
-                "select": "*, definition:automation_definitions(*)"
+                "select": "*, definition:automation_definitions(*)",
             }
             data = self._get("automation_schedules", params)
             return data[0] if data else None
@@ -209,21 +201,19 @@ class SupabaseService:
     def get_setting(self, key, default=None):
         """Busca uma configuração do sistema (com cache de 5 minutos)."""
         import time
+
         now = time.time()
-        
+
         # Check cache if fresh (300s = 5min)
         if key in self._settings_cache and (now - self._settings_last_fetch < 300):
             return self._settings_cache[key]
-            
+
         try:
             # Fetch specific key from DB
-            params = {
-                "key": f"eq.{key}",
-                "select": "value"
-            }
+            params = {"key": f"eq.{key}", "select": "value"}
             data = self._get("system_settings", params)
             if data:
-                val = data[0]['value']
+                val = data[0]["value"]
                 self._settings_cache[key] = val
                 self._settings_last_fetch = now
                 return val
@@ -245,22 +235,22 @@ class SupabaseService:
                 "type": report_type,
                 "date_ref": date_ref,
                 "data": data,
-                "created_at": "now()"
+                "created_at": "now()",
             }
             endpoint = f"{self.url}/rest/v1/automation_reports"
             # Return representation to get the ID back
             headers = self.headers.copy()
             headers["Prefer"] = "return=representation"
-            
+
             resp = requests.post(endpoint, headers=headers, json=payload, timeout=30)
 
             if resp.status_code >= 400:
-                 print(f"⚠ Falha ao salvar snapshot do relatório: {resp.text}")
-                 return None
-            
+                print(f"⚠ Falha ao salvar snapshot do relatório: {resp.text}")
+                return None
+
             result = resp.json()
             if result and len(result) > 0:
-                report_id = result[0].get('id')
+                report_id = result[0].get("id")
                 print(f"✅ Snapshot salvo com sucesso: {report_id}")
                 return report_id
             return None
@@ -281,7 +271,7 @@ class SupabaseService:
             endpoint = f"{self.url}/rest/v1/{table}?on_conflict={on_conflict}"
             headers = self.headers.copy()
             headers["Prefer"] = "resolution=merge-duplicates"
-            
+
             resp = requests.post(endpoint, headers=headers, json=data, timeout=30)
 
             if resp.status_code >= 400:
@@ -297,32 +287,33 @@ class SupabaseService:
         all_ids = set()
         offset = 0
         limit = 1000
-        
+
         while True:
             try:
                 endpoint = f"{self.url}/rest/v1/{table}?select=id"
                 headers = self.headers.copy()
                 headers["Range"] = f"{offset}-{offset + limit - 1}"
-                
+
                 resp = requests.get(endpoint, headers=headers, timeout=30)
 
                 resp.raise_for_status()
                 data = resp.json()
-                
+
                 if not data:
                     break
-                    
+
                 for item in data:
-                    all_ids.add(str(item['id']))
-                
+                    all_ids.add(str(item["id"]))
+
                 if len(data) < limit:
                     break
-                    
+
                 offset += limit
             except Exception as e:
                 print(f"⚠ Erro ao buscar IDs de {table} no offset {offset}: {e}")
                 break
         return all_ids
+
 
 if __name__ == "__main__":
     # Teste
@@ -330,7 +321,6 @@ if __name__ == "__main__":
     schedules = svc.get_active_schedules()
     print(f"Encontrados {len(schedules)} agendamentos ativos.")
     for s in schedules:
-        def_name = s.get('definition', {}).get('name', 'Unknown')
-        recipients = s.get('recipients', [])
+        def_name = s.get("definition", {}).get("name", "Unknown")
+        recipients = s.get("recipients", [])
         print(f"- [{s['scheduled_time']}] {s['name']} ({def_name}) -> {len(recipients)} contatos")
-

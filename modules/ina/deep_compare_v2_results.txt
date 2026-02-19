@@ -1,0 +1,57 @@
+﻿======================================================================
+HIP├ôTESES PARA INADIMPL├èNCIA TOTAL (Dashboard: R$ 29.639.764)
+======================================================================
+  [H1_ATRASADO]                  = R$  19,165,523.04 | Diff: R$  -10,474,241 (-35.34%) 
+  [H2_ATRASADO_AVENCER]          = R$  34,888,747.14 | Diff: R$   +5,248,983 (+17.71%) 
+  [H3_ATRASADO_VENCHOJE]         = R$  19,179,869.72 | Diff: R$  -10,459,894 (-35.29%) 
+  [H4_VencimentoPast]            = R$ 232,068,812.59 | Diff: R$ +202,429,049 (+682.96%) 
+  [H5_Ordem_GT0]                 = R$  60,212,470.17 | Diff: R$  +30,572,706 (+103.15%) 
+  [H6_Ordem_GE1]                 = R$  60,212,470.17 | Diff: R$  +30,572,706 (+103.15%) 
+
+======================================================================
+HIP├ôTESES PARA CONCILIA├ç├âO (Dashboard: R$ 347.654)
+======================================================================
+  [C1_AVENCER_d2]                          = R$      65,621.90 | Diff: R$     -282,032 (-81.12%) 
+  [C2_Ordem0]                              = R$ 178,010,738.28 | Diff: R$ +177,663,084 (+51103.42%) 
+  [C3_Ordem0_AVENCER]                      = R$   5,233,206.59 | Diff: R$   +4,885,553 (+1405.29%) 
+  [C4_VENCHOJE_AVENCER_Ordem0]             = R$   5,247,553.27 | Diff: R$   +4,899,899 (+1409.42%) 
+
+======================================================================
+TOP 10 S├ô COM FILTRO ATRASADO (hip├│tese dashboard)
+======================================================================
+   1. GUILHERME QUEIROZ LIMA                   |   54d | R$     111,182.45
+   2. FOCO EMPRESARIAL 360 LTDA                |   58d | R$      68,500.00
+   3. DEPOSITO DE BEBIDAS DUARTE LTDA          |   82d | R$      61,075.56
+   4. MOINHO HORTOLANDIA                       |   88d | R$      54,804.75
+   5. CATA TECIDOS E EMBALAGENS INDUSTRIAIS S. |   65d | R$      47,247.21
+   6. AKSO CONSTRUTORA                         |   82d | R$      42,128.87
+   7. FINEC SOLUCOES JURIDICAS E FINANCEIRAS L |   68d | R$      40,000.00
+   8. NOVA PROSPER DISTRIBUIDORA DE ALIMENTOS  |   82d | R$      39,722.89
+   9. GSC - SAO CARLOS MANUTENCAO EM HVAC LTDA |   76d | R$      38,867.97
+  10. 1799 - MG ASSESSORIA E CONSULTORIA EM GE |   11d | R$      37,159.06
+
+======================================================================
+TOP 10 SEM FILTRO STATUS, Ordem >= 1
+======================================================================
+   1. FRIPREMIUM COMERCIAL DE ALIMENTOS LTDA   |   68d | R$  10,191,268.43
+   2. CAPRETZ EMPREENDIMENTOS IMOBILIARIOS LTD |   13d | R$     120,576.05
+   3. HIPER NETO COMERCIO LTDA                 |   75d | R$     111,232.11
+   4. GUILHERME QUEIROZ LIMA                   |   54d | R$     111,182.45
+   5. LUDFOR ENERGIA LTDA                      |   89d | R$     103,141.76
+   6. CATA TECIDOS E EMBALAGENS INDUSTRIAIS S. |   76d | R$      86,156.68
+   7. COMAK SOLUCOES AGRICOLAS LTDA            |   75d | R$      84,860.91
+   8. AUTONUNES LTDA                           |   82d | R$      84,093.13
+   9. M.B.F. METALURGICA BRASILEIRA DE FIXADOR |   76d | R$      76,864.31
+  10. KAIBER E PACHECO ADVOGADOS               |   77d | R$      74,698.87
+
+======================================================================
+CAPRETZ: BREAKDOWN T├ìTULO A T├ìTULO
+======================================================================
+ERROR: {"code": "DatasetExecuteQueriesError", "pbi.error": {"code": "DatasetExecuteQueriesError", "parameters": {}, "details": [{"code": "DetailsMessage", "detail": {"type": 1, "value": "Query (6, 15) Column '<oii>titulo</oii>' in table '<oii>Competencia</oii>' cannot be found or may not be used in this expression."}}, {"code": "AnalysisServicesErrorCode", "detail": {"type": 1, "value": "3241803780"}}]}}
+
+======================================================================
+FRIPREMIUM: SUM COM DIFERENTES FILTROS
+======================================================================
+  [SemFiltroStatus]         = R$  10,191,268.43
+  [SoAtrasado]              = R$           0.00
+  [Todos3Status]            = R$  10,184,179.61

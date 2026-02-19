@@ -1,0 +1,113 @@
+============================================================
+PROBE 1: Sample row com colunas chave
+============================================================
+{
+  "error": {
+    "code": "DatasetExecuteQueriesError",
+    "pbi.error": {
+      "code": "DatasetExecuteQueriesError",
+      "parameters": {},
+      "details": [
+        {
+          "code": "DetailsMessage",
+          "detail": {
+            "type": 1,
+            "value": "Query (7, 25) Column '<oii>valor_titulo</oii>' in table '<oii>Competencia</oii>' cannot be found or may not be used in this expression."
+          }
+        },
+        {
+          "code": "AnalysisServicesErrorCode",
+          "detail": {
+            "type": 1,
+            "value": "3241803780"
+          }
+        }
+      ]
+    }
+  }
+}
+
+============================================================
+PROBE 1b: Checar se dias_atraso existe como coluna
+============================================================
+[
+  {
+    "[dias_atraso]": null
+  }
+]
+
+============================================================
+PROBE 2: Top 3 nome_fantasia + SUM(valor_titulo) + ATRASADO + <=90d
+============================================================
+{
+  "error": {
+    "code": "DatasetExecuteQueriesError",
+    "pbi.error": {
+      "code": "DatasetExecuteQueriesError",
+      "parameters": {},
+      "details": [
+        {
+          "code": "DetailsMessage",
+          "detail": {
+            "type": 1,
+            "value": "Query (7, 30) Column '<oii>valor_titulo</oii>' in table '<oii>Competencia</oii>' cannot be found or may not be used in this expression."
+          }
+        },
+        {
+          "code": "AnalysisServicesErrorCode",
+          "detail": {
+            "type": 1,
+            "value": "3241803780"
+          }
+        }
+      ]
+    }
+  }
+}
+
+============================================================
+PROBE 3: Top 3 nome_fantasia + [Card_Inadimplencia_TOTAL] + filtro 90d
+============================================================
+[
+  {
+    "Competencia[nome_fantasia]": "STUDIO AGRO FAMILY",
+    "[Valor]": "\n<style>\n.cardContainer {\n    width: 360px;          /* ✅ largura ajustada */\n    height: 200px;         /* ✅ altura ajustada */\n\n    background: #1f1f1f;\n    border: 2px solid #d5ae77;\n    border-radius: 22px;\n\n    padding: 18px 16px;\n    box-sizing: border-box;\n\n    font-family: Segoe UI, Arial, sans-serif;\n\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n\n    gap: 12px;\n\n    box-shadow:\n        0 12px 26px rgba(0,0,0,.45),\n        inset 0 2px 8px rgba(213,174,55,.08);\n}\n\n/* ===== TÍTULO ===== */\n.cardTitle {\n    font-size: 20px;\n    font-weight: 900;\n    color: #d5ae77;\n    letter-spacing: 0.8px;\n    text-align: center;\n    white-space: nowrap;\n}\n\n/* ===== VALOR ===== */\n.cardValor {\n    font-size: 30px;\n    font-weight: 900;\n    color: #ffffff;\n    white-space: nowrap;\n}\n</style>\n\n<div class='cardContainer'>\n\n    <div class='cardTitle'>\n        INADIMPLÊNCIA TOTAL\n    </div>\n\n    <div class='cardValor'>\n        R$ 985\n    </div>\n\n</div>\n"
+  },
+  {
+    "Competencia[nome_fantasia]": "ANTUNES E ANTUNES ADVOGADOS ASSOCIADOS",
+    "[Valor]": "\n<style>\n.cardContainer {\n    width: 360px;          /* ✅ largura ajustada */\n    height: 200px;         /* ✅ altura ajustada */\n\n    background: #1f1f1f;\n    border: 2px solid #d5ae77;\n    border-radius: 22px;\n\n    padding: 18px 16px;\n    box-sizing: border-box;\n\n    font-family: Segoe UI, Arial, sans-serif;\n\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n\n    gap: 12px;\n\n    box-shadow:\n        0 12px 26px rgba(0,0,0,.45),\n        inset 0 2px 8px rgba(213,174,55,.08);\n}\n\n/* ===== TÍTULO ===== */\n.cardTitle {\n    font-size: 20px;\n    font-weight: 900;\n    color: #d5ae77;\n    letter-spacing: 0.8px;\n    text-align: center;\n    white-space: nowrap;\n}\n\n/* ===== VALOR ===== */\n.cardValor {\n    font-size: 30px;\n    font-weight: 900;\n    color: #ffffff;\n    white-space: nowrap;\n}\n</style>\n\n<div class='cardContainer'>\n\n    <div class='cardTitle'>\n        INADIMPLÊNCIA TOTAL\n    </div>\n\n    <div class='cardValor'>\n        R$ 999\n    </div>\n\n</div>\n"
+  },
+  {
+    "Competencia[nome_fantasia]": "CTS - COMPASS TAX STRATEGY NEGOCIOS EMPRESARIAIS LTDA",
+    "[Valor]": "\n<style>\n.cardContainer {\n    width: 360px;          /* ✅ largura ajustada */\n    height: 200px;         /* ✅ altura ajustada */\n\n    background: #1f1f1f;\n    border: 2px solid #d5ae77;\n    border-radius: 22px;\n\n    padding: 18px 16px;\n    box-sizing: border-box;\n\n    font-family: Segoe UI, Arial, sans-serif;\n\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n\n    gap: 12px;\n\n    box-shadow:\n        0 12px 26px rgba(0,0,0,.45),\n        inset 0 2px 8px rgba(213,174,55,.08);\n}\n\n/* ===== TÍTULO ===== */\n.cardTitle {\n    font-size: 20px;\n    font-weight: 900;\n    color: #d5ae77;\n    letter-spacing: 0.8px;\n    text-align: center;\n    white-space: nowrap;\n}\n\n/* ===== VALOR ===== */\n.cardValor {\n    font-size: 30px;\n    font-weight: 900;\n    color: #ffffff;\n    white-space: nowrap;\n}\n</style>\n\n<div class='cardContainer'>\n\n    <div class='cardTitle'>\n        INADIMPLÊNCIA TOTAL\n    </div>\n\n    <div class='cardValor'>\n        R$ 994\n    </div>\n\n</div>\n"
+  }
+]
+
+============================================================
+PROBE 4: Top 3 com ADDCOLUMNS + VALUES + CALCULATE
+============================================================
+{
+  "error": {
+    "code": "DatasetExecuteQueriesError",
+    "pbi.error": {
+      "code": "DatasetExecuteQueriesError",
+      "parameters": {},
+      "details": [
+        {
+          "code": "DetailsMessage",
+          "detail": {
+            "type": 1,
+            "value": "Query (8, 21) Column '<oii>valor_titulo</oii>' in table '<oii>Competencia</oii>' cannot be found or may not be used in this expression."
+          }
+        },
+        {
+          "code": "AnalysisServicesErrorCode",
+          "detail": {
+            "type": 1,
+            "value": "3241803780"
+          }
+        }
+      ]
+    }
+  }
+}

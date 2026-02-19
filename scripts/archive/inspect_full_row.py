@@ -10,11 +10,12 @@ if project_root not in sys.path:
 
 from core.services.supabase_service import SupabaseService
 
+
 def inspect():
     svc = SupabaseService()
-    
+
     print("\n--- FAZENDO INSPEÇÃO DETALHADA ---")
-    
+
     # Unidades: Get one that is NOT named "Unidade X" if possible?
     # Or just get any and list keys.
     print("Fetching 1 Unit...")
@@ -23,7 +24,7 @@ def inspect():
         u = units[0]
         print("UNIT KEYS:", sorted(list(u.keys())))
         print("UNIT EXAMPLE:", json.dumps(u, indent=2, ensure_ascii=False))
-    
+
     # Models: Get one
     print("\nFetching 1 Modelo...")
     models = svc._get("nexus_modelos", {"limit": 1})
@@ -31,6 +32,7 @@ def inspect():
         m = models[0]
         print("MODEL KEYS:", sorted(list(m.keys())))
         print("MODEL EXAMPLE (Part):", json.dumps(m, indent=2, ensure_ascii=False))
+
 
 if __name__ == "__main__":
     inspect()

@@ -1,13 +1,15 @@
 import sys
 import os
 import json
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from core.services.supabase_service import SupabaseService
+
 
 def debug_136():
     svc = SupabaseService()
     print("--- DEBUG UNIT 136 ---")
-    
+
     # 1. Check Unidade
     print("\n[1] Checking nexus_unidades ID 136...")
     res_u = svc._get("nexus_unidades", {"id": "eq.136"})
@@ -25,7 +27,7 @@ def debug_136():
         print("Sample Model:", json.dumps(res_m[0], indent=2, default=str))
     else:
         print("❌ No models for Unit 136.")
-        
+
     # 3. Check Consultor (if model exists)
     if res_m:
         cid = res_m[0].get("consultor_id")
@@ -39,6 +41,7 @@ def debug_136():
                 print("❌ Consultor NOT FOUND.")
         else:
             print("⚠ Model has no consultor_id.")
+
 
 if __name__ == "__main__":
     debug_136()

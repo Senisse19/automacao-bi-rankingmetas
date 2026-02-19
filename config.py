@@ -2,12 +2,15 @@
 Configurações da automação Power BI & Nexus -> WhatsApp
 Suporta variáveis de ambiente para deploy em Docker/Coolify
 """
+
 import os
-import json
 from dotenv import load_dotenv
 
 # Carregar variáveis do arquivo .env
-load_dotenv()
+# Carregar variáveis do arquivo .env
+project_root = os.path.dirname(os.path.abspath(__file__))
+dotenv_path = os.path.join(project_root, ".env")
+load_dotenv(dotenv_path)
 
 # --- CONFIGURATIONS ---
 
@@ -84,13 +87,16 @@ DESTINATARIOS_WHATSAPP = {}
 EMAILS_DESTINO = {}
 
 # Mensagem padrão
-METAS_CAPTION = os.getenv("METAS_CAPTION", """📊 Acompanhamento Metas Caixa Grupo Studio
+METAS_CAPTION = os.getenv(
+    "METAS_CAPTION",
+    """📊 Acompanhamento Metas Caixa Grupo Studio
 
 Dados consolidados até {data} (D-1).
 
 🎯 Acompanhe o progresso:
 
-https://bi.grupostudio.tec.br/""")
+https://bi.grupostudio.tec.br/""",
+)
 
 # Admin Settings
 ADMIN_PHONE = os.getenv("ADMIN_PHONE", "5551998129077@s.whatsapp.net")

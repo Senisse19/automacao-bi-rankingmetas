@@ -1,5 +1,3 @@
-import os
-
 path = r"c:/Users/victor.senisse.GRUPOSTUDIO/Desktop/Plataforma BI/portal-dashboards-studio/src/app/reports/unidades/page.tsx"
 
 with open(path, "r", encoding="utf-8") as f:
@@ -13,5 +11,5 @@ for line in lines:
 
 with open(path, "w", encoding="utf-8") as f:
     f.writelines(new_lines)
-    
+
 print("Removed raw_data line.")

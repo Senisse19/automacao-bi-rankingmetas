@@ -1,0 +1,95 @@
+======================================================================
+ANÁLISE PROFUNDA: AUTOMAÇÃO vs DASHBOARD
+Data da execução: 11/02/2026
+======================================================================
+
+======================================================================
+SEÇÃO 1: COMPARAÇÃO DE KPIs
+======================================================================
+
+  INADIMPLÊNCIA TOTAL:
+  Dashboard:     R$ 29.639.764
+  Automação:     R$ 34,903,093.82  (filtro: area<>IC + status IN ATRASADO/A VENCER/VENCE HOJE)
+  Só ATRASADO:   R$ 19,165,523.04  (filtro: area<>IC + status = ATRASADO)
+  Diferença:     R$ 5,263,329.82
+  Count All:     10689 títulos | Count ATRASADO: 8900 títulos
+
+  VENCENDO HOJE:
+  Dashboard:     R$ 4.247
+  Automação:     R$ 14,346.68
+
+  CONCILIAÇÃO (D+2):
+  Dashboard:     R$ 347.654
+  A VENCER total:R$ 15,723,224.10
+  A VENCER <=D+2:R$ 10,601,417.55
+
+  MÉDIA ATRASO:
+  Automação avg(todos):   469 dias
+  Automação avg(atrasado):625 dias
+
+======================================================================
+SEÇÃO 2: TOP 10 — COMPARAÇÃO DETALHADA
+======================================================================
+
+Nosso Top 20 (com contagem de títulos):
+   1. FRIPREMIUM COMERCIAL DE ALIMENTOS LTDA   |   68d | R$  10,184,179.61 | 6 títulos
+   2. CAPRETZ EMPREENDIMENTOS IMOBILIARIOS LTD |   13d | R$     120,576.05 | 2 títulos
+   3. GUILHERME QUEIROZ LIMA                   |   54d | R$     111,182.45 | 1 títulos
+   4. FOCO EMPRESARIAL 360 LTDA                |   58d | R$      68,500.00 | 1 títulos
+   5. DEPOSITO DE BEBIDAS DUARTE LTDA          |   82d | R$      61,075.56 | 3 títulos
+   6. MOINHO HORTOLANDIA                       |   88d | R$      54,804.75 | 3 títulos
+   7. CATA TECIDOS E EMBALAGENS INDUSTRIAIS S. |   65d | R$      47,247.21 | 1 títulos
+   8. AKSO CONSTRUTORA                         |   82d | R$      42,128.87 | 8 títulos
+   9. FINEC SOLUCOES JURIDICAS E FINANCEIRAS L |   68d | R$      40,000.00 | 1 títulos
+  10. NOVA PROSPER DISTRIBUIDORA DE ALIMENTOS  |   82d | R$      39,722.89 | 4 títulos
+  11. GSC - SAO CARLOS MANUTENCAO EM HVAC LTDA |   76d | R$      38,867.97 | 1 títulos
+  12. 1799 - MG ASSESSORIA E CONSULTORIA EM GE |   11d | R$      37,159.06 | 2 títulos
+  13. LATICINIOS SANTA HELENA                  |   56d | R$      35,746.18 | 1 títulos
+  14. DIEGO FERRAZ &amp; RENATA GOSH - ADVOGAD |   42d | R$      35,000.00 | 1 títulos
+  15. PATRICIA LIMA BAHIA FARIAS FERNANDES     |   11d | R$      31,750.00 | 1 títulos
+  16. MARCO YOSHIHISSA ASAHI                   |   86d | R$      28,644.00 | 5 títulos
+  17. ME COMERCIO DE ALIMENTOS LTDA            |   77d | R$      27,845.77 | 4 títulos
+  18. CAMPWARE COMERCIO E DISTRIBUICAO DE PROD |   50d | R$      25,674.86 | 2 títulos
+  19. MARCIO JUSTINO GODOY                     |   79d | R$      25,408.33 | 10 títulos
+  20. 1767 - ANSELMO AFONSO FERREIRA           |   45d | R$      25,000.00 | 1 títulos
+
+======================================================================
+COMPARAÇÃO LINHA A LINHA
+======================================================================
+  # | Dashboard                                |       Valor DB |    Nosso Valor |         Diff | Status
+----------------------------------------------------------------------------------------------------------------------------------
+   1 | FRIPREMIUM COMERCIAL                     | R$   10,179,634 | R$   10,184,180 | R$     +4,546 | ✅
+   2 | GUILHERME QUEIROZ LIMA                   | R$      111,182 | R$      111,182 | R$         +0 | ✅
+   3 | VITOR M NUNES FILHO                      | R$      100,000 |    NÃO ENCONTR |          --- | ❌ AUSENTE
+   4 | FOCO EMPRESARIAL 360                     | R$       68,500 | R$       68,500 | R$         +0 | ✅
+   5 | CAPRETZ EMPREENDIMEN                     | R$       66,317 | R$      120,576 | R$    +54,259 | ⚠️ +81.8%
+   6 | CATA TECIDOS E EMBALAG                   | R$       47,247 | R$       47,247 | R$         +0 | ✅
+   7 | TOYO INK BRASIL LTDA                     | R$       44,108 |    NÃO ENCONTR |          --- | ❌ AUSENTE
+   8 | SAWEM DA AMAZONIA                        | R$       43,097 |    NÃO ENCONTR |          --- | ❌ AUSENTE
+   9 | FINEC SOLUCOES JURIDICA                  | R$       41,072 | R$       40,000 | R$     -1,072 | ⚠️ -2.6%
+  10 | SAWEM INDUSTRIAL                         | R$       35,447 |    NÃO ENCONTR |          --- | ❌ AUSENTE
+
+======================================================================
+SEÇÃO 3: INVESTIGAÇÃO DE CLIENTES DIVERGENTES
+======================================================================
+
+--- CAPRETZ ---
+  Status=A VENCER     | Faixa=0–30 dias            | Ordem=1 ✅ IN |   2 tit | R$   120,576.05 | MaxDias=13
+
+--- VITOR M NUNES ---
+
+--- TOYO INK ---
+  Status=RECEBIDO     | Faixa=None                 | Ordem=None ❌ OUT |   3 tit | R$    64,935.38 | MaxDias=47
+  Status=CANCELADO    | Faixa=31–60 dias           | Ordem=2 ✅ IN |   2 tit | R$    14,136.09 | MaxDias=54
+  Status=RECEBIDO     | Faixa=Mês vigente          | Ordem=0 ❌ OUT |   1 tit | R$    44,108.13 | MaxDias=6
+
+--- SAWEM ---
+  Status=RECEBIDO     | Faixa=31–60 dias           | Ordem=2 ✅ IN |   1 tit | R$    43,096.50 | MaxDias=54
+  Status=RECEBIDO     | Faixa=Mês vigente          | Ordem=0 ❌ OUT |   1 tit | R$    35,446.67 | MaxDias=5
+
+======================================================================
+SEÇÃO 4: TOTAL SEM FILTRO DE STATUS vs COM FILTRO
+======================================================================
+  Sem filtro status: R$ 238,223,208.45 (57291 títulos)
+  Com filtro status: R$ 34,903,093.82 (10689 títulos)
+  Diferença:         R$ 203,320,114.63 (46602 títulos)
