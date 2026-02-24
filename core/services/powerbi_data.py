@@ -395,16 +395,10 @@ class PowerBIDataFetcher:
         # 4. Buscar metas GS (total)
         metas_gs = self.fetch_metas_departamento("GS_Metas", "GS")
 
-        # 5. Buscar percentuais GS
-        pct_gs = self.fetch_percentuais_gs()
-
-        # 6. Buscar metas Comercial/Operacional
+        # 5. Buscar metas Comercial/Operacional
         metas_com_op = self.fetch_metas_comercial_operacional()
 
-        # 7. Buscar percentuais Comercial/Operacional
-        pct_com_op = self.fetch_percentuais_comercial_operacional()
-
-        # 8. Configuração dos outros departamentos
+        # 6. Configuração dos outros departamentos
         departamentos_config = [
             ("Corporate", "Corporate_Metas", "CORPORATE"),
             ("Educação", "Educação_Metas", "EDUCACAO"),
@@ -414,68 +408,71 @@ class PowerBIDataFetcher:
             ("Tecnologia", "PJ360_Metas", "PJ"),
         ]
 
-        # Monta dados formatados para GS — realizado = Comercial + Operacional
+        liq_comercial = liquido.get("Total_Comercial", 0)
+        liq_operacional = liquido.get("Total_Operacional", 0)
+        realizado_liquido_gs = liq_comercial + liq_operacional
+
+        meta1_gs = metas_gs.get("meta1", 0)
+        meta2_gs = metas_gs.get("meta2", 0)
+        meta3_gs = metas_gs.get("meta3", 0)
+
+        # Monta dados formatados para GS — agora usando valores Líquidos para o GS
         total_gs = {
-            "meta1": format_currency(metas_gs.get("meta1", 0)),
-            "meta2": format_currency(metas_gs.get("meta2", 0)),
-            "meta3": format_currency(metas_gs.get("meta3", 0)),
-            "pct_meta1": pct_gs.get("pct_meta1", 0),
-            "pct_meta2": pct_gs.get("pct_meta2", 0),
-            "pct_meta3": pct_gs.get("pct_meta3", 0),
-            "realizado": format_currency(realizados.get("Comercial", 0) + realizados.get("Operacional", 0)),
-            "percent": format_percent(
-                ((realizados.get("Comercial", 0) + realizados.get("Operacional", 0)) / metas_gs.get("meta1", 1)) * 100
-                if metas_gs.get("meta1", 0) > 0
-                else 0
-            ),
+            "meta1": format_currency(meta1_gs),
+            "meta2": format_currency(meta2_gs),
+            "meta3": format_currency(meta3_gs),
+            "pct_meta1": (realizado_liquido_gs / meta1_gs * 100) if meta1_gs > 0 else 0,
+            "pct_meta2": (realizado_liquido_gs / meta2_gs * 100) if meta2_gs > 0 else 0,
+            "pct_meta3": (realizado_liquido_gs / meta3_gs * 100) if meta3_gs > 0 else 0,
+            "realizado": format_currency(realizado_liquido_gs),
+            "percent": format_percent((realizado_liquido_gs / meta1_gs * 100) if meta1_gs > 0 else 0),
         }
 
         departamentos = []
 
-        # Comercial
+        # Comercial (agora líquido como padrão)
         com_metas = metas_com_op.get("Comercial", {})
-        com_pct = pct_com_op.get("Comercial", {})
-        com_real = realizados.get("Comercial", 0)
+        com_meta1 = com_metas.get("meta1", 0)
+        com_meta2 = com_metas.get("meta2", 0)
+        com_meta3 = com_metas.get("meta3", 0)
+
         departamentos.append(
             {
                 "nome": "Comercial",
-                "meta1": format_currency(com_metas.get("meta1", 0)),
-                "meta2": format_currency(com_metas.get("meta2", 0)),
-                "meta3": format_currency(com_metas.get("meta3", 0)),
-                "pct_meta1": com_pct.get("pct_meta1", 0),
-                "pct_meta2": com_pct.get("pct_meta2", 0),
-                "pct_meta3": com_pct.get("pct_meta3", 0),
-                "realizado": format_currency(com_real),
-                "percent": format_percent(
-                    (com_real / com_metas.get("meta1", 1)) * 100 if com_metas.get("meta1", 0) > 0 else 0
-                ),
+                "meta1": format_currency(com_meta1),
+                "meta2": format_currency(com_meta2),
+                "meta3": format_currency(com_meta3),
+                "pct_meta1": (liq_comercial / com_meta1 * 100) if com_meta1 > 0 else 0,
+                "pct_meta2": (liq_comercial / com_meta2 * 100) if com_meta2 > 0 else 0,
+                "pct_meta3": (liq_comercial / com_meta3 * 100) if com_meta3 > 0 else 0,
+                "realizado": format_currency(liq_comercial),
+                "percent": format_percent((liq_comercial / com_meta1 * 100) if com_meta1 > 0 else 0),
             }
         )
 
-        # Operacional
+        # Operacional (agora líquido como padrão)
         op_metas = metas_com_op.get("Operacional", {})
-        op_pct = pct_com_op.get("Operacional", {})
-        op_real = realizados.get("Operacional", 0)
+        op_meta1 = op_metas.get("meta1", 0)
+        op_meta2 = op_metas.get("meta2", 0)
+        op_meta3 = op_metas.get("meta3", 0)
+
         departamentos.append(
             {
                 "nome": "Operacional",
-                "meta1": format_currency(op_metas.get("meta1", 0)),
-                "meta2": format_currency(op_metas.get("meta2", 0)),
-                "meta3": format_currency(op_metas.get("meta3", 0)),
-                "pct_meta1": op_pct.get("pct_meta1", 0),
-                "pct_meta2": op_pct.get("pct_meta2", 0),
-                "pct_meta3": op_pct.get("pct_meta3", 0),
-                "realizado": format_currency(op_real),
-                "percent": format_percent(
-                    (op_real / op_metas.get("meta1", 1)) * 100 if op_metas.get("meta1", 0) > 0 else 0
-                ),
+                "meta1": format_currency(op_meta1),
+                "meta2": format_currency(op_meta2),
+                "meta3": format_currency(op_meta3),
+                "pct_meta1": (liq_operacional / op_meta1 * 100) if op_meta1 > 0 else 0,
+                "pct_meta2": (liq_operacional / op_meta2 * 100) if op_meta2 > 0 else 0,
+                "pct_meta3": (liq_operacional / op_meta3 * 100) if op_meta3 > 0 else 0,
+                "realizado": format_currency(liq_operacional),
+                "percent": format_percent((liq_operacional / op_meta1 * 100) if op_meta1 > 0 else 0),
             }
         )
 
         # Outros departamentos com repasse e líquido por departamento
         for nome, tabela, prefixo in departamentos_config:
             metas = self.fetch_metas_departamento(tabela, prefixo)
-            pct = self.fetch_percentuais_departamento(prefixo)
 
             # Tecnologia usa PJ como chave no dicionário de realizados/repasses
             key_realizado = "PJ" if nome == "Tecnologia" else nome
@@ -483,19 +480,24 @@ class PowerBIDataFetcher:
             valor_repasse = repasses.get(key_realizado, 0)
             valor_liquido = liquido.get(key_realizado, 0)
 
+            meta1 = metas.get("meta1", 0)
+            meta2 = metas.get("meta2", 0)
+            meta3 = metas.get("meta3", 0)
+
+            # Exibe Realizado bruto no mini card (pois mostrará o repasse depois), mas bate percentuais via Líquido
             departamentos.append(
                 {
                     "nome": nome,
-                    "meta1": format_currency(metas.get("meta1", 0)),
-                    "meta2": format_currency(metas.get("meta2", 0)),
-                    "meta3": format_currency(metas.get("meta3", 0)),
-                    "pct_meta1": pct.get("pct_meta1", 0),
-                    "pct_meta2": pct.get("pct_meta2", 0),
-                    "pct_meta3": pct.get("pct_meta3", 0),
+                    "meta1": format_currency(meta1),
+                    "meta2": format_currency(meta2),
+                    "meta3": format_currency(meta3),
+                    "pct_meta1": (valor_liquido / meta1 * 100) if meta1 > 0 else 0,
+                    "pct_meta2": (valor_liquido / meta2 * 100) if meta2 > 0 else 0,
+                    "pct_meta3": (valor_liquido / meta3 * 100) if meta3 > 0 else 0,
                     "realizado": format_currency(real),
                     "repasse": format_currency(valor_repasse),
                     "liquido": format_currency(valor_liquido),
-                    "percent": format_percent((real / metas.get("meta1", 1)) * 100 if metas.get("meta1", 0) > 0 else 0),
+                    "percent": format_percent((valor_liquido / meta1 * 100) if meta1 > 0 else 0),
                 }
             )
 
