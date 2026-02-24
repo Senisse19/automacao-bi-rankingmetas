@@ -164,15 +164,45 @@ class MetasRenderer(BaseRenderer):
         self.width = 500
 
         header_h = 100
-        gs_card_h = 240
-        dept_row_h = 210
-        num_dept_rows = 4
+        # header_h = 100 # This is now calculated by _draw_header
+        # gs_card_h = 240 # This is now dynamic
+        # dept_row_h = 260  # Comporta TOTAL + REPASSE + VALOR LÍQUIDO sem cortar conteúdo inferior
+        # num_dept_rows = 4 # This is now dynamic
         receitas_h = 100 if receitas else 0
         padding = 15
 
-        height = header_h + gs_card_h + (num_dept_rows * (dept_row_h + padding)) + receitas_h + 80
+        dept_pairs = [
+            [("comercial", "COMERCIAL"), ("operacional", "OPERACIONAL")],
+            [("expansão", "EXPANSÃO"), ("corporate", "CORPORATE")],
+            [("educação", "EDUCAÇÃO"), ("tax", "TAX")],
+            [("franchising", "FRANCHISING"), ("tecnologia", "TECNOLOGIA")],
+        ]
 
-        img = Image.new("RGB", (self.width, height), self.bg_color)
+        def is_short(name):
+            return name.upper() in ["COMERCIAL", "OPERACIONAL", "GS", "GS - RESUMO GERAL"]
+
+        h_large = 260
+        h_short = 195
+
+        # Recalcular altura total da imagem baseada no conteúdo real
+        # First, draw header to get its height
+        temp_img = Image.new("RGB", (self.width, 1), self.bg_color)  # Dummy image for header height calc
+        temp_draw = ImageDraw.Draw(temp_img)
+        header_h = self._draw_header(temp_draw, "RELATÓRIO DE METAS", periodo)
+
+        current_y = header_h + padding
+        if total_gs:
+            # GS sempre usa a altura maior pois tem o realizado grande e 3 metas com barras
+            actual_gs_h = h_large
+            current_y += actual_gs_h + padding
+
+        for pair in dept_pairs:
+            row_h = max(h_short if is_short(lbl) else h_large for _, lbl in pair)
+            current_y += row_h + padding
+
+        final_height = current_y + receitas_h + 80  # 80 for footer
+
+        img = Image.new("RGB", (self.width, final_height), self.bg_color)
         draw = ImageDraw.Draw(img)
 
         font_title = self._get_font(15, bold=True)
@@ -190,7 +220,7 @@ class MetasRenderer(BaseRenderer):
 
         if total_gs:
             card_w = self.width - 2 * margin
-            card_h = gs_card_h
+            card_h = h_large  # GS card is large
 
             draw.rounded_rectangle(
                 [(margin, y), (margin + card_w, y + card_h)],
@@ -268,22 +298,22 @@ class MetasRenderer(BaseRenderer):
 
             y += card_h + padding
 
-        dept_pairs = [
-            [("comercial", "COMERCIAL"), ("operacional", "OPERACIONAL")],
-            [("expansão", "EXPANSÃO"), ("corporate", "CORPORATE")],
-            [("educação", "EDUCAÇÃO"), ("tax", "TAX")],
-            [("franchising", "FRANCHISING"), ("tecnologia", "TECNOLOGIA")],
-        ]
-
         card_w = (self.width - 2 * margin - card_gap) // 2
-        card_h = dept_row_h
 
         for pair in dept_pairs:
+            # Altura da linha baseada no maior cartão da dupla
+            row_h = max(h_short if is_short(lbl) else h_large for _, lbl in pair)
+
             for i, (key, label) in enumerate(pair):
                 cx = margin + i * (card_w + card_gap)
                 data = dept_map.get(key, {})
-                self._draw_dept_card(draw, cx, y, card_w, card_h, label, data, is_small=False)
-            y += card_h + padding
+                # Desenha o cartão com a altura da linha para manter alinhamento visual se necessário,
+                # OU usa a altura individual se preferir que um seja menor que o outro na mesma linha.
+                # O usuário reclamou do espaço vazio, então vou usar a altura individual para o fundo do cartão.
+                card_h_individual = h_short if is_short(label) else h_large
+                self._draw_dept_card(draw, cx, y, card_w, card_h_individual, label, data, is_small=False)
+
+            y += row_h + padding
 
         if receitas:
             rec_y = y
@@ -337,7 +367,7 @@ class MetasRenderer(BaseRenderer):
                     fill=self.text_color,
                 )
 
-        self._draw_footer(draw, height)
+        self._draw_footer(draw, final_height)
         img.save(output_path, "PNG")
         return output_path
 
@@ -453,22 +483,61 @@ class MetasRenderer(BaseRenderer):
         if not realizado or realizado == "":
             realizado = "-"
 
+        repasse = str(data.get("repasse", "-"))
+        liquido = str(data.get("liquido", "-"))
+
         ry = my + 3
+        line_h = 18  # Espaçamento entre linhas
+
+        # Label TOTAL (corresponde ao dashboard)
         draw.text(
             (x + pad, ry),
-            "REALIZADO",
+            "TOTAL",
             font=self._get_font(10, bold=True),
             fill=self.muted_text,
         )
-
-        bbox = draw.textbbox((0, 0), realizado, font=self._get_font(14, bold=True))
-        rw = bbox[2] - bbox[0]
         draw.text(
-            (x + (w - rw) / 2, ry + 14),
+            (x + pad, ry + line_h),
             realizado,
-            font=self._get_font(14, bold=True),
+            font=self._get_font(13, bold=True),
             fill=self.text_color,
         )
+
+        # Regra de negócio: Comercial, Operacional e GS não têm Repasse e Líquido
+        hide_repasse_liquido = title.upper() in ["COMERCIAL", "OPERACIONAL", "GS", "GS - RESUMO GERAL"]
+
+        if not hide_repasse_liquido:
+            # REPASSE — exibido sempre, mostra R$ 0 se vazio
+            sub_y = ry + line_h + 22
+            draw.text(
+                (x + pad, sub_y),
+                "REPASSE",
+                font=self._get_font(9, bold=True),
+                fill=self.muted_text,
+            )
+            repasse_display = repasse if repasse not in ("-", "", "R$ 0,00") else "R$ 0"
+            draw.text(
+                (x + pad, sub_y + 13),
+                repasse_display,
+                font=self._get_font(12, bold=True),
+                fill=self.gold_color,
+            )
+
+            # VALOR LÍQUIDO — exibido sempre, mostra R$ 0 se vazio
+            liq_y = sub_y + 32
+            draw.text(
+                (x + pad, liq_y),
+                "VALOR LÍQUIDO",
+                font=self._get_font(9, bold=True),
+                fill=self.muted_text,
+            )
+            liquido_display = liquido if liquido not in ("-", "", "R$ 0,00") else "R$ 0"
+            draw.text(
+                (x + pad, liq_y + 13),
+                liquido_display,
+                font=self._get_font(12, bold=True),
+                fill=self.accent_color,
+            )
 
     def generate_resumo_image(self, periodo, total_gs=None, receitas=None, output_path="metas_resumo.png"):
         self.width = 500
@@ -736,6 +805,27 @@ class MetasRenderer(BaseRenderer):
             font=font_big_value,
             fill=self.text_color,
         )
+
+        repasse = str(departamento.get("repasse", "R$ 0,00"))
+        if repasse != "R$ 0,00":
+            # Adiciona o repasse na tela de departamento tbm
+            draw.text((cx + 200, ry), "REPASSE", font=font_label, fill=self.muted_text)
+            draw.text(
+                (cx + 200, ry + 25),
+                repasse,
+                font=font_big_value,
+                fill=self.gold_color,
+            )
+
+        liquido = str(departamento.get("liquido", "R$ 0,00"))
+        if liquido != "R$ 0,00":
+            draw.text((cx + cx + 330, ry), "LÍQUIDO", font=font_label, fill=self.muted_text)
+            draw.text(
+                (cx + cx + 330, ry + 25),
+                liquido,
+                font=font_big_value,
+                fill=self.accent_color,
+            )
 
         draw.text(
             (25, height - 25),

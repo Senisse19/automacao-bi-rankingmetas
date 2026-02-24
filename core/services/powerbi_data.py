@@ -34,6 +34,8 @@ from core.services.dax_queries import (
     get_receitas_query,
     get_metas_dept_query,
     get_percentuais_dept_query,
+    get_repasses_query,
+    get_receitas_liquido_query,
 )
 
 
@@ -226,6 +228,88 @@ class PowerBIDataFetcher:
             "sem_categoria": 0,
         }
 
+    def fetch_repasses(self):
+        """Busca valores de repasses da tabela Medidas_Repasse"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+
+        query = get_repasses_query(date_filter_start, date_filter_end)
+
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "Corporate": row.get("[Corporate_Repasse]") or 0,
+                    "Educação": row.get("[Educacao_Repasse]") or 0,
+                    "Expansão": row.get("[Expansao_Repasse]") or 0,
+                    "Franchising": row.get("[Franchising_Repasse]") or 0,
+                    "PJ": row.get("[PJ_Repasse]") or 0,
+                    "Tax": row.get("[Tax_Repasse]") or 0,
+                    "Total": row.get("[Total_Repasse]") or 0,
+                }
+        except Exception as e:
+            logger.error(f"Erro ao buscar repasses: {e}")
+
+        return {
+            "Corporate": 0,
+            "Educação": 0,
+            "Expansão": 0,
+            "Franchising": 0,
+            "PJ": 0,
+            "Tax": 0,
+            "Total": 0,
+        }
+
+    def fetch_receitas_liquido(self):
+        """Busca valores líquidos da Composição de Receitas"""
+        now = datetime.now()
+        start_date = datetime(now.year, now.month, 1)
+        if now.month == 12:
+            end_date = datetime(now.year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
+
+        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+
+        query = get_receitas_liquido_query(date_filter_start, date_filter_end)
+
+        try:
+            result = self.client.execute_dax(query)
+            if result and len(result) > 0:
+                row = result[0]
+                return {
+                    "Corporate": row.get("[Corporate_Liquido]") or 0,
+                    "Educação": row.get("[Educacao_Liquido]") or 0,
+                    "Expansão": row.get("[Expansao_Liquido]") or 0,
+                    "Franchising": row.get("[Franchising_Liquido]") or 0,
+                    "Tax": row.get("[Tax_Liquido]") or 0,
+                    "PJ": row.get("[Tecnologia_Liquido]") or 0,
+                    "Total_Comercial": row.get("[Total_Comercial]") or 0,
+                    "Total_Operacional": row.get("[Total_Operacao]") or 0,
+                }
+        except Exception as e:
+            logger.error(f"Erro ao buscar receitas liquido: {e}")
+
+        return {
+            "Corporate": 0,
+            "Educação": 0,
+            "Expansão": 0,
+            "Franchising": 0,
+            "Tax": 0,
+            "PJ": 0,
+            "Total_Comercial": 0,
+            "Total_Operacional": 0,
+        }
+
     def fetch_metas_departamento(self, tabela, prefixo):
         """Busca metas de um departamento específico"""
         month_filter = self._get_month_filter()
@@ -300,19 +384,25 @@ class PowerBIDataFetcher:
         # 2. Buscar receitas (Outras Receitas, Intercompany)
         receitas_raw = self.fetch_receitas()
 
-        # 3. Buscar metas GS (total)
+        # 3. Buscar repasses por departamento (usa Dept_Descricao='Repasse')
+        repasses = self.fetch_repasses()
+
+        # 4. Buscar líquidos por departamento (realizado - repasse)
+        liquido = self.fetch_receitas_liquido()
+
+        # 4. Buscar metas GS (total)
         metas_gs = self.fetch_metas_departamento("GS_Metas", "GS")
 
-        # 4. Buscar percentuais GS
+        # 5. Buscar percentuais GS
         pct_gs = self.fetch_percentuais_gs()
 
-        # 5. Buscar metas Comercial/Operacional
+        # 6. Buscar metas Comercial/Operacional
         metas_com_op = self.fetch_metas_comercial_operacional()
 
-        # 6. Buscar percentuais Comercial/Operacional
+        # 7. Buscar percentuais Comercial/Operacional
         pct_com_op = self.fetch_percentuais_comercial_operacional()
 
-        # 7. Configuração dos outros departamentos
+        # 8. Configuração dos outros departamentos
         departamentos_config = [
             ("Corporate", "Corporate_Metas", "CORPORATE"),
             ("Educação", "Educação_Metas", "EDUCACAO"),
@@ -322,7 +412,7 @@ class PowerBIDataFetcher:
             ("Tecnologia", "PJ360_Metas", "PJ"),
         ]
 
-        # Montar dados formatados para GS
+        # Monta dados formatados para GS — realizado = Comercial + Operacional
         total_gs = {
             "meta1": format_currency(metas_gs.get("meta1", 0)),
             "meta2": format_currency(metas_gs.get("meta2", 0)),
@@ -380,14 +470,16 @@ class PowerBIDataFetcher:
             }
         )
 
-        # Outros departamentos
+        # Outros departamentos com repasse e líquido por departamento
         for nome, tabela, prefixo in departamentos_config:
             metas = self.fetch_metas_departamento(tabela, prefixo)
             pct = self.fetch_percentuais_departamento(prefixo)
 
-            # Mapeamento de nome para chave de realizado (Tecnologia -> PJ)
+            # Tecnologia usa PJ como chave no dicionário de realizados/repasses
             key_realizado = "PJ" if nome == "Tecnologia" else nome
             real = realizados.get(key_realizado, 0)
+            valor_repasse = repasses.get(key_realizado, 0)
+            valor_liquido = liquido.get(key_realizado, 0)
 
             departamentos.append(
                 {
@@ -399,6 +491,8 @@ class PowerBIDataFetcher:
                     "pct_meta2": pct.get("pct_meta2", 0),
                     "pct_meta3": pct.get("pct_meta3", 0),
                     "realizado": format_currency(real),
+                    "repasse": format_currency(valor_repasse),
+                    "liquido": format_currency(valor_liquido),
                     "percent": format_percent((real / metas.get("meta1", 1)) * 100 if metas.get("meta1", 0) > 0 else 0),
                 }
             )
