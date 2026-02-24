@@ -246,15 +246,22 @@ class PowerBIDataFetcher:
             result = self.client.execute_dax(query)
             if result and len(result) > 0:
                 row = result[0]
-                return {
+                repasses_dict = {
                     "Corporate": row.get("[Corporate_Repasse]") or 0,
                     "Educação": row.get("[Educacao_Repasse]") or 0,
                     "Expansão": row.get("[Expansao_Repasse]") or 0,
                     "Franchising": row.get("[Franchising_Repasse]") or 0,
                     "PJ": row.get("[PJ_Repasse]") or 0,
                     "Tax": row.get("[Tax_Repasse]") or 0,
-                    "Total": row.get("[Total_Repasse]") or 0,
+                    "Total_Geral": row.get("[Total_Repasse_Geral]") or 0,
                 }
+                # O total exibido no card de receitas deve ser o oficial do PBI
+                repasses_dict["Total"] = (
+                    repasses_dict["Total_Geral"]
+                    if repasses_dict["Total_Geral"] > 0
+                    else sum(v for k, v in repasses_dict.items() if k != "Total_Geral")
+                )
+                return repasses_dict
         except Exception as e:
             logger.error(f"Erro ao buscar repasses: {e}")
 

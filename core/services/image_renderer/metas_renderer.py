@@ -667,7 +667,7 @@ class MetasRenderer(BaseRenderer):
             keys = [
                 ("outras", "Outras Receitas:"),
                 ("intercompany", "Intercompany:"),
-                ("nao_identificadas", "Não Identificadas:"),
+                ("repasse_total", "Repasse Total:"),
                 ("sem_categoria", "Sem Categoria:"),
             ]
 

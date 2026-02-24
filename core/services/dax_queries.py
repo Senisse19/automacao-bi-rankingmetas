@@ -122,7 +122,8 @@ def get_repasses_query(date_start, date_end):
             "Expansao_Repasse", [Valor_Expansao_Repasse],
             "Franchising_Repasse", [Valor_Franchising_Repasse],
             "PJ_Repasse", [Valor_PJ_Repasse],
-            "Tax_Repasse", [valor_Tax_Repasse]
+            "Tax_Repasse", [valor_Tax_Repasse],
+            "Total_Repasse_Geral", [total_repasse]
         ),
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )
