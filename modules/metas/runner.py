@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from jinja2 import Template
 
 
-from config import IMAGES_DIR, METAS_CAPTION, EMAIL_CONFIG
+from config import IMAGES_DIR, METAS_CAPTION, EMAIL_CONFIG, POWERBI_CONFIG
 from core.clients.powerbi_client import PowerBIClient
 from core.services.image_generator import ImageGenerator
 from core.services.supabase_service import SupabaseService
@@ -28,7 +28,9 @@ class MetasAutomation:
     """
 
     def __init__(self):
-        self.powerbi = PowerBIClient()
+        self.powerbi = PowerBIClient(
+            workspace_id=POWERBI_CONFIG.get("metas_workspace_id"), dataset_id=POWERBI_CONFIG.get("metas_dataset_id")
+        )
         self.image_gen = ImageGenerator()
         self.whatsapp = EvolutionClient()
         self.supabase = SupabaseService()

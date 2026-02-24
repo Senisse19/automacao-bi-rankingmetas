@@ -30,6 +30,9 @@ POWERBI_CONFIG = {
     "tenant": os.getenv("SHAREPOINT_TENANT"),
     "workspace_id": os.getenv("POWERBI_WORKSPACE_ID"),
     "dataset_id": os.getenv("POWERBI_DATASET_ID"),
+    # Permite especificar workspaces/datasets exclusivos para relatórios específicos
+    "metas_workspace_id": os.getenv("POWERBI_METAS_WORKSPACE_ID", os.getenv("POWERBI_WORKSPACE_ID")),
+    "metas_dataset_id": os.getenv("POWERBI_METAS_DATASET_ID", os.getenv("POWERBI_DATASET_ID")),
 }
 
 # Configurações Evolution API

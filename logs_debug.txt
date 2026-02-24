@@ -1,0 +1,51 @@
+[
+  {
+    "id": "de909eb6-4816-4325-b2e7-8c1eb1862511",
+    "contact_id": null,
+    "event_type": "job_queue_success",
+    "details": {
+      "job_id": "a9f4df3d-a778-4768-9259-b465b96478e2",
+      "def_key": "metas_diarias",
+      "duration": 195.81
+    },
+    "created_at": "2026-02-24T17:50:09.878311+00:00"
+  },
+  {
+    "id": "979c79f7-f81a-410c-8986-b93a8dd190ee",
+    "contact_id": null,
+    "event_type": "job_success",
+    "details": {
+      "job": "job_metas"
+    },
+    "created_at": "2026-02-24T17:50:09.704344+00:00"
+  },
+  {
+    "id": "da9f252b-ca96-4b04-ad79-341869c469eb",
+    "contact_id": "550c635f-785f-4471-bb60-fb3a93602b05",
+    "event_type": "message_sent",
+    "details": {
+      "type": "metas",
+      "recipient": "Victor de Almeida Senisse"
+    },
+    "created_at": "2026-02-24T17:48:36.509424+00:00"
+  },
+  {
+    "id": "b68b91ae-10e0-4fc0-89af-c1f77f706c05",
+    "contact_id": "78fb70ee-ea8f-45e7-80cf-0498a6e37c95",
+    "event_type": "message_sent",
+    "details": {
+      "type": "metas",
+      "recipient": "Douglas Fraga"
+    },
+    "created_at": "2026-02-24T17:47:12.790592+00:00"
+  },
+  {
+    "id": "07a5b629-8bf4-463d-9a69-99e168ec3757",
+    "contact_id": null,
+    "event_type": "job_start",
+    "details": {
+      "job": "metas"
+    },
+    "created_at": "2026-02-24T17:46:54.033062+00:00"
+  }
+]

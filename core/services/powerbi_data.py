@@ -39,6 +39,9 @@ from core.services.dax_queries import (
 )
 
 
+from config import POWERBI_CONFIG
+
+
 class PowerBIDataFetcher:
     """
     Classe responsável por buscar dados de metas do Power BI via consultas DAX.
@@ -46,7 +49,9 @@ class PowerBIDataFetcher:
     """
 
     def __init__(self):
-        self.client = PowerBIClient()
+        self.client = PowerBIClient(
+            workspace_id=POWERBI_CONFIG.get("metas_workspace_id"), dataset_id=POWERBI_CONFIG.get("metas_dataset_id")
+        )
         self._authenticated = False
 
     def authenticate(self):
