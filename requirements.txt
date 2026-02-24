@@ -1,0 +1,8 @@
+requests
+python-dotenv
+schedule
+fpdf
+Pillow
+psycopg2-binary
+supabase
+jinja2
