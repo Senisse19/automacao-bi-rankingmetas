@@ -501,7 +501,7 @@ class PowerBIDataFetcher:
         receitas = {
             "outras": format_currency(receitas_raw.get("outras", 0)),
             "intercompany": format_currency(receitas_raw.get("intercompany", 0)),
-            "nao_identificadas": format_currency(receitas_raw.get("nao_identificadas", 0)),
+            "repasse_total": format_currency(repasses.get("Total", 0)),
             "sem_categoria": format_currency(receitas_raw.get("sem_categoria", 0)),
         }
 
