@@ -229,7 +229,7 @@ class PowerBIDataFetcher:
         }
 
     def fetch_repasses(self):
-        """Busca valores de repasses da tabela Medidas_Repasse"""
+        """Busca valores de repasses do Power BI"""
         now = datetime.now()
         start_date = datetime(now.year, now.month, 1)
         if now.month == 12:
@@ -246,34 +246,24 @@ class PowerBIDataFetcher:
             result = self.client.execute_dax(query)
             if result and len(result) > 0:
                 row = result[0]
+                # Mapeamento robusto: medidas que existem vs departamentos na UI
                 repasses_dict = {
                     "Corporate": row.get("[Corporate_Repasse]") or 0,
-                    "Educação": row.get("[Educacao_Repasse]") or 0,
-                    "Expansão": row.get("[Expansao_Repasse]") or 0,
-                    "Franchising": row.get("[Franchising_Repasse]") or 0,
-                    "PJ": row.get("[PJ_Repasse]") or 0,
                     "Tax": row.get("[Tax_Repasse]") or 0,
                     "Total_Geral": row.get("[Total_Repasse_Geral]") or 0,
+                    # Departamentos sem medida específica de repasse no PBI (confirmado como R$ 0 pelo usuário)
+                    "Educação": 0,
+                    "Expansão": 0,
+                    "Franchising": 0,
+                    "PJ": 0,
                 }
                 # O total exibido no card de receitas deve ser o oficial do PBI
-                repasses_dict["Total"] = (
-                    repasses_dict["Total_Geral"]
-                    if repasses_dict["Total_Geral"] > 0
-                    else sum(v for k, v in repasses_dict.items() if k != "Total_Geral")
-                )
+                repasses_dict["Total"] = repasses_dict["Total_Geral"]
                 return repasses_dict
         except Exception as e:
             logger.error(f"Erro ao buscar repasses: {e}")
 
-        return {
-            "Corporate": 0,
-            "Educação": 0,
-            "Expansão": 0,
-            "Franchising": 0,
-            "PJ": 0,
-            "Tax": 0,
-            "Total": 0,
-        }
+        return {"Corporate": 0, "Educação": 0, "Expansão": 0, "Franchising": 0, "PJ": 0, "Tax": 0, "Total": 0}
 
     def fetch_receitas_liquido(self):
         """Busca valores líquidos da Composição de Receitas"""

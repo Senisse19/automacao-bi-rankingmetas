@@ -111,17 +111,13 @@ def get_percentuais_dept_query(prefixo, date_start, date_end):
 
 
 def get_repasses_query(date_start, date_end):
-    # Medidas de repasse: Realizado GS filtrado por Dept_Descricao='Repasse'
-    # por departamento (descrição + bandeira + coluna Dept_Descricao)
+    # Medidas de repasse existentes no modelo:
+    # total_repasse, Valor_Corporate_Repasse, valor_Tax_Repasse
     return f"""
     EVALUATE
     CALCULATETABLE(
         ROW(
             "Corporate_Repasse", [Valor_Corporate_Repasse],
-            "Educacao_Repasse", [Valor_Educacao_Repasse],
-            "Expansao_Repasse", [Valor_Expansao_Repasse],
-            "Franchising_Repasse", [Valor_Franchising_Repasse],
-            "PJ_Repasse", [Valor_PJ_Repasse],
             "Tax_Repasse", [valor_Tax_Repasse],
             "Total_Repasse_Geral", [total_repasse]
         ),
