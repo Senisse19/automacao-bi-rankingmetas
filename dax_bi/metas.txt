@@ -859,3 +859,222 @@ DIVIDE(
 Tax_Meta1 = CALCULATE(SUM(TAX_Metas[Metas]),TAX_Metas[TIPO] = "Meta 1")
 Tax_Meta2 = CALCULATE(SUM(TAX_Metas[Metas]),TAX_Metas[TIPO] = "Meta 2")
 Tax_Meta3 = CALCULATE(SUM(TAX_Metas[Metas]),TAX_Metas[TIPO] = "Meta 3")
+vou te passar as querys de repasse:
+
+corporate_liquido = [Valor_Corporate] - [Valor_Corporate_Repasse]
+educacao_liquido = [Valor_Educacao] - [Valor_Educacao_Repasse]
+expansao_liquido = [Valor_Expansao] - [Valor_Expansao_Repasse]
+franchising_liquido = [Valor_Franchising] - [Valor_Franchising_Repasse]
+tax_liquido = [valor_Tax] - [valor_Tax_Repasse]
+tecnlogia_liquido = [Valor_PJ] - [Valor_PJ_Repasse]
+total_liquido_comercial = [Valor_Educacao] + [Valor_Franchising] + [Valor_Expansao] - [Valor_Expansao_Repasse] - [Valor_Educacao_Repasse] - [Valor_Franchising_Repasse]
+total_liquido_operacao = [valor_Tax] + [Valor_Corporate] + [Valor_PJ] - [valor_Tax_Repasse] - [Valor_Corporate_Repasse] - [Valor_PJ_Repasse]
+total_repasse = CALCULATE([Realizado GS],    KEEPFILTERS (
+      ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)
+
+Valor_Educacao_Repasse = 
+CALCULATE(
+    [Realizado GS],
+
+    /* 🔒 Filtro por DESCRIÇÃO */
+    KEEPFILTERS (
+        ContasReceber[descricao] IN {
+            "Receita de Treinamento Externo",
+            "RECEITA DE TREINAMENTOS",
+            "Receita de Treinamento Interno"
+        }
+    ),
+
+    /* 🔒 Filtro por BANDEIRA */
+    KEEPFILTERS (
+        ContasReceber[bandeira] IN {
+            "STUDIO REVISAO SOCIETARIA",
+            "GS EDUCAÇÃO"
+        }
+    ),
+
+    /* 🔥 SOMENTE REPASSE */
+    KEEPFILTERS (
+        ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)
+
+Valor_Expansao_Repasse = 
+CALCULATE(
+    [Realizado GS],
+
+    /* 🔒 Regra de descrições da EXPANSÃO */
+    KEEPFILTERS (
+        ContasReceber[descricao] IN {
+            "EXPANSÃO - TAXA DE LICENCIAMENTO",
+            "EXPANSÃO - TAXA DE FRANQUIA",
+            "Receita de Franquia/Aliança",
+            "Receita de Implantação",
+            "Receita de Taxas de Franquia/Aliança",
+            "Receita de Taxa de Franquia/Aliança",
+            "RECEITA DE FINANCIAMENTO DE FRANQUIA",
+            "Licenças de Softwares e Programas"
+        }
+    ),
+
+    /* 🔒 Regra de bandeiras da EXPANSÃO */
+    KEEPFILTERS (
+        ContasReceber[bandeira] IN {
+            "E-FISCAL CONSULTORIA",
+            "STUDIO VAREJO",
+            "BRAGA E MONTEIRO",
+            "ALIANÇA LEGAL",
+            "AUDIT TECNOLOGIA",
+            "STUDIO AGRONEGÓCIOS",
+            "STUDIO FISCAL",
+            "STUDIO SBS STORE",
+            "STUDIO REVISAO SOCIETARIA"
+        }
+    ),
+
+    /* 🔥 SOMENTE REPASSE */
+    KEEPFILTERS (
+       ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)
+Valor_Franchising_Repasse = 
+CALCULATE(
+    [Realizado GS],
+
+    /* 🔒 Regras de DESCRIÇÃO do Franchising */
+    KEEPFILTERS (
+        ContasReceber[descricao] IN {
+            "TAXAS DE FRANQUIA/ALIANÇA",
+            "ROYALTIES/CRM",
+            "RECEITA DE ROYALTIES/CRM",
+            "ROYALTIES VARIÁVEIS",
+            "RECEITA DE ROYALTIES VARIÁVEIS",
+            "ROYALTIES ANTECIPADO",
+            "RECEITA DE ROYALTIES ANTECIPADOS",
+            "RECEITA DE ROYALTIES",
+            "FRANCHISING - ROYALTIES",
+            "RECEITA DE CRM",
+            "FRANCHISING - CRM",
+            "Receita de Royalties Antecipado"
+        }
+    ),
+
+    /* 🔒 Regras de BANDEIRA do Franchising */
+    KEEPFILTERS (
+        ContasReceber[bandeira] IN {
+            "STUDIO AGRONEGÓCIOS",
+            "AUDIT TECNOLOGIA",
+            "STUDIO VAREJO",
+            "ALIANÇA LEGAL",
+            "STUDIO SBS STORE",
+            "SPACE W",
+            "STUDIO BANK",
+            "STUDIO BROKERS",
+            "STUDIO ENERGY",
+            "STUDIO FISCAL",
+            "STUDIO GROWTH",
+            "STUDIO PAR",
+            "STUDIO REVISAO SOCIETARIA",
+            "E-FISCAL CONSULTORIA",
+            "BRAGA E MONTEIRO"
+        }
+    ),
+
+    /* 🔥 SOMENTE REPASSE */
+    KEEPFILTERS (
+        ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)
+
+Valor_PJ_Repasse = 
+CALCULATE(
+    [Realizado GS],
+
+    /* 🔒 Filtro de bandeiras */
+    KEEPFILTERS (
+        ContasReceber[bandeira] IN {
+            "AUDIT TECNOLOGIA",
+            "STUDIO REVISAO SOCIETARIA",
+            "SPACE W",
+            "STUDIO BROKERS",
+            "STUDIO CONTABILIDADE LTDA"
+        }
+    ),
+
+    /* 🔒 Filtro de descrições */
+    KEEPFILTERS (
+        ContasReceber[descricao] IN {
+            "RECEITA DE SUPORTE E CONSULTORIA EM TI",
+            "CLIENTES - LOCAÇÃO DE EQUIPAMENTOS E SUPORTE TI",
+            "CLIENTES - LICENÇAS DE SOFTWARES E PROGRAMAS GS",
+            "CLIENTES - LICENÇAS DE SOFTWARES E PROGRAMAS EXTERNO",
+            "Licenças de Softwares e Programas Auditatax",
+            "RECEITA AUDITACARD",
+            "Licenças de Softwares e Programas Auditacard",
+            "Licenças de Softwares e Programas PJ360"
+        }
+    ),
+
+    /* 🔥 SOMENTE REPASSE */
+    KEEPFILTERS (
+        ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)
+valor_Tax_Repasse = 
+CALCULATE(
+    [Realizado GS],
+
+    /* 🔹 REGRA DE DESCRIÇÃO */
+    KEEPFILTERS (
+        ContasReceber[descricao] IN {
+ "RECEITA DE RETIFICAÇÃO",
+                        "RECEITA DE TRANSAÇÃO TRIBUTÁRIA",
+            "RECEITA DE TESES",
+            "Receita de Transação Tributária",
+            "RECEITA DE PRT",
+            "RECEITA DE PROJETOS ESPECIAIS",
+            "RECEITA DE PONTOS QUALIFICADOS",
+            "RECEITA DE OPERAÇÃO DE JOBS (ÊXITO)",
+            "CLIENTES - TRIBUTÁRIO",
+            "CLIENTES - TRANSAÇÃO TRIBUTÁRIA",
+            "Receita de PRT",
+            "Receita de PRT",
+            "Receita de Compensação",
+            "Receita de Ponto Qualificados",
+            "Receita de Revisão Previdenciária",
+"Receita de Mapa Fiscal",
+"Receita de Revisão Previdenciária",
+"Receita de Transação Tributária"
+        }
+    ),
+
+    /* 🔹 REGRA DE BANDEIRA */
+    KEEPFILTERS (
+        ContasReceber[bandeira] IN {
+      "STUDIO CONTABILIDADE LTDA",
+            "STUDIO OPERACIONAL",
+            "SPACE W",
+            "STUDIO AGRONEGÓCIOS",
+            "ALIANÇA LEGAL",
+            "FERREIRA & MONTEIRO",
+            "STUDIO SBS STORE",
+            "AUDIT TECNOLOGIA",
+            "E-FISCAL OPERACIONAL",
+            "E-FISCAL CONSULTORIA",
+            "STUDIO OPERACIONAL 1",
+            "STUDIO STORE",
+            "BRAGA E MONTEIRO",
+            "SF CONSULTORIA",
+            "STUDIO ENERGY",
+            "STUDIO REVISAO SOCIETARIA",
+            "STUDIO BANK"
+        }
+    ),
+
+    /* 🔥 NOVA REGRA: SOMENTE DEPARTAMENTO REPASSE */
+    KEEPFILTERS (
+        ContasReceber[Dept_Descricao] = "Repasse"
+    )
+)

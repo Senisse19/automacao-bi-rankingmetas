@@ -4508,3 +4508,13 @@
 2026-02-24 14:45:51 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor Teste (metas)
 2026-02-24 14:47:42 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
 
+2026-02-24 16:01:08 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-02-24 16:01:11 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-02-25 10:12:58 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-02-25 10:12:59 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-02-25 10:12:59 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Query (7, 36) The value for '<oii>total_repasse</oii>' cannot be determined. Either the column doesn't exist, or there is no current row for this column."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3241803820"}}]}}}
+2026-02-25 10:12:59 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-02-25 10:12:59 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Query (12, 31) The value for '<oii>total_liquido_operacao</oii>' cannot be determined. Either the column doesn't exist, or there is no current row for this column."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3241803820"}}]}}}
+2026-02-25 10:13:01 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-02-25 10:17:52 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-02-25 10:17:55 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
