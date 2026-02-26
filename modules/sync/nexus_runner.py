@@ -137,7 +137,7 @@ def sync_modelos(client, svc):
         # Tratar Unidades Ausentes (Placeholders)
         if missing_unidade_ids:
             logger.info(
-                f"⚠ Encontradas {len(missing_unidade_ids)} unidades referenciadas mas inexistentes. Buscando nomes via API..."
+                f"Encontradas {len(missing_unidade_ids)} unidades referenciadas mas inexistentes. Buscando nomes via API..."
             )
             placeholder_batch = []
             for miss_uid in missing_unidade_ids:
@@ -179,6 +179,41 @@ def sync_modelos(client, svc):
         logger.error(f"Erro ao sincronizar modelos: {e}")
 
 
+def sync_contas_receber(client, svc):
+    logger.info("--- Sincronizando CONTAS A RECEBER (Fallback) ---")
+    try:
+        data = client.fetch_all_from_source("contas-receber")
+        logger.info(f"Encontradas {len(data)} contas a receber no Nexus.")
+
+        batch = []
+        agora = datetime.now().isoformat()
+        for item in data:
+            row = {
+                "id": item.get("id"),
+                "codigo": item.get("codigo"),
+                "razao_social": item.get("razao_social"),
+                "bandeira": item.get("bandeira"),
+                "descricao": item.get("descricao"),
+                "data_emissao": item.get("data_emissao"),
+                "data_vencimento": item.get("data_vencimento"),
+                "valor": item.get("valor_contas_receber"),
+                "personalizar": item.get("personalizar"),
+                "updated_at": agora,
+            }
+            batch.append(row)
+
+        logger.info(f"Fazendo upsert de {len(batch)} contas a receber...")
+        chunk_size = 500
+        for i in range(0, len(batch), chunk_size):
+            chunk = batch[i : i + chunk_size]
+            success = svc.upsert_data("nexus_contas_receber", chunk, on_conflict="id")
+            if not success:
+                logger.error(f"Failed chunk {i} for contas a receber")
+
+    except Exception as e:
+        logger.error(f"Erro ao sincronizar contas a receber: {e}")
+
+
 def run():
     logger.info("=== Starting Nexus Reference Sync ===")
     client = UnidadesClient()
@@ -187,6 +222,7 @@ def run():
     sync_unidades(client, svc)
     sync_participantes(client, svc)
     sync_modelos(client, svc)
+    sync_contas_receber(client, svc)
 
     # Novos Syncs (Enriquecimento de Jobs)
     from modules.referencial.sync_services import SyncServices

@@ -4518,3 +4518,1944 @@
 2026-02-25 10:13:01 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
 2026-02-25 10:17:52 - powerbi_data - INFO - Buscando dados do Power BI...
 2026-02-25 10:17:55 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-02-25 10:51:18 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-02-25 10:51:18 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to execute the DAX query."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3239575574"}}]}}}
+2026-02-25 10:51:18 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-02-25 10:51:18 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to execute the DAX query."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3239575574"}}]}}}
+2026-02-25 11:50:50 - sync_contas_receber - INFO - === SYNC Contas a Receber ===
+2026-02-25 11:50:51 - sync_contas_receber - INFO - Buscando dados da API Nexus (contas-receber)...
+2026-02-25 11:50:51 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 11:50:51 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 11:50:52 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 11:50:52 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 11:50:53 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 11:50:54 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 11:50:54 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 11:50:55 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 11:50:55 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 11:50:56 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 11:50:56 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 11:50:57 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 11:50:57 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 11:50:58 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 11:50:58 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 11:50:59 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 11:50:59 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 11:51:00 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 11:51:00 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 11:51:01 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 11:51:01 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 11:51:02 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 11:51:02 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 11:51:03 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 11:51:04 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 11:51:04 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 11:51:05 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 11:51:05 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 11:51:06 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 11:51:06 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 11:51:07 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 11:51:07 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 11:51:08 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 11:51:08 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 11:51:09 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 11:51:09 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 11:51:10 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 11:51:10 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 11:51:11 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 11:51:11 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 11:51:12 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 11:51:12 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 11:51:13 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 11:51:13 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 11:51:14 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 11:51:14 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 11:51:15 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 11:51:16 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 11:51:16 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 11:51:17 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 11:51:18 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 11:51:19 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 11:51:19 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 11:51:20 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 11:51:21 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 11:51:21 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 11:51:22 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 11:51:23 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 11:51:23 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 11:51:24 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 11:51:24 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 11:51:25 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 11:51:25 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 11:51:26 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 11:51:27 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 11:51:27 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 11:51:28 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 11:51:28 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 11:51:29 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 11:51:29 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 11:51:30 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 11:51:31 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 11:51:31 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 11:51:32 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 11:51:33 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 11:51:34 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 11:51:34 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 11:51:35 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 11:51:35 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 11:51:36 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 11:51:36 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 11:51:37 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 11:51:37 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 11:51:38 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 11:51:39 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 11:51:39 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 11:51:40 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 11:51:40 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 11:51:41 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 11:51:41 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 11:51:42 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 11:51:42 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 11:51:43 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 11:51:44 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 11:51:44 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 11:51:45 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 11:51:45 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 11:51:46 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 11:51:46 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 11:51:47 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 11:51:48 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 11:51:48 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 11:51:49 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 11:51:49 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 11:51:50 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 11:51:50 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 11:51:51 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 11:51:52 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 11:51:52 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 11:51:53 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 11:51:54 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 11:51:54 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 11:51:55 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 11:51:55 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 11:51:56 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 11:51:57 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 11:51:57 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 11:51:58 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 11:51:58 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 11:51:59 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 11:52:00 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 11:52:00 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 11:52:01 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 11:52:02 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 11:52:02 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 11:52:03 - unidades_client - INFO - Page 125 fetched 28 items. Total so far: 62028
+2026-02-25 11:52:03 - sync_contas_receber - INFO - Total de registros obtidos: 62028
+2026-02-25 11:52:03 - sync_contas_receber - INFO - Chunk 1/125 upsertado (500 registros)
+2026-02-25 11:52:04 - sync_contas_receber - INFO - Chunk 2/125 upsertado (500 registros)
+2026-02-25 11:52:04 - sync_contas_receber - INFO - Chunk 3/125 upsertado (500 registros)
+2026-02-25 11:52:05 - sync_contas_receber - INFO - Chunk 4/125 upsertado (500 registros)
+2026-02-25 11:52:06 - sync_contas_receber - INFO - Chunk 5/125 upsertado (500 registros)
+2026-02-25 11:52:06 - sync_contas_receber - INFO - Chunk 6/125 upsertado (500 registros)
+2026-02-25 11:52:07 - sync_contas_receber - INFO - Chunk 7/125 upsertado (500 registros)
+2026-02-25 11:52:07 - sync_contas_receber - INFO - Chunk 8/125 upsertado (500 registros)
+2026-02-25 11:52:08 - sync_contas_receber - INFO - Chunk 9/125 upsertado (500 registros)
+2026-02-25 11:52:08 - sync_contas_receber - INFO - Chunk 10/125 upsertado (500 registros)
+2026-02-25 11:52:08 - sync_contas_receber - INFO - Chunk 11/125 upsertado (500 registros)
+2026-02-25 11:52:09 - sync_contas_receber - INFO - Chunk 12/125 upsertado (500 registros)
+2026-02-25 11:52:09 - sync_contas_receber - INFO - Chunk 13/125 upsertado (500 registros)
+2026-02-25 11:52:10 - sync_contas_receber - INFO - Chunk 14/125 upsertado (500 registros)
+2026-02-25 11:52:10 - sync_contas_receber - INFO - Chunk 15/125 upsertado (500 registros)
+2026-02-25 11:52:10 - sync_contas_receber - INFO - Chunk 16/125 upsertado (500 registros)
+2026-02-25 11:52:11 - sync_contas_receber - INFO - Chunk 17/125 upsertado (500 registros)
+2026-02-25 11:52:11 - sync_contas_receber - INFO - Chunk 18/125 upsertado (500 registros)
+2026-02-25 11:52:11 - sync_contas_receber - INFO - Chunk 19/125 upsertado (500 registros)
+2026-02-25 11:52:12 - sync_contas_receber - INFO - Chunk 20/125 upsertado (500 registros)
+2026-02-25 11:52:12 - sync_contas_receber - INFO - Chunk 21/125 upsertado (500 registros)
+2026-02-25 11:52:12 - sync_contas_receber - INFO - Chunk 22/125 upsertado (500 registros)
+2026-02-25 11:52:13 - sync_contas_receber - INFO - Chunk 23/125 upsertado (500 registros)
+2026-02-25 11:52:13 - sync_contas_receber - INFO - Chunk 24/125 upsertado (500 registros)
+2026-02-25 11:52:14 - sync_contas_receber - INFO - Chunk 25/125 upsertado (500 registros)
+2026-02-25 11:52:14 - sync_contas_receber - INFO - Chunk 26/125 upsertado (500 registros)
+2026-02-25 11:52:15 - sync_contas_receber - INFO - Chunk 27/125 upsertado (500 registros)
+2026-02-25 11:52:15 - sync_contas_receber - INFO - Chunk 28/125 upsertado (500 registros)
+2026-02-25 11:52:15 - sync_contas_receber - INFO - Chunk 29/125 upsertado (500 registros)
+2026-02-25 11:52:16 - sync_contas_receber - INFO - Chunk 30/125 upsertado (500 registros)
+2026-02-25 11:52:16 - sync_contas_receber - INFO - Chunk 31/125 upsertado (500 registros)
+2026-02-25 11:52:16 - sync_contas_receber - INFO - Chunk 32/125 upsertado (500 registros)
+2026-02-25 11:52:17 - sync_contas_receber - INFO - Chunk 33/125 upsertado (500 registros)
+2026-02-25 11:52:17 - sync_contas_receber - INFO - Chunk 34/125 upsertado (500 registros)
+2026-02-25 11:52:18 - sync_contas_receber - INFO - Chunk 35/125 upsertado (500 registros)
+2026-02-25 11:52:18 - sync_contas_receber - INFO - Chunk 36/125 upsertado (500 registros)
+2026-02-25 11:52:18 - sync_contas_receber - INFO - Chunk 37/125 upsertado (500 registros)
+2026-02-25 11:52:19 - sync_contas_receber - INFO - Chunk 38/125 upsertado (500 registros)
+2026-02-25 11:52:19 - sync_contas_receber - INFO - Chunk 39/125 upsertado (500 registros)
+2026-02-25 11:52:20 - sync_contas_receber - INFO - Chunk 40/125 upsertado (500 registros)
+2026-02-25 11:52:20 - sync_contas_receber - INFO - Chunk 41/125 upsertado (500 registros)
+2026-02-25 11:52:20 - sync_contas_receber - INFO - Chunk 42/125 upsertado (500 registros)
+2026-02-25 11:52:21 - sync_contas_receber - INFO - Chunk 43/125 upsertado (500 registros)
+2026-02-25 11:52:21 - sync_contas_receber - INFO - Chunk 44/125 upsertado (500 registros)
+2026-02-25 11:52:22 - sync_contas_receber - INFO - Chunk 45/125 upsertado (500 registros)
+2026-02-25 11:52:22 - sync_contas_receber - INFO - Chunk 46/125 upsertado (500 registros)
+2026-02-25 11:52:23 - sync_contas_receber - INFO - Chunk 47/125 upsertado (500 registros)
+2026-02-25 11:52:23 - sync_contas_receber - INFO - Chunk 48/125 upsertado (500 registros)
+2026-02-25 11:52:23 - sync_contas_receber - INFO - Chunk 49/125 upsertado (500 registros)
+2026-02-25 11:52:24 - sync_contas_receber - INFO - Chunk 50/125 upsertado (500 registros)
+2026-02-25 11:52:24 - sync_contas_receber - INFO - Chunk 51/125 upsertado (500 registros)
+2026-02-25 11:52:25 - sync_contas_receber - INFO - Chunk 52/125 upsertado (500 registros)
+2026-02-25 11:52:25 - sync_contas_receber - INFO - Chunk 53/125 upsertado (500 registros)
+2026-02-25 11:52:25 - sync_contas_receber - INFO - Chunk 54/125 upsertado (500 registros)
+2026-02-25 11:52:26 - sync_contas_receber - INFO - Chunk 55/125 upsertado (500 registros)
+2026-02-25 11:52:26 - sync_contas_receber - INFO - Chunk 56/125 upsertado (500 registros)
+2026-02-25 11:52:26 - sync_contas_receber - INFO - Chunk 57/125 upsertado (500 registros)
+2026-02-25 11:52:27 - sync_contas_receber - INFO - Chunk 58/125 upsertado (500 registros)
+2026-02-25 11:52:27 - sync_contas_receber - INFO - Chunk 59/125 upsertado (500 registros)
+2026-02-25 11:52:28 - sync_contas_receber - INFO - Chunk 60/125 upsertado (500 registros)
+2026-02-25 11:52:28 - sync_contas_receber - INFO - Chunk 61/125 upsertado (500 registros)
+2026-02-25 11:52:28 - sync_contas_receber - INFO - Chunk 62/125 upsertado (500 registros)
+2026-02-25 11:52:29 - sync_contas_receber - INFO - Chunk 63/125 upsertado (500 registros)
+2026-02-25 11:52:29 - sync_contas_receber - INFO - Chunk 64/125 upsertado (500 registros)
+2026-02-25 11:52:30 - sync_contas_receber - INFO - Chunk 65/125 upsertado (500 registros)
+2026-02-25 11:52:30 - sync_contas_receber - INFO - Chunk 66/125 upsertado (500 registros)
+2026-02-25 11:52:31 - sync_contas_receber - INFO - Chunk 67/125 upsertado (500 registros)
+2026-02-25 11:52:31 - sync_contas_receber - INFO - Chunk 68/125 upsertado (500 registros)
+2026-02-25 11:52:31 - sync_contas_receber - INFO - Chunk 69/125 upsertado (500 registros)
+2026-02-25 11:52:32 - sync_contas_receber - INFO - Chunk 70/125 upsertado (500 registros)
+2026-02-25 11:52:32 - sync_contas_receber - INFO - Chunk 71/125 upsertado (500 registros)
+2026-02-25 11:52:33 - sync_contas_receber - INFO - Chunk 72/125 upsertado (500 registros)
+2026-02-25 11:52:33 - sync_contas_receber - INFO - Chunk 73/125 upsertado (500 registros)
+2026-02-25 11:52:33 - sync_contas_receber - INFO - Chunk 74/125 upsertado (500 registros)
+2026-02-25 11:52:34 - sync_contas_receber - INFO - Chunk 75/125 upsertado (500 registros)
+2026-02-25 11:52:34 - sync_contas_receber - INFO - Chunk 76/125 upsertado (500 registros)
+2026-02-25 11:52:34 - sync_contas_receber - INFO - Chunk 77/125 upsertado (500 registros)
+2026-02-25 11:52:35 - sync_contas_receber - INFO - Chunk 78/125 upsertado (500 registros)
+2026-02-25 11:52:35 - sync_contas_receber - INFO - Chunk 79/125 upsertado (500 registros)
+2026-02-25 11:52:35 - sync_contas_receber - INFO - Chunk 80/125 upsertado (500 registros)
+2026-02-25 11:52:36 - sync_contas_receber - INFO - Chunk 81/125 upsertado (500 registros)
+2026-02-25 11:52:36 - sync_contas_receber - INFO - Chunk 82/125 upsertado (500 registros)
+2026-02-25 11:52:36 - sync_contas_receber - INFO - Chunk 83/125 upsertado (500 registros)
+2026-02-25 11:52:37 - sync_contas_receber - INFO - Chunk 84/125 upsertado (500 registros)
+2026-02-25 11:52:37 - sync_contas_receber - INFO - Chunk 85/125 upsertado (500 registros)
+2026-02-25 11:52:37 - sync_contas_receber - INFO - Chunk 86/125 upsertado (500 registros)
+2026-02-25 11:52:38 - sync_contas_receber - INFO - Chunk 87/125 upsertado (500 registros)
+2026-02-25 11:52:38 - sync_contas_receber - INFO - Chunk 88/125 upsertado (500 registros)
+2026-02-25 11:52:38 - sync_contas_receber - INFO - Chunk 89/125 upsertado (500 registros)
+2026-02-25 11:52:39 - sync_contas_receber - INFO - Chunk 90/125 upsertado (500 registros)
+2026-02-25 11:52:39 - sync_contas_receber - INFO - Chunk 91/125 upsertado (500 registros)
+2026-02-25 11:52:40 - sync_contas_receber - INFO - Chunk 92/125 upsertado (500 registros)
+2026-02-25 11:52:40 - sync_contas_receber - INFO - Chunk 93/125 upsertado (500 registros)
+2026-02-25 11:52:40 - sync_contas_receber - INFO - Chunk 94/125 upsertado (500 registros)
+2026-02-25 11:52:41 - sync_contas_receber - INFO - Chunk 95/125 upsertado (500 registros)
+2026-02-25 11:52:41 - sync_contas_receber - INFO - Chunk 96/125 upsertado (500 registros)
+2026-02-25 11:52:41 - sync_contas_receber - INFO - Chunk 97/125 upsertado (500 registros)
+2026-02-25 11:52:42 - sync_contas_receber - INFO - Chunk 98/125 upsertado (500 registros)
+2026-02-25 11:52:42 - sync_contas_receber - INFO - Chunk 99/125 upsertado (500 registros)
+2026-02-25 11:52:42 - sync_contas_receber - INFO - Chunk 100/125 upsertado (500 registros)
+2026-02-25 11:52:43 - sync_contas_receber - INFO - Chunk 101/125 upsertado (500 registros)
+2026-02-25 11:52:43 - sync_contas_receber - INFO - Chunk 102/125 upsertado (500 registros)
+2026-02-25 11:52:43 - sync_contas_receber - INFO - Chunk 103/125 upsertado (500 registros)
+2026-02-25 11:52:44 - sync_contas_receber - INFO - Chunk 104/125 upsertado (500 registros)
+2026-02-25 11:52:44 - sync_contas_receber - INFO - Chunk 105/125 upsertado (500 registros)
+2026-02-25 11:52:44 - sync_contas_receber - INFO - Chunk 106/125 upsertado (500 registros)
+2026-02-25 11:52:45 - sync_contas_receber - INFO - Chunk 107/125 upsertado (500 registros)
+2026-02-25 11:52:45 - sync_contas_receber - INFO - Chunk 108/125 upsertado (500 registros)
+2026-02-25 11:52:45 - sync_contas_receber - INFO - Chunk 109/125 upsertado (500 registros)
+2026-02-25 11:52:46 - sync_contas_receber - INFO - Chunk 110/125 upsertado (500 registros)
+2026-02-25 11:52:46 - sync_contas_receber - INFO - Chunk 111/125 upsertado (500 registros)
+2026-02-25 11:52:46 - sync_contas_receber - INFO - Chunk 112/125 upsertado (500 registros)
+2026-02-25 11:52:47 - sync_contas_receber - INFO - Chunk 113/125 upsertado (500 registros)
+2026-02-25 11:52:47 - sync_contas_receber - INFO - Chunk 114/125 upsertado (500 registros)
+2026-02-25 11:52:47 - sync_contas_receber - INFO - Chunk 115/125 upsertado (500 registros)
+2026-02-25 11:52:48 - sync_contas_receber - INFO - Chunk 116/125 upsertado (500 registros)
+2026-02-25 11:52:48 - sync_contas_receber - INFO - Chunk 117/125 upsertado (500 registros)
+2026-02-25 11:52:48 - sync_contas_receber - INFO - Chunk 118/125 upsertado (500 registros)
+2026-02-25 11:52:49 - sync_contas_receber - INFO - Chunk 119/125 upsertado (500 registros)
+2026-02-25 11:52:49 - sync_contas_receber - INFO - Chunk 120/125 upsertado (500 registros)
+2026-02-25 11:52:50 - sync_contas_receber - INFO - Chunk 121/125 upsertado (500 registros)
+2026-02-25 11:52:50 - sync_contas_receber - INFO - Chunk 122/125 upsertado (500 registros)
+2026-02-25 11:52:50 - sync_contas_receber - INFO - Chunk 123/125 upsertado (500 registros)
+2026-02-25 11:52:51 - sync_contas_receber - INFO - Chunk 124/125 upsertado (500 registros)
+2026-02-25 11:52:51 - sync_contas_receber - INFO - Chunk 125/125 upsertado (28 registros)
+2026-02-25 11:52:51 - sync_contas_receber - INFO - === SYNC concluído: 62028 registros processados ===
+2026-02-25 14:44:24 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 14:44:26 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:44:26 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:44:27 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:44:28 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:44:29 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:44:29 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:44:30 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:44:31 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:44:31 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 14:44:32 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 14:44:33 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 14:44:34 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 14:44:35 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 14:44:36 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 14:44:37 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 14:44:38 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 14:44:38 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 14:44:39 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 14:44:40 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 14:44:41 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 14:44:41 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 14:44:42 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 14:44:43 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 14:44:44 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 14:44:45 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 14:44:46 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 14:44:47 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 14:44:48 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 14:44:48 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 14:44:49 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 14:44:51 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 14:44:52 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 14:44:53 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 14:44:54 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 14:44:55 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 14:44:56 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 14:44:57 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 14:44:57 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 14:44:58 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 14:44:59 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 14:45:00 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 14:45:01 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 14:45:02 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 14:45:03 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 14:45:04 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 14:45:05 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 14:45:05 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 14:45:06 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 14:45:07 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 14:45:08 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 14:45:08 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 14:45:09 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 14:45:10 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 14:45:11 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 14:45:12 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 14:45:13 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 14:45:13 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 14:45:14 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 14:45:16 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 14:45:17 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 14:45:18 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 14:45:18 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 14:45:19 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 14:45:20 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 14:45:21 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 14:45:21 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 14:45:23 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 14:45:23 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 14:45:24 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 14:45:25 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 14:45:26 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 14:45:27 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 14:45:27 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 14:45:28 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 14:45:29 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 14:45:31 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 14:45:31 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 14:45:32 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 14:45:33 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 14:45:33 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 14:45:34 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 14:45:34 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 14:45:35 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 14:45:36 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 14:45:36 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 14:45:37 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 14:45:37 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 14:45:38 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 14:45:39 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 14:45:40 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 14:45:41 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 14:45:41 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 14:45:42 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 14:45:43 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 14:45:44 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 14:45:45 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 14:45:46 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 14:45:46 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 14:45:48 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 14:45:48 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 14:45:49 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 14:45:50 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 14:45:51 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 14:45:52 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 14:45:53 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 14:45:54 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 14:45:54 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 14:45:55 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 14:45:56 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 14:45:57 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 14:45:59 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 14:45:59 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 14:46:01 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 14:46:01 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 14:46:02 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 14:46:03 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 14:46:04 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 14:46:05 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 14:46:06 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 14:46:07 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 14:46:07 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 14:46:08 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 14:46:09 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 14:46:10 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 14:46:10 - unidades_client - INFO - Page 125 fetched 12 items. Total so far: 62012
+2026-02-25 14:47:27 - sync_contas_receber - INFO - === SYNC Contas a Receber ===
+2026-02-25 14:47:27 - sync_contas_receber - INFO - Buscando dados da API Nexus (contas-receber)...
+2026-02-25 14:47:27 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 14:47:28 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:47:29 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:47:29 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:47:30 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:47:30 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:47:31 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:47:31 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:47:31 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:47:32 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 14:47:32 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 14:47:33 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 14:47:33 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 14:47:34 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 14:47:34 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 14:47:35 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 14:47:35 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 14:47:36 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 14:47:36 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 14:47:37 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 14:47:37 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 14:47:38 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 14:47:38 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 14:47:39 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 14:47:39 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 14:47:40 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 14:47:40 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 14:47:41 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 14:47:41 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 14:47:42 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 14:47:42 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 14:47:43 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 14:47:43 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 14:47:44 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 14:47:45 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 14:47:45 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 14:47:46 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 14:47:46 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 14:47:47 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 14:47:47 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 14:47:48 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 14:47:49 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 14:47:49 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 14:47:50 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 14:47:50 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 14:47:51 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 14:47:52 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 14:47:52 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 14:47:53 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 14:47:53 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 14:47:54 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 14:47:54 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 14:47:55 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 14:47:56 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 14:47:56 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 14:47:57 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 14:47:57 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 14:47:58 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 14:47:58 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 14:47:59 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 14:48:00 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 14:48:00 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 14:48:01 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 14:48:02 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 14:48:02 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 14:48:03 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 14:48:04 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 14:48:04 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 14:48:05 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 14:48:05 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 14:48:06 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 14:48:06 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 14:48:07 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 14:48:08 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 14:48:08 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 14:48:09 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 14:48:10 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 14:48:10 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 14:48:11 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 14:48:11 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 14:48:12 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 14:48:13 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 14:48:13 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 14:48:14 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 14:48:14 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 14:48:15 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 14:48:15 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 14:48:16 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 14:48:17 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 14:48:17 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 14:48:18 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 14:48:18 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 14:48:19 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 14:48:19 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 14:48:20 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 14:48:21 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 14:48:21 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 14:48:22 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 14:48:22 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 14:48:23 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 14:48:23 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 14:48:24 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 14:48:25 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 14:48:25 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 14:48:26 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 14:48:26 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 14:48:27 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 14:48:27 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 14:48:28 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 14:48:29 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 14:48:29 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 14:48:30 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 14:48:31 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 14:48:31 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 14:48:32 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 14:48:32 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 14:48:33 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 14:48:34 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 14:48:34 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 14:48:35 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 14:48:36 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 14:48:37 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 14:48:37 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 14:48:38 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 14:48:38 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 14:48:39 - unidades_client - INFO - Page 125 fetched 27 items. Total so far: 62027
+2026-02-25 14:48:39 - sync_contas_receber - INFO - Total de registros obtidos: 62027
+2026-02-25 14:48:40 - sync_contas_receber - INFO - Chunk 1/125 upsertado (500 registros)
+2026-02-25 14:48:40 - sync_contas_receber - INFO - Chunk 2/125 upsertado (500 registros)
+2026-02-25 14:48:41 - sync_contas_receber - INFO - Chunk 3/125 upsertado (500 registros)
+2026-02-25 14:48:42 - sync_contas_receber - INFO - Chunk 4/125 upsertado (500 registros)
+2026-02-25 14:48:42 - sync_contas_receber - INFO - Chunk 5/125 upsertado (500 registros)
+2026-02-25 14:48:43 - sync_contas_receber - INFO - Chunk 6/125 upsertado (500 registros)
+2026-02-25 14:48:43 - sync_contas_receber - INFO - Chunk 7/125 upsertado (500 registros)
+2026-02-25 14:48:44 - sync_contas_receber - INFO - Chunk 8/125 upsertado (500 registros)
+2026-02-25 14:48:44 - sync_contas_receber - INFO - Chunk 9/125 upsertado (500 registros)
+2026-02-25 14:48:45 - sync_contas_receber - INFO - Chunk 10/125 upsertado (500 registros)
+2026-02-25 14:48:45 - sync_contas_receber - INFO - Chunk 11/125 upsertado (500 registros)
+2026-02-25 14:48:46 - sync_contas_receber - INFO - Chunk 12/125 upsertado (500 registros)
+2026-02-25 14:48:46 - sync_contas_receber - INFO - Chunk 13/125 upsertado (500 registros)
+2026-02-25 14:48:46 - sync_contas_receber - INFO - Chunk 14/125 upsertado (500 registros)
+2026-02-25 14:48:47 - sync_contas_receber - INFO - Chunk 15/125 upsertado (500 registros)
+2026-02-25 14:48:47 - sync_contas_receber - INFO - Chunk 16/125 upsertado (500 registros)
+2026-02-25 14:48:48 - sync_contas_receber - INFO - Chunk 17/125 upsertado (500 registros)
+2026-02-25 14:48:48 - sync_contas_receber - INFO - Chunk 18/125 upsertado (500 registros)
+2026-02-25 14:48:48 - sync_contas_receber - INFO - Chunk 19/125 upsertado (500 registros)
+2026-02-25 14:48:49 - sync_contas_receber - INFO - Chunk 20/125 upsertado (500 registros)
+2026-02-25 14:48:49 - sync_contas_receber - INFO - Chunk 21/125 upsertado (500 registros)
+2026-02-25 14:48:50 - sync_contas_receber - INFO - Chunk 22/125 upsertado (500 registros)
+2026-02-25 14:48:50 - sync_contas_receber - INFO - Chunk 23/125 upsertado (500 registros)
+2026-02-25 14:48:51 - sync_contas_receber - INFO - Chunk 24/125 upsertado (500 registros)
+2026-02-25 14:48:51 - sync_contas_receber - INFO - Chunk 25/125 upsertado (500 registros)
+2026-02-25 14:48:51 - sync_contas_receber - INFO - Chunk 26/125 upsertado (500 registros)
+2026-02-25 14:48:52 - sync_contas_receber - INFO - Chunk 27/125 upsertado (500 registros)
+2026-02-25 14:48:52 - sync_contas_receber - INFO - Chunk 28/125 upsertado (500 registros)
+2026-02-25 14:48:53 - sync_contas_receber - INFO - Chunk 29/125 upsertado (500 registros)
+2026-02-25 14:48:53 - sync_contas_receber - INFO - Chunk 30/125 upsertado (500 registros)
+2026-02-25 14:48:54 - sync_contas_receber - INFO - Chunk 31/125 upsertado (500 registros)
+2026-02-25 14:48:54 - sync_contas_receber - INFO - Chunk 32/125 upsertado (500 registros)
+2026-02-25 14:48:54 - sync_contas_receber - INFO - Chunk 33/125 upsertado (500 registros)
+2026-02-25 14:48:55 - sync_contas_receber - INFO - Chunk 34/125 upsertado (500 registros)
+2026-02-25 14:48:55 - sync_contas_receber - INFO - Chunk 35/125 upsertado (500 registros)
+2026-02-25 14:48:56 - sync_contas_receber - INFO - Chunk 36/125 upsertado (500 registros)
+2026-02-25 14:48:56 - sync_contas_receber - INFO - Chunk 37/125 upsertado (500 registros)
+2026-02-25 14:48:57 - sync_contas_receber - INFO - Chunk 38/125 upsertado (500 registros)
+2026-02-25 14:48:57 - sync_contas_receber - INFO - Chunk 39/125 upsertado (500 registros)
+2026-02-25 14:48:57 - sync_contas_receber - INFO - Chunk 40/125 upsertado (500 registros)
+2026-02-25 14:48:58 - sync_contas_receber - INFO - Chunk 41/125 upsertado (500 registros)
+2026-02-25 14:48:58 - sync_contas_receber - INFO - Chunk 42/125 upsertado (500 registros)
+2026-02-25 14:48:59 - sync_contas_receber - INFO - Chunk 43/125 upsertado (500 registros)
+2026-02-25 14:48:59 - sync_contas_receber - INFO - Chunk 44/125 upsertado (500 registros)
+2026-02-25 14:48:59 - sync_contas_receber - INFO - Chunk 45/125 upsertado (500 registros)
+2026-02-25 14:49:00 - sync_contas_receber - INFO - Chunk 46/125 upsertado (500 registros)
+2026-02-25 14:49:00 - sync_contas_receber - INFO - Chunk 47/125 upsertado (500 registros)
+2026-02-25 14:49:01 - sync_contas_receber - INFO - Chunk 48/125 upsertado (500 registros)
+2026-02-25 14:49:01 - sync_contas_receber - INFO - Chunk 49/125 upsertado (500 registros)
+2026-02-25 14:49:01 - sync_contas_receber - INFO - Chunk 50/125 upsertado (500 registros)
+2026-02-25 14:49:02 - sync_contas_receber - INFO - Chunk 51/125 upsertado (500 registros)
+2026-02-25 14:49:02 - sync_contas_receber - INFO - Chunk 52/125 upsertado (500 registros)
+2026-02-25 14:49:03 - sync_contas_receber - INFO - Chunk 53/125 upsertado (500 registros)
+2026-02-25 14:49:03 - sync_contas_receber - INFO - Chunk 54/125 upsertado (500 registros)
+2026-02-25 14:49:04 - sync_contas_receber - INFO - Chunk 55/125 upsertado (500 registros)
+2026-02-25 14:49:04 - sync_contas_receber - INFO - Chunk 56/125 upsertado (500 registros)
+2026-02-25 14:49:05 - sync_contas_receber - INFO - Chunk 57/125 upsertado (500 registros)
+2026-02-25 14:49:05 - sync_contas_receber - INFO - Chunk 58/125 upsertado (500 registros)
+2026-02-25 14:49:06 - sync_contas_receber - INFO - Chunk 59/125 upsertado (500 registros)
+2026-02-25 14:49:06 - sync_contas_receber - INFO - Chunk 60/125 upsertado (500 registros)
+2026-02-25 14:49:07 - sync_contas_receber - INFO - Chunk 61/125 upsertado (500 registros)
+2026-02-25 14:49:07 - sync_contas_receber - INFO - Chunk 62/125 upsertado (500 registros)
+2026-02-25 14:49:07 - sync_contas_receber - INFO - Chunk 63/125 upsertado (500 registros)
+2026-02-25 14:49:08 - sync_contas_receber - INFO - Chunk 64/125 upsertado (500 registros)
+2026-02-25 14:49:08 - sync_contas_receber - INFO - Chunk 65/125 upsertado (500 registros)
+2026-02-25 14:49:09 - sync_contas_receber - INFO - Chunk 66/125 upsertado (500 registros)
+2026-02-25 14:49:09 - sync_contas_receber - INFO - Chunk 67/125 upsertado (500 registros)
+2026-02-25 14:49:09 - sync_contas_receber - INFO - Chunk 68/125 upsertado (500 registros)
+2026-02-25 14:49:10 - sync_contas_receber - INFO - Chunk 69/125 upsertado (500 registros)
+2026-02-25 14:49:10 - sync_contas_receber - INFO - Chunk 70/125 upsertado (500 registros)
+2026-02-25 14:49:11 - sync_contas_receber - INFO - Chunk 71/125 upsertado (500 registros)
+2026-02-25 14:49:11 - sync_contas_receber - INFO - Chunk 72/125 upsertado (500 registros)
+2026-02-25 14:49:12 - sync_contas_receber - INFO - Chunk 73/125 upsertado (500 registros)
+2026-02-25 14:49:12 - sync_contas_receber - INFO - Chunk 74/125 upsertado (500 registros)
+2026-02-25 14:49:12 - sync_contas_receber - INFO - Chunk 75/125 upsertado (500 registros)
+2026-02-25 14:49:13 - sync_contas_receber - INFO - Chunk 76/125 upsertado (500 registros)
+2026-02-25 14:49:13 - sync_contas_receber - INFO - Chunk 77/125 upsertado (500 registros)
+2026-02-25 14:49:14 - sync_contas_receber - INFO - Chunk 78/125 upsertado (500 registros)
+2026-02-25 14:49:14 - sync_contas_receber - INFO - Chunk 79/125 upsertado (500 registros)
+2026-02-25 14:49:14 - sync_contas_receber - INFO - Chunk 80/125 upsertado (500 registros)
+2026-02-25 14:49:15 - sync_contas_receber - INFO - Chunk 81/125 upsertado (500 registros)
+2026-02-25 14:49:15 - sync_contas_receber - INFO - Chunk 82/125 upsertado (500 registros)
+2026-02-25 14:49:16 - sync_contas_receber - INFO - Chunk 83/125 upsertado (500 registros)
+2026-02-25 14:49:16 - sync_contas_receber - INFO - Chunk 84/125 upsertado (500 registros)
+2026-02-25 14:49:17 - sync_contas_receber - INFO - Chunk 85/125 upsertado (500 registros)
+2026-02-25 14:49:17 - sync_contas_receber - INFO - Chunk 86/125 upsertado (500 registros)
+2026-02-25 14:49:17 - sync_contas_receber - INFO - Chunk 87/125 upsertado (500 registros)
+2026-02-25 14:49:18 - sync_contas_receber - INFO - Chunk 88/125 upsertado (500 registros)
+2026-02-25 14:49:18 - sync_contas_receber - INFO - Chunk 89/125 upsertado (500 registros)
+2026-02-25 14:49:19 - sync_contas_receber - INFO - Chunk 90/125 upsertado (500 registros)
+2026-02-25 14:49:19 - sync_contas_receber - INFO - Chunk 91/125 upsertado (500 registros)
+2026-02-25 14:49:20 - sync_contas_receber - INFO - Chunk 92/125 upsertado (500 registros)
+2026-02-25 14:49:20 - sync_contas_receber - INFO - Chunk 93/125 upsertado (500 registros)
+2026-02-25 14:49:21 - sync_contas_receber - INFO - Chunk 94/125 upsertado (500 registros)
+2026-02-25 14:49:21 - sync_contas_receber - INFO - Chunk 95/125 upsertado (500 registros)
+2026-02-25 14:49:22 - sync_contas_receber - INFO - Chunk 96/125 upsertado (500 registros)
+2026-02-25 14:49:22 - sync_contas_receber - INFO - Chunk 97/125 upsertado (500 registros)
+2026-02-25 14:49:22 - sync_contas_receber - INFO - Chunk 98/125 upsertado (500 registros)
+2026-02-25 14:49:23 - sync_contas_receber - INFO - Chunk 99/125 upsertado (500 registros)
+2026-02-25 14:49:23 - sync_contas_receber - INFO - Chunk 100/125 upsertado (500 registros)
+2026-02-25 14:49:24 - sync_contas_receber - INFO - Chunk 101/125 upsertado (500 registros)
+2026-02-25 14:49:24 - sync_contas_receber - INFO - Chunk 102/125 upsertado (500 registros)
+2026-02-25 14:49:25 - sync_contas_receber - INFO - Chunk 103/125 upsertado (500 registros)
+2026-02-25 14:49:25 - sync_contas_receber - INFO - Chunk 104/125 upsertado (500 registros)
+2026-02-25 14:49:25 - sync_contas_receber - INFO - Chunk 105/125 upsertado (500 registros)
+2026-02-25 14:49:26 - sync_contas_receber - INFO - Chunk 106/125 upsertado (500 registros)
+2026-02-25 14:49:26 - sync_contas_receber - INFO - Chunk 107/125 upsertado (500 registros)
+2026-02-25 14:49:27 - sync_contas_receber - INFO - Chunk 108/125 upsertado (500 registros)
+2026-02-25 14:49:27 - sync_contas_receber - INFO - Chunk 109/125 upsertado (500 registros)
+2026-02-25 14:49:27 - sync_contas_receber - INFO - Chunk 110/125 upsertado (500 registros)
+2026-02-25 14:49:28 - sync_contas_receber - INFO - Chunk 111/125 upsertado (500 registros)
+2026-02-25 14:49:28 - sync_contas_receber - INFO - Chunk 112/125 upsertado (500 registros)
+2026-02-25 14:49:29 - sync_contas_receber - INFO - Chunk 113/125 upsertado (500 registros)
+2026-02-25 14:49:29 - sync_contas_receber - INFO - Chunk 114/125 upsertado (500 registros)
+2026-02-25 14:49:30 - sync_contas_receber - INFO - Chunk 115/125 upsertado (500 registros)
+2026-02-25 14:49:30 - sync_contas_receber - INFO - Chunk 116/125 upsertado (500 registros)
+2026-02-25 14:49:30 - sync_contas_receber - INFO - Chunk 117/125 upsertado (500 registros)
+2026-02-25 14:49:31 - sync_contas_receber - INFO - Chunk 118/125 upsertado (500 registros)
+2026-02-25 14:49:31 - sync_contas_receber - INFO - Chunk 119/125 upsertado (500 registros)
+2026-02-25 14:49:32 - sync_contas_receber - INFO - Chunk 120/125 upsertado (500 registros)
+2026-02-25 14:49:32 - sync_contas_receber - INFO - Chunk 121/125 upsertado (500 registros)
+2026-02-25 14:49:33 - sync_contas_receber - INFO - Chunk 122/125 upsertado (500 registros)
+2026-02-25 14:49:33 - sync_contas_receber - INFO - Chunk 123/125 upsertado (500 registros)
+2026-02-25 14:49:34 - sync_contas_receber - INFO - Chunk 124/125 upsertado (500 registros)
+2026-02-25 14:49:34 - sync_contas_receber - INFO - Chunk 125/125 upsertado (27 registros)
+2026-02-25 14:49:34 - sync_contas_receber - INFO - === SYNC concluído: 62027 registros processados ===
+2026-02-25 14:49:40 - run_nexus_sync - INFO - === Starting Nexus Reference Sync ===
+2026-02-25 14:49:40 - run_nexus_sync - INFO - --- Sincronizando UNIDADES ---
+2026-02-25 14:49:40 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/unidades/
+2026-02-25 14:49:41 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:49:41 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:49:41 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:49:41 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:49:41 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:49:41 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:49:41 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:49:42 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:49:42 - unidades_client - INFO - Page 9 fetched 419 items. Total so far: 4419
+2026-02-25 14:49:42 - run_nexus_sync - INFO - Encontradas 4419 unidades no Nexus.
+2026-02-25 14:49:42 - run_nexus_sync - INFO - Fazendo upsert de 4419 unidades...
+2026-02-25 14:49:42 - run_nexus_sync - INFO - Upserted items 0 to 500
+2026-02-25 14:49:43 - run_nexus_sync - INFO - Upserted items 500 to 1000
+2026-02-25 14:49:43 - run_nexus_sync - INFO - Upserted items 1000 to 1500
+2026-02-25 14:49:44 - run_nexus_sync - INFO - Upserted items 1500 to 2000
+2026-02-25 14:49:44 - run_nexus_sync - INFO - Upserted items 2000 to 2500
+2026-02-25 14:49:44 - run_nexus_sync - INFO - Upserted items 2500 to 3000
+2026-02-25 14:49:45 - run_nexus_sync - INFO - Upserted items 3000 to 3500
+2026-02-25 14:49:45 - run_nexus_sync - INFO - Upserted items 3500 to 4000
+2026-02-25 14:49:46 - run_nexus_sync - INFO - Upserted items 4000 to 4419
+2026-02-25 14:49:46 - run_nexus_sync - INFO - --- Sincronizando PARTICIPANTES ---
+2026-02-25 14:49:46 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/participantes/
+2026-02-25 14:49:46 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:49:46 - unidades_client - INFO - Page 2 fetched 499 items. Total so far: 999
+2026-02-25 14:49:46 - run_nexus_sync - INFO - Encontrados 999 participantes no Nexus.
+2026-02-25 14:49:46 - run_nexus_sync - INFO - Fazendo upsert de 999 participantes...
+2026-02-25 14:49:48 - run_nexus_sync - INFO - --- Sincronizando MODELOS (Vendas/Contratos) ---
+2026-02-25 14:49:48 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/modelos/
+2026-02-25 14:49:48 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:49:48 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:49:48 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:49:48 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:49:48 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:49:49 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:49:49 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:49:49 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:49:49 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 14:49:49 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 14:49:49 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 14:49:49 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 14:49:50 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 14:49:50 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 14:49:50 - unidades_client - INFO - Page 15 fetched 271 items. Total so far: 7271
+2026-02-25 14:49:50 - run_nexus_sync - INFO - Encontrados 7271 modelos no Nexus.
+2026-02-25 14:49:52 - run_nexus_sync - INFO - Unidades conhecidas no DB: 4540
+2026-02-25 14:49:52 - run_nexus_sync - INFO - ⚠ Encontradas 29 unidades referenciadas mas inexistentes. Buscando nomes via API...
+2026-02-25 14:50:05 - run_nexus_sync - ERROR - Erro ao sincronizar modelos: 'charmap' codec can't encode character '\u26a0' in position 0: character maps to <undefined>
+2026-02-25 14:50:05 - sync_services - INFO - Starting nexus_servicos sync...
+2026-02-25 14:50:05 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/servicos
+2026-02-25 14:50:06 - jobs_client - INFO - Page 1: Fetched 500 items. Total so far: 500
+2026-02-25 14:50:06 - jobs_client - INFO - Page 2: Fetched 500 items. Total so far: 1000
+2026-02-25 14:50:06 - jobs_client - INFO - Page 3: Fetched 500 items. Total so far: 1500
+2026-02-25 14:50:06 - jobs_client - INFO - Page 4: Fetched 19 items. Total so far: 1519
+2026-02-25 14:50:06 - sync_services - INFO - Fetched 1519 services from API
+2026-02-25 14:50:06 - sync_services - INFO - Upserted 1519 records into nexus_servicos
+2026-02-25 14:50:06 - sync_contracts - INFO - Starting nexus_contratos_recorrentes sync (full_load=False)...
+2026-02-25 14:50:06 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/contratos_recorrentes/
+2026-02-25 14:50:07 - jobs_client - INFO - Page 1: Fetched 240 items. Total so far: 240
+2026-02-25 14:50:07 - sync_contracts - INFO - Fetched 240 contracts from API
+2026-02-25 14:50:07 - sync_contracts - INFO - Upserted final batch of 240
+2026-02-25 14:50:07 - run_nexus_sync - INFO - === Nexus Reference Sync Complete ===
+2026-02-25 14:50:10 - run_nexus_sync - INFO - === Starting Nexus Reference Sync ===
+2026-02-25 14:50:11 - run_nexus_sync - INFO - --- Sincronizando UNIDADES ---
+2026-02-25 14:50:11 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/unidades/
+2026-02-25 14:50:11 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:50:11 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:50:11 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:50:11 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:50:11 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:50:11 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:50:11 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:50:11 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:50:11 - unidades_client - INFO - Page 9 fetched 419 items. Total so far: 4419
+2026-02-25 14:50:11 - run_nexus_sync - INFO - Encontradas 4419 unidades no Nexus.
+2026-02-25 14:50:11 - run_nexus_sync - INFO - Fazendo upsert de 4419 unidades...
+2026-02-25 14:50:12 - run_nexus_sync - INFO - Upserted items 0 to 500
+2026-02-25 14:50:12 - run_nexus_sync - INFO - Upserted items 500 to 1000
+2026-02-25 14:50:13 - run_nexus_sync - INFO - Upserted items 1000 to 1500
+2026-02-25 14:50:13 - run_nexus_sync - INFO - Upserted items 1500 to 2000
+2026-02-25 14:50:14 - run_nexus_sync - INFO - Upserted items 2000 to 2500
+2026-02-25 14:50:15 - run_nexus_sync - INFO - Upserted items 2500 to 3000
+2026-02-25 14:50:15 - run_nexus_sync - INFO - Upserted items 3000 to 3500
+2026-02-25 14:50:16 - run_nexus_sync - INFO - Upserted items 3500 to 4000
+2026-02-25 14:50:16 - run_nexus_sync - INFO - Upserted items 4000 to 4419
+2026-02-25 14:50:16 - run_nexus_sync - INFO - --- Sincronizando PARTICIPANTES ---
+2026-02-25 14:50:16 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/participantes/
+2026-02-25 14:50:17 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:50:17 - unidades_client - INFO - Page 2 fetched 499 items. Total so far: 999
+2026-02-25 14:50:17 - run_nexus_sync - INFO - Encontrados 999 participantes no Nexus.
+2026-02-25 14:50:17 - run_nexus_sync - INFO - Fazendo upsert de 999 participantes...
+2026-02-25 14:50:19 - run_nexus_sync - INFO - --- Sincronizando MODELOS (Vendas/Contratos) ---
+2026-02-25 14:50:19 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/modelos/
+2026-02-25 14:50:19 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 14:50:19 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 14:50:19 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 14:50:19 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 14:50:19 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 14:50:19 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 14:50:20 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 14:50:20 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 14:50:20 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 14:50:20 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 14:50:20 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 14:50:20 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 14:50:20 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 14:50:21 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 14:50:21 - unidades_client - INFO - Page 15 fetched 271 items. Total so far: 7271
+2026-02-25 14:50:21 - run_nexus_sync - INFO - Encontrados 7271 modelos no Nexus.
+2026-02-25 14:50:23 - run_nexus_sync - INFO - Unidades conhecidas no DB: 4540
+2026-02-25 14:50:23 - run_nexus_sync - INFO - Encontradas 29 unidades referenciadas mas inexistentes. Buscando nomes via API...
+2026-02-25 14:50:43 - run_nexus_sync - ERROR - Erro ao sincronizar modelos: 'charmap' codec can't encode character '\u26a0' in position 0: character maps to <undefined>
+2026-02-25 14:50:43 - sync_services - INFO - Starting nexus_servicos sync...
+2026-02-25 14:50:43 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/servicos
+2026-02-25 14:50:45 - jobs_client - INFO - Page 1: Fetched 500 items. Total so far: 500
+2026-02-25 14:50:45 - jobs_client - INFO - Page 2: Fetched 500 items. Total so far: 1000
+2026-02-25 14:50:45 - jobs_client - INFO - Page 3: Fetched 500 items. Total so far: 1500
+2026-02-25 14:50:45 - jobs_client - INFO - Page 4: Fetched 19 items. Total so far: 1519
+2026-02-25 14:50:45 - sync_services - INFO - Fetched 1519 services from API
+2026-02-25 14:50:47 - sync_services - INFO - Upserted 1519 records into nexus_servicos
+2026-02-25 14:50:47 - sync_contracts - INFO - Starting nexus_contratos_recorrentes sync (full_load=False)...
+2026-02-25 14:50:47 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/contratos_recorrentes/
+2026-02-25 14:50:48 - jobs_client - INFO - Page 1: Fetched 240 items. Total so far: 240
+2026-02-25 14:50:48 - sync_contracts - INFO - Fetched 240 contracts from API
+2026-02-25 14:50:49 - sync_contracts - INFO - Upserted final batch of 240
+2026-02-25 14:50:49 - run_nexus_sync - INFO - === Nexus Reference Sync Complete ===
+2026-02-25 15:05:10 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 15:05:11 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 15:05:12 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 15:05:12 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 15:05:12 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 15:05:13 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 15:05:13 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 15:05:14 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 15:05:15 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 15:05:15 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 15:05:16 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 15:05:16 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 15:05:17 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 15:05:18 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 15:05:18 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 15:05:19 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 15:05:19 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 15:05:20 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 15:05:20 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 15:05:21 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 15:05:21 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 15:05:22 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 15:05:22 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 15:05:23 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 15:05:23 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 15:05:24 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 15:05:24 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 15:05:25 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 15:05:25 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 15:05:26 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 15:05:27 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 15:05:27 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 15:05:28 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 15:05:28 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 15:05:29 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 15:05:29 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 15:05:29 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 15:05:30 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 15:05:30 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 15:05:31 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 15:05:31 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 15:05:32 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 15:05:32 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 15:05:33 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 15:05:33 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 15:05:33 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 15:05:34 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 15:05:35 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 15:05:35 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 15:05:36 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 15:05:36 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 15:05:36 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 15:05:37 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 15:05:38 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 15:05:38 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 15:05:39 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 15:05:39 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 15:05:40 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 15:05:40 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 15:05:41 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 15:05:41 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 15:05:42 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 15:05:42 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 15:05:43 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 15:05:43 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 15:05:44 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 15:05:44 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 15:05:45 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 15:05:45 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 15:05:46 - unidades_client - INFO - Page 69 fetched 171 items. Total so far: 34171
+2026-02-25 15:05:58 - master_sync - INFO - 🚀 INICIANDO SINCRONIZAÇÃO MESTRE DIÁRIA 🚀
+2026-02-25 15:05:58 - master_sync - INFO - [1/2] Executando Sincronização de Jobs...
+2026-02-25 15:05:58 - run_jobs - INFO - --- Iniciando Sincronização de Jobs (Incremental) ---
+2026-02-25 15:05:58 - run_jobs - INFO - Buscando página 1...
+2026-02-25 15:05:58 - run_jobs - INFO - Página 1: Obtidos 500 itens. Processando...
+2026-02-25 15:05:58 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:05:59 - run_jobs - INFO - Buscando página 2...
+2026-02-25 15:05:59 - run_jobs - INFO - Página 2: Obtidos 500 itens. Processando...
+2026-02-25 15:05:59 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:00 - run_jobs - INFO - Buscando página 3...
+2026-02-25 15:06:00 - run_jobs - INFO - Página 3: Obtidos 500 itens. Processando...
+2026-02-25 15:06:00 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:00 - run_jobs - INFO - Buscando página 4...
+2026-02-25 15:06:01 - run_jobs - INFO - Página 4: Obtidos 500 itens. Processando...
+2026-02-25 15:06:01 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:01 - run_jobs - INFO - Buscando página 5...
+2026-02-25 15:06:02 - run_jobs - INFO - Página 5: Obtidos 500 itens. Processando...
+2026-02-25 15:06:02 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:02 - run_jobs - INFO - Buscando página 6...
+2026-02-25 15:06:02 - run_jobs - INFO - Página 6: Obtidos 500 itens. Processando...
+2026-02-25 15:06:02 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:03 - run_jobs - INFO - Buscando página 7...
+2026-02-25 15:06:03 - run_jobs - INFO - Página 7: Obtidos 500 itens. Processando...
+2026-02-25 15:06:03 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:03 - run_jobs - INFO - Buscando página 8...
+2026-02-25 15:06:03 - run_jobs - INFO - Página 8: Obtidos 500 itens. Processando...
+2026-02-25 15:06:03 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:04 - run_jobs - INFO - Buscando página 9...
+2026-02-25 15:06:05 - run_jobs - INFO - Página 9: Obtidos 500 itens. Processando...
+2026-02-25 15:06:05 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:05 - run_jobs - INFO - Buscando página 10...
+2026-02-25 15:06:05 - run_jobs - INFO - Página 10: Obtidos 500 itens. Processando...
+2026-02-25 15:06:05 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:06 - run_jobs - INFO - Buscando página 11...
+2026-02-25 15:06:06 - run_jobs - INFO - Página 11: Obtidos 500 itens. Processando...
+2026-02-25 15:06:06 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:07 - run_jobs - INFO - Buscando página 12...
+2026-02-25 15:06:07 - run_jobs - INFO - Página 12: Obtidos 500 itens. Processando...
+2026-02-25 15:06:07 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:08 - run_jobs - INFO - Buscando página 13...
+2026-02-25 15:06:08 - run_jobs - INFO - Página 13: Obtidos 500 itens. Processando...
+2026-02-25 15:06:08 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:08 - run_jobs - INFO - Buscando página 14...
+2026-02-25 15:06:09 - run_jobs - INFO - Página 14: Obtidos 500 itens. Processando...
+2026-02-25 15:06:09 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:09 - run_jobs - INFO - Buscando página 15...
+2026-02-25 15:06:09 - run_jobs - INFO - Página 15: Obtidos 500 itens. Processando...
+2026-02-25 15:06:09 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:10 - run_jobs - INFO - Buscando página 16...
+2026-02-25 15:06:10 - run_jobs - INFO - Página 16: Obtidos 500 itens. Processando...
+2026-02-25 15:06:10 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:11 - run_jobs - INFO - Buscando página 17...
+2026-02-25 15:06:11 - run_jobs - INFO - Página 17: Obtidos 500 itens. Processando...
+2026-02-25 15:06:11 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:11 - run_jobs - INFO - Buscando página 18...
+2026-02-25 15:06:12 - run_jobs - INFO - Página 18: Obtidos 500 itens. Processando...
+2026-02-25 15:06:12 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:12 - run_jobs - INFO - Buscando página 19...
+2026-02-25 15:06:12 - run_jobs - INFO - Página 19: Obtidos 500 itens. Processando...
+2026-02-25 15:06:12 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:13 - run_jobs - INFO - Buscando página 20...
+2026-02-25 15:06:13 - run_jobs - INFO - Página 20: Obtidos 500 itens. Processando...
+2026-02-25 15:06:13 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:14 - run_jobs - INFO - Buscando página 21...
+2026-02-25 15:06:14 - run_jobs - INFO - Página 21: Obtidos 500 itens. Processando...
+2026-02-25 15:06:14 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:14 - run_jobs - INFO - Buscando página 22...
+2026-02-25 15:06:15 - run_jobs - INFO - Página 22: Obtidos 500 itens. Processando...
+2026-02-25 15:06:15 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:15 - run_jobs - INFO - Buscando página 23...
+2026-02-25 15:06:15 - run_jobs - INFO - Página 23: Obtidos 500 itens. Processando...
+2026-02-25 15:06:15 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:16 - run_jobs - INFO - Buscando página 24...
+2026-02-25 15:06:16 - run_jobs - INFO - Página 24: Obtidos 500 itens. Processando...
+2026-02-25 15:06:16 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:17 - run_jobs - INFO - Buscando página 25...
+2026-02-25 15:06:17 - run_jobs - INFO - Página 25: Obtidos 500 itens. Processando...
+2026-02-25 15:06:17 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:18 - run_jobs - INFO - Buscando página 26...
+2026-02-25 15:06:18 - run_jobs - INFO - Página 26: Obtidos 500 itens. Processando...
+2026-02-25 15:06:18 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:18 - run_jobs - INFO - Buscando página 27...
+2026-02-25 15:06:19 - run_jobs - INFO - Página 27: Obtidos 500 itens. Processando...
+2026-02-25 15:06:19 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:19 - run_jobs - INFO - Buscando página 28...
+2026-02-25 15:06:20 - run_jobs - INFO - Página 28: Obtidos 500 itens. Processando...
+2026-02-25 15:06:20 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:20 - run_jobs - INFO - Buscando página 29...
+2026-02-25 15:06:20 - run_jobs - INFO - Página 29: Obtidos 500 itens. Processando...
+2026-02-25 15:06:20 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:21 - run_jobs - INFO - Buscando página 30...
+2026-02-25 15:06:21 - run_jobs - INFO - Página 30: Obtidos 500 itens. Processando...
+2026-02-25 15:06:21 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:22 - run_jobs - INFO - Buscando página 31...
+2026-02-25 15:06:22 - run_jobs - INFO - Página 31: Obtidos 500 itens. Processando...
+2026-02-25 15:06:22 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:22 - run_jobs - INFO - Buscando página 32...
+2026-02-25 15:06:23 - run_jobs - INFO - Página 32: Obtidos 500 itens. Processando...
+2026-02-25 15:06:23 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:23 - run_jobs - INFO - Buscando página 33...
+2026-02-25 15:06:23 - run_jobs - INFO - Página 33: Obtidos 500 itens. Processando...
+2026-02-25 15:06:23 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:24 - run_jobs - INFO - Buscando página 34...
+2026-02-25 15:06:24 - run_jobs - INFO - Página 34: Obtidos 500 itens. Processando...
+2026-02-25 15:06:24 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:24 - run_jobs - INFO - Buscando página 35...
+2026-02-25 15:06:25 - run_jobs - INFO - Página 35: Obtidos 500 itens. Processando...
+2026-02-25 15:06:25 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:25 - run_jobs - INFO - Buscando página 36...
+2026-02-25 15:06:25 - run_jobs - INFO - Página 36: Obtidos 500 itens. Processando...
+2026-02-25 15:06:25 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:26 - run_jobs - INFO - Buscando página 37...
+2026-02-25 15:06:26 - run_jobs - INFO - Página 37: Obtidos 500 itens. Processando...
+2026-02-25 15:06:26 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:26 - run_jobs - INFO - Buscando página 38...
+2026-02-25 15:06:27 - run_jobs - INFO - Página 38: Obtidos 500 itens. Processando...
+2026-02-25 15:06:27 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:27 - run_jobs - INFO - Buscando página 39...
+2026-02-25 15:06:28 - run_jobs - INFO - Página 39: Obtidos 500 itens. Processando...
+2026-02-25 15:06:28 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:28 - run_jobs - INFO - Buscando página 40...
+2026-02-25 15:06:28 - run_jobs - INFO - Página 40: Obtidos 500 itens. Processando...
+2026-02-25 15:06:28 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:29 - run_jobs - INFO - Buscando página 41...
+2026-02-25 15:06:29 - run_jobs - INFO - Página 41: Obtidos 500 itens. Processando...
+2026-02-25 15:06:29 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:30 - run_jobs - INFO - Buscando página 42...
+2026-02-25 15:06:30 - run_jobs - INFO - Página 42: Obtidos 500 itens. Processando...
+2026-02-25 15:06:30 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:31 - run_jobs - INFO - Buscando página 43...
+2026-02-25 15:06:31 - run_jobs - INFO - Página 43: Obtidos 500 itens. Processando...
+2026-02-25 15:06:31 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:31 - run_jobs - INFO - Buscando página 44...
+2026-02-25 15:06:32 - run_jobs - INFO - Página 44: Obtidos 500 itens. Processando...
+2026-02-25 15:06:32 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:32 - run_jobs - INFO - Buscando página 45...
+2026-02-25 15:06:33 - run_jobs - INFO - Página 45: Obtidos 500 itens. Processando...
+2026-02-25 15:06:33 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:33 - run_jobs - INFO - Buscando página 46...
+2026-02-25 15:06:33 - run_jobs - INFO - Página 46: Obtidos 500 itens. Processando...
+2026-02-25 15:06:33 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:34 - run_jobs - INFO - Buscando página 47...
+2026-02-25 15:06:34 - run_jobs - INFO - Página 47: Obtidos 500 itens. Processando...
+2026-02-25 15:06:34 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:35 - run_jobs - INFO - Buscando página 48...
+2026-02-25 15:06:35 - run_jobs - INFO - Página 48: Obtidos 500 itens. Processando...
+2026-02-25 15:06:35 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:36 - run_jobs - INFO - Buscando página 49...
+2026-02-25 15:06:36 - run_jobs - INFO - Página 49: Obtidos 500 itens. Processando...
+2026-02-25 15:06:36 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:37 - run_jobs - INFO - Buscando página 50...
+2026-02-25 15:06:37 - run_jobs - INFO - Página 50: Obtidos 500 itens. Processando...
+2026-02-25 15:06:37 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:37 - run_jobs - INFO - Buscando página 51...
+2026-02-25 15:06:38 - run_jobs - INFO - Página 51: Obtidos 500 itens. Processando...
+2026-02-25 15:06:38 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:38 - run_jobs - INFO - Buscando página 52...
+2026-02-25 15:06:39 - run_jobs - INFO - Página 52: Obtidos 500 itens. Processando...
+2026-02-25 15:06:39 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:39 - run_jobs - INFO - Buscando página 53...
+2026-02-25 15:06:40 - run_jobs - INFO - Página 53: Obtidos 500 itens. Processando...
+2026-02-25 15:06:40 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:40 - run_jobs - INFO - Buscando página 54...
+2026-02-25 15:06:40 - run_jobs - INFO - Página 54: Obtidos 500 itens. Processando...
+2026-02-25 15:06:40 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:41 - run_jobs - INFO - Buscando página 55...
+2026-02-25 15:06:41 - run_jobs - INFO - Página 55: Obtidos 500 itens. Processando...
+2026-02-25 15:06:41 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:42 - run_jobs - INFO - Buscando página 56...
+2026-02-25 15:06:42 - run_jobs - INFO - Página 56: Obtidos 500 itens. Processando...
+2026-02-25 15:06:42 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:42 - run_jobs - INFO - Buscando página 57...
+2026-02-25 15:06:43 - run_jobs - INFO - Página 57: Obtidos 500 itens. Processando...
+2026-02-25 15:06:43 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:43 - run_jobs - INFO - Buscando página 58...
+2026-02-25 15:06:43 - run_jobs - INFO - Página 58: Obtidos 500 itens. Processando...
+2026-02-25 15:06:43 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:44 - run_jobs - INFO - Buscando página 59...
+2026-02-25 15:06:44 - run_jobs - INFO - Página 59: Obtidos 500 itens. Processando...
+2026-02-25 15:06:44 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:45 - run_jobs - INFO - Buscando página 60...
+2026-02-25 15:06:45 - run_jobs - INFO - Página 60: Obtidos 500 itens. Processando...
+2026-02-25 15:06:45 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:45 - run_jobs - INFO - Buscando página 61...
+2026-02-25 15:06:45 - run_jobs - INFO - Página 61: Obtidos 500 itens. Processando...
+2026-02-25 15:06:45 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:46 - run_jobs - INFO - Buscando página 62...
+2026-02-25 15:06:46 - run_jobs - INFO - Página 62: Obtidos 500 itens. Processando...
+2026-02-25 15:06:46 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:47 - run_jobs - INFO - Buscando página 63...
+2026-02-25 15:06:47 - run_jobs - INFO - Página 63: Obtidos 500 itens. Processando...
+2026-02-25 15:06:47 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:47 - run_jobs - INFO - Buscando página 64...
+2026-02-25 15:06:48 - run_jobs - INFO - Página 64: Obtidos 500 itens. Processando...
+2026-02-25 15:06:48 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:48 - run_jobs - INFO - Buscando página 65...
+2026-02-25 15:06:49 - run_jobs - INFO - Página 65: Obtidos 500 itens. Processando...
+2026-02-25 15:06:49 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:50 - run_jobs - INFO - Buscando página 66...
+2026-02-25 15:06:50 - run_jobs - INFO - Página 66: Obtidos 500 itens. Processando...
+2026-02-25 15:06:50 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:51 - run_jobs - INFO - Buscando página 67...
+2026-02-25 15:06:51 - run_jobs - INFO - Página 67: Obtidos 500 itens. Processando...
+2026-02-25 15:06:51 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:52 - run_jobs - INFO - Buscando página 68...
+2026-02-25 15:06:52 - run_jobs - INFO - Página 68: Obtidos 500 itens. Processando...
+2026-02-25 15:06:52 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:52 - run_jobs - INFO - Buscando página 69...
+2026-02-25 15:06:53 - run_jobs - INFO - Página 69: Obtidos 500 itens. Processando...
+2026-02-25 15:06:53 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:53 - run_jobs - INFO - Buscando página 70...
+2026-02-25 15:06:53 - run_jobs - INFO - Página 70: Obtidos 500 itens. Processando...
+2026-02-25 15:06:53 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:54 - run_jobs - INFO - Buscando página 71...
+2026-02-25 15:06:54 - run_jobs - INFO - Página 71: Obtidos 500 itens. Processando...
+2026-02-25 15:06:54 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:55 - run_jobs - INFO - Buscando página 72...
+2026-02-25 15:06:55 - run_jobs - INFO - Página 72: Obtidos 500 itens. Processando...
+2026-02-25 15:06:55 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:56 - run_jobs - INFO - Buscando página 73...
+2026-02-25 15:06:56 - run_jobs - INFO - Página 73: Obtidos 500 itens. Processando...
+2026-02-25 15:06:56 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:57 - run_jobs - INFO - Buscando página 74...
+2026-02-25 15:06:57 - run_jobs - INFO - Página 74: Obtidos 500 itens. Processando...
+2026-02-25 15:06:57 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:58 - run_jobs - INFO - Buscando página 75...
+2026-02-25 15:06:58 - run_jobs - INFO - Página 75: Obtidos 500 itens. Processando...
+2026-02-25 15:06:58 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:58 - run_jobs - INFO - Buscando página 76...
+2026-02-25 15:06:59 - run_jobs - INFO - Página 76: Obtidos 500 itens. Processando...
+2026-02-25 15:06:59 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:06:59 - run_jobs - INFO - Buscando página 77...
+2026-02-25 15:06:59 - run_jobs - INFO - Página 77: Obtidos 500 itens. Processando...
+2026-02-25 15:06:59 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:00 - run_jobs - INFO - Buscando página 78...
+2026-02-25 15:07:00 - run_jobs - INFO - Página 78: Obtidos 500 itens. Processando...
+2026-02-25 15:07:00 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:01 - run_jobs - INFO - Buscando página 79...
+2026-02-25 15:07:01 - run_jobs - INFO - Página 79: Obtidos 500 itens. Processando...
+2026-02-25 15:07:01 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:01 - run_jobs - INFO - Buscando página 80...
+2026-02-25 15:07:02 - run_jobs - INFO - Página 80: Obtidos 500 itens. Processando...
+2026-02-25 15:07:02 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:02 - run_jobs - INFO - Buscando página 81...
+2026-02-25 15:07:02 - run_jobs - INFO - Página 81: Obtidos 500 itens. Processando...
+2026-02-25 15:07:02 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:03 - run_jobs - INFO - Buscando página 82...
+2026-02-25 15:07:03 - run_jobs - INFO - Página 82: Obtidos 500 itens. Processando...
+2026-02-25 15:07:03 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:03 - run_jobs - INFO - Buscando página 83...
+2026-02-25 15:07:04 - run_jobs - INFO - Página 83: Obtidos 500 itens. Processando...
+2026-02-25 15:07:04 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:04 - run_jobs - INFO - Buscando página 84...
+2026-02-25 15:07:04 - run_jobs - INFO - Página 84: Obtidos 500 itens. Processando...
+2026-02-25 15:07:04 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:05 - run_jobs - INFO - Buscando página 85...
+2026-02-25 15:07:05 - run_jobs - INFO - Página 85: Obtidos 500 itens. Processando...
+2026-02-25 15:07:05 - run_jobs - INFO - Fazendo upsert de um lote de 500 registros...
+2026-02-25 15:07:24 - run_nexus_sync - INFO - --- Sincronizando CONTAS A RECEBER (Fallback) ---
+2026-02-25 15:07:24 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 15:07:25 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 15:07:26 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 15:07:26 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 15:07:26 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 15:07:27 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 15:07:28 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 15:07:28 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 15:07:28 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 15:07:29 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 15:07:29 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 15:07:30 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 15:07:30 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 15:07:31 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 15:07:32 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 15:07:32 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 15:07:33 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 15:07:33 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 15:07:34 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 15:07:34 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 15:07:35 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 15:07:35 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 15:07:36 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 15:07:37 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 15:07:37 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 15:07:38 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 15:07:38 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 15:07:39 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 15:07:39 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 15:07:40 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 15:07:40 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 15:07:41 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 15:07:41 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 15:07:42 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 15:07:43 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 15:07:43 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 15:07:44 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 15:07:44 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 15:07:45 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 15:07:45 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 15:07:46 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 15:07:46 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 15:07:47 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 15:07:47 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 15:07:48 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 15:07:49 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 15:07:49 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 15:07:50 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 15:07:50 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 15:07:51 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 15:07:52 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 15:07:53 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 15:07:53 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 15:07:54 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 15:07:55 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 15:07:55 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 15:07:56 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 15:07:56 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 15:07:57 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 15:07:58 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 15:07:59 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 15:07:59 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 15:08:00 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 15:08:00 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 15:27:50 - run_nexus_sync - INFO - --- Sincronizando CONTAS A RECEBER (Fallback) ---
+2026-02-25 15:27:50 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 15:27:51 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 15:27:52 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 15:27:52 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 15:27:52 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 15:27:53 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 15:27:53 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 15:27:54 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 15:27:54 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 15:27:55 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 15:27:55 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 15:27:56 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 15:27:56 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 15:27:57 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 15:27:57 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 15:27:58 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 15:27:58 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 15:27:59 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 15:27:59 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 15:28:00 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 15:28:00 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 15:28:01 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 15:28:02 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 15:28:02 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 15:28:03 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 15:28:03 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 15:28:04 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 15:28:04 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 15:28:05 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 15:28:06 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 15:28:06 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 15:28:07 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 15:28:07 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 15:28:08 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 15:28:08 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 15:28:09 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 15:28:09 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 15:28:10 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 15:28:11 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 15:28:11 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 15:28:12 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 15:28:12 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 15:28:13 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 15:28:13 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 15:28:14 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 15:28:15 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 15:28:15 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 15:28:16 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 15:28:16 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 15:28:17 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 15:28:18 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 15:28:18 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 15:28:19 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 15:28:19 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 15:28:20 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 15:28:21 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 15:28:21 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 15:28:22 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 15:28:22 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 15:28:23 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 15:28:24 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 15:28:24 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 15:28:25 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 15:28:25 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 15:28:26 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 15:28:26 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 15:28:27 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 15:28:28 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 15:28:29 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 15:28:30 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 15:28:30 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 15:28:31 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 15:28:32 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 15:28:33 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 15:28:33 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 15:28:35 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 15:28:37 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 15:28:38 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 15:28:38 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 15:28:39 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 15:28:40 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 15:28:40 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 15:28:41 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 15:28:41 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 15:28:42 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 15:28:43 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 15:28:43 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 15:28:44 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 15:28:44 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 15:28:45 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 15:28:46 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 15:28:46 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 15:28:47 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 15:28:47 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 15:28:48 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 15:28:49 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 15:28:49 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 15:28:50 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 15:28:50 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 15:28:51 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 15:28:51 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 15:28:52 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 15:28:52 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 15:28:53 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 15:28:54 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 15:28:54 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 15:28:55 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 15:28:55 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 15:28:56 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 15:28:56 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 15:28:57 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 15:28:58 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 15:28:58 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 15:28:59 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 15:28:59 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 15:29:00 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 15:29:00 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 15:29:01 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 15:29:02 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 15:29:03 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 15:29:03 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 15:29:04 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 15:29:04 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 15:29:05 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 15:29:06 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 15:29:06 - unidades_client - INFO - Page 125 fetched 500 items. Total so far: 62500
+2026-02-25 15:29:07 - unidades_client - INFO - Page 126 fetched 500 items. Total so far: 63000
+2026-02-25 15:29:07 - unidades_client - INFO - Page 127 fetched 358 items. Total so far: 63358
+2026-02-25 15:29:07 - run_nexus_sync - INFO - Encontradas 63358 contas a receber no Nexus.
+2026-02-25 15:29:08 - run_nexus_sync - INFO - Fazendo upsert de 63358 contas a receber...
+2026-02-25 16:16:46 - run_nexus_sync - INFO - === Starting Nexus Reference Sync ===
+2026-02-25 16:16:47 - run_nexus_sync - INFO - --- Sincronizando UNIDADES ---
+2026-02-25 16:16:47 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/unidades/
+2026-02-25 16:16:47 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:16:47 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:16:48 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:16:48 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:16:48 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:16:48 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:16:48 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:16:48 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:16:48 - unidades_client - INFO - Page 9 fetched 419 items. Total so far: 4419
+2026-02-25 16:16:48 - run_nexus_sync - INFO - Encontradas 4419 unidades no Nexus.
+2026-02-25 16:16:48 - run_nexus_sync - INFO - Fazendo upsert de 4419 unidades...
+2026-02-25 16:16:48 - run_nexus_sync - INFO - Upserted items 0 to 500
+2026-02-25 16:16:50 - run_nexus_sync - INFO - Upserted items 500 to 1000
+2026-02-25 16:16:50 - run_nexus_sync - INFO - Upserted items 1000 to 1500
+2026-02-25 16:16:51 - run_nexus_sync - INFO - Upserted items 1500 to 2000
+2026-02-25 16:16:51 - run_nexus_sync - INFO - Upserted items 2000 to 2500
+2026-02-25 16:16:51 - run_nexus_sync - INFO - Upserted items 2500 to 3000
+2026-02-25 16:16:52 - run_nexus_sync - INFO - Upserted items 3000 to 3500
+2026-02-25 16:16:52 - run_nexus_sync - INFO - Upserted items 3500 to 4000
+2026-02-25 16:16:53 - run_nexus_sync - INFO - Upserted items 4000 to 4419
+2026-02-25 16:16:53 - run_nexus_sync - INFO - --- Sincronizando PARTICIPANTES ---
+2026-02-25 16:16:53 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/participantes/
+2026-02-25 16:16:53 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:16:53 - unidades_client - INFO - Page 2 fetched 499 items. Total so far: 999
+2026-02-25 16:16:53 - run_nexus_sync - INFO - Encontrados 999 participantes no Nexus.
+2026-02-25 16:16:53 - run_nexus_sync - INFO - Fazendo upsert de 999 participantes...
+2026-02-25 16:16:55 - run_nexus_sync - INFO - --- Sincronizando MODELOS (Vendas/Contratos) ---
+2026-02-25 16:16:55 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/modelos/
+2026-02-25 16:16:55 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:16:55 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:16:55 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:16:55 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:16:55 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:16:55 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:16:56 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:16:56 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:16:56 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 16:16:56 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 16:16:56 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 16:16:56 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 16:16:56 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 16:16:56 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 16:16:56 - unidades_client - INFO - Page 15 fetched 271 items. Total so far: 7271
+2026-02-25 16:16:56 - run_nexus_sync - INFO - Encontrados 7271 modelos no Nexus.
+2026-02-25 16:16:58 - run_nexus_sync - INFO - Unidades conhecidas no DB: 4540
+2026-02-25 16:16:58 - run_nexus_sync - INFO - Encontradas 29 unidades referenciadas mas inexistentes. Buscando nomes via API...
+2026-02-25 16:17:10 - run_nexus_sync - INFO -   -> Inserted placeholders 0 - 29
+2026-02-25 16:17:10 - run_nexus_sync - INFO - Fazendo upsert de 847 modelos (2024+)...
+2026-02-25 16:17:12 - run_nexus_sync - INFO - --- Sincronizando CONTAS A RECEBER (Fallback) ---
+2026-02-25 16:17:12 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 16:17:12 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:17:13 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:17:13 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:17:14 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:17:14 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:17:14 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:17:15 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:17:15 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:17:16 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 16:17:16 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 16:17:17 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 16:17:17 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 16:17:18 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 16:17:18 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 16:17:19 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 16:17:19 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 16:17:20 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 16:17:20 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 16:17:21 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 16:17:22 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 16:17:22 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 16:17:23 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 16:17:23 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 16:17:24 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 16:17:24 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 16:17:25 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 16:17:25 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 16:17:26 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 16:17:26 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 16:17:27 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 16:17:27 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 16:17:28 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 16:17:28 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 16:17:29 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 16:17:29 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 16:17:30 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 16:17:30 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 16:17:31 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 16:17:31 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 16:17:32 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 16:17:32 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 16:17:33 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 16:17:33 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 16:17:34 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 16:17:35 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 16:17:35 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 16:17:36 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 16:17:36 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 16:17:37 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 16:17:37 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 16:17:38 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 16:17:39 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 16:17:39 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 16:17:40 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 16:17:40 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 16:17:41 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 16:17:42 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 16:17:42 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 16:17:43 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 16:17:43 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 16:17:44 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 16:17:44 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 16:17:45 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 16:17:46 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 16:17:46 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 16:17:47 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 16:17:47 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 16:17:48 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 16:17:49 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 16:17:49 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 16:17:50 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 16:17:51 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 16:17:51 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 16:17:52 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 16:17:52 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 16:17:53 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 16:17:53 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 16:17:54 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 16:17:55 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 16:17:55 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 16:17:56 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 16:17:56 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 16:17:57 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 16:17:58 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 16:17:58 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 16:17:59 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 16:17:59 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 16:18:00 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 16:18:01 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 16:18:01 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 16:18:02 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 16:18:03 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 16:18:03 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 16:18:04 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 16:18:04 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 16:18:05 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 16:18:05 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 16:18:06 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 16:18:07 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 16:18:09 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 16:18:09 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 16:18:10 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 16:18:11 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 16:18:11 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 16:18:12 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 16:18:13 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 16:18:13 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 16:18:14 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 16:18:15 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 16:18:15 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 16:18:16 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 16:18:16 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 16:18:17 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 16:18:18 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 16:18:18 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 16:18:19 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 16:18:20 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 16:18:21 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 16:18:21 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 16:18:22 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 16:18:22 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 16:18:23 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 16:18:24 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 16:18:24 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 16:18:25 - unidades_client - INFO - Page 125 fetched 500 items. Total so far: 62500
+2026-02-25 16:18:25 - unidades_client - INFO - Page 126 fetched 500 items. Total so far: 63000
+2026-02-25 16:18:26 - unidades_client - INFO - Page 127 fetched 364 items. Total so far: 63364
+2026-02-25 16:18:26 - run_nexus_sync - INFO - Encontradas 63364 contas a receber no Nexus.
+2026-02-25 16:18:26 - run_nexus_sync - INFO - Fazendo upsert de 63364 contas a receber...
+2026-02-25 16:18:26 - run_nexus_sync - ERROR - Failed chunk 0 for contas a receber
+2026-02-25 16:18:27 - run_nexus_sync - ERROR - Failed chunk 500 for contas a receber
+2026-02-25 16:18:27 - run_nexus_sync - ERROR - Failed chunk 1000 for contas a receber
+2026-02-25 16:18:28 - run_nexus_sync - ERROR - Failed chunk 1500 for contas a receber
+2026-02-25 16:18:28 - run_nexus_sync - ERROR - Failed chunk 2000 for contas a receber
+2026-02-25 16:18:28 - run_nexus_sync - ERROR - Failed chunk 2500 for contas a receber
+2026-02-25 16:18:29 - run_nexus_sync - ERROR - Failed chunk 3000 for contas a receber
+2026-02-25 16:18:29 - run_nexus_sync - ERROR - Failed chunk 3500 for contas a receber
+2026-02-25 16:18:29 - run_nexus_sync - ERROR - Failed chunk 4000 for contas a receber
+2026-02-25 16:18:30 - run_nexus_sync - ERROR - Failed chunk 4500 for contas a receber
+2026-02-25 16:18:30 - run_nexus_sync - ERROR - Failed chunk 5000 for contas a receber
+2026-02-25 16:18:30 - run_nexus_sync - ERROR - Failed chunk 5500 for contas a receber
+2026-02-25 16:18:31 - run_nexus_sync - ERROR - Failed chunk 6000 for contas a receber
+2026-02-25 16:18:31 - run_nexus_sync - ERROR - Failed chunk 6500 for contas a receber
+2026-02-25 16:18:32 - run_nexus_sync - ERROR - Failed chunk 7000 for contas a receber
+2026-02-25 16:18:32 - run_nexus_sync - ERROR - Failed chunk 7500 for contas a receber
+2026-02-25 16:18:32 - run_nexus_sync - ERROR - Failed chunk 8000 for contas a receber
+2026-02-25 16:18:33 - run_nexus_sync - ERROR - Failed chunk 8500 for contas a receber
+2026-02-25 16:18:33 - run_nexus_sync - ERROR - Failed chunk 9000 for contas a receber
+2026-02-25 16:18:34 - run_nexus_sync - ERROR - Failed chunk 9500 for contas a receber
+2026-02-25 16:18:34 - run_nexus_sync - ERROR - Failed chunk 10000 for contas a receber
+2026-02-25 16:18:34 - run_nexus_sync - ERROR - Failed chunk 10500 for contas a receber
+2026-02-25 16:18:35 - run_nexus_sync - ERROR - Failed chunk 11000 for contas a receber
+2026-02-25 16:18:35 - run_nexus_sync - ERROR - Failed chunk 11500 for contas a receber
+2026-02-25 16:18:36 - run_nexus_sync - ERROR - Failed chunk 12000 for contas a receber
+2026-02-25 16:18:36 - run_nexus_sync - ERROR - Failed chunk 12500 for contas a receber
+2026-02-25 16:18:37 - run_nexus_sync - ERROR - Failed chunk 13000 for contas a receber
+2026-02-25 16:18:37 - run_nexus_sync - ERROR - Failed chunk 13500 for contas a receber
+2026-02-25 16:18:37 - run_nexus_sync - ERROR - Failed chunk 14000 for contas a receber
+2026-02-25 16:18:38 - run_nexus_sync - ERROR - Failed chunk 14500 for contas a receber
+2026-02-25 16:18:38 - run_nexus_sync - ERROR - Failed chunk 15000 for contas a receber
+2026-02-25 16:18:39 - run_nexus_sync - ERROR - Failed chunk 15500 for contas a receber
+2026-02-25 16:18:39 - run_nexus_sync - ERROR - Failed chunk 16000 for contas a receber
+2026-02-25 16:18:39 - run_nexus_sync - ERROR - Failed chunk 16500 for contas a receber
+2026-02-25 16:18:40 - run_nexus_sync - ERROR - Failed chunk 17000 for contas a receber
+2026-02-25 16:18:40 - run_nexus_sync - ERROR - Failed chunk 17500 for contas a receber
+2026-02-25 16:18:40 - run_nexus_sync - ERROR - Failed chunk 18000 for contas a receber
+2026-02-25 16:18:41 - run_nexus_sync - ERROR - Failed chunk 18500 for contas a receber
+2026-02-25 16:18:41 - run_nexus_sync - ERROR - Failed chunk 19000 for contas a receber
+2026-02-25 16:18:42 - run_nexus_sync - ERROR - Failed chunk 19500 for contas a receber
+2026-02-25 16:18:42 - run_nexus_sync - ERROR - Failed chunk 20000 for contas a receber
+2026-02-25 16:18:42 - run_nexus_sync - ERROR - Failed chunk 20500 for contas a receber
+2026-02-25 16:18:43 - run_nexus_sync - ERROR - Failed chunk 21000 for contas a receber
+2026-02-25 16:18:43 - run_nexus_sync - ERROR - Failed chunk 21500 for contas a receber
+2026-02-25 16:18:43 - run_nexus_sync - ERROR - Failed chunk 22000 for contas a receber
+2026-02-25 16:18:44 - run_nexus_sync - ERROR - Failed chunk 22500 for contas a receber
+2026-02-25 16:18:44 - run_nexus_sync - ERROR - Failed chunk 23000 for contas a receber
+2026-02-25 16:18:45 - run_nexus_sync - ERROR - Failed chunk 23500 for contas a receber
+2026-02-25 16:18:45 - run_nexus_sync - ERROR - Failed chunk 24000 for contas a receber
+2026-02-25 16:18:46 - run_nexus_sync - ERROR - Failed chunk 24500 for contas a receber
+2026-02-25 16:18:46 - run_nexus_sync - ERROR - Failed chunk 25000 for contas a receber
+2026-02-25 16:18:46 - run_nexus_sync - ERROR - Failed chunk 25500 for contas a receber
+2026-02-25 16:18:47 - run_nexus_sync - ERROR - Failed chunk 26000 for contas a receber
+2026-02-25 16:18:47 - run_nexus_sync - ERROR - Failed chunk 26500 for contas a receber
+2026-02-25 16:18:48 - run_nexus_sync - ERROR - Failed chunk 27000 for contas a receber
+2026-02-25 16:18:48 - run_nexus_sync - ERROR - Failed chunk 27500 for contas a receber
+2026-02-25 16:18:49 - run_nexus_sync - ERROR - Failed chunk 28000 for contas a receber
+2026-02-25 16:18:49 - run_nexus_sync - ERROR - Failed chunk 28500 for contas a receber
+2026-02-25 16:18:49 - run_nexus_sync - ERROR - Failed chunk 29000 for contas a receber
+2026-02-25 16:18:50 - run_nexus_sync - ERROR - Failed chunk 29500 for contas a receber
+2026-02-25 16:18:50 - run_nexus_sync - ERROR - Failed chunk 30000 for contas a receber
+2026-02-25 16:18:51 - run_nexus_sync - ERROR - Failed chunk 30500 for contas a receber
+2026-02-25 16:18:51 - run_nexus_sync - ERROR - Failed chunk 31000 for contas a receber
+2026-02-25 16:18:52 - run_nexus_sync - ERROR - Failed chunk 31500 for contas a receber
+2026-02-25 16:18:52 - run_nexus_sync - ERROR - Failed chunk 32000 for contas a receber
+2026-02-25 16:18:53 - run_nexus_sync - ERROR - Failed chunk 32500 for contas a receber
+2026-02-25 16:18:53 - run_nexus_sync - ERROR - Failed chunk 33000 for contas a receber
+2026-02-25 16:18:54 - run_nexus_sync - ERROR - Failed chunk 33500 for contas a receber
+2026-02-25 16:18:54 - run_nexus_sync - ERROR - Failed chunk 34000 for contas a receber
+2026-02-25 16:18:54 - run_nexus_sync - ERROR - Failed chunk 34500 for contas a receber
+2026-02-25 16:18:55 - run_nexus_sync - ERROR - Failed chunk 35000 for contas a receber
+2026-02-25 16:18:55 - run_nexus_sync - ERROR - Failed chunk 35500 for contas a receber
+2026-02-25 16:18:56 - run_nexus_sync - ERROR - Failed chunk 36000 for contas a receber
+2026-02-25 16:18:56 - run_nexus_sync - ERROR - Failed chunk 36500 for contas a receber
+2026-02-25 16:18:57 - run_nexus_sync - ERROR - Failed chunk 37000 for contas a receber
+2026-02-25 16:18:57 - run_nexus_sync - ERROR - Failed chunk 37500 for contas a receber
+2026-02-25 16:18:58 - run_nexus_sync - ERROR - Failed chunk 38000 for contas a receber
+2026-02-25 16:18:58 - run_nexus_sync - ERROR - Failed chunk 38500 for contas a receber
+2026-02-25 16:18:58 - run_nexus_sync - ERROR - Failed chunk 39000 for contas a receber
+2026-02-25 16:18:59 - run_nexus_sync - ERROR - Failed chunk 39500 for contas a receber
+2026-02-25 16:18:59 - run_nexus_sync - ERROR - Failed chunk 40000 for contas a receber
+2026-02-25 16:19:00 - run_nexus_sync - ERROR - Failed chunk 40500 for contas a receber
+2026-02-25 16:19:00 - run_nexus_sync - ERROR - Failed chunk 41000 for contas a receber
+2026-02-25 16:19:00 - run_nexus_sync - ERROR - Failed chunk 41500 for contas a receber
+2026-02-25 16:19:01 - run_nexus_sync - ERROR - Failed chunk 42000 for contas a receber
+2026-02-25 16:19:01 - run_nexus_sync - ERROR - Failed chunk 42500 for contas a receber
+2026-02-25 16:19:02 - run_nexus_sync - ERROR - Failed chunk 43000 for contas a receber
+2026-02-25 16:19:02 - run_nexus_sync - ERROR - Failed chunk 43500 for contas a receber
+2026-02-25 16:19:02 - run_nexus_sync - ERROR - Failed chunk 44000 for contas a receber
+2026-02-25 16:19:03 - run_nexus_sync - ERROR - Failed chunk 44500 for contas a receber
+2026-02-25 16:19:03 - run_nexus_sync - ERROR - Failed chunk 45000 for contas a receber
+2026-02-25 16:19:04 - run_nexus_sync - ERROR - Failed chunk 45500 for contas a receber
+2026-02-25 16:19:04 - run_nexus_sync - ERROR - Failed chunk 46000 for contas a receber
+2026-02-25 16:19:05 - run_nexus_sync - ERROR - Failed chunk 46500 for contas a receber
+2026-02-25 16:19:05 - run_nexus_sync - ERROR - Failed chunk 47000 for contas a receber
+2026-02-25 16:19:06 - run_nexus_sync - ERROR - Failed chunk 47500 for contas a receber
+2026-02-25 16:19:06 - run_nexus_sync - ERROR - Failed chunk 48000 for contas a receber
+2026-02-25 16:19:06 - run_nexus_sync - ERROR - Failed chunk 48500 for contas a receber
+2026-02-25 16:19:07 - run_nexus_sync - ERROR - Failed chunk 49000 for contas a receber
+2026-02-25 16:19:07 - run_nexus_sync - ERROR - Failed chunk 49500 for contas a receber
+2026-02-25 16:19:08 - run_nexus_sync - ERROR - Failed chunk 50000 for contas a receber
+2026-02-25 16:19:08 - run_nexus_sync - ERROR - Failed chunk 50500 for contas a receber
+2026-02-25 16:19:09 - run_nexus_sync - ERROR - Failed chunk 51000 for contas a receber
+2026-02-25 16:19:09 - run_nexus_sync - ERROR - Failed chunk 51500 for contas a receber
+2026-02-25 16:19:09 - run_nexus_sync - ERROR - Failed chunk 52000 for contas a receber
+2026-02-25 16:19:10 - run_nexus_sync - ERROR - Failed chunk 52500 for contas a receber
+2026-02-25 16:19:10 - run_nexus_sync - ERROR - Failed chunk 53000 for contas a receber
+2026-02-25 16:19:10 - run_nexus_sync - ERROR - Failed chunk 53500 for contas a receber
+2026-02-25 16:19:11 - run_nexus_sync - ERROR - Failed chunk 54000 for contas a receber
+2026-02-25 16:19:11 - run_nexus_sync - ERROR - Failed chunk 54500 for contas a receber
+2026-02-25 16:19:12 - run_nexus_sync - ERROR - Failed chunk 55000 for contas a receber
+2026-02-25 16:19:12 - run_nexus_sync - ERROR - Failed chunk 55500 for contas a receber
+2026-02-25 16:19:12 - run_nexus_sync - ERROR - Failed chunk 56000 for contas a receber
+2026-02-25 16:19:13 - run_nexus_sync - ERROR - Failed chunk 56500 for contas a receber
+2026-02-25 16:19:13 - run_nexus_sync - ERROR - Failed chunk 57000 for contas a receber
+2026-02-25 16:19:14 - run_nexus_sync - ERROR - Failed chunk 57500 for contas a receber
+2026-02-25 16:19:14 - run_nexus_sync - ERROR - Failed chunk 58000 for contas a receber
+2026-02-25 16:19:14 - run_nexus_sync - ERROR - Failed chunk 58500 for contas a receber
+2026-02-25 16:19:15 - run_nexus_sync - ERROR - Failed chunk 59000 for contas a receber
+2026-02-25 16:19:15 - run_nexus_sync - ERROR - Failed chunk 59500 for contas a receber
+2026-02-25 16:19:16 - run_nexus_sync - ERROR - Failed chunk 60000 for contas a receber
+2026-02-25 16:19:16 - run_nexus_sync - ERROR - Failed chunk 60500 for contas a receber
+2026-02-25 16:19:16 - run_nexus_sync - ERROR - Failed chunk 61000 for contas a receber
+2026-02-25 16:19:17 - run_nexus_sync - ERROR - Failed chunk 61500 for contas a receber
+2026-02-25 16:19:17 - run_nexus_sync - ERROR - Failed chunk 62000 for contas a receber
+2026-02-25 16:19:18 - run_nexus_sync - ERROR - Failed chunk 62500 for contas a receber
+2026-02-25 16:19:18 - run_nexus_sync - ERROR - Failed chunk 63000 for contas a receber
+2026-02-25 16:19:18 - sync_services - INFO - Starting nexus_servicos sync...
+2026-02-25 16:19:18 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/servicos
+2026-02-25 16:19:19 - jobs_client - INFO - Page 1: Fetched 500 items. Total so far: 500
+2026-02-25 16:19:19 - jobs_client - INFO - Page 2: Fetched 500 items. Total so far: 1000
+2026-02-25 16:19:19 - jobs_client - INFO - Page 3: Fetched 500 items. Total so far: 1500
+2026-02-25 16:19:19 - jobs_client - INFO - Page 4: Fetched 19 items. Total so far: 1519
+2026-02-25 16:19:19 - sync_services - INFO - Fetched 1519 services from API
+2026-02-25 16:19:19 - sync_services - INFO - Upserted 1519 records into nexus_servicos
+2026-02-25 16:19:19 - sync_contracts - INFO - Starting nexus_contratos_recorrentes sync (full_load=False)...
+2026-02-25 16:19:19 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/contratos_recorrentes/
+2026-02-25 16:19:20 - jobs_client - INFO - Page 1: Fetched 240 items. Total so far: 240
+2026-02-25 16:19:20 - sync_contracts - INFO - Fetched 240 contracts from API
+2026-02-25 16:19:20 - sync_contracts - INFO - Upserted final batch of 240
+2026-02-25 16:19:20 - run_nexus_sync - INFO - === Nexus Reference Sync Complete ===
+2026-02-25 16:28:37 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 16:28:38 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:28:39 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:28:39 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:28:40 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:28:40 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:28:41 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:28:41 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:28:42 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:28:42 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 16:28:43 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 16:28:43 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 16:28:44 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 16:28:44 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 16:28:45 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 16:28:45 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 16:28:46 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 16:28:46 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 16:28:47 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 16:28:48 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 16:28:48 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 16:28:49 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 16:28:49 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 16:28:50 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 16:28:50 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 16:28:51 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 16:28:52 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 16:28:52 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 16:28:53 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 16:28:53 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 16:28:54 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 16:28:55 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 16:28:55 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 16:28:56 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 16:28:57 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 16:28:58 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 16:28:58 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 16:28:59 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 16:29:00 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 16:29:00 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 16:29:01 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 16:29:01 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 16:29:02 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 16:29:03 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 16:29:03 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 16:29:04 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 16:29:04 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 16:29:05 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 16:29:06 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 16:29:06 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 16:29:07 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 16:29:07 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 16:29:08 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 16:29:09 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 16:29:10 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 16:29:10 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 16:29:11 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 16:29:11 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 16:29:12 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 16:29:13 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 16:29:13 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 16:29:14 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 16:29:15 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 16:29:15 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 16:29:16 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 16:29:16 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 16:29:17 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 16:29:18 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 16:29:18 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 16:29:19 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 16:29:19 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 16:29:20 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 16:29:21 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 16:29:21 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 16:29:22 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 16:29:22 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 16:29:23 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 16:29:23 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 16:29:24 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 16:29:25 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 16:29:25 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 16:29:26 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 16:29:26 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 16:29:27 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 16:29:27 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 16:29:28 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 16:29:29 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 16:29:29 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 16:29:30 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 16:29:30 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 16:29:31 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 16:29:31 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 16:29:32 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 16:29:32 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 16:29:33 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 16:29:35 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 16:29:35 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 16:29:36 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 16:29:36 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 16:29:37 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 16:29:37 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 16:29:38 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 16:29:39 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 16:29:40 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 16:29:41 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 16:29:41 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 16:29:42 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 16:29:43 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 16:29:43 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 16:29:44 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 16:29:44 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 16:29:45 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 16:29:46 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 16:29:46 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 16:29:47 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 16:29:48 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 16:29:48 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 16:29:49 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 16:29:49 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 16:29:50 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 16:29:50 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 16:29:51 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 16:29:52 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 16:29:52 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 16:29:53 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 16:29:53 - unidades_client - INFO - Page 125 fetched 500 items. Total so far: 62500
+2026-02-25 16:29:54 - unidades_client - INFO - Page 126 fetched 500 items. Total so far: 63000
+2026-02-25 16:29:55 - unidades_client - INFO - Page 127 fetched 366 items. Total so far: 63366
+2026-02-25 16:30:15 - run_nexus_sync - INFO - === Starting Nexus Reference Sync ===
+2026-02-25 16:30:16 - run_nexus_sync - INFO - --- Sincronizando UNIDADES ---
+2026-02-25 16:30:16 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/unidades/
+2026-02-25 16:30:17 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:30:17 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:30:17 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:30:17 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:30:17 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:30:17 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:30:17 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:30:18 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:30:18 - unidades_client - INFO - Page 9 fetched 419 items. Total so far: 4419
+2026-02-25 16:30:18 - run_nexus_sync - INFO - Encontradas 4419 unidades no Nexus.
+2026-02-25 16:30:18 - run_nexus_sync - INFO - Fazendo upsert de 4419 unidades...
+2026-02-25 16:30:19 - run_nexus_sync - INFO - Upserted items 0 to 500
+2026-02-25 16:30:19 - run_nexus_sync - INFO - Upserted items 500 to 1000
+2026-02-25 16:30:20 - run_nexus_sync - INFO - Upserted items 1000 to 1500
+2026-02-25 16:30:20 - run_nexus_sync - INFO - Upserted items 1500 to 2000
+2026-02-25 16:30:21 - run_nexus_sync - INFO - Upserted items 2000 to 2500
+2026-02-25 16:30:21 - run_nexus_sync - INFO - Upserted items 2500 to 3000
+2026-02-25 16:30:21 - run_nexus_sync - INFO - Upserted items 3000 to 3500
+2026-02-25 16:30:22 - run_nexus_sync - INFO - Upserted items 3500 to 4000
+2026-02-25 16:30:23 - run_nexus_sync - INFO - Upserted items 4000 to 4419
+2026-02-25 16:30:23 - run_nexus_sync - INFO - --- Sincronizando PARTICIPANTES ---
+2026-02-25 16:30:23 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/participantes/
+2026-02-25 16:30:23 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:30:23 - unidades_client - INFO - Page 2 fetched 499 items. Total so far: 999
+2026-02-25 16:30:23 - run_nexus_sync - INFO - Encontrados 999 participantes no Nexus.
+2026-02-25 16:30:23 - run_nexus_sync - INFO - Fazendo upsert de 999 participantes...
+2026-02-25 16:30:24 - run_nexus_sync - INFO - --- Sincronizando MODELOS (Vendas/Contratos) ---
+2026-02-25 16:30:24 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/modelos/
+2026-02-25 16:30:25 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:30:25 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:30:25 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:30:25 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:30:25 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:30:25 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:30:25 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:30:26 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:30:26 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 16:30:26 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 16:30:26 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 16:30:26 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 16:30:26 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 16:30:26 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 16:30:26 - unidades_client - INFO - Page 15 fetched 271 items. Total so far: 7271
+2026-02-25 16:30:26 - run_nexus_sync - INFO - Encontrados 7271 modelos no Nexus.
+2026-02-25 16:30:28 - run_nexus_sync - INFO - Unidades conhecidas no DB: 4540
+2026-02-25 16:30:28 - run_nexus_sync - INFO - Encontradas 29 unidades referenciadas mas inexistentes. Buscando nomes via API...
+2026-02-25 16:30:38 - run_nexus_sync - INFO -   -> Inserted placeholders 0 - 29
+2026-02-25 16:30:38 - run_nexus_sync - INFO - Fazendo upsert de 847 modelos (2024+)...
+2026-02-25 16:30:40 - run_nexus_sync - INFO - --- Sincronizando CONTAS A RECEBER (Fallback) ---
+2026-02-25 16:30:40 - unidades_client - INFO - Fetching full data from SOURCE API: https://nexusdata.duckdns.org/api/v1/contas-receber/
+2026-02-25 16:30:40 - unidades_client - INFO - Page 1 fetched 500 items. Total so far: 500
+2026-02-25 16:30:40 - unidades_client - INFO - Page 2 fetched 500 items. Total so far: 1000
+2026-02-25 16:30:41 - unidades_client - INFO - Page 3 fetched 500 items. Total so far: 1500
+2026-02-25 16:30:41 - unidades_client - INFO - Page 4 fetched 500 items. Total so far: 2000
+2026-02-25 16:30:42 - unidades_client - INFO - Page 5 fetched 500 items. Total so far: 2500
+2026-02-25 16:30:42 - unidades_client - INFO - Page 6 fetched 500 items. Total so far: 3000
+2026-02-25 16:30:43 - unidades_client - INFO - Page 7 fetched 500 items. Total so far: 3500
+2026-02-25 16:30:43 - unidades_client - INFO - Page 8 fetched 500 items. Total so far: 4000
+2026-02-25 16:30:44 - unidades_client - INFO - Page 9 fetched 500 items. Total so far: 4500
+2026-02-25 16:30:44 - unidades_client - INFO - Page 10 fetched 500 items. Total so far: 5000
+2026-02-25 16:30:45 - unidades_client - INFO - Page 11 fetched 500 items. Total so far: 5500
+2026-02-25 16:30:45 - unidades_client - INFO - Page 12 fetched 500 items. Total so far: 6000
+2026-02-25 16:30:46 - unidades_client - INFO - Page 13 fetched 500 items. Total so far: 6500
+2026-02-25 16:30:48 - unidades_client - INFO - Page 14 fetched 500 items. Total so far: 7000
+2026-02-25 16:30:49 - unidades_client - INFO - Page 15 fetched 500 items. Total so far: 7500
+2026-02-25 16:30:49 - unidades_client - INFO - Page 16 fetched 500 items. Total so far: 8000
+2026-02-25 16:30:50 - unidades_client - INFO - Page 17 fetched 500 items. Total so far: 8500
+2026-02-25 16:30:50 - unidades_client - INFO - Page 18 fetched 500 items. Total so far: 9000
+2026-02-25 16:30:51 - unidades_client - INFO - Page 19 fetched 500 items. Total so far: 9500
+2026-02-25 16:30:52 - unidades_client - INFO - Page 20 fetched 500 items. Total so far: 10000
+2026-02-25 16:30:52 - unidades_client - INFO - Page 21 fetched 500 items. Total so far: 10500
+2026-02-25 16:30:53 - unidades_client - INFO - Page 22 fetched 500 items. Total so far: 11000
+2026-02-25 16:30:53 - unidades_client - INFO - Page 23 fetched 500 items. Total so far: 11500
+2026-02-25 16:30:54 - unidades_client - INFO - Page 24 fetched 500 items. Total so far: 12000
+2026-02-25 16:30:54 - unidades_client - INFO - Page 25 fetched 500 items. Total so far: 12500
+2026-02-25 16:30:55 - unidades_client - INFO - Page 26 fetched 500 items. Total so far: 13000
+2026-02-25 16:30:55 - unidades_client - INFO - Page 27 fetched 500 items. Total so far: 13500
+2026-02-25 16:30:56 - unidades_client - INFO - Page 28 fetched 500 items. Total so far: 14000
+2026-02-25 16:30:57 - unidades_client - INFO - Page 29 fetched 500 items. Total so far: 14500
+2026-02-25 16:30:57 - unidades_client - INFO - Page 30 fetched 500 items. Total so far: 15000
+2026-02-25 16:30:58 - unidades_client - INFO - Page 31 fetched 500 items. Total so far: 15500
+2026-02-25 16:30:58 - unidades_client - INFO - Page 32 fetched 500 items. Total so far: 16000
+2026-02-25 16:30:59 - unidades_client - INFO - Page 33 fetched 500 items. Total so far: 16500
+2026-02-25 16:31:00 - unidades_client - INFO - Page 34 fetched 500 items. Total so far: 17000
+2026-02-25 16:31:00 - unidades_client - INFO - Page 35 fetched 500 items. Total so far: 17500
+2026-02-25 16:31:01 - unidades_client - INFO - Page 36 fetched 500 items. Total so far: 18000
+2026-02-25 16:31:01 - unidades_client - INFO - Page 37 fetched 500 items. Total so far: 18500
+2026-02-25 16:31:02 - unidades_client - INFO - Page 38 fetched 500 items. Total so far: 19000
+2026-02-25 16:31:02 - unidades_client - INFO - Page 39 fetched 500 items. Total so far: 19500
+2026-02-25 16:31:03 - unidades_client - INFO - Page 40 fetched 500 items. Total so far: 20000
+2026-02-25 16:31:04 - unidades_client - INFO - Page 41 fetched 500 items. Total so far: 20500
+2026-02-25 16:31:04 - unidades_client - INFO - Page 42 fetched 500 items. Total so far: 21000
+2026-02-25 16:31:05 - unidades_client - INFO - Page 43 fetched 500 items. Total so far: 21500
+2026-02-25 16:31:05 - unidades_client - INFO - Page 44 fetched 500 items. Total so far: 22000
+2026-02-25 16:31:06 - unidades_client - INFO - Page 45 fetched 500 items. Total so far: 22500
+2026-02-25 16:31:06 - unidades_client - INFO - Page 46 fetched 500 items. Total so far: 23000
+2026-02-25 16:31:07 - unidades_client - INFO - Page 47 fetched 500 items. Total so far: 23500
+2026-02-25 16:31:08 - unidades_client - INFO - Page 48 fetched 500 items. Total so far: 24000
+2026-02-25 16:31:08 - unidades_client - INFO - Page 49 fetched 500 items. Total so far: 24500
+2026-02-25 16:31:09 - unidades_client - INFO - Page 50 fetched 500 items. Total so far: 25000
+2026-02-25 16:31:09 - unidades_client - INFO - Page 51 fetched 500 items. Total so far: 25500
+2026-02-25 16:31:10 - unidades_client - INFO - Page 52 fetched 500 items. Total so far: 26000
+2026-02-25 16:31:10 - unidades_client - INFO - Page 53 fetched 500 items. Total so far: 26500
+2026-02-25 16:31:11 - unidades_client - INFO - Page 54 fetched 500 items. Total so far: 27000
+2026-02-25 16:31:11 - unidades_client - INFO - Page 55 fetched 500 items. Total so far: 27500
+2026-02-25 16:31:12 - unidades_client - INFO - Page 56 fetched 500 items. Total so far: 28000
+2026-02-25 16:31:13 - unidades_client - INFO - Page 57 fetched 500 items. Total so far: 28500
+2026-02-25 16:31:13 - unidades_client - INFO - Page 58 fetched 500 items. Total so far: 29000
+2026-02-25 16:31:14 - unidades_client - INFO - Page 59 fetched 500 items. Total so far: 29500
+2026-02-25 16:31:14 - unidades_client - INFO - Page 60 fetched 500 items. Total so far: 30000
+2026-02-25 16:31:15 - unidades_client - INFO - Page 61 fetched 500 items. Total so far: 30500
+2026-02-25 16:31:15 - unidades_client - INFO - Page 62 fetched 500 items. Total so far: 31000
+2026-02-25 16:31:16 - unidades_client - INFO - Page 63 fetched 500 items. Total so far: 31500
+2026-02-25 16:31:16 - unidades_client - INFO - Page 64 fetched 500 items. Total so far: 32000
+2026-02-25 16:31:17 - unidades_client - INFO - Page 65 fetched 500 items. Total so far: 32500
+2026-02-25 16:31:18 - unidades_client - INFO - Page 66 fetched 500 items. Total so far: 33000
+2026-02-25 16:31:18 - unidades_client - INFO - Page 67 fetched 500 items. Total so far: 33500
+2026-02-25 16:31:19 - unidades_client - INFO - Page 68 fetched 500 items. Total so far: 34000
+2026-02-25 16:31:19 - unidades_client - INFO - Page 69 fetched 500 items. Total so far: 34500
+2026-02-25 16:31:20 - unidades_client - INFO - Page 70 fetched 500 items. Total so far: 35000
+2026-02-25 16:31:20 - unidades_client - INFO - Page 71 fetched 500 items. Total so far: 35500
+2026-02-25 16:31:21 - unidades_client - INFO - Page 72 fetched 500 items. Total so far: 36000
+2026-02-25 16:31:21 - unidades_client - INFO - Page 73 fetched 500 items. Total so far: 36500
+2026-02-25 16:31:22 - unidades_client - INFO - Page 74 fetched 500 items. Total so far: 37000
+2026-02-25 16:31:22 - unidades_client - INFO - Page 75 fetched 500 items. Total so far: 37500
+2026-02-25 16:31:23 - unidades_client - INFO - Page 76 fetched 500 items. Total so far: 38000
+2026-02-25 16:31:24 - unidades_client - INFO - Page 77 fetched 500 items. Total so far: 38500
+2026-02-25 16:31:24 - unidades_client - INFO - Page 78 fetched 500 items. Total so far: 39000
+2026-02-25 16:31:25 - unidades_client - INFO - Page 79 fetched 500 items. Total so far: 39500
+2026-02-25 16:31:26 - unidades_client - INFO - Page 80 fetched 500 items. Total so far: 40000
+2026-02-25 16:31:26 - unidades_client - INFO - Page 81 fetched 500 items. Total so far: 40500
+2026-02-25 16:31:27 - unidades_client - INFO - Page 82 fetched 500 items. Total so far: 41000
+2026-02-25 16:31:27 - unidades_client - INFO - Page 83 fetched 500 items. Total so far: 41500
+2026-02-25 16:31:28 - unidades_client - INFO - Page 84 fetched 500 items. Total so far: 42000
+2026-02-25 16:31:29 - unidades_client - INFO - Page 85 fetched 500 items. Total so far: 42500
+2026-02-25 16:31:29 - unidades_client - INFO - Page 86 fetched 500 items. Total so far: 43000
+2026-02-25 16:31:30 - unidades_client - INFO - Page 87 fetched 500 items. Total so far: 43500
+2026-02-25 16:31:30 - unidades_client - INFO - Page 88 fetched 500 items. Total so far: 44000
+2026-02-25 16:31:31 - unidades_client - INFO - Page 89 fetched 500 items. Total so far: 44500
+2026-02-25 16:31:32 - unidades_client - INFO - Page 90 fetched 500 items. Total so far: 45000
+2026-02-25 16:31:32 - unidades_client - INFO - Page 91 fetched 500 items. Total so far: 45500
+2026-02-25 16:31:33 - unidades_client - INFO - Page 92 fetched 500 items. Total so far: 46000
+2026-02-25 16:31:34 - unidades_client - INFO - Page 93 fetched 500 items. Total so far: 46500
+2026-02-25 16:31:34 - unidades_client - INFO - Page 94 fetched 500 items. Total so far: 47000
+2026-02-25 16:31:35 - unidades_client - INFO - Page 95 fetched 500 items. Total so far: 47500
+2026-02-25 16:31:36 - unidades_client - INFO - Page 96 fetched 500 items. Total so far: 48000
+2026-02-25 16:31:36 - unidades_client - INFO - Page 97 fetched 500 items. Total so far: 48500
+2026-02-25 16:31:37 - unidades_client - INFO - Page 98 fetched 500 items. Total so far: 49000
+2026-02-25 16:31:37 - unidades_client - INFO - Page 99 fetched 500 items. Total so far: 49500
+2026-02-25 16:31:38 - unidades_client - INFO - Page 100 fetched 500 items. Total so far: 50000
+2026-02-25 16:31:39 - unidades_client - INFO - Page 101 fetched 500 items. Total so far: 50500
+2026-02-25 16:31:39 - unidades_client - INFO - Page 102 fetched 500 items. Total so far: 51000
+2026-02-25 16:31:40 - unidades_client - INFO - Page 103 fetched 500 items. Total so far: 51500
+2026-02-25 16:31:40 - unidades_client - INFO - Page 104 fetched 500 items. Total so far: 52000
+2026-02-25 16:31:41 - unidades_client - INFO - Page 105 fetched 500 items. Total so far: 52500
+2026-02-25 16:31:41 - unidades_client - INFO - Page 106 fetched 500 items. Total so far: 53000
+2026-02-25 16:31:42 - unidades_client - INFO - Page 107 fetched 500 items. Total so far: 53500
+2026-02-25 16:31:43 - unidades_client - INFO - Page 108 fetched 500 items. Total so far: 54000
+2026-02-25 16:31:43 - unidades_client - INFO - Page 109 fetched 500 items. Total so far: 54500
+2026-02-25 16:31:44 - unidades_client - INFO - Page 110 fetched 500 items. Total so far: 55000
+2026-02-25 16:31:44 - unidades_client - INFO - Page 111 fetched 500 items. Total so far: 55500
+2026-02-25 16:31:45 - unidades_client - INFO - Page 112 fetched 500 items. Total so far: 56000
+2026-02-25 16:31:46 - unidades_client - INFO - Page 113 fetched 500 items. Total so far: 56500
+2026-02-25 16:31:46 - unidades_client - INFO - Page 114 fetched 500 items. Total so far: 57000
+2026-02-25 16:31:47 - unidades_client - INFO - Page 115 fetched 500 items. Total so far: 57500
+2026-02-25 16:31:47 - unidades_client - INFO - Page 116 fetched 500 items. Total so far: 58000
+2026-02-25 16:31:48 - unidades_client - INFO - Page 117 fetched 500 items. Total so far: 58500
+2026-02-25 16:31:49 - unidades_client - INFO - Page 118 fetched 500 items. Total so far: 59000
+2026-02-25 16:31:49 - unidades_client - INFO - Page 119 fetched 500 items. Total so far: 59500
+2026-02-25 16:31:50 - unidades_client - INFO - Page 120 fetched 500 items. Total so far: 60000
+2026-02-25 16:31:50 - unidades_client - INFO - Page 121 fetched 500 items. Total so far: 60500
+2026-02-25 16:31:51 - unidades_client - INFO - Page 122 fetched 500 items. Total so far: 61000
+2026-02-25 16:31:51 - unidades_client - INFO - Page 123 fetched 500 items. Total so far: 61500
+2026-02-25 16:31:52 - unidades_client - INFO - Page 124 fetched 500 items. Total so far: 62000
+2026-02-25 16:31:53 - unidades_client - INFO - Page 125 fetched 500 items. Total so far: 62500
+2026-02-25 16:31:53 - unidades_client - INFO - Page 126 fetched 500 items. Total so far: 63000
+2026-02-25 16:31:54 - unidades_client - INFO - Page 127 fetched 366 items. Total so far: 63366
+2026-02-25 16:31:54 - run_nexus_sync - INFO - Encontradas 63366 contas a receber no Nexus.
+2026-02-25 16:31:54 - run_nexus_sync - INFO - Fazendo upsert de 63366 contas a receber...
+2026-02-25 16:32:37 - sync_services - INFO - Starting nexus_servicos sync...
+2026-02-25 16:32:37 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/servicos
+2026-02-25 16:32:38 - jobs_client - INFO - Page 1: Fetched 500 items. Total so far: 500
+2026-02-25 16:32:38 - jobs_client - INFO - Page 2: Fetched 500 items. Total so far: 1000
+2026-02-25 16:32:38 - jobs_client - INFO - Page 3: Fetched 500 items. Total so far: 1500
+2026-02-25 16:32:38 - jobs_client - INFO - Page 4: Fetched 19 items. Total so far: 1519
+2026-02-25 16:32:38 - sync_services - INFO - Fetched 1519 services from API
+2026-02-25 16:32:38 - sync_services - INFO - Upserted 1519 records into nexus_servicos
+2026-02-25 16:32:38 - sync_contracts - INFO - Starting nexus_contratos_recorrentes sync (full_load=False)...
+2026-02-25 16:32:38 - jobs_client - INFO - Fetching data from: https://nexusdata.duckdns.org/api/v1/contratos_recorrentes/
+2026-02-25 16:32:39 - jobs_client - INFO - Page 1: Fetched 240 items. Total so far: 240
+2026-02-25 16:32:39 - sync_contracts - INFO - Fetched 240 contracts from API
+2026-02-25 16:32:39 - sync_contracts - INFO - Upserted final batch of 240
+2026-02-25 16:32:39 - run_nexus_sync - INFO - === Nexus Reference Sync Complete ===
+2026-02-25 17:01:55 - api_server - INFO - Iniciando API no endereço http://0.0.0.0:8000
+2026-02-25 17:02:46 - api_server - INFO - Iniciando API no endereço http://0.0.0.0:8000

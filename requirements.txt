@@ -6,3 +6,7 @@ Pillow
 psycopg2-binary
 supabase
 jinja2
+fastapi
+uvicorn
+pandas
+openpyxl

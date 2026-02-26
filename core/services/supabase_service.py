@@ -40,7 +40,7 @@ class SupabaseService:
         }
 
     def _get(self, table, params=None):
-        """Helper para fazer requests GET na API REST."""
+        """Helper para requests GET na API REST. Aceita params como dict ou lista de tuplas."""
         try:
             endpoint = f"{self.url}/rest/v1/{table}"
             response = requests.get(endpoint, headers=self.headers, params=params, timeout=30)
