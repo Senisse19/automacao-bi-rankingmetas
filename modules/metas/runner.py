@@ -28,9 +28,17 @@ class MetasAutomation:
     """
 
     def __init__(self):
-        self.powerbi = PowerBIClient(
-            workspace_id=POWERBI_CONFIG.get("metas_workspace_id"), dataset_id=POWERBI_CONFIG.get("metas_dataset_id")
-        )
+        metas_dataset_id = POWERBI_CONFIG.get("metas_dataset_id")
+        metas_workspace_id = POWERBI_CONFIG.get("metas_workspace_id")
+
+        # Validação para garantir que as variáveis estão configuradas antes de iniciar
+        if not metas_dataset_id or not metas_workspace_id:
+            raise ValueError(
+                "❌ Variáveis POWERBI_METAS_DATASET_ID e POWERBI_WORKSPACE_ID não configuradas. "
+                "Configure-as no Coolify antes de executar a automação Metas."
+            )
+
+        self.powerbi = PowerBIClient(workspace_id=metas_workspace_id, dataset_id=metas_dataset_id)
         self.image_gen = ImageGenerator()
         self.whatsapp = EvolutionClient()
         self.supabase = SupabaseService()

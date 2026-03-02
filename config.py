@@ -24,15 +24,20 @@ SHAREPOINT_CONFIG = {
 }
 
 # Configurações Power BI
+# Workspace compartilhado por todos os datasets
 POWERBI_CONFIG = {
     "client_id": os.getenv("SHAREPOINT_CLIENT_ID"),
     "client_secret": os.getenv("SHAREPOINT_CLIENT_SECRET"),
     "tenant": os.getenv("SHAREPOINT_TENANT"),
+    # Workspace único compartilhado por todos os relatórios
     "workspace_id": os.getenv("POWERBI_WORKSPACE_ID"),
-    "dataset_id": os.getenv("POWERBI_DATASET_ID"),
-    # Permite especificar workspaces/datasets exclusivos para relatórios específicos
+    # Dataset ID específico para cada automação (variáveis preferidas)
     "metas_workspace_id": os.getenv("POWERBI_METAS_WORKSPACE_ID", os.getenv("POWERBI_WORKSPACE_ID")),
-    "metas_dataset_id": os.getenv("POWERBI_METAS_DATASET_ID", os.getenv("POWERBI_DATASET_ID")),
+    "metas_dataset_id": os.getenv("POWERBI_METAS_DATASET_ID"),
+    "ina_workspace_id": os.getenv("POWERBI_INA_WORKSPACE_ID", os.getenv("POWERBI_WORKSPACE_ID")),
+    "ina_dataset_id": os.getenv("POWERBI_INA_DATASET_ID"),
+    "unidades_workspace_id": os.getenv("POWERBI_UNIDADES_WORKSPACE_ID", os.getenv("POWERBI_WORKSPACE_ID")),
+    "unidades_dataset_id": os.getenv("POWERBI_UNIDADES_DATASET_ID"),
 }
 
 # Configurações Evolution API

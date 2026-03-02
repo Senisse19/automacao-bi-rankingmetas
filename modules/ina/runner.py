@@ -18,16 +18,23 @@ from core.services.supabase_service import SupabaseService
 from core.clients.evolution_client import EvolutionClient
 from utils.logger import get_logger
 from core.services.image_renderer.ina_renderer import InaRenderer
+from config import POWERBI_CONFIG
 
 logger = get_logger("run_ina")
 
-# Novo ID identificado via list_datasets e validado via probe_new_id
-INA_DATASET_ID = "ae481f4d-b8df-4e0c-915e-47a4606bec06"
-INA_WORKSPACE_ID = os.environ.get("POWERBI_WORKSPACE_ID")
+# IDs lidos da configuração centralizada (variáveis POWERBI_INA_*)
+INA_DATASET_ID = POWERBI_CONFIG.get("ina_dataset_id")
+INA_WORKSPACE_ID = POWERBI_CONFIG.get("ina_workspace_id")
 
 
 class InaAutomation:
     def __init__(self):
+        # Validação para garantir que as variáveis estão configuradas antes de iniciar
+        if not INA_DATASET_ID or not INA_WORKSPACE_ID:
+            raise ValueError(
+                "❌ Variáveis POWERBI_INA_DATASET_ID e POWERBI_WORKSPACE_ID não configuradas. "
+                "Configure-as no Coolify antes de executar a automação INA."
+            )
         logger.info(f"🔌 Conectando ao Power BI - Workspace: {INA_WORKSPACE_ID} | Dataset: {INA_DATASET_ID}")
         self.powerbi = PowerBIClient(workspace_id=INA_WORKSPACE_ID, dataset_id=INA_DATASET_ID)
         self.whatsapp = EvolutionClient()
