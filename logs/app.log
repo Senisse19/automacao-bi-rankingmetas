@@ -6459,3 +6459,53 @@
 2026-02-25 16:32:39 - run_nexus_sync - INFO - === Nexus Reference Sync Complete ===
 2026-02-25 17:01:55 - api_server - INFO - Iniciando API no endereço http://0.0.0.0:8000
 2026-02-25 17:02:46 - api_server - INFO - Iniciando API no endereço http://0.0.0.0:8000
+2026-03-09 14:47:21 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:48:14 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:48:50 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:49:31 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-03-09 14:49:31 - run_metas - INFO - Buscando dados do Power BI...
+2026-03-09 14:49:32 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:49:32 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-03-09 14:49:34 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-03-09 14:49:34 - run_metas - INFO - Gerando imagens...
+2026-03-09 14:49:34 - run_metas - INFO -    [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/
+2026-03-09 14:49:34 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-03-09 14:50:14 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:50:41 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:50:41 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-03-09 14:50:44 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-03-09 14:53:46 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:53:46 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-03-09 14:53:48 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-03-09 14:53:48 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Query (7, 21) The value for '<oii>% Meta 3 Tecnologia</oii>' cannot be determined. Either the column doesn't exist, or there is no current row for this column."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3241803820"}}]}}}
+2026-03-09 14:53:48 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-03-09 14:58:46 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-03-09 14:58:46 - run_metas - INFO - Buscando dados do Power BI...
+2026-03-09 14:58:47 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 14:58:47 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-03-09 14:58:49 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-03-09 14:58:49 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Query (7, 21) The value for '<oii>% Meta 3 Tecnologia</oii>' cannot be determined. Either the column doesn't exist, or there is no current row for this column."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3241803820"}}]}}}
+2026-03-09 14:58:49 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-03-09 14:58:49 - run_metas - INFO - Gerando imagens...
+2026-03-09 14:58:49 - run_metas - INFO -    [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/
+2026-03-09 14:58:49 - run_metas - INFO - === FIM AUTOMAÇÃO METAS ===
+
+2026-03-09 15:51:26 - api_server - INFO - Iniciando API no endereço http://0.0.0.0:8000
+2026-03-09 16:01:59 - run_metas - INFO - Recebido payload via CLI com 1 destinatários.
+2026-03-09 16:01:59 - run_metas - INFO - 
+=== AUTOMAÇÃO METAS ===
+2026-03-09 16:01:59 - run_metas - INFO - Buscando dados do Power BI...
+2026-03-09 16:02:00 - powerbi_client - INFO - Token OAuth obtido (expira em 3599s)
+2026-03-09 16:02:00 - powerbi_data - INFO - Buscando dados do Power BI...
+2026-03-09 16:02:03 - powerbi_client - ERROR - Erro ao executar DAX: 400 Client Error: Bad Request for url: https://api.powerbi.com/v1.0/myorg/groups/4600324e-148c-4aae-a743-601628c04d29/datasets/5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4/executeQueries
+2026-03-09 16:02:03 - powerbi_client - ERROR - Detalhes: {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Query (7, 21) The value for '<oii>% Meta 3 Tecnologia</oii>' cannot be determined. Either the column doesn't exist, or there is no current row for this column."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"3241803820"}}]}}}
+2026-03-09 16:02:03 - powerbi_data - INFO - OK - Dados de 8 departamentos obtidos
+2026-03-09 16:02:03 - run_metas - INFO - Gerando imagens...
+2026-03-09 16:02:03 - run_metas - INFO - Enviando para WhatsApp...
+2026-03-09 16:02:03 - run_metas - INFO - Processando envio para 1 destinatários dinâmicos.
+2026-03-09 16:02:14 - evolution_client - INFO -    [SEND_FILE] Arquivo: metas_geral.png | Extensão: png
+2026-03-09 16:02:14 - evolution_client - INFO -    [SEND_FILE] Modo: IMAGEM
+2026-03-09 16:02:16 - notification_service - INFO -    [Notification] OK: WhatsApp para Victor (metas)

@@ -1,6 +1,7 @@
+import atexit
 import os
 import time
-import atexit
+
 from utils.logger import get_logger
 
 logger = get_logger("lock_manager")
@@ -26,7 +27,8 @@ class LockManager:
                 mtime = os.path.getmtime(self.lock_file)
                 if time.time() - mtime > 60:
                     logger.warning(
-                        f"⚠️ Lock file antigo encontrado (última atualização há {time.time() - mtime:.0f}s). Assumindo crash anterior e removendo."
+                        f"⚠️ Lock file antigo encontrado (última atualização há {time.time() - mtime:.0f}s). "
+                        "Assumindo crash anterior e removendo."
                     )
                     try:
                         os.remove(self.lock_file)

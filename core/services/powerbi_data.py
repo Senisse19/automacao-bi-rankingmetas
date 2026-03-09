@@ -6,6 +6,7 @@ integrando diretamente com o modelo semântico mapeado.
 
 import json
 from datetime import datetime, timedelta
+
 from core.clients.powerbi_client import PowerBIClient
 from utils.logger import get_logger
 
@@ -26,18 +27,16 @@ def format_percent(value):
     return f"{value:.2f}%".replace(".", ",")
 
 
-from core.services.dax_queries import (
-    get_realizado_query,
-    get_metas_com_op_query,
-    get_percentuais_gs_query,
-    get_percentuais_com_op_query,
-    get_receitas_query,
-    get_metas_dept_query,
-    get_percentuais_dept_query,
-)
-
-
 from config import POWERBI_CONFIG
+from core.services.dax_queries import (
+    get_metas_com_op_query,
+    get_metas_dept_query,
+    get_percentuais_com_op_query,
+    get_percentuais_dept_query,
+    get_percentuais_gs_query,
+    get_receitas_liquido_query,
+    get_receitas_query,
+)
 
 
 class PowerBIDataFetcher:
@@ -72,24 +71,24 @@ class PowerBIDataFetcher:
         else:
             end_date = datetime(now.year, now.month + 1, 1) - timedelta(days=1)
 
-        date_filter_start = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
-        date_filter_end = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
+        start_str = f"DATE({start_date.year}, {start_date.month}, {start_date.day})"
+        end_str = f"DATE({end_date.year}, {end_date.month}, {end_date.day})"
 
-        query = get_realizado_query(date_filter_start, date_filter_end)
+        query = get_receitas_liquido_query(start_str, end_str) # Changed DAX query
 
         try:
             result = self.client.execute_dax(query)
             if result and len(result) > 0:
                 row = result[0]
                 return {
-                    "Comercial": row.get("[Comercial]") or 0,
-                    "Operacional": row.get("[Operacional]") or 0,
-                    "Corporate": row.get("[Corporate]") or 0,
-                    "Educação": row.get("[Educacao]") or 0,
-                    "Expansão": row.get("[Expansao]") or 0,
-                    "Franchising": row.get("[Franchising]") or 0,
-                    "PJ": row.get("[PJ]") or 0,
-                    "Tax": row.get("[Tax]") or 0,
+                    "Comercial": row.get("[Total_Comercial]") or 0,
+                    "Operacional": row.get("[Total_Operacao]") or 0,
+                    "Corporate": row.get("[Corporate_Liquido]") or 0,
+                    "Educação": row.get("[Educacao_Liquido]") or 0,
+                    "Expansão": row.get("[Expansao_Liquido]") or 0,
+                    "Franchising": row.get("[Franchising_Liquido]") or 0,
+                    "Tecnologia": row.get("[Tecnologia_Liquido]") or 0, # Changed from PJ to Tecnologia
+                    "Tax": row.get("[Tax_Liquido]") or 0,
                 }
         except Exception as e:
             logger.error(f"Erro ao buscar valores realizados: {e}")
@@ -218,7 +217,8 @@ class PowerBIDataFetcher:
                 return {
                     "outras": row.get("[OutrasReceitas]") or 0,
                     "intercompany": row.get("[InterCompany]") or 0,
-                    "nao_identificadas": row.get("[NaoIdentificada]") or 0,
+                    "total_geral": row.get("[NaoIdentificada]") or 0,
+                    "repasse": row.get("[Repasse]") or 0, # Added Repasse
                     "sem_categoria": row.get("[SemCategoria]") or 0,
                 }
         except Exception as e:
@@ -227,7 +227,8 @@ class PowerBIDataFetcher:
         return {
             "outras": 0,
             "intercompany": 0,
-            "nao_identificadas": 0,
+            "total_geral": 0,
+            "repasse": 0, # Added Repasse
             "sem_categoria": 0,
         }
 
@@ -324,7 +325,7 @@ class PowerBIDataFetcher:
             ("Expansão", "Expansão_Metas", "EXPANSAO"),
             ("Franchising", "Franchising_Metas", "FRANCHISING"),
             ("Tax", "TAX_Metas", "TAX"),
-            ("Tecnologia", "PJ360_Metas", "PJ"),
+            ("Tecnologia", "PJ360_Metas", "Tecnologia"), # Mapped PJ to Tecnologia
         ]
 
         # Realizado GS = Comercial + Operacional (valores brutos)
@@ -385,8 +386,8 @@ class PowerBIDataFetcher:
             metas = self.fetch_metas_departamento(tabela, prefixo)
             pct = self.fetch_percentuais_departamento(prefixo)
 
-            # Tecnologia usa PJ como chave no dicionário de realizados
-            key_realizado = "PJ" if nome == "Tecnologia" else nome
+            # Tecnologia agora usa "Tecnologia" como chave no dicionário de realizados
+            key_realizado = nome
             real = realizados.get(key_realizado, 0)
 
             departamentos.append(
@@ -407,7 +408,8 @@ class PowerBIDataFetcher:
         receitas = {
             "outras": format_currency(receitas_raw.get("outras", 0)),
             "intercompany": format_currency(receitas_raw.get("intercompany", 0)),
-            "nao_identificadas": format_currency(receitas_raw.get("nao_identificadas", 0)),
+            "repasse": format_currency(receitas_raw.get("repasse", 0)), # Added Repasse
+            "total_geral": format_currency(receitas_raw.get("total_geral", 0)),
             "sem_categoria": format_currency(receitas_raw.get("sem_categoria", 0)),
         }
 

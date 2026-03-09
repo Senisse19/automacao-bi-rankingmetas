@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from datetime import datetime
+
 from config import UNIDADES_CONFIG
 from core.services.supabase_service import SupabaseService
 from utils.logger import get_logger

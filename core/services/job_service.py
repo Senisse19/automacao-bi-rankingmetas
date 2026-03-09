@@ -1,7 +1,8 @@
-import time
 import json
-from core.services.supabase_service import SupabaseService
+import time
+
 from core.jobs import JOB_MAPPING, safe_run_job
+from core.services.supabase_service import SupabaseService
 from utils.logger import get_logger
 
 logger = get_logger("job_service")

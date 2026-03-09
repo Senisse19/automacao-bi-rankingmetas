@@ -1,5 +1,7 @@
-from PIL import Image, ImageDraw
 from datetime import datetime, timedelta
+
+from PIL import Image, ImageDraw
+
 from .base_renderer import BaseRenderer
 
 
@@ -38,8 +40,8 @@ class MetasRenderer(BaseRenderer):
         # title é passado. Data é 'agora'.
         now_str = datetime.now().strftime("%d/%m/%Y às %H:%M")
 
-        # Nota: O generate_ranking_image original não usava _draw_header refatorado, ele tinha lógica inline.
-        # Vamos substituir pela chamada padronizada para consistência.
+        # Nota: O generate_ranking_image original não usava _draw_header refatorado,
+        # ele tinha lógica inline. Vamos substituir pela chamada padronizada para consistência.
         header_h = self._draw_header(draw, title.upper(), now_str)
 
         y = header_h + 30
@@ -186,7 +188,8 @@ class MetasRenderer(BaseRenderer):
 
         # Recalcular altura total da imagem baseada no conteúdo real
         # First, draw header to get its height
-        temp_img = Image.new("RGB", (self.width, 1), self.bg_color)  # Dummy image for header height calc
+        # Dummy image for header height calc
+        temp_img = Image.new("RGB", (self.width, 1), self.bg_color)
         temp_draw = ImageDraw.Draw(temp_img)
         header_h = self._draw_header(temp_draw, "RELATÓRIO DE METAS", periodo)
 
@@ -215,7 +218,11 @@ class MetasRenderer(BaseRenderer):
         margin = 15
         card_gap = 10
 
-        header_h = self._draw_header(draw, "RELATÓRIO DE METAS", periodo)
+        # Título enriquecido com Total Geral
+        total_val = receitas.get("total_geral", "R$ 0,00") if receitas else "R$ 0,00"
+        header_title = f"RELATÓRIO DE METAS | TOTAL: {total_val}"
+
+        header_h = self._draw_header(draw, header_title, periodo)
         y = header_h + padding
 
         if total_gs:
@@ -309,7 +316,7 @@ class MetasRenderer(BaseRenderer):
                 data = dept_map.get(key, {})
                 # Desenha o cartão com a altura da linha para manter alinhamento visual se necessário,
                 # OU usa a altura individual se preferir que um seja menor que o outro na mesma linha.
-                # O usuário reclamou do espaço vazio, então vou usar a altura individual para o fundo do cartão.
+                # O usuário reclamou do espaço vazio, então vou usar a altura individual para o fundo.
                 card_h_individual = h_short if is_short(label) else h_large
                 self._draw_dept_card(draw, cx, y, card_w, card_h_individual, label, data, is_small=False)
 
@@ -341,7 +348,7 @@ class MetasRenderer(BaseRenderer):
             keys = [
                 ("outras", "Outras Receitas:"),
                 ("intercompany", "Intercompany:"),
-                ("repasse_total", "Repasse Total:"),
+                ("repasse", "Repasse Total:"),
                 ("sem_categoria", "Sem Categoria:"),
             ]
 
@@ -716,7 +723,10 @@ class MetasRenderer(BaseRenderer):
 
         header_h = self._draw_header(draw, nome, periodo_display)
         y = header_h + 15
-        y = 85  # Override? This was in original code. Wait, original code said y = 85 after y = header_h + 15. The header calculation logic implies it should flow.
+        # Override? This was in original code.
+        # Wait, original code said y = 85 after y = header_h + 15.
+        # The header calculation logic implies it should flow.
+        y = 85
         # But if header is ~70, y=85 is strict.
         # Original code (Line 692 in Step 209): y = 85.
         # Just to be safe and consistent with refactor, knowing header is 70, y=85 is 15px margin.

@@ -4,23 +4,6 @@ Separating queries from logic makes it easier to maintain and update the semanti
 """
 
 
-def get_realizado_query(date_start, date_end):
-    return f"""
-    EVALUATE
-    CALCULATETABLE(
-        ROW(
-            "Comercial", [Comercial_Total],
-            "Operacional", [Operacional_Total],
-            "Corporate", [Valor_Corporate],
-            "Educacao", [Valor_Educacao],
-            "Expansao", [Valor_Expansao],
-            "Franchising", [Valor_Franchising],
-            "PJ", [Valor_PJ],
-            "Tax", [valor_Tax]
-        ),
-        DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
-    )
-    """
 
 
 def get_metas_com_op_query(date_start, date_end):
@@ -79,7 +62,8 @@ def get_receitas_query(date_start, date_end):
             "OutrasReceitas", [Valor_OutrasReceitas],
             "InterCompany", [Valor_InterCompany],
             "NaoIdentificada", [Valor_NaoIdentificada],
-            "SemCategoria", [Valor_Sem_Categoria]
+            "SemCategoria", [Valor_Sem_Categoria],
+            "Repasse", [total_repasse]
         ),
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )
@@ -110,20 +94,6 @@ def get_percentuais_dept_query(prefixo, date_start, date_end):
     """
 
 
-def get_repasses_query(date_start, date_end):
-    # Medidas de repasse existentes no modelo:
-    # total_repasse, Valor_Corporate_Repasse, valor_Tax_Repasse
-    return f"""
-    EVALUATE
-    CALCULATETABLE(
-        ROW(
-            "Corporate_Repasse", [Valor_Corporate_Repasse],
-            "Tax_Repasse", [valor_Tax_Repasse],
-            "Total_Repasse_Geral", [total_repasse]
-        ),
-        DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
-    )
-    """
 
 
 def get_receitas_liquido_query(date_start, date_end):
@@ -146,59 +116,3 @@ def get_receitas_liquido_query(date_start, date_end):
     """
 
 
-def get_metas_detalhado_query(mes_nome: str, ano: int):
-    """
-    Query de detalhamento do painel de Metas.
-    Retorna registros de ContasReceber agrupados por bandeira (departamento).
-    Parâmetros dinâmicos: mes_nome (ex: 'Fevereiro') e ano (ex: 2026).
-    """
-    return f"""
-    DEFINE
-        VAR __DS0FilterTable =
-            TREATAS({{"{mes_nome}"}}, 'Calendario'[MesNome])
-
-        VAR __DS0FilterTable3 =
-            TREATAS({{{ano}}}, 'LocalDateTable_3e7035ad-586d-4a29-ac78-7da643dc8edd'[Ano])
-
-        VAR __DS0Core =
-            SUMMARIZECOLUMNS(
-                ROLLUPADDISSUBTOTAL(
-                    ROLLUPGROUP(
-                        'ContasReceber'[razao_social],
-                        'ContasReceber'[bandeira],
-                        'ContasReceber'[descricao],
-                        'ContasReceber'[data_emissao],
-                        'ContasReceber'[codigo],
-                        'Calendario'[Date]
-                    ), "IsGrandTotalRowTotal"
-                ),
-                __DS0FilterTable,
-                __DS0FilterTable3,
-                "Valor", 'Medidas_Repasse'[tecnlogia_liquido]
-            )
-
-        VAR __DS0PrimaryWindowed =
-            TOPN(
-                5000,
-                __DS0Core,
-                [IsGrandTotalRowTotal], 0,
-                'ContasReceber'[bandeira], 1,
-                'ContasReceber'[razao_social], 1,
-                'ContasReceber'[descricao], 1,
-                'ContasReceber'[data_emissao], 1,
-                'ContasReceber'[codigo], 1,
-                'Calendario'[Date], 1
-            )
-
-    EVALUATE
-        __DS0PrimaryWindowed
-
-    ORDER BY
-        [IsGrandTotalRowTotal] DESC,
-        'ContasReceber'[bandeira],
-        'ContasReceber'[razao_social],
-        'ContasReceber'[descricao],
-        'ContasReceber'[data_emissao],
-        'ContasReceber'[codigo],
-        'Calendario'[Date]
-    """

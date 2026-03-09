@@ -57,16 +57,17 @@ class JobEnricher:
             contract = self._contracts_cache.get(client_id)
 
             if contract:
-                j["faturamento"] = contract.get(
-                    "valor_a_vista"
-                )  # "Faturamento" as Acquisition Value? Or Monthly? Clarify. User said "Faturamento" and "Honorários Iniciais".
+                j["faturamento"] = contract.get("valor_a_vista")
+                # "Faturamento" as Acquisition Value? Or Monthly? Clarify.
+                # User said "Faturamento" and "Honorários Iniciais".
                 # Let's map:
                 # "Faturamento" -> ??? Usually means Client's Revenue? Or Deal Value?
                 # User asked: "Faturamento" and "Honorários Iniciais".
                 # In contract table we have: `valor_a_vista`, `mensalidade`.
                 # Let's assume `valor_a_vista` = Honorários Iniciais.
                 # `mensalidade` = Mensalidade.
-                # "Faturamento" often refers to Client's Turnover (Faturamento da Empresa). Usually in `nexus_participantes`?
+                # "Faturamento" often refers to Client's Turnover (Faturamento da Empresa).
+                # Usually in `nexus_participantes`?
                 # Nexus contract usually has `faturamento_estimado`? No column in my table migration.
                 # Let's check raw contract fields in inspection... I missed that.
 

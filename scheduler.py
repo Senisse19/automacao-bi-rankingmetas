@@ -4,13 +4,14 @@ Orquestra a execução dos scripts de automação modular via Supabase.
 Refatorado para usar LockManager e JobService.
 """
 
-import schedule
-import time
 import sys
+import time
 
-from core.services.supabase_service import SupabaseService
-from core.services.job_service import JobService
+import schedule
+
 from core.jobs import JOB_MAPPING, safe_run_job
+from core.services.job_service import JobService
+from core.services.supabase_service import SupabaseService
 from utils.lock_manager import LockManager
 from utils.logger import get_logger
 

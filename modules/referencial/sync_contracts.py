@@ -1,7 +1,8 @@
-from core.services.supabase_service import SupabaseService
-from core.clients.jobs_client import JobsClient
-from utils.logger import get_logger
 from datetime import datetime
+
+from core.clients.jobs_client import JobsClient
+from core.services.supabase_service import SupabaseService
+from utils.logger import get_logger
 
 logger = get_logger("sync_contracts")
 
@@ -19,7 +20,8 @@ class SyncContracts:
 
         try:
             # Buscar contratos. Se full_load=True, pega tudo. Se não, filtra por data (SE A API SUPORTAR).
-            # Como não conhecemos filtros de data, vamos assumir carga completa por seguranca ou limitar se for muito grande.
+            # Como não conhecemos filtros de data, vamos assumir carga completa por seguranca
+            # ou limitar se for muito grande.
             # O endpoint parece suportar paginação padrão do DataTables ou similar.
 
             # TODO: Implementar filtro por data_alteracao se a API suportar para otimizar.

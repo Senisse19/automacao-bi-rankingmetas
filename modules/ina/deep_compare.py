@@ -3,8 +3,9 @@ Análise profunda: Automação vs Dashboard — pente fino em cada valor.
 Compara KPIs e Top 10 usando queries DAX independentes.
 """
 
-import os
 import json
+import os
+
 import requests
 from dotenv import load_dotenv
 

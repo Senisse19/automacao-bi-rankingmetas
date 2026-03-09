@@ -1,8 +1,9 @@
-import time
 import random
-from typing import Dict, Optional, Any
-from utils.logger import get_logger
+import time
+from typing import Any, Dict, Optional
+
 from core.clients.evolution_client import EvolutionClient
+from utils.logger import get_logger
 
 logger = get_logger("notification_service")
 

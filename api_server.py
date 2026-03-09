@@ -1,5 +1,6 @@
-import uvicorn
 import argparse
+
+import uvicorn
 from dotenv import load_dotenv
 
 load_dotenv()

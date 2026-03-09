@@ -4,9 +4,9 @@ Suporta variáveis de ambiente para deploy em Docker/Coolify
 """
 
 import os
+
 from dotenv import load_dotenv
 
-# Carregar variáveis do arquivo .env
 # Carregar variáveis do arquivo .env
 project_root = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(project_root, ".env")

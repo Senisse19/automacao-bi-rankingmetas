@@ -3,20 +3,29 @@ Automação Metas (Power BI)
 Extrai dados de metas do Power BI e envia imagens para WhatsApp/Email.
 """
 
+import json
 import os
 import random
-import json
+import sys
 from datetime import datetime, timedelta
-from jinja2 import Template
+from pathlib import Path
 
+# Adiciona o diretório raiz (studio-automation-core) ao PYTHONPATH
+project_root = Path(__file__).resolve().parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
-from config import IMAGES_DIR, METAS_CAPTION, EMAIL_CONFIG, POWERBI_CONFIG
-from core.clients.powerbi_client import PowerBIClient
-from core.services.image_generator import ImageGenerator
-from core.services.supabase_service import SupabaseService
-from core.clients.evolution_client import EvolutionClient
-from core.clients.email_client import EmailClient
-from utils.logger import get_logger
+from jinja2 import Template  # noqa: E402
+
+from config import EMAIL_CONFIG, IMAGES_DIR, METAS_CAPTION, POWERBI_CONFIG  # noqa: E402
+from core.clients.email_client import EmailClient  # noqa: E402
+from core.clients.evolution_client import EvolutionClient  # noqa: E402
+from core.clients.powerbi_client import PowerBIClient  # noqa: E402
+from core.services.image_generator import ImageGenerator  # noqa: E402
+from core.services.supabase_service import SupabaseService  # noqa: E402
+from utils.date_helpers import get_periodo_semanal
+from utils.greeting import get_saudacao  # noqa: E402
+from utils.logger import get_logger  # noqa: E402
 
 logger = get_logger("run_metas")
 
@@ -70,13 +79,9 @@ class MetasAutomation:
         ontem = datetime.now() - timedelta(days=1)
         return ontem.strftime("%d/%m/%Y")
 
-    def get_periodo_semanal(self):
+    def _get_periodo_semanal(self):
         """Retorna o período da semana anterior (seg-dom) formatado (ex: 15/01 a 21/01)."""
-        hoje = datetime.now()
-        inicio_semana_atual = hoje - timedelta(days=hoje.weekday())
-        inicio_semana_anterior = inicio_semana_atual - timedelta(days=7)
-        fim_semana_anterior = inicio_semana_anterior + timedelta(days=6)
-        return f"{inicio_semana_anterior.strftime('%d/%m/%Y')} a {fim_semana_anterior.strftime('%d/%m/%Y')}"
+        return get_periodo_semanal()
 
     def fetch_data(self):
         """Busca todos os dados necessários do Power BI."""
@@ -106,7 +111,7 @@ class MetasAutomation:
         # 3. Individuais (Backup / Mapping)
         for dep in departamentos:
             nome_lower = dep["nome"].lower().replace("ã", "a").replace("ç", "c")
-            os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")
+            dep_path = os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")  # noqa: F841 — reservado para imagens individuais
 
             # [CHANGED] User requested to send RESUMO to everyone for now.
             # We skip generating individual specific images, but we map the key to RESUMO path.
@@ -187,13 +192,7 @@ class MetasAutomation:
 
                 # Saudação Variables
                 primeiro_nome = nome.split()[0].title()
-                hora = datetime.now().hour
-                if 5 <= hora < 12:
-                    saudacao = "Bom dia"
-                elif 12 <= hora < 18:
-                    saudacao = "Boa tarde"
-                else:
-                    saudacao = "Boa noite"
+                saudacao = get_saudacao()
                 saudacao_lower = saudacao.lower()
 
                 # --- Template Logic ---
@@ -201,7 +200,11 @@ class MetasAutomation:
                 is_first_time = not self.supabase.check_welcome_sent(contact_id)
 
                 # Warning Message for First-Time Users
-                warning_msg = '\n\n⚠ Aviso Importante: Por favor salve este contato. Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
+                warning_msg = (
+                    "\n\n⚠ Aviso Importante: Por favor salve este contato. "
+                    "Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre "
+                    'todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
+                )
 
                 if current_template:
                     # Dynamic Template
@@ -271,7 +274,8 @@ class MetasAutomation:
         # [NEW] Check if there is valid data (Realizado != "-")
         if total_gs.get("realizado") == "-":
             logger.warning(
-                f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). Abortando execução."
+                f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). "
+                "Abortando execução."
             )
             return
 

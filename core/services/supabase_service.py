@@ -1,9 +1,15 @@
 import os
+import time
+
 import requests
 from dotenv import load_dotenv
 
-# Force reload of .env
+from utils.logger import get_logger
+
+# Recarregar variáveis do .env
 load_dotenv()
+
+logger = get_logger("supabase_service")
 
 
 class SupabaseService:
@@ -16,21 +22,24 @@ class SupabaseService:
         return cls._instance
 
     def _init_client(self):
-        # Try standard/backend env vars first, then frontend/legacy ones
+        # Cache de configurações como atributo de instância (thread-safe)
+        self._settings_cache = {}
+        self._settings_last_fetch = 0
+
+        # Prioriza variáveis backend; fallback para variáveis do frontend
         self.url = os.getenv("SUPABASE_URL") or os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
         anon_key = os.getenv("SUPABASE_ANON_KEY") or os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "").strip()
         service_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_KEY", "").strip()
 
-        # Use Service Role Key to bypass RLS (Required for Backend Scripts)
+        # Service Role Key para bypass de RLS (obrigatório para scripts backend)
         self.key = service_key
 
         if not self.key or self.key == "":
-            # Fallback warning or check
-            print("⚠ Aviso: SERVICE_ROLE_KEY não encontrada. Tentando Anon Key (pode falhar com RLS)...")
+            logger.warning("SERVICE_ROLE_KEY não encontrada. Tentando Anon Key (pode falhar com RLS)...")
             self.key = anon_key
 
         if not self.url or not self.key:
-            print("❌ Erro: Credenciais do Supabase não encontradas no .env")
+            logger.error("Credenciais do Supabase não encontradas no .env")
             return
 
         self.headers = {
@@ -48,7 +57,7 @@ class SupabaseService:
             response.raise_for_status()
             return response.json()
         except Exception as e:
-            print(f"[ERROR] Erro HTTP Supabase ({table}): {e}")
+            logger.error(f"Erro HTTP Supabase ({table}): {e}")
             return []
 
     def get_active_schedules(self):
@@ -61,7 +70,10 @@ class SupabaseService:
             # Supabase API syntax for join: select=*,definition:automation_definitions(*)
             params = {
                 # Fetch schedule, its direct template (if any), definition, and definition's default template
-                "select": "*, template:automation_templates(*), definition:automation_definitions(*, default_template:automation_templates(*))",
+                "select": (
+                    "*, template:automation_templates(*), "
+                    "definition:automation_definitions(*, default_template:automation_templates(*))"
+                ),
                 "active": "eq.true",
             }
             schedules = self._get("automation_schedules", params)
@@ -69,39 +81,31 @@ class SupabaseService:
             if not schedules:
                 return []
 
-            # 2. Fetch recipients
-            # To optimize, we could do one big query or multiple.
-            # Let's fetch all recipients for active schedules.
-            # Simplest is one query per schedule as before, or one big query if we had schedule_ids.
-            # Let's stick to simple logic: for each schedule, fetch recipients.
+            # 2. Buscar recipients em lote (evita N+1 queries)
+            schedule_ids = [s["id"] for s in schedules]
+            ids_filter = ",".join(str(sid) for sid in schedule_ids)
+
+            rec_params = {
+                "select": "schedule_id,contact:automation_contacts(*)",
+                "schedule_id": f"in.({ids_filter})",
+            }
+            all_recipients = self._get("automation_recipients", rec_params)
+
+            # Agrupar recipients por schedule_id e filtrar contatos ativos
+            recipients_by_schedule = {}
+            for r in all_recipients:
+                sid = r.get("schedule_id")
+                c = r.get("contact")
+                if c and c.get("active"):
+                    recipients_by_schedule.setdefault(sid, []).append(c)
 
             for sched in schedules:
-                # Query automation_recipients join automation_contacts
-                rec_params = {
-                    "select": "contact:automation_contacts(*)",
-                    "schedule_id": f"eq.{sched['id']}",
-                }
-                # Also filter where contact is active?
-                # The join syntax checks foreign key. To filter on joined table:
-                # automation_contacts.active=eq.true.
-                # Syntax: select=contact:automation_contacts(*)&contact.active=eq.true
-                # But we have map table.
-
-                resp_data = self._get("automation_recipients", rec_params)
-
-                # Flatten and filter active
-                contacts = []
-                for r in resp_data:
-                    c = r.get("contact")
-                    if c and c.get("active"):
-                        contacts.append(c)
-
-                sched["recipients"] = contacts
+                sched["recipients"] = recipients_by_schedule.get(sched["id"], [])
 
             return schedules
 
         except Exception as e:
-            print(f"❌ Erro ao buscar agendamentos do Supabase: {e}")
+            logger.error(f"Erro ao buscar agendamentos do Supabase: {e}")
             return []
 
     def check_welcome_sent(self, contact_id):
@@ -134,9 +138,9 @@ class SupabaseService:
             resp = requests.post(endpoint, headers=self.headers, json=payload, timeout=30)
 
             if resp.status_code >= 400:
-                print(f"⚠ Falha ao gravar log {event_type}: {resp.text}")
+                logger.warning(f"Falha ao gravar log {event_type}: {resp.text}")
         except Exception as e:
-            print(f"⚠ Erro ao gravar log {event_type}: {e}")
+            logger.warning(f"Erro ao gravar log {event_type}: {e}")
 
     def mark_welcome_sent(self, contact_id):
         """Registra que enviamos boas-vindas."""
@@ -151,7 +155,7 @@ class SupabaseService:
                 return templates[0]
             return None
         except Exception as e:
-            print(f"❌ Erro ao buscar template '{name}': {e}")
+            logger.error(f"Erro ao buscar template '{name}': {e}")
             return None
 
     # --- Job Queue Methods ---
@@ -162,7 +166,7 @@ class SupabaseService:
             params = {"status": "eq.pending", "select": "*", "order": "created_at.asc"}
             return self._get("automation_queue", params)
         except Exception as e:
-            print(f"❌ Erro ao buscar jobs pendentes: {e}")
+            logger.error(f"Erro ao buscar jobs pendentes: {e}")
             return []
 
     def update_job_status(self, job_id, status, logs=None):
@@ -176,9 +180,9 @@ class SupabaseService:
             resp = requests.patch(endpoint, headers=self.headers, json=payload, timeout=30)
 
             if resp.status_code >= 400:
-                print(f"⚠ Falha ao atualizar job {job_id}: {resp.text}")
+                logger.warning(f"Falha ao atualizar job {job_id}: {resp.text}")
         except Exception as e:
-            print(f"⚠ Erro ao atualizar job {job_id}: {e}")
+            logger.warning(f"Erro ao atualizar job {job_id}: {e}")
 
     def get_schedule_by_id(self, schedule_id):
         """Busca detalhes de um agendamento específico."""
@@ -190,17 +194,13 @@ class SupabaseService:
             data = self._get("automation_schedules", params)
             return data[0] if data else None
         except Exception as e:
-            print(f"❌ Erro ao buscar schedule {schedule_id}: {e}")
+            logger.error(f"Erro ao buscar schedule {schedule_id}: {e}")
             return None
 
     # --- Configuration Methods ---
 
-    _settings_cache = {}
-    _settings_last_fetch = 0
-
     def get_setting(self, key, default=None):
         """Busca uma configuração do sistema (com cache de 5 minutos)."""
-        import time
 
         now = time.time()
 
@@ -220,7 +220,7 @@ class SupabaseService:
             else:
                 return default
         except Exception as e:
-            print(f"⚠ Erro ao buscar setting '{key}': {e}")
+            logger.warning(f"Erro ao buscar setting '{key}': {e}")
             return default
 
     # --- Report Snapshot Methods ---
@@ -245,17 +245,17 @@ class SupabaseService:
             resp = requests.post(endpoint, headers=headers, json=payload, timeout=30)
 
             if resp.status_code >= 400:
-                print(f"⚠ Falha ao salvar snapshot do relatório: {resp.text}")
+                logger.warning(f"Falha ao salvar snapshot do relatório: {resp.text}")
                 return None
 
             result = resp.json()
             if result and len(result) > 0:
                 report_id = result[0].get("id")
-                print(f"✅ Snapshot salvo com sucesso: {report_id}")
+                logger.info(f"Snapshot salvo com sucesso: {report_id}")
                 return report_id
             return None
         except Exception as e:
-            print(f"⚠ Erro ao salvar snapshot: {e}")
+            logger.warning(f"Erro ao salvar snapshot: {e}")
             return None
 
     def upsert_data(self, table: str, data: list | dict, on_conflict: str = "id") -> bool:
@@ -275,11 +275,11 @@ class SupabaseService:
             resp = requests.post(endpoint, headers=headers, json=data, timeout=30)
 
             if resp.status_code >= 400:
-                print(f"⚠ Falha ao fazer upsert em {table}: {resp.text}")
+                logger.warning(f"Falha ao fazer upsert em {table}: {resp.text}")
                 return False
             return True
         except Exception as e:
-            print(f"⚠ Erro ao fazer upsert em {table}: {e}")
+            logger.warning(f"Erro ao fazer upsert em {table}: {e}")
             return False
 
     def get_all_ids(self, table: str) -> set:
@@ -310,7 +310,7 @@ class SupabaseService:
 
                 offset += limit
             except Exception as e:
-                print(f"⚠ Erro ao buscar IDs de {table} no offset {offset}: {e}")
+                logger.warning(f"Erro ao buscar IDs de {table} no offset {offset}: {e}")
                 break
         return all_ids
 

@@ -1,7 +1,8 @@
-from core.services.supabase_service import SupabaseService
-from core.clients.jobs_client import JobsClient
-from utils.logger import get_logger
 from datetime import datetime
+
+from core.clients.jobs_client import JobsClient
+from core.services.supabase_service import SupabaseService
+from utils.logger import get_logger
 
 logger = get_logger("sync_services")
 

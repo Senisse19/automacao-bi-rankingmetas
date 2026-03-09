@@ -4,8 +4,8 @@ Permite listar, criar e remover definições e agendamentos de jobs.
 Foco: Registrar o job 'painel_ina'.
 """
 
-import sys
 import os
+import sys
 
 # Add project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -85,7 +85,8 @@ def create_ina_job():
             "automation_schedules", new_sched
         )  # on_conflict id (auto) não funciona pra insert novo sem ID.
         # upsert_data tenta post. Se não passar ID, cria novo?
-        # O método upsert_data usa POST e headers merge-duplicates. Se não tiver constraints unicas além do ID, pode duplicar.
+        # O método upsert_data usa POST e headers merge-duplicates.
+        # Se não tiver constraints unicas além do ID, pode duplicar.
         # Melhor checar se já existe antes (feito acima).
         # Para insert puro, upsert_data funciona.
 

@@ -1,6 +1,7 @@
 import requests
 import requests.adapters
 from urllib3.util.retry import Retry
+
 from config import NEXUS_CONFIG
 from utils.logger import get_logger
 

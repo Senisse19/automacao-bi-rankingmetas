@@ -1,5 +1,8 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from core.api.routers import export, webhooks
 
 app = FastAPI(
@@ -7,11 +10,16 @@ app = FastAPI(
     description="API para automação e extração de dados do Power BI Grupo Studio",
     version="1.0.0",
 )
+# Origens permitidas para CORS (produção + dev local)
+ALLOWED_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "https://bi.grupostudio.tec.br,http://localhost:3000"
+).split(",")
 
-# Adicionando CORS para o frontend Next.js poder consultar as APIs
+# CORS restrito aos domínios autorizados
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Para desenvolvimento, restrito no futuro
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

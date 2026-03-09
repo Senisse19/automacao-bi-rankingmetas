@@ -5,6 +5,7 @@ Cliente Evolution API para envio de mensagens WhatsApp
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
 from config import EVOLUTION_CONFIG
 from utils.logger import get_logger
 

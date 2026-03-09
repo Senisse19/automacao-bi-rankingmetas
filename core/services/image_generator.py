@@ -5,11 +5,12 @@ Responsável por delegar a criação das imagens para os renderizadores especial
 
 import os
 
+from .image_renderer.jobs_renderer import JobsRenderer
+
 # from services.image_renderer.metas_renderer import MetasRenderer
 # from services.image_renderer.unidades_renderer import UnidadesRenderer
 from .image_renderer.metas_renderer import MetasRenderer
 from .image_renderer.unidades_renderer import UnidadesRenderer
-from .image_renderer.jobs_renderer import JobsRenderer
 
 
 class ImageGenerator:

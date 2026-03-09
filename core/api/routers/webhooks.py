@@ -96,8 +96,9 @@ def _verify_signature(body: bytes, signature_header: str | None) -> bool:
     """Valida a assinatura HMAC-SHA256 via X-Hub-Signature se o secret estiver configurado."""
     secret = os.getenv("WEBHOOK_SECRET", "")
     if not secret:
-        # Sem secret configurado, aceita qualquer requisição
-        return True
+        # Sem secret configurado, rejeitar por segurança (configure WEBHOOK_SECRET no .env)
+        logger.warning("[WEBHOOK] WEBHOOK_SECRET não configurado. Rejeitando requisição.")
+        return False
 
     if not signature_header:
         return False

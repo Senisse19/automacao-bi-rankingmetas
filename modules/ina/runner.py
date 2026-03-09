@@ -5,6 +5,7 @@ Inclui funcionalidade de autodescoberta de schema.
 """
 
 import os
+import re
 import sys
 from datetime import datetime
 
@@ -13,12 +14,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(project_root)
 
-from core.clients.powerbi_client import PowerBIClient
-from core.services.supabase_service import SupabaseService
-from core.clients.evolution_client import EvolutionClient
-from utils.logger import get_logger
-from core.services.image_renderer.ina_renderer import InaRenderer
 from config import POWERBI_CONFIG
+from core.clients.evolution_client import EvolutionClient
+from core.clients.powerbi_client import PowerBIClient
+from core.services.image_renderer.ina_renderer import InaRenderer
+from core.services.supabase_service import SupabaseService
+from utils.logger import get_logger
 
 logger = get_logger("run_ina")
 
@@ -81,14 +82,15 @@ class InaAutomation:
 
         # Query KPIs
         query_kpis = f"""
-        EVALUATE 
+        EVALUATE
         ROW(
             "Card_Vencendo_Hoje", CALCULATE([Card_Vencendo_Hoje], {global_filter} {filters_dax}),
             "Card_Inadimplencia_Ate_2_Dias", CALCULATE([Card_Inadimplencia_Ate_2_Dias], {global_filter} {filters_dax}),
-            "Card_Inadimplencia_3_Mais_Dias", CALCULATE([Card_Inadimplencia_3_Mais_Dias], {global_filter} {filters_dax}),
+            "Card_Inadimplencia_3_Mais_Dias",
+            CALCULATE([Card_Inadimplencia_3_Mais_Dias], {global_filter} {filters_dax}),
             "Card_Media_Atraso", CALCULATE([Card_Media_Atraso], {global_filter} {filters_dax}),
             "Card_Inadimplencia_TOTAL", CALCULATE([Card_Inadimplencia_TOTAL], {global_filter} {filters_dax}),
-            "Card_INTERCOMPANY", CALCULATE([Card_INTERCOMPANY], {global_filter} {filters_dax}), 
+            "Card_INTERCOMPANY", CALCULATE([Card_INTERCOMPANY], {global_filter} {filters_dax}),
             "Card_QtdAtraso", CALCULATE([Card_QtdAtraso], {global_filter} {filters_dax})
         )
         """
@@ -305,7 +307,10 @@ class InaAutomation:
                 if not phone:
                     continue
 
-                caption = f"📊 *Painel INA [{display_area}] - {datetime.now().strftime('%d/%m/%Y')}*\nOlá {nome}, segue o resumo atualizado."
+                caption = (
+                    f"📊 *Painel INA [{display_area}] - {datetime.now().strftime('%d/%m/%Y')}*\n"
+                    f"Olá {nome}, segue o resumo atualizado."
+                )
 
                 try:
                     self.whatsapp.send_file(group_id=phone, file_path=output_path, caption=caption)
@@ -333,8 +338,6 @@ class InaAutomation:
         value_str = str(value)
 
         try:
-            import re
-
             # 2. Remove HTML
             if "<" in value_str and ">" in value_str:
                 value_str = re.sub(r"<style>.*?</style>", "", value_str, flags=re.DOTALL)

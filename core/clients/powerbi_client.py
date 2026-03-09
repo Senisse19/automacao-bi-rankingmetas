@@ -4,10 +4,13 @@ Funciona com licença Premium Per User (PPU).
 Gerencia autenticação Azure AD e execução de queries.
 """
 
+import os
+import time
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-import os
+
 from utils.logger import get_logger
 
 logger = get_logger("powerbi_client")
@@ -26,10 +29,12 @@ class PowerBIClient:
         # Validate critical env vars
         if not self.tenant or not self.client_id or not self.client_secret:
             raise ValueError(
-                "CRITICAL: Missing required environment variables (SHAREPOINT_TENANT, SHAREPOINT_CLIENT_ID, SHAREPOINT_CLIENT_SECRET)."
+                "CRITICAL: Missing required environment variables "
+                "(SHAREPOINT_TENANT, SHAREPOINT_CLIENT_ID, SHAREPOINT_CLIENT_SECRET)."
             )
 
         self.token = None
+        self.token_expiry = 0  # Timestamp de expiração do token OAuth
 
         # Configure Autoscaling Retry
         self.session = requests.Session()
@@ -55,7 +60,12 @@ class PowerBIClient:
         try:
             response = self.session.post(token_url, data=data, timeout=10)
             response.raise_for_status()
-            self.token = response.json().get("access_token")
+            token_data = response.json()
+            self.token = token_data.get("access_token")
+            # Buffer de 60s para evitar uso de token prestes a expirar
+            expires_in = token_data.get("expires_in", 3600)
+            self.token_expiry = time.time() + expires_in - 60
+            logger.info(f"Token OAuth obtido (expira em {expires_in}s)")
             return True
         except requests.exceptions.RequestException as e:
             logger.error(f"Erro na autenticacao: {e}")
@@ -66,11 +76,15 @@ class PowerBIClient:
         Executa uma consulta DAX no dataset configurado.
         Retorna uma lista de linhas (dicionários) ou lista vazia em caso de erro.
         """
-        if not self.token:
+        # Renova token se ausente ou expirado
+        if not self.token or time.time() >= self.token_expiry:
             if not self.authenticate():
                 return None
 
-        url = f"https://api.powerbi.com/v1.0/myorg/groups/{self.workspace_id}/datasets/{self.dataset_id}/executeQueries"
+        url = (
+            f"https://api.powerbi.com/v1.0/myorg/groups/{self.workspace_id}/datasets/"
+            f"{self.dataset_id}/executeQueries"
+        )
 
         headers = {
             "Authorization": f"Bearer {self.token}",
@@ -168,7 +182,7 @@ if __name__ == "__main__":
 
     # Query basica que funciona em qualquer modelo
     simple_query = """
-    EVALUATE 
+    EVALUATE
     ROW(
         "Dataset", "Ranking_Metas",
         "Status", "Conectado",
