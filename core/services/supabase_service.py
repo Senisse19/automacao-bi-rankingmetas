@@ -3,6 +3,14 @@ import time
 
 import requests
 from dotenv import load_dotenv
+from tenacity import (
+    retry,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential,
+    before_sleep_log,
+)
+import logging
 
 from utils.logger import get_logger
 
@@ -48,16 +56,37 @@ class SupabaseService:
             "Content-Type": "application/json",
         }
 
-    def _get(self, table, params=None):
-        """Helper para requests GET na API REST. Aceita params como dict ou lista de tuplas."""
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type(requests.RequestException),
+        before_sleep=before_sleep_log(logging.getLogger("supabase_service"), logging.WARNING),
+        reraise=True,
+    )
+    def _get_with_retry(self, endpoint: str, headers: dict, params=None):
+        """GET com retry automático (3 tentativas, backoff exponencial 2s→10s)."""
+        response = requests.get(endpoint, headers=headers, params=params, timeout=30)
+        response.raise_for_status()
+        return response.json()
+
+    def _get(self, table, params=None, prefer_count_none: bool = False):
+        """
+        Helper para requests GET na API REST. Aceita params como dict ou lista de tuplas.
+
+        Args:
+            prefer_count_none: Se True, envia 'Prefer: count=none' para que o PostgREST
+                               não execute o COUNT(*) auxiliar. Use em loops de paginação
+                               onde o total de registros não é necessário.
+        """
         try:
             endpoint = f"{self.url}/rest/v1/{table}"
-            response = requests.get(endpoint, headers=self.headers, params=params, timeout=30)
-
-            response.raise_for_status()
-            return response.json()
+            headers = {**self.headers, "Prefer": "count=none"} if prefer_count_none else self.headers
+            return self._get_with_retry(endpoint, headers, params)
+        except requests.RequestException as e:
+            logger.error(f"Erro HTTP Supabase ({table}) após retries: {type(e).__name__}")
+            return []
         except Exception as e:
-            logger.error(f"Erro HTTP Supabase ({table}): {e}")
+            logger.error(f"Erro inesperado Supabase ({table}): {type(e).__name__}")
             return []
 
     def get_active_schedules(self):

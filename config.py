@@ -4,6 +4,7 @@ Suporta variáveis de ambiente para deploy em Docker/Coolify
 """
 
 import os
+import sys
 
 from dotenv import load_dotenv
 
@@ -107,4 +108,46 @@ https://bi.grupostudio.tec.br/""",
 )
 
 # Admin Settings
-ADMIN_PHONE = os.getenv("ADMIN_PHONE", "5551998129077@s.whatsapp.net")
+ADMIN_PHONE = os.getenv("ADMIN_PHONE", "")
+
+
+# --- STARTUP VALIDATION ---
+
+_REQUIRED_VARS = [
+    "SHAREPOINT_CLIENT_ID",
+    "SHAREPOINT_CLIENT_SECRET",
+    "SHAREPOINT_TENANT",
+    "EVOLUTION_SERVER_URL",
+    "EVOLUTION_API_KEY",
+    "EVOLUTION_INSTANCE_NAME",
+]
+
+_OPTIONAL_WARN_VARS = [
+    "SHAREPOINT_SITE_ID",
+    "SHAREPOINT_FOLDER_ID",
+    "POWERBI_WORKSPACE_ID",
+    "ADMIN_PHONE",
+]
+
+
+def validate_config(strict: bool = True) -> bool:
+    """
+    Valida variáveis de ambiente obrigatórias.
+    strict=True encerra o processo se faltarem variáveis críticas.
+    Retorna True se tudo estiver ok.
+    """
+    from utils.logger import get_logger  # importação local para evitar ciclo
+    _logger = get_logger("config")
+
+    missing = [v for v in _REQUIRED_VARS if not os.getenv(v)]
+    if missing:
+        _logger.error(f"Variáveis obrigatórias ausentes: {', '.join(missing)}")
+        if strict:
+            sys.exit(1)
+        return False
+
+    for var in _OPTIONAL_WARN_VARS:
+        if not os.getenv(var):
+            _logger.warning(f"Variável opcional não configurada: {var}")
+
+    return True

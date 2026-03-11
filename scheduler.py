@@ -5,10 +5,12 @@ Refatorado para usar LockManager e JobService.
 """
 
 import sys
+import threading
 import time
 
 import schedule
 
+from config import validate_config
 from core.jobs import JOB_MAPPING, safe_run_job
 from core.services.job_service import JobService
 from core.services.supabase_service import SupabaseService
@@ -16,6 +18,35 @@ from utils.lock_manager import LockManager
 from utils.logger import get_logger
 
 logger = get_logger("scheduler")
+
+# Controle de jobs em execução — evita disparos simultâneos do mesmo job
+_running_jobs: set[str] = set()
+_running_lock = threading.Lock()
+
+
+def _run_job_in_thread(job_func, job_name: str, recipients=None, template_content=None) -> None:
+    """
+    Executa safe_run_job em uma thread daemon para não bloquear o loop principal.
+
+    Se o mesmo job já estiver em execução (ex: job lento + trigger repetida),
+    o novo disparo é ignorado com aviso no log para evitar execução dupla.
+    """
+    with _running_lock:
+        if job_name in _running_jobs:
+            logger.warning(f"[SKIP] Job '{job_name}' já está em execução. Disparo ignorado.")
+            return
+        _running_jobs.add(job_name)
+
+    def _target():
+        try:
+            safe_run_job(job_func, recipients=recipients, template_content=template_content)
+        finally:
+            with _running_lock:
+                _running_jobs.discard(job_name)
+
+    t = threading.Thread(target=_target, name=f"job-{job_name}", daemon=True)
+    t.start()
+    logger.info(f"[Thread] Job '{job_name}' iniciado em background (thread: {t.name})")
 
 
 def refresh_schedule():
@@ -86,8 +117,9 @@ def refresh_schedule():
                     scheduler_obj = getattr(schedule.every(), day_name)
                     # Pass template_content to safe_run_job wrapper
                     scheduler_obj.at(time_clean).do(
-                        safe_run_job,
+                        _run_job_in_thread,
                         job_func,
+                        job_name=name,
                         recipients=recipients,
                         template_content=template_content,
                     )
@@ -139,6 +171,7 @@ def run_scheduler_loop():
 
 
 if __name__ == "__main__":
+    validate_config(strict=True)
     if "--test-all" in sys.argv:
         logger.info(">>> MODO TESTE IMEDIATO <<<")
         svc = SupabaseService()

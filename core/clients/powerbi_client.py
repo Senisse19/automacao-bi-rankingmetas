@@ -4,7 +4,9 @@ Funciona com licença Premium Per User (PPU).
 Gerencia autenticação Azure AD e execução de queries.
 """
 
+import hashlib
 import os
+import threading
 import time
 
 import requests
@@ -14,6 +16,44 @@ from urllib3.util.retry import Retry
 from utils.logger import get_logger
 
 logger = get_logger("powerbi_client")
+
+
+class _DAXCache:
+    """
+    Cache em memória thread-safe com TTL para resultados de queries DAX.
+
+    Compartilhado entre todas as instâncias de PowerBIClient no processo.
+    Evita requisições repetidas ao Power BI quando a mesma query é executada
+    múltiplas vezes dentro da janela de validade (padrão: 30 minutos).
+    """
+
+    def __init__(self, ttl_seconds: int = 1800):
+        self._store: dict[str, tuple[list, float]] = {}
+        self._lock = threading.Lock()
+        self._ttl = ttl_seconds
+
+    def get(self, key: str) -> list | None:
+        with self._lock:
+            entry = self._store.get(key)
+            if entry is None:
+                return None
+            result, expires_at = entry
+            if time.time() > expires_at:
+                del self._store[key]
+                return None
+            return result
+
+    def set(self, key: str, value: list) -> None:
+        with self._lock:
+            self._store[key] = (value, time.time() + self._ttl)
+
+    def clear(self) -> None:
+        with self._lock:
+            self._store.clear()
+
+
+# Instância única compartilhada por todas as chamadas DAX do processo (30 min TTL)
+_dax_cache = _DAXCache(ttl_seconds=1800)
 
 
 class PowerBIClient:
@@ -75,7 +115,17 @@ class PowerBIClient:
         """
         Executa uma consulta DAX no dataset configurado.
         Retorna uma lista de linhas (dicionários) ou lista vazia em caso de erro.
+
+        Resultado é cacheado por 30 minutos para evitar requisições duplicadas
+        ao Power BI quando a mesma query é chamada várias vezes no mesmo ciclo.
         """
+        # Verifica cache antes de qualquer requisição HTTP
+        cache_key = hashlib.md5(query.encode("utf-8")).hexdigest()
+        cached = _dax_cache.get(cache_key)
+        if cached is not None:
+            logger.debug(f"DAX cache hit [{cache_key[:8]}]")
+            return cached
+
         # Renova token se ausente ou expirado
         if not self.token or time.time() >= self.token_expiry:
             if not self.authenticate():
@@ -105,6 +155,7 @@ class PowerBIClient:
 
             if tables:
                 rows = tables[0].get("rows", [])
+                _dax_cache.set(cache_key, rows)
                 return rows
             return []
 

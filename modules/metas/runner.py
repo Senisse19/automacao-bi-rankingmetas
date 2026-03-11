@@ -107,18 +107,7 @@ class MetasAutomation:
         # 2. Resumo
         resumo_path = os.path.join(IMAGES_DIR, "metas_resumo.png")
         self.image_gen.generate_resumo_image(periodo, total_gs, receitas, resumo_path)
-
-        # 3. Individuais (Backup / Mapping)
-        for dep in departamentos:
-            nome_lower = dep["nome"].lower().replace("ã", "a").replace("ç", "c")
-            dep_path = os.path.join(IMAGES_DIR, f"metas_{nome_lower}.png")  # noqa: F841 — reservado para imagens individuais
-
-            # [CHANGED] User requested to send RESUMO to everyone for now.
-            # We skip generating individual specific images, but we map the key to RESUMO path.
-            # self.image_gen.generate_departamento_image(dep, periodo, dep_path)
-
-            # Map valid departments to their SPECIFIC Image (Now overridden to RESUMO)
-            images[nome_lower] = resumo_path
+        images["resumo"] = resumo_path
 
         return images
 
@@ -177,6 +166,16 @@ class MetasAutomation:
 
         notification_service = NotificationService(self.supabase)
 
+        # Monta o lote completo de envios antes de disparar para permitir send_batch
+        batch: list[tuple] = []
+        first_time_contacts: list[str] = []
+
+        warning_msg = (
+            "\n\n⚠ Aviso Importante: Por favor salve este contato. "
+            "Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre "
+            'todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
+        )
+
         for grupo_key, image_path in images.items():
             destinatarios = source_data.get(grupo_key, [])
             if not destinatarios:
@@ -185,29 +184,19 @@ class MetasAutomation:
             for pessoa in destinatarios:
                 nome = pessoa.get("nome") or pessoa.get("name", "Colaborador")
                 telefone = pessoa.get("telefone") or pessoa.get("phone")
-                contact_id = pessoa.get("id")  # Supabase ID
+                contact_id = pessoa.get("id")
 
                 if not telefone:
                     continue
 
-                # Saudação Variables
                 primeiro_nome = nome.split()[0].title()
                 saudacao = get_saudacao()
                 saudacao_lower = saudacao.lower()
 
-                # --- Template Logic ---
                 current_template = template_content or fallback_template_str
                 is_first_time = not self.supabase.check_welcome_sent(contact_id)
 
-                # Warning Message for First-Time Users
-                warning_msg = (
-                    "\n\n⚠ Aviso Importante: Por favor salve este contato. "
-                    "Para garantir o recebimento contínuo dos relatórios, pedimos que responda sempre "
-                    'todas as mensagens confirmando o recebimento (ex: "ok", "recebido").'
-                )
-
                 if current_template:
-                    # Dynamic Template
                     try:
                         context = {
                             "nome": primeiro_nome,
@@ -215,21 +204,17 @@ class MetasAutomation:
                             "saudacao": saudacao,
                             "saudacao_lower": saudacao_lower,
                             "data": data_ref,
-                            "data_semanal": self.get_periodo_semanal(),
+                            "data_semanal": self._get_periodo_semanal(),
                             "grupo": grupo_key.title(),
                         }
-
                         if "{{" in current_template:
-                            # Use Jinja2 if template syntax detected
                             caption = Template(current_template).render(**context)
                         else:
-                            # Fallback to legacy .format()
                             caption = current_template.format(**context)
                     except Exception as e:
-                        logger.error(f"Erro ao formatar template (Jinja/Format) para {nome}: {e}")
+                        logger.error(f"Erro ao formatar template para {nome}: {e}")
                         caption = f"{saudacao}, {primeiro_nome}!\n\nSegue o relatório de {data_ref}."
                 else:
-                    # Legacy Hardcoded Fallback
                     variations = [
                         f"{saudacao}, {primeiro_nome}!",
                         f"Olá, {primeiro_nome}! {saudacao}.",
@@ -237,24 +222,24 @@ class MetasAutomation:
                         f"{primeiro_nome}, {saudacao_lower}!",
                         f"Oi, {primeiro_nome}. {saudacao}!",
                     ]
-                    selected_greeting = random.choice(variations)
-                    caption = f"{selected_greeting}\n\n" + METAS_CAPTION.format(data=data_ref)
+                    caption = f"{random.choice(variations)}\n\n" + METAS_CAPTION.format(data=data_ref)
 
-                # Append warning if new user
                 if is_first_time:
-                    logger.info(f"   ℹ Novo usuário detectado: {nome}. Adicionando aviso de primeiro envio.")
+                    logger.info(f"   ℹ Novo usuário: {nome}. Adicionando aviso de primeiro envio.")
                     caption += warning_msg
+                    if contact_id:
+                        first_time_contacts.append(contact_id)
 
-                # --- Send via Service ---
-                success = notification_service.send_whatsapp_report(
-                    recipient_data=pessoa,
-                    image_path=image_path,
-                    caption=caption,
-                    context_tag="metas",
-                )
+                batch.append((pessoa, image_path, caption))
 
-                if success and is_first_time:
-                    self.supabase.mark_welcome_sent(contact_id)
+        # Envia o lote com workers paralelos (delays sobrepostos, envios sequenciais)
+        results = notification_service.send_batch(batch, context_tag="metas")
+
+        # Marca novos usuários como notificados (apenas após o batch concluir)
+        for contact_id in first_time_contacts:
+            self.supabase.mark_welcome_sent(contact_id)
+
+        logger.info(f"[Metas] Envios: {results['success']} ok, {results['failed']} falhas.")
 
     def send_email(self, images):
         # Email logic remains unchanged for now, using hardcoded templates or separate implementation

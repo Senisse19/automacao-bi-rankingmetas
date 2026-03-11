@@ -10,12 +10,15 @@ import os
 from datetime import datetime
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Query, Request
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from core.clients.unidades_client import UnidadesClient
 from core.services.supabase_service import SupabaseService
 
 logger = logging.getLogger("api_webhooks")
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
 
 # Campos mapeados da API Nexus → coluna da tabela Supabase
 CONTAS_FIELD_MAP = {
@@ -108,6 +111,7 @@ def _verify_signature(body: bytes, signature_header: str | None) -> bool:
 
 
 @router.post("/nexus")
+@limiter.limit("60/minute")
 async def webhook_nexus(
     request: Request,
     background_tasks: BackgroundTasks,

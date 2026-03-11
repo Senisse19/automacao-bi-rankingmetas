@@ -63,7 +63,17 @@ def get_receitas_query(date_start, date_end):
             "InterCompany", [Valor_InterCompany],
             "NaoIdentificada", [Valor_NaoIdentificada],
             "SemCategoria", [Valor_Sem_Categoria],
-            "Repasse", [total_repasse]
+            "Repasse", [total_repasse],
+            "TotalGeral", (
+                COALESCE([total_repasse], 0) + 
+                COALESCE([tax_liquido], 0) + 
+                COALESCE([corporate_liquido], 0) + 
+                COALESCE([educacao_liquido], 0) + 
+                COALESCE([expansao_liquido], 0) + 
+                COALESCE([franchising_liquido], 0) + 
+                COALESCE([tecnlogia_liquido], 0) + 
+                COALESCE([Valor_OutrasReceitas], 0)
+            )
         ),
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )
@@ -81,6 +91,20 @@ def get_metas_dept_query(tabela, month_filter):
 
 
 def get_percentuais_dept_query(prefixo, date_start, date_end):
+    # Se tecnologia, bota 0 nas metas que estão quebradas no PBI
+    if prefixo == "Tecnologia":
+        return f"""
+        EVALUATE
+        CALCULATETABLE(
+            ROW(
+                "Pct1", 0,
+                "Pct2", 0,
+                "Pct3", 0
+            ),
+            DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
+        )
+        """
+
     return f"""
     EVALUATE
     CALCULATETABLE(
@@ -102,14 +126,20 @@ def get_receitas_liquido_query(date_start, date_end):
     EVALUATE
     CALCULATETABLE(
         ROW(
-            "Corporate_Liquido", [corporate_liquido],
-            "Educacao_Liquido", [educacao_liquido],
-            "Expansao_Liquido", [expansao_liquido],
-            "Franchising_Liquido", [franchising_liquido],
-            "Tax_Liquido", [tax_liquido],
-            "Tecnologia_Liquido", [tecnlogia_liquido],
-            "Total_Comercial", [total_liquido_comercial],
-            "Total_Operacao", [total_liquido_operacao]
+            "Corporate_Liquido", COALESCE([corporate_liquido], 0),
+            "Educacao_Liquido", COALESCE([educacao_liquido], 0),
+            "Expansao_Liquido", COALESCE([expansao_liquido], 0),
+            "Franchising_Liquido", COALESCE([franchising_liquido], 0),
+            "Tax_Liquido", COALESCE([tax_liquido], 0),
+            "Tecnologia_Liquido", COALESCE([tecnlogia_liquido], 0),
+            "Total_Comercial", COALESCE([total_liquido_comercial], 0),
+            "Total_Operacao", COALESCE([total_liquido_operacao], 0),
+            "Corporate_Repasse", COALESCE([Valor_Corporate_Repasse], 0),
+            "Tax_Repasse", COALESCE([valor_Tax_Repasse], 0),
+            "Educacao_Repasse", COALESCE([Valor_Educacao_Repasse], 0),
+            "Expansao_Repasse", COALESCE([Valor_Expansao_Repasse], 0),
+            "Franchising_Repasse", COALESCE([Valor_Franchising_Repasse], 0),
+            "Tecnologia_Repasse", COALESCE([Valor_PJ_Repasse], 0)
         ),
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )

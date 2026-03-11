@@ -4,13 +4,16 @@ import logging
 from datetime import datetime
 
 import pandas as pd
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from core.services.supabase_service import SupabaseService
 
 logger = logging.getLogger("api_export")
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
 
 # Mapeamento de número do mês para nome em português
 MESES_PT = {
@@ -254,7 +257,9 @@ def classificar_departamento(descricao: str | None) -> str | None:
 
 
 @router.get("/metas")
+@limiter.limit("30/minute")
 async def export_metas_excel(
+    request: Request,
     mes: int = Query(default=None, description="Número do mês (1-12). Omitir para exportar todo o histórico."),
     ano: int = Query(default=None, description="Ano (ex: 2026). Obrigatório se mes for informado."),
 ):
@@ -292,7 +297,9 @@ async def export_metas_excel(
         limit = 1000
 
         while True:
-            # Monta params como lista de tuplas preservando os filtros de data repetidos
+            # Monta params como lista de tuplas preservando os filtros de data repetidos.
+            # prefer_count_none=True evita o COUNT(*) auxiliar do PostgREST em cada página,
+            # reduzindo o tempo de resposta em loops de paginação grandes.
             p: list[tuple] = [
                 ("select", ",".join(COL_MAP.keys())),
                 ("order", "descricao.asc,razao_social.asc"),
@@ -300,7 +307,7 @@ async def export_metas_excel(
                 ("limit", limit),
                 *filtros_data,
             ]
-            chunk = svc._get("nexus_contas_receber", p)
+            chunk = svc._get("nexus_contas_receber", p, prefer_count_none=True)
             if not chunk:
                 break
             all_rows.extend(chunk)

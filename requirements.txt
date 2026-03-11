@@ -1,12 +1,40 @@
-requests
-python-dotenv
-schedule
-fpdf
-Pillow
-psycopg2-binary
-supabase
-jinja2
-fastapi
-uvicorn
-pandas
-openpyxl
+# Dependências diretas — versões verificadas no ambiente de desenvolvimento (Mar/2026)
+# Para instalar: pip install -r requirements.txt
+# Para atualizar este arquivo: pip freeze | grep -E "^(requests|...)=="
+
+# ── HTTP ────────────────────────────────────────────────────────────────────
+requests==2.32.5
+urllib3==2.6.2
+
+# ── Configuração ────────────────────────────────────────────────────────────
+python-dotenv==1.2.1
+
+# ── Agendamento ─────────────────────────────────────────────────────────────
+schedule==1.2.2
+
+# ── Geração de PDF ──────────────────────────────────────────────────────────
+# Provê "from fpdf import FPDF" usado em core/services/pdf_generator.py
+fpdf2
+
+# ── Imagens ─────────────────────────────────────────────────────────────────
+Pillow==12.1.0
+
+# ── Templates ───────────────────────────────────────────────────────────────
+Jinja2==3.1.6
+
+# ── API Web ─────────────────────────────────────────────────────────────────
+fastapi==0.133.0
+uvicorn==0.41.0
+slowapi==0.1.9
+
+# ── Resiliência ──────────────────────────────────────────────────────────────
+tenacity==9.1.2
+
+# ── Testes ───────────────────────────────────────────────────────────────────
+pytest==8.4.0
+pytest-mock==3.14.1
+
+# ── Dados / Excel ───────────────────────────────────────────────────────────
+pandas==3.0.1
+openpyxl==3.1.5
+numpy==2.4.2
