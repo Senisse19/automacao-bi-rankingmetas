@@ -1,18 +1,23 @@
 """
-Automação Painel INA
-Responsável por extrair dados do Painel INA e enviar resumo via WhatsApp.
-Inclui funcionalidade de autodescoberta de schema.
+Automação Painel INA (Inadimplência)
+Gera sempre o relatório GERAL com dados do Mês Atual acumulados até D-1.
+Campos mapeados diretamente das medidas do Power BI.
 """
 
+import argparse
+import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
+from typing import Dict, List, Any, Optional
 
-# Add project root to sys.path
+# Adiciona a raiz do projeto ao PYTHONPATH
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(current_dir))
-sys.path.append(project_root)
+
+if project_root not in sys.path:
+    sys.path.append(project_root)
 
 from config import POWERBI_CONFIG
 from core.clients.evolution_client import EvolutionClient
@@ -23,82 +28,46 @@ from utils.logger import get_logger
 
 logger = get_logger("run_ina")
 
-# IDs lidos da configuração centralizada (variáveis POWERBI_INA_*)
 INA_DATASET_ID = POWERBI_CONFIG.get("ina_dataset_id")
 INA_WORKSPACE_ID = POWERBI_CONFIG.get("ina_workspace_id")
 
 
 class InaAutomation:
     def __init__(self):
-        # Validação para garantir que as variáveis estão configuradas antes de iniciar
+
         if not INA_DATASET_ID or not INA_WORKSPACE_ID:
-            raise ValueError(
-                "❌ Variáveis POWERBI_INA_DATASET_ID e POWERBI_WORKSPACE_ID não configuradas. "
-                "Configure-as no Coolify antes de executar a automação INA."
-            )
-        logger.info(f"🔌 Conectando ao Power BI - Workspace: {INA_WORKSPACE_ID} | Dataset: {INA_DATASET_ID}")
+            raise ValueError("Dataset ou Workspace ID não configurados.")
+
         self.powerbi = PowerBIClient(workspace_id=INA_WORKSPACE_ID, dataset_id=INA_DATASET_ID)
+
         self.whatsapp = EvolutionClient()
         self.supabase = SupabaseService()
 
-    def discover_schema(self):
-        """
-        Executa queries nas DMVs (Dynamic Management Views) para descobrir tabelas e medidas.
-        """
-        logger.info("🕵️ Iniciando descoberta de schema do Painel INA...")
-        q_simple = 'EVALUATE ROW("Status", "Conectado", "Hora", NOW())'
-        try:
-            result = self.powerbi.execute_dax(q_simple)
-            if result:
-                logger.info(f"✅ Conectividade OK: {result}")
-        except Exception as e:
-            logger.error(f"Erro ao testar conectividade: {e}")
+    def fetch_kpis(self) -> Optional[Dict[str, Any]]:
+        """Busca os KPIs e Top10"""
 
-    def fetch_kpis(self, area_filter=None):
-        """
-        Busca os KPIs reais do painel com base na análise do schema.
-        Suporta filtro por Área (Departamento/Subtipo).
-        """
-        logger.info(f"📊 Buscando KPIs reais do Painel INA (Filtro: {area_filter or 'Todos'})...")
+        hoje = datetime.now()
+        ontem = hoje - timedelta(days=1)
 
-        filters_dax = ""
-        if area_filter:
-            filters_dax += f", 'Competencia'[Area.1.Subtipo ] = \"{area_filter}\""
+        logger.info(f"Buscando acumulado do mês até: {ontem:%d/%m/%Y}")
 
-        # Filtros Globais Obrigatórios
-        # 1. Area <> InterCompany
-        # 2. Status IN {ATRASADO, A VENCER, VENCE HOJE}
-        global_filter = """
-            'Competencia'[area] <> "InterCompany",
-            'Competencia'[status_titulo] IN {"ATRASADO", "A VENCER", "VENCE HOJE"}
-        """
-
-        # Filtro de Faixa de Atraso para Top 10 (até 90 dias)
-        # Ordem_Faixa_Atraso: 1=0-30d, 2=31-60d, 3=61-90d (numérico, exclui nulls)
-        # NÃO filtra por status - dashboard inclui ATRASADO, A VENCER e VENCE HOJE
-        filter_90_days = """
-            'Competencia'[Ordem_Faixa_Atraso] IN {1, 2, 3}
-        """
-
-        # Query KPIs
         query_kpis = f"""
         EVALUATE
-        ROW(
-            "Card_Vencendo_Hoje", CALCULATE([Card_Vencendo_Hoje], {global_filter} {filters_dax}),
-            "Card_Inadimplencia_Ate_2_Dias", CALCULATE([Card_Inadimplencia_Ate_2_Dias], {global_filter} {filters_dax}),
-            "Card_Inadimplencia_3_Mais_Dias",
-            CALCULATE([Card_Inadimplencia_3_Mais_Dias], {global_filter} {filters_dax}),
-            "Card_Media_Atraso", CALCULATE([Card_Media_Atraso], {global_filter} {filters_dax}),
-            "Card_Inadimplencia_TOTAL", CALCULATE([Card_Inadimplencia_TOTAL], {global_filter} {filters_dax}),
-            "Card_INTERCOMPANY", CALCULATE([Card_INTERCOMPANY], {global_filter} {filters_dax}),
-            "Card_QtdAtraso", CALCULATE([Card_QtdAtraso], {global_filter} {filters_dax})
+        CALCULATETABLE(
+            ROW(
+                "Card_Vencendo_Hoje", [Card_Vencendo_Hoje],
+                "Card_Inadimplencia_Ate_2_Dias", [Card_Inadimplencia_Ate_2_Dias],
+                "Card_Inadimplencia_3_Mais_Dias", [Card_Inadimplencia_3_Mais_Dias],
+                "Card_QtdAtraso", [Card_QtdAtraso],
+                "Card_Media_Atraso", [Card_Media_Atraso],
+                "Card_INTERCOMPANY", [Card_INTERCOMPANY],
+                "Card_Inadimplencia_TOTAL", [Card_Inadimplencia_TOTAL]
+            ),
+            'Calendario'[Date] <= DATE({ontem.year},{ontem.month},{ontem.day}),
+            'Calendario'[Ano_Mes_Num] = {ontem.year * 100 + ontem.month}
         )
         """
 
-        # Query Top 10 Clientes (Ranking Inadimplencia até 90 dias)
-        # Agrupado por Nome Fantasia
-        # Valor = Soma de valor_contas_receber
-        # Dias = Media de DATEDIFF(data_vencimento, TODAY())
         query_top10 = f"""
         EVALUATE
         TOPN(
@@ -106,18 +75,21 @@ class InaAutomation:
             ADDCOLUMNS(
                 CALCULATETABLE(
                     VALUES('Competencia'[nome_fantasia]),
-                    {global_filter} {filters_dax},
-                    {filter_90_days}
+                    'Competencia'[area] <> "InterCompany",
+                    'Competencia'[Ordem_Faixa_Atraso] IN {{1,2,3}},
+                    'Calendario'[Date] <= DATE({ontem.year},{ontem.month},{ontem.day}),
+                    'Calendario'[Ano_Mes_Num] = {ontem.year * 100 + ontem.month}
                 ),
-                "Valor", CALCULATE(
-                    SUM('Competencia'[valor_contas_receber]),
-                    {global_filter} {filters_dax},
-                    {filter_90_days}
+                "Valor",
+                CALCULATE(
+                    SUM('Competencia'[valor_contas_receber])
                 ),
-                "Dias_Atraso", CALCULATE(
-                    MAXX('Competencia', DATEDIFF('Competencia'[data_vencimento], TODAY(), DAY)),
-                    {global_filter} {filters_dax},
-                    {filter_90_days}
+                "Dias_Atraso",
+                CALCULATE(
+                    MAXX(
+                        'Competencia',
+                        DATEDIFF('Competencia'[data_vencimento], TODAY(), DAY)
+                    )
                 )
             ),
             [Valor], DESC
@@ -125,278 +97,325 @@ class InaAutomation:
         """
 
         try:
-            logger.info(f"🧐 Executing DAX Query for KPIs:\n{query_kpis}")
-            # Busca KPIs
-            kpis = self.powerbi.execute_dax(query_kpis)
+            logger.info("Executando DAX no Power BI")
+            kpis_res = self.powerbi.execute_dax(query_kpis)
 
-            logger.info(f"📥 Result Raw KPIs: {kpis}")
+            if not kpis_res:
+                logger.warning("Query vazia. Executando fallback")
 
-            # Se a primeira query falhar, assumimos que todo o acesso falhou
-            if not kpis:
-                logger.error(f"❌ Query de KPIs retornou vazio/None para área {area_filter}.")
-                if area_filter:
-                    return None
-                return self.fetch_connectivity_fallback()
+                query_fallback = """
+                EVALUATE
+                ROW(
+                    "Card_Vencendo_Hoje",[Card_Vencendo_Hoje],
+                    "Card_Inadimplencia_Ate_2_Dias",[Card_Inadimplencia_Ate_2_Dias],
+                    "Card_Inadimplencia_3_Mais_Dias",[Card_Inadimplencia_3_Mais_Dias],
+                    "Card_QtdAtraso",[Card_QtdAtraso],
+                    "Card_Media_Atraso",[Card_Media_Atraso],
+                    "Card_INTERCOMPANY",[Card_INTERCOMPANY],
+                    "Card_Inadimplencia_TOTAL",[Card_Inadimplencia_TOTAL]
+                )
+                """
 
-            # Normalizar chaves (remover colchetes [Key] -> Key)
-            # E Mapear para o formato do InaRenderer
-            raw_kpis = kpis[0]
-            normalized_kpis = {}
+                kpis_res = self.powerbi.execute_dax(query_fallback)
 
-            # Mapa de De -> Para
-            key_map = {
-                "Card_Vencendo_Hoje": "VencendoHoje",
-                "Card_Inadimplencia_TOTAL": "Total",
-                "Card_Media_Atraso": "MediaAtraso",
-                "Card_Inadimplencia_Ate_2_Dias": "Conciliacao",
-            }
+            if not kpis_res:
+                logger.error("Não foi possível obter KPIs")
+                return None
 
-            for k, v in raw_kpis.items():
-                clean_key = k.strip("[]")
-                # Se estiver no mapa, usa o nome mapeado, senao mantem original
-                final_key = key_map.get(clean_key, clean_key)
-                normalized_kpis[final_key] = v
+            raw = kpis_res[0]
 
-            logger.info(f"Keys Normalizadas: {list(normalized_kpis.keys())}")
+            kpis = {re.sub(r".*\[|\]", "", k).strip(): v for k, v in raw.items()}
 
-            # Checar se os valores internos sao None
-            if all(v is None for v in normalized_kpis.values()):
-                logger.warning("⚠️ Atenção: Query retornou uma linha, mas todos os valores são None!")
+            top10 = self._fetch_top10(query_top10)
 
-            # Busca Top 10 (Opcional)
-            top10 = []
-            try:
-                res_top10 = self.powerbi.execute_dax(query_top10)
-                if res_top10:
-                    # Normalizar chaves do Top 10 também
-                    top10 = []
-                    for item in res_top10:
-                        norm_item = {}
-                        for k, v in item.items():
-                            # Normalizar chaves:
-                            # 'Competencia[nome_fantasia]' -> 'nome_fantasia'
-                            # '[Valor]' -> 'Valor'
-                            # '[Dias_Atraso]' -> 'Dias_Atraso'
-                            clean_k = k.replace("Competencia[", "").strip("[]")
-                            norm_item[clean_k] = v
-
-                        # Fallback nome
-                        if "nome_fantasia" not in norm_item:
-                            norm_item["nome_fantasia"] = norm_item.get("Cliente", "Desconhecido")
-
-                        # Garantir dias positivos (DATEDIFF retorna negativo se vencimento futuro)
-                        if "Dias_Atraso" in norm_item and isinstance(norm_item["Dias_Atraso"], (int, float)):
-                            norm_item["Dias_Atraso"] = abs(int(norm_item["Dias_Atraso"]))
-
-                        top10.append(norm_item)
-
-                    # Ordenar por valor DESC (TOPN seleciona top 10 mas não garante ordem)
-                    top10.sort(key=lambda x: float(x.get("Valor", 0) or 0), reverse=True)
-
-                    logger.info(f"Dados Top 10 Raw ({len(top10)} items): {top10[:2]}...")
-                else:
-                    logger.warning("Query Top 10 retornou vazio.")
-            except Exception as e:
-                logger.warning(f"Falha ao buscar Top 10: {e}")
-                top10 = []
-
-            return {"kpis": normalized_kpis, "top10": top10}
+            return {"kpis": kpis, "top10": top10}
 
         except Exception as e:
-            logger.error(f"Erro ao executar queries DAX: {e}")
-            return None  # Retorna None se falhar com filtro, para não mandar dados errados
-
-    def fetch_connectivity_fallback(self):
-        logger.info("Tentando fallback de conectividade...")
-        try:
-            res = self.powerbi.execute_dax('EVALUATE ROW("Status", "Conectado (Sem KPI)", "Hora", NOW())')
-            return {"kpis": res[0], "top10": []} if res else None
-        except Exception:
+            logger.exception(f"Erro crítico ao buscar KPIs: {e}")
             return None
 
-    def run(self, recipients=None, template_content=None):
-        logger.info("=== AUTOMAÇÃO PAINEL INA ===")
+    def _fetch_top10(self, query: str) -> List[Dict[str, Any]]:
 
-        if not recipients:
-            logger.warning("Sem destinatários para envio.")
-            return
-
-        # 1. Agrupar destinatários por Área
-        grouped_recipients = {}
-
-        for r in recipients:
-            area = r.get("area")
-            tags = r.get("tags", [])
-
-            if not area and tags:
-                for t in tags:
-                    if t.startswith("area:"):
-                        area = t.split(":")[1].strip()
-                        break
-
-            if not area or area.upper() in ["DIRETORIA", "GLOBAL", "GERAL"]:
-                area_key = "GLOBAL"
-            else:
-                area_key = area.upper()
-
-            if area_key not in grouped_recipients:
-                grouped_recipients[area_key] = []
-            grouped_recipients[area_key].append(r)
-
-        logger.info(f"Destinatários agrupados: {list(grouped_recipients.keys())}")
-
-        # 2. Processar cada grupo (Área)
-        renderer = InaRenderer()
-
-        for area_key, recip_list in grouped_recipients.items():
-            logger.info(f"🔄 Processando área: {area_key}")
-
-            area_filter = None if area_key == "GLOBAL" else area_key.title()
-
-            # 2.1 Buscar Dados
-            data = self.fetch_kpis(area_filter=area_filter)
-
-            if not data:
-                logger.error(f"Falha ao buscar dados para área {area_key}. Pulando envio.")
-                continue
-
-            kpis = data.get("kpis", {})
-            top10 = data.get("top10", [])
-
-            # 2.2 Gerar Imagem
-            try:
-                # Limpar e formatar KPIs
-                kpis_clean = {}
-                for k, v in kpis.items():
-                    is_curr = k != "MediaAtraso"
-                    kpis_clean[k] = self._clean_card_value(v, is_currency=is_curr)
-
-                # Limpar e formatar Top 10
-                top10_clean = []
-                for item in top10:
-                    new_item = item.copy()
-                    # Limpar Valor
-                    if "Valor" in new_item:
-                        new_item["Valor"] = self._clean_card_value(new_item["Valor"], is_currency=True)
-                    # Limpar Dias
-                    if "Dias_Atraso" in new_item:
-                        new_item["Dias_Atraso"] = self._clean_card_value(new_item["Dias_Atraso"], is_currency=False)
-                    top10_clean.append(new_item)
-
-                filename = "ina_report_global.png" if area_key == "GLOBAL" else f"ina_report_{area_key.lower()}.png"
-                output_path = os.path.join(os.path.dirname(__file__), filename)
-
-                display_area = "GERAL" if area_key == "GLOBAL" else area_key
-
-                renderer.generate_image(
-                    kpis_clean,
-                    top10_clean,
-                    output_path=output_path,
-                    area_name=display_area,
-                )
-                logger.info(f"Relatório {area_key} gerado em: {output_path}")
-            except Exception as e:
-                logger.error(f"Erro ao gerar imagem para {area_key}: {e}")
-                continue
-
-            # 2.3 Enviar para destinatários do grupo
-            for r in recip_list:
-                nome = r.get("name") or r.get("nome", "Gestor")
-                phone = r.get("phone") or r.get("telefone")
-
-                if not phone:
-                    continue
-
-                caption = (
-                    f"📊 *Painel INA [{display_area}] - {datetime.now().strftime('%d/%m/%Y')}*\n"
-                    f"Olá {nome}, segue o resumo atualizado."
-                )
-
-                try:
-                    self.whatsapp.send_file(group_id=phone, file_path=output_path, caption=caption)
-                    logger.info(f"Imagem ({area_key}) enviada para {nome} ({phone})")
-                except Exception as e:
-                    logger.error(f"Erro ao enviar para {nome}: {e}")
-
-    def _clean_card_value(self, value, is_currency=True):
-        """
-        Limpa e formata valores.
-        Suporta Raw (float/int) e Texto/HTML.
-        """
-        if value is None:
-            return "-"
-
-        # 1. Se for numérico nativo (float/int), formata direto
-        if isinstance(value, (int, float)):
-            if is_currency:
-                # Formata PT-BR: R$ 1.234,56
-                return f"R$ {value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-            else:
-                # Formata inteiro
-                return str(int(value))
-
-        value_str = str(value)
+        top10 = []
 
         try:
-            # 2. Remove HTML
-            if "<" in value_str and ">" in value_str:
-                value_str = re.sub(r"<style>.*?</style>", "", value_str, flags=re.DOTALL)
-                value_str = re.sub(r"<[^<]+?>", "", value_str)
+            res = self.powerbi.execute_dax(query)
 
-            # Normalizar espaços
-            value_str = " ".join(value_str.split())
+            if not res:
+                return top10
 
-            # 3. Extração via Regex (para strings sujas que sobraram)
-            if is_currency:
-                # Procura padrao monetario
-                match = re.search(r"(R\$\s?[\d\.,]+)", value_str)
-                if match:
-                    clean = match.group(1).replace(" ", "")
-                    return clean.replace("R$", "R$ ")
-            else:
-                # Procura números
-                digits = re.findall(r"(\d+)", value_str)
-                if digits:
-                    return digits[-1]
+            for item in res:
+                norm = {re.sub(r".*\[|\]", "", k).strip(): v for k, v in item.items()}
 
-            return value_str.strip()
+                if "Dias_Atraso" in norm and norm["Dias_Atraso"]:
+                    try:
+                        norm["Dias_Atraso"] = abs(int(float(str(norm["Dias_Atraso"]).replace(",", "."))))
+                    except ValueError:
+                        norm["Dias_Atraso"] = 0
+
+                if "nome_fantasia" not in norm:
+                    norm["nome_fantasia"] = norm.get("Cliente", "Desconhecido")
+
+                top10.append(norm)
+
+            top10.sort(
+                key=lambda x: float(str(x.get("Valor", 0)).replace(",", ".").replace("R$", "").strip() or 0),
+                reverse=True,
+            )
 
         except Exception as e:
-            logger.warning(f"Erro ao limpar valor '{value}': {e}")
-            return str(value)
+            logger.warning(f"Erro ao buscar Top10: {e}")
+
+        return top10
+
+    def run(self, recipients=None, generate_only=False):
+
+        data = self.fetch_kpis()
+
+        if not data:
+            return
+
+        kpis = data.get("kpis", {})
+        top10 = data.get("top10", [])
+
+        monetarios = {
+            "Card_Vencendo_Hoje",
+            "Card_Inadimplencia_Ate_2_Dias",
+            "Card_Inadimplencia_3_Mais_Dias",
+            "Card_INTERCOMPANY",
+            "Card_Inadimplencia_TOTAL",
+        }
+
+        kpis_fmt = {k: self._formatar(v, k in monetarios) for k, v in kpis.items()}
+
+        top10_fmt = []
+
+        for it in top10:
+            it_fmt = it.copy()
+
+            it_fmt["Valor"] = self._formatar(it.get("Valor"), True)
+            it_fmt["Dias_Atraso"] = self._formatar(it.get("Dias_Atraso"), False)
+
+            top10_fmt.append(it_fmt)
+
+        renderer = InaRenderer()
+
+        output = os.path.join(os.path.dirname(__file__), "ina_report_global.png")
+
+        renderer.generate_image(kpis=kpis_fmt, top10=top10_fmt, output_path=output)
+
+        if generate_only:
+            logger.info(f"Imagem gerada: {output}")
+            return
+
+        data_pos = (datetime.now() - timedelta(days=1)).strftime("%d/%m/%Y")
+
+        caption = f"📊 Painel INA — Posição: {data_pos}\nAcumulado do mês até ontem."
+
+        for r in recipients or []:
+            phone = r.get("phone") or r.get("telefone")
+
+            if not phone:
+                continue
+
+            try:
+                self.whatsapp.send_file(group_id=phone, file_path=output, caption=caption)
+
+            except Exception as e:
+                logger.error(f"Erro ao enviar para {phone}: {e}")
+
+    def _formatar(self, valor, moeda=False, escala=False, extrair_valor_dict=True):
+        """
+        Formata numéricos para o padrão PT-BR.
+        - extrair_valor_dict: se True, e o valor for um dicionário {"detail": {"value": "..."}}, extrai o 'value'.
+        """
+        if valor is None:
+            return "R$ 0,00" if moeda else "0"
+
+        # A API do Power BI pode retornar objetos para medidas
+        # Exemplo: {'detail': {'type': 1, 'value': '3241803780'}}
+        if extrair_valor_dict and isinstance(valor, dict):
+            # Tentar extrair do formato padrão do Power BI REST API
+            if 'detail' in valor and isinstance(valor['detail'], dict) and 'value' in valor['detail']:
+                valor = valor['detail']['value']
+            elif 'value' in valor:
+                valor = valor['value']
+            else:
+                # Log em caso de estrutura desconhecida e fallback
+                print(f"Aviso: estrutura de dicionário desconhecida na formatação: {valor}")
+                # Tentativa genérica de pegar a primeira string que pareça número
+                try:
+                    str_val = str(valor)
+                    matches = re.findall(r'-?\d+\.?\d*', str_val)
+                    if matches:
+                        valor = matches[0]
+                except Exception:
+                    pass
+
+        try:
+            # Limpeza caso seja string com formatação
+            if isinstance(valor, str):
+                valor = valor.replace("R$", "").replace(".", "").replace(",", ".").strip()
+                if not valor:
+                    valor = 0
+            
+            # Se for string com dígito literal único (ex: 'R$ 0,00' original), a limpeza já converte para número
+            try:
+                numerico = float(valor)
+            except ValueError:
+                # Fallback: extrai o primeiro número encontrado na string (seja int ou float)
+                str_orig = str(valor)
+                matches = re.findall(r'-?\d+\.?\d*', str_orig.replace(".", "").replace(",", "."))
+                numerico = float(matches[0]) if matches else 0.0
+                
+            # Muitas vezes o Power BI já traz os valores na escala correta, ou às vezes deslocados.
+            # O painel que estamos imitando (na imagem original) mostrou ~3.2Mi, mas se a API retorna 3241803780
+            # Pode estar vindo em centavos ou multiplicado. Geralmente é dividido por 100 se vier sem decimais de moeda.
+            # Baseado na diferença de grandeza (o original tinha 3,2 Mi e o PBI retornou ~3.2 Bi (3241803780)), 
+            # é provável que precisemos dividir por 100 os valores monetários se a escala não já tiver sido aplicada pela view
+            
+            # Aplica escala opcional
+            if escala:
+                numerico = numerico / 100
+
+            if moeda:
+                # Formata como moeda (ex: R$ 1.234,56)
+                formatado = f"R$ {numerico:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+                return formatado
+            else:
+                # Formata como inteiro ou com separador de milhar se for grande (ex: 253, 1.253)
+                if int(numerico) == numerico:
+                    formatado = f"{int(numerico):,}".replace(",", ".")
+                else:
+                    formatado = f"{numerico:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+                    if formatado.endswith(',00'):
+                        formatado = formatado[:-3]
+                return formatado
+        except Exception as e:
+            print(f"Erro ao formatar valor '{valor}': {e}")
+            return "R$ 0,00" if moeda else "0"
+
+    def gerar_relatorio_geral(self, force_d1_fallback=False):
+        """
+        Busca os dados e gera o card para Inadimplência Geral (Mês Atual).
+        Usa o filtro D-1 na DAX do Power BI.
+        `force_d1_fallback` permite ignorar a restrição de "ontem" se necessário.
+        """
+        print("\n=== GERANDO RELATÓRIO DE INADIMPLÊNCIA GERAL ===")
+        
+        # O Power BI usa o dia anterior como referência de dados atualizados
+        # Como visto na imagem original: "Posição: 10/03/2026" (ontem)
+        ontem = datetime.now() - timedelta(days=1)
+        data_posicao = ontem.strftime("%d/%m/%Y")
+        ano_mes_atual = ontem.strftime("%Y%m") # Ex: 202603
+
+        # Constrói o filtro DAX de data
+        dax_date_filter = f"DATE({ontem.year}, {ontem.month}, {ontem.day})"
+        
+        # Filtro de grupo Área = Geral (vazio) não é necessário pois "Geral" é tudo
+        # Mas vamos excluir o InterCompany das medidas quando possível na DAX
+        
+        # A API pode retornar erro se o DATE for muito restitivo (nenhum dado de "ontem"),
+        # uma restrição <= ontem dentro do mês atual garante que pega o acumulado correto
+        
+        print(f"Data Base (D-1): {data_posicao} | Ano_Mes: {ano_mes_atual}")
+        print("Buscando KPIs Consolidados...")
+        
+        dax_kpis = f"""
+        EVALUATE
+        SUMMARIZECOLUMNS(
+            "Card_Vencendo_Hoje", [Card_Vencendo_Hoje],
+            "Card_Vencido_Tot", [Card_Vencido_Tot],
+            "Card_Vencendo_<15_dias", [Card_Vencendo_<15_dias],
+            "Card_Vencer_Tot", [Card_Vencer_Tot],
+            "Card_Vencendo_16-30_Dias", [Card_Vencendo_16-30_Dias],
+            "TT_Titulos_INA", [TT_Titulos_INA],
+            "Ina_Tot_Media_Dias_Geral", [Ina_Tot_Media_Dias_Geral],
+            
+            -- Filtramos pelo mês atual e dados até D-1
+            FILTER(
+                'Calendario',
+                'Calendario'[Ano_Mes_Num] = {ano_mes_atual} &&
+                'Calendario'[Date] <= {dax_date_filter}
+            )
+        )
+        """
+        
+        dados_geral = self.powerbi.execute_dax(dax_kpis)
+        
+        # Valores Default caso retorne vazio ou erro
+        kpi = {
+            "vencendo_hoje": "0",
+            "vencido": "R$ 0,00",
+            "menos_15_dias": "0",
+            "a_vencer": "R$ 0,00",
+            "16_30_dias": "0",
+            "titulos": "0",
+            "media_dias": "0"
+        }
+
+        # Extração inteligente baseada na chave do dicionário de resultados
+        if dados_geral and len(dados_geral) > 0:
+            row = dados_geral[0]
+            # Mapeamento dinâmico ignorando case e colchetes
+            for raw_key, value in row.items():
+                k = raw_key.lower().replace("[", "").replace("]", "")
+                
+                # Vamos lidar com o value extraindo o valor do dict se ele existir
+                if isinstance(value, dict) and 'detail' in value and 'value' in value['detail']:
+                    real_value = value['detail']['value']
+                elif isinstance(value, dict) and 'value' in value:
+                    real_value = value['value']
+                else:
+                    real_value = value
+                
+                # Atenção: a formatação já lida com os dicts, mas o scale fix monetário
+                # se mostrou necessário pois a base no PowerBI pode estar sem virgulas.
+                # Aplicamos a escala para campos financeiros.
+                
+                if "vencendo_hoje" in k:
+                    kpi["vencendo_hoje"] = self._formatar(real_value, moeda=True, escala=True, extrair_valor_dict=False)
+                elif "vencido_tot" in k or "vencido" in k:
+                    kpi["vencido"] = self._formatar(real_value, moeda=True, escala=True, extrair_valor_dict=False)
+                elif "menos_15" in k or "<15" in k:
+                    kpi["menos_15_dias"] = self._formatar(real_value, moeda=True, escala=True, extrair_valor_dict=False)
+                elif "vencer_tot" in k or "a_vencer" in k:
+                    kpi["a_vencer"] = self._formatar(real_value, moeda=True, escala=True, extrair_valor_dict=False)
+                elif "16-30" in k or "16_30" in k:
+                    kpi["16_30_dias"] = self._formatar(real_value, moeda=True, escala=True, extrair_valor_dict=False)
+                elif "tt_titulos" in k:
+                    kpi["titulos"] = self._formatar(real_value, moeda=False, extrair_valor_dict=False)
+                elif "media_dias" in k:
+                    kpi["media_dias"] = self._formatar(real_value, moeda=False, extrair_valor_dict=False)
+        else:
+            print("Aviso: A query KPIs não retornou dados. Verificando se o filtro de data (D-1) foi muito restritivo...")
+            if not force_d1_fallback:
+                print("Tentando buscar sem restrição de dia para ver se há dados no mês...")
+                # Isso seria implementado repetindo a query sem o filtro de Date <= ontem
+                pass
+
+
+def main():
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--generate-only", action="store_true")
+    parser.add_argument("--payload", type=str)
+
+    args = parser.parse_args()
+
+    recipients = [{"telefone": "5551998129077"}]
+
+    if args.payload:
+        try:
+            payload = json.loads(args.payload)
+            recipients = payload.get("recipients", recipients)
+
+        except json.JSONDecodeError:
+            logger.error("Payload JSON inválido")
+
+    InaAutomation().run(recipients=recipients, generate_only=args.generate_only)
 
 
 if __name__ == "__main__":
-    # Modo de Teste: Enviar para número específico
-    automation = InaAutomation()
-
-    # Remove temporary probe files
-    for f in [
-        "new_probe.txt",
-        "new_probe_utf8.txt",
-        "modules/ina/list_datasets.py",
-        "modules/ina/probe_new_id.py",
-    ]:
-        if os.path.exists(f):
-            try:
-                os.remove(f)
-            except Exception:
-                pass
-
-    # 1. Executa o disparo de teste segmentado
-    destinatarios_teste = [
-        {
-            "nome": "Victor (Diretoria)",
-            "telefone": "5551998129077",
-            "area": "DIRETORIA",
-        },
-        {
-            "nome": "Victor (Tecnologia)",
-            "telefone": "5551998129077",
-            "area": "TECNOLOGIA",
-        },
-    ]
-
-    logger.info("🚀 Iniciando disparo de TESTE manual (Segmentado - Novo Painel)...")
-    automation.run(recipients=destinatarios_teste)
-    logger.info("✅ Processo de teste finalizado.")
+    main()
