@@ -25,8 +25,9 @@ class SyncServices:
             if not all_services:
                 return
 
-            # Transformar dados para formato do banco
             upsert_data = []
+            BATCH_SIZE = 1000
+
             for item in all_services:
                 upsert_data.append(
                     {
@@ -40,9 +41,14 @@ class SyncServices:
                     }
                 )
 
-            # Upsert
-            self.db.upsert_data(self.table_name, upsert_data, on_conflict="codigo")
-            logger.info(f"Upserted {len(upsert_data)} records into {self.table_name}")
+                if len(upsert_data) >= BATCH_SIZE:
+                    self.db.upsert_data(self.table_name, upsert_data, on_conflict="codigo")
+                    logger.info(f"Upserted batch of {len(upsert_data)}")
+                    upsert_data = []
+
+            if upsert_data:
+                self.db.upsert_data(self.table_name, upsert_data, on_conflict="codigo")
+                logger.info(f"Upserted final batch of {len(upsert_data)} records into {self.table_name}")
 
         except Exception as e:
             logger.error(f"Error syncing services: {e}")

@@ -13,20 +13,12 @@ class SyncContracts:
         self.client = JobsClient()
         self.table_name = "nexus_contratos_recorrentes"
 
-    def run(self, days_ago=30, full_load=False):
-        logger.info(f"Starting {self.table_name} sync (full_load={full_load})...")
+    def run(self):
+        logger.info(f"Starting {self.table_name} sync...")
 
         endpoint = "/contratos_recorrentes/"  # IMPORTANTE: Trailing slash
 
         try:
-            # Buscar contratos. Se full_load=True, pega tudo. Se não, filtra por data (SE A API SUPORTAR).
-            # Como não conhecemos filtros de data, vamos assumir carga completa por seguranca
-            # ou limitar se for muito grande.
-            # O endpoint parece suportar paginação padrão do DataTables ou similar.
-
-            # TODO: Implementar filtro por data_alteracao se a API suportar para otimizar.
-            # Por enquanto, fetch_all simples.
-
             all_contracts = self.client.fetch_all(endpoint)
             logger.info(f"Fetched {len(all_contracts)} contracts from API")
 

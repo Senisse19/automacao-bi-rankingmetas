@@ -6,7 +6,14 @@ Suporta variáveis de ambiente para deploy em Docker/Coolify
 import os
 import sys
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    print("ERRO: O pacote 'python-dotenv' não foi encontrado.")
+    print("Por favor, execute: pip install python-dotenv")
+    # Em ambientes críticos, poderíamos encerrar, mas aqui vamos tentar continuar
+    # pois o OS pode já ter as variáveis definidas.
+    def load_dotenv(*args, **kwargs): pass
 
 # Carregar variáveis do arquivo .env (na raiz do projeto)
 current_dir = os.path.dirname(os.path.abspath(__file__))
