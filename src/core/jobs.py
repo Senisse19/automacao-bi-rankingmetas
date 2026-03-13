@@ -33,7 +33,7 @@ def job_painel_ina(recipients=None, template_content=None):
     SupabaseService().log_event("job_start", {"job": "painel_ina"})
 
     ina = InaAutomation()
-    ina.run(recipients=recipients, template_content=template_content)
+    ina.run(recipients=recipients)
 
 
 
@@ -59,5 +59,5 @@ def safe_run_job(job_func, recipients=None, template_content=None):
     except Exception as e:
         error_msg = f"❌ Erro na execução de '{job_func.__name__}': {str(e)}"
         logger.error(error_msg)
-        SupabaseService().log_event("job_error", {"job": job_func.__name__, "error": str(e)}, level="error")
+        SupabaseService().log_event("job_error", {"job": job_func.__name__, "error": str(e)})
         # alert_admin(error_msg) # TODO: Decouple admin alert
