@@ -37,7 +37,7 @@ class BaseRenderer:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(current_dir, "../../../"))
 
-        local_font = os.path.join(project_root, "core", "assets", "fonts", "arial.ttf")
+        local_font = os.path.join(project_root, "src", "core", "assets", "fonts", "arial.ttf")
 
         possible_fonts = [
             # Outfit Fonts (Priority)

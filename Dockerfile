@@ -11,6 +11,8 @@ ENV TZ=America/Sao_Paulo
 # gcc e outros para compilar bibliotecas se necessário (ex: Pillow)
 RUN apt-get update && apt-get install -y \
     tzdata \
+    fonts-liberation \
+    fontconfig \
     && rm -rf /var/lib/apt/lists/*
 
 # Definir diretório de trabalho

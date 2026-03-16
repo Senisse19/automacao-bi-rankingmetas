@@ -1,0 +1,13 @@
+Workspace: 4600324e-148c-4aae-a743-601628c04d29
+Encontrados 10 datasets
+
+- Ranking_Metas | ID: 5f1e9f0f-8388-438d-a0be-6a5e13bb3ce4
+- Gameficacao | ID: 25d1389d-b400-408e-b25d-6c5da4eab4c2
+- Painel_Financeiro | ID: bac33e2d-7e65-4c99-874a-a6a8ae919212
+- Compisao das Receitas | ID: 26873b5b-7e88-48b9-8a23-e504178fcf8a
+- teste_extracao | ID: a22cc70c-0bb6-40ee-90d7-14ae200bb1ec
+- painel_recuperado | ID: 36e4beb2-2684-4282-ace0-50d8ca7f6658
+- Unidades | ID: f476a231-a82f-405d-b0e5-1a4147e172ca
+- jobs | ID: 055b32cb-a002-4dea-907e-138400ea943c
+- metas_financeiras | ID: 41aff9a6-5868-47a6-9275-e79a59f3d225
+- painel_ina | ID: 92174395-c9b1-4b2c-b491-137fff6bb634

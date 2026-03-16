@@ -7786,3 +7786,20 @@
 {"timestamp": "2026-03-13T16:55:32", "level": "INFO", "logger": "run_ina", "message": "  Card_INTERCOMPANY: R$ 0,00"}
 {"timestamp": "2026-03-13T16:55:32", "level": "INFO", "logger": "run_ina", "message": "  Card_Inadimplencia_TOTAL: R$ 29.938.972,00"}
 {"timestamp": "2026-03-13T16:55:32", "level": "INFO", "logger": "run_ina", "message": "Imagem gerada: C:\\Users\\victor.senisse.GRUPOSTUDIO\\Desktop\\Plataforma BI\\studio-automation-core\\src\\modules\\ina\\ina_report_global.png"}
+{"timestamp": "2026-03-13T17:58:44", "level": "INFO", "logger": "run_ina", "message": "Buscando KPIs INA (referência D-0: 13/03/2026, Calendario[AnoMes_Ordenacao]=202603)"}
+{"timestamp": "2026-03-13T17:58:44", "level": "INFO", "logger": "run_ina", "message": "Executando query KPIs no Power BI"}
+{"timestamp": "2026-03-13T17:58:45", "level": "INFO", "logger": "powerbi_client", "message": "Token OAuth obtido (expira em 3599s)"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "KPIs recebidos: ['Card_Vencendo_Hoje', 'Card_Inadimplencia_Ate_2_Dias', 'Card_Inadimplencia_3_Mais_Dias', 'Card_QtdAtraso', 'Card_Media_Atraso', 'Card_INTERCOMPANY', 'Card_Inadimplencia_TOTAL']"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "KPIs formatados:"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_Vencendo_Hoje: R$ 0,00"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_Inadimplencia_Ate_2_Dias: R$ 109.548,00"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_Inadimplencia_3_Mais_Dias: R$ 420.531,00"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_QtdAtraso: 514"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_Media_Atraso: 5"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_INTERCOMPANY: R$ 0,00"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "  Card_Inadimplencia_TOTAL: R$ 29.937.686,00"}
+{"timestamp": "2026-03-13T17:58:47", "level": "INFO", "logger": "run_ina", "message": "Imagem gerada: C:\\Users\\victor.senisse.GRUPOSTUDIO\\Desktop\\Plataforma BI\\studio-automation-core\\src\\modules\\ina\\ina_report_global.png"}
+{"timestamp": "2026-03-13T18:15:10", "level": "INFO", "logger": "powerbi_client", "message": "Token OAuth obtido (expira em 3599s)"}
+{"timestamp": "2026-03-13T18:15:45", "level": "INFO", "logger": "powerbi_client", "message": "Token OAuth obtido (expira em 3599s)"}
+{"timestamp": "2026-03-13T18:16:31", "level": "INFO", "logger": "powerbi_client", "message": "Token OAuth obtido (expira em 3599s)"}
+{"timestamp": "2026-03-13T18:17:13", "level": "INFO", "logger": "powerbi_client", "message": "Token OAuth obtido (expira em 3599s)"}
