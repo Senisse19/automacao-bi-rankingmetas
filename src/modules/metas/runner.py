@@ -104,7 +104,7 @@ class MetasAutomation:
 
         return images
 
-    def send_whatsapp(self, images, custom_recipients=None, template_content=None):
+    def send_whatsapp(self, images, custom_recipients=None, template_content=None, dry_run=False):
         """
         Envia as imagens geradas via WhatsApp.
         :param images: Dict {dept: image_path}
@@ -113,7 +113,7 @@ class MetasAutomation:
         """
 
         logger.info("Enviando para WhatsApp...")
-        data_ref = self.get_data_referencia()
+        date_ref = self.get_data_referencia()
 
         # Pre-fetch templates form DB
         fallback_template_str = None
@@ -142,12 +142,19 @@ class MetasAutomation:
                 profile = profile[0]
 
             is_admin = profile.get("is_admin", False)
-            department = str(profile.get("department") or "").lower().strip()
+
+            # Coleta departamentos de ambas as fontes (profile e contact) e normaliza
+            p_dept = str(profile.get("department") or "").lower().strip()
+            c_dept = str(r.get("department") or "").lower().strip()
 
             # Lógica central:
-            # 1. Admins e Diretoria recebem o relatório COMPLETO (metas_geral)
-            # 2. Demais perfis recebem apenas o RESUMO (metas_resumo)
-            if is_admin or department == "diretoria":
+            # 1. Qualquer um com 'is_admin' marcado no profile recebe metas_geral.
+            # 2. Se o departamento em 'profiles' for 'Diretoria'.
+            # 3. Se o departamento em 'automation_contacts' for 'geral' (mapeado para Diretoria no portal).
+            # 4. Se o departamento em 'automation_contacts' for 'diretoria'.
+            is_diretoria = any(d in ["diretoria", "geral"] for d in [p_dept, c_dept])
+
+            if is_admin or is_diretoria:
                 dept_key = "diretoria"
             else:
                 dept_key = "resumo"
@@ -162,7 +169,6 @@ class MetasAutomation:
 
         # Instantiate Notification Service
         from src.core.services.notification_service import NotificationService
-
         notification_service = NotificationService(self.supabase)
 
         # Monta o lote completo de envios antes de disparar para permitir send_batch
@@ -181,7 +187,7 @@ class MetasAutomation:
                 continue
 
             for pessoa in destinatarios:
-                nome = pessoa.get("nome") or pessoa.get("name", "Colaborador")
+                nome = pessoa.get("nome") or pessoa.get("name") or "Colaborador"
                 telefone = pessoa.get("telefone") or pessoa.get("phone")
                 contact_id = pessoa.get("id")
 
@@ -202,7 +208,7 @@ class MetasAutomation:
                             "nome_completo": nome,
                             "saudacao": saudacao,
                             "saudacao_lower": saudacao_lower,
-                            "data": data_ref,
+                            "data": date_ref,
                             "data_semanal": self._get_periodo_semanal(),
                             "grupo": grupo_key.title(),
                         }
@@ -212,7 +218,7 @@ class MetasAutomation:
                             caption = current_template.format(**context)
                     except Exception as e:
                         logger.error(f"Erro ao formatar template para {nome}: {e}")
-                        caption = f"{saudacao}, {primeiro_nome}!\n\nSegue o relatório de {data_ref}."
+                        caption = f"{saudacao}, {primeiro_nome}!\n\nSegue o relatório de {date_ref}."
                 else:
                     variations = [
                         f"{saudacao}, {primeiro_nome}!",
@@ -221,10 +227,10 @@ class MetasAutomation:
                         f"{primeiro_nome}, {saudacao_lower}!",
                         f"Oi, {primeiro_nome}. {saudacao}!",
                     ]
-                    caption = f"{random.choice(variations)}\n\n" + METAS_CAPTION.format(data=data_ref)
+                    caption = f"{random.choice(variations)}\n\n" + METAS_CAPTION.format(data=date_ref)
 
                 if is_first_time:
-                    logger.info(f"   ℹ Novo usuário: {nome}. Adicionando aviso de primeiro envio.")
+                    logger.info(f"   [INFO] Novo usuário: {nome}. Adicionando aviso de primeiro envio.")
                     caption += warning_msg
                     if contact_id:
                         first_time_contacts.append(contact_id)
@@ -232,19 +238,23 @@ class MetasAutomation:
                 batch.append((pessoa, image_path, caption))
 
         # Envia o lote com workers paralelos (delays sobrepostos, envios sequenciais)
-        results = notification_service.send_batch(batch, context_tag="metas")
-
-        # Marca novos usuários como notificados (apenas após o batch concluir)
-        for contact_id in first_time_contacts:
-            self.supabase.mark_welcome_sent(contact_id)
-
-        logger.info(f"[Metas] Envios: {results['success']} ok, {results['failed']} falhas.")
+        if not dry_run:
+            results = notification_service.send_batch(batch, context_tag="metas")
+            # Marca novos usuários como notificados (apenas após o batch concluir)
+            for contact_id in first_time_contacts:
+                self.supabase.mark_welcome_sent(contact_id)
+            logger.info(f"[Metas] Envios: {results['success']} ok, {results['failed']} falhas.")
+        else:
+            logger.info(f"[DRY-RUN] Simulação de envio para {len(batch)} destinatários concluída.")
+            for p, img, cap in batch:
+                nome_p = p.get('nome') or p.get('name') or "Sem nome"
+                logger.info(f"   -> Enviar para: {nome_p} | Imagem: {os.path.basename(img)}")
 
     def send_email(self, images):
         # Email logic remains unchanged for now, using hardcoded templates or separate implementation
         pass
 
-    def run(self, generate_only=False, recipients=None, template_content=None):
+    def run(self, generate_only=False, recipients=None, template_content=None, dry_run=False):
         """
         Executa o fluxo completo da automação.
         :param recipients: Lista opcional de destinatários do DB.
@@ -266,11 +276,12 @@ class MetasAutomation:
         periodo = self.get_periodo()
         images = self.generate_images(total_gs, deps, receitas, periodo)
 
-        if not generate_only:
-            self.send_whatsapp(images, custom_recipients=recipients, template_content=template_content)
+        if not generate_only or dry_run:
+            self.send_whatsapp(images, custom_recipients=recipients, template_content=template_content, dry_run=dry_run)
             # self.send_email(images) # Commenting out email for now to focus on WA
-        else:
-            logger.info("   [INFO] Imagens geradas, envio pulado (--generate-only). Verifique a pasta images/")
+        
+        if generate_only:
+            logger.info("   [INFO] Imagens geradas. Verifique a pasta images/")
         logger.info("=== FIM AUTOMAÇÃO METAS ===\n")
 
 
@@ -282,6 +293,11 @@ def main():
         "--generate-only",
         action="store_true",
         help="Only generate images, do not send.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simulate WhatsApp sending (logs only).",
     )
     parser.add_argument("--payload", type=str, help="JSON payload with recipients and template.")
 
@@ -306,6 +322,7 @@ def main():
         generate_only=args.generate_only,
         recipients=recipients,
         template_content=template_content,
+        dry_run=args.dry_run,
     )
 
 
