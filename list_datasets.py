@@ -1,5 +1,6 @@
 
 import os
+
 try:
     from dotenv import load_dotenv
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -9,6 +10,7 @@ except ImportError:
     pass
 
 from src.core.clients.powerbi_client import PowerBIClient
+
 
 def main():
     output_file = "datasets_found.txt"

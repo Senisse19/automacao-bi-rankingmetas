@@ -133,23 +133,29 @@ class MetasAutomation:
             logger.error("Nenhum destinatário fornecido (custom_recipients empty).")
             return
 
-        # Group flat list by department to match image keys
+        # Group flat list by report type (diretoria/admins receive 'geral', others 'resumo')
         recipients_map = {}
         for r in custom_recipients:
-            # Normalize department name to match image keys (e.g. 'Diretoria' -> 'diretoria')
-            dept_key = (r.get("department") or "geral").lower()
-            dept_key = (
-                dept_key.replace("ã", "a").replace("ç", "c").replace("õ", "o").replace("é", "e").replace("á", "a")
-            )
+            # Extração robusta do profile (pode vir como lista em joins do Supabase)
+            profile = r.get("profile") or {}
+            if isinstance(profile, list) and len(profile) > 0:
+                profile = profile[0]
 
-            # Map 'geral' to 'diretoria' (where the General Image is stored)
-            if dept_key == "geral":
+            is_admin = profile.get("is_admin", False)
+            department = str(profile.get("department") or "").lower().strip()
+
+            # Lógica central:
+            # 1. Admins e Diretoria recebem o relatório COMPLETO (metas_geral)
+            # 2. Demais perfis recebem apenas o RESUMO (metas_resumo)
+            if is_admin or department == "diretoria":
                 dept_key = "diretoria"
+            else:
+                dept_key = "resumo"
 
             if dept_key not in recipients_map:
                 recipients_map[dept_key] = []
 
-            recipients_map[dept_key].append(r)  # Keep full object
+            recipients_map[dept_key].append(r)
 
         source_data = recipients_map
         logger.info(f"Processando envio para {len(custom_recipients)} destinatários dinâmicos.")

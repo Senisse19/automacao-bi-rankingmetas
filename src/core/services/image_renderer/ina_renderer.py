@@ -1,5 +1,7 @@
-﻿from PIL import Image, ImageDraw
 from datetime import datetime
+
+from PIL import Image, ImageDraw
+
 from .base_renderer import BaseRenderer
 
 
@@ -8,7 +10,13 @@ class InaRenderer(BaseRenderer):
     Renderizador para o Painel INA (Inadimpl├¬ncia).
     """
 
-    def generate_image(self, kpis, top10, output_path="ina_report.png", area_name="GERAL"):
+    def generate_image(
+        self,
+        kpis,
+        top10,
+        output_path="ina_report.png",
+        area_name="GERAL"
+    ):
         """
         Gera a imagem do relat├│rio di├írio do INA.
         """
@@ -117,7 +125,8 @@ class InaRenderer(BaseRenderer):
             width=1,
         )
 
-        # 2. T├¡tulo da Se├º├úo (Dentro do Card ou Fora? User disse "grande card com colunas", entao titulo pode ser dentro)
+        # 2. Título da Seção (Dentro do Card ou Fora?
+        # User disse "grande card com colunas", entao titulo pode ser dentro)
         # Vamos colocar padding interno
         inner_margin_x = margin + 20
         current_y = start_y + 20

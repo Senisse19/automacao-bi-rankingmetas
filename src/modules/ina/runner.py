@@ -12,6 +12,8 @@ import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
+from jinja2 import Template
+
 from src.config import POWERBI_CONFIG
 from src.core.clients.evolution_client import EvolutionClient
 from src.core.clients.powerbi_client import PowerBIClient
@@ -19,7 +21,6 @@ from src.core.services.notification_service import NotificationService
 from src.core.services.supabase_service import SupabaseService
 from src.core.utils.greeting import get_saudacao
 from src.core.utils.logger import get_logger
-from jinja2 import Template
 from src.modules.ina.renderer import InaRenderer
 
 logger = get_logger("run_ina")

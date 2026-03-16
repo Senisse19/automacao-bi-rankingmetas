@@ -1,7 +1,8 @@
-﻿import unicodedata
+import unicodedata
+from datetime import datetime, timedelta
 
 from PIL import Image, ImageDraw
-from datetime import datetime, timedelta
+
 from .base_renderer import BaseRenderer
 
 
@@ -723,7 +724,9 @@ class MetasRenderer(BaseRenderer):
 
         header_h = self._draw_header(draw, nome, periodo_display)
         y = header_h + 15
-        y = 85  # Override? This was in original code. Wait, original code said y = 85 after y = header_h + 15. The header calculation logic implies it should flow.
+        y = 85  # Override? This was in original code.
+        # Wait, original code said y = 85 after y = header_h + 15.
+        # The header calculation logic implies it should flow.
         # But if header is ~70, y=85 is strict.
         # Original code (Line 692 in Step 209): y = 85.
         # Just to be safe and consistent with refactor, knowing header is 70, y=85 is 15px margin.
