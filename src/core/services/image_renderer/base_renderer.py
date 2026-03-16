@@ -197,7 +197,7 @@ class BaseRenderer:
         """
         Desenha o rodap├® padr├úo no final da imagem.
         """
-        footer_text = "Grupo Studio ÔÇó Automa├º├úo Power BI"
+        footer_text = "Grupo Studio • Automação Power BI"
 
         font_footer = self._get_font(14)
         bbox = draw.textbbox((0, 0), footer_text, font=font_footer)

@@ -1,6 +1,13 @@
-﻿from PIL import Image, ImageDraw
+﻿import unicodedata
+
+from PIL import Image, ImageDraw
 from datetime import datetime, timedelta
 from .base_renderer import BaseRenderer
+
+
+def _normalize_key(s: str) -> str:
+    """Normaliza string para ASCII minúsculo (remove acentos) para usar como chave de busca."""
+    return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii").lower()
 
 
 class MetasRenderer(BaseRenderer):
@@ -173,8 +180,8 @@ class MetasRenderer(BaseRenderer):
 
         dept_pairs = [
             [("comercial", "COMERCIAL"), ("operacional", "OPERACIONAL")],
-            [("expans├úo", "EXPANS├âO"), ("corporate", "CORPORATE")],
-            [("educa├º├úo", "EDUCA├ç├âO"), ("tax", "TAX")],
+            [("expansao", "EXPANSÃO"), ("corporate", "CORPORATE")],
+            [("educacao", "EDUCAÇÃO"), ("tax", "TAX")],
             [("franchising", "FRANCHISING"), ("tecnologia", "TECNOLOGIA")],
         ]
 
@@ -188,7 +195,7 @@ class MetasRenderer(BaseRenderer):
         # First, draw header to get its height
         temp_img = Image.new("RGB", (self.width, 1), self.bg_color)  # Dummy image for header height calc
         temp_draw = ImageDraw.Draw(temp_img)
-        header_h = self._draw_header(temp_draw, "RELAT├ôRIO DE METAS", periodo)
+        header_h = self._draw_header(temp_draw, "RELATÓRIO DE METAS", periodo)
 
         current_y = header_h + padding
         if total_gs:
@@ -211,11 +218,11 @@ class MetasRenderer(BaseRenderer):
         font_big_value = self._get_font(22, bold=True)
         font_small = self._get_font(11, bold=True)
 
-        dept_map = {d["nome"].lower(): d for d in departamentos}
+        dept_map = {_normalize_key(d["nome"]): d for d in departamentos}
         margin = 15
         card_gap = 10
 
-        header_h = self._draw_header(draw, "RELAT├ôRIO DE METAS", periodo)
+        header_h = self._draw_header(draw, "RELATÓRIO DE METAS", periodo)
         y = header_h + padding
 
         if total_gs:
@@ -559,7 +566,7 @@ class MetasRenderer(BaseRenderer):
         margin = 15
 
         data_atual = (datetime.now() - timedelta(days=1)).strftime("%d/%m/%Y")
-        header_h = self._draw_header(draw, "RELAT├ôRIO GERAL", data_atual)
+        header_h = self._draw_header(draw, "RELATÓRIO GERAL", data_atual)
         y = header_h + padding
 
         if total_gs:
