@@ -30,7 +30,7 @@ _DEPARTAMENTOS_CONFIG: list[tuple[str, str, str]] = [
     ("Expansão", "Expansão_Metas", "EXPANSAO"),
     ("Franchising", "Franchising_Metas", "FRANCHISING"),
     ("Tax", "TAX_Metas", "TAX"),
-    ("Tecnologia", "PJ360_Metas", "Tecnologia"),
+    ("Tecnologia", "PJ360_Metas", "TECNOLOGIA"),
 ]
 
 

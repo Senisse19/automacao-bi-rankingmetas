@@ -91,20 +91,6 @@ def get_metas_dept_query(tabela, month_filter):
 
 
 def get_percentuais_dept_query(prefixo, date_start, date_end):
-    # Se tecnologia, bota 0 nas metas que estão quebradas no PBI
-    if prefixo == "Tecnologia":
-        return f"""
-        EVALUATE
-        CALCULATETABLE(
-            ROW(
-                "Pct1", 0,
-                "Pct2", 0,
-                "Pct3", 0
-            ),
-            DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
-        )
-        """
-
     return f"""
     EVALUATE
     CALCULATETABLE(

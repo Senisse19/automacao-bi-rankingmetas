@@ -174,7 +174,7 @@ class MetasRenderer(BaseRenderer):
         header_h = 100
         # header_h = 100 # This is now calculated by _draw_header
         # gs_card_h = 240 # This is now dynamic
-        # dept_row_h = 260  # Comporta TOTAL + REPASSE + VALOR L├ìQUIDO sem cortar conte├║do inferior
+        # dept_row_h = 260  # Comporta TOTAL + REPASSE + VALOR LÍQUIDO sem cortar conteúdo inferior
         # num_dept_rows = 4 # This is now dynamic
         receitas_h = 100 if receitas else 0
         padding = 15
@@ -531,11 +531,11 @@ class MetasRenderer(BaseRenderer):
                 fill=self.gold_color,
             )
 
-            # VALOR L├ìQUIDO ÔÇö exibido sempre, mostra R$ 0 se vazio
+            # VALOR LÍQUIDO — exibido sempre, mostra R$ 0 se vazio
             liq_y = sub_y + 32
             draw.text(
                 (x + pad, liq_y),
-                "VALOR L├ìQUIDO",
+                "VALOR LÍQUIDO",
                 font=self._get_font(9, bold=True),
                 fill=self.muted_text,
             )
