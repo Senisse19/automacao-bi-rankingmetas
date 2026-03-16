@@ -15,7 +15,9 @@ from typing import Any, Dict, List, Optional
 from src.config import POWERBI_CONFIG
 from src.core.clients.evolution_client import EvolutionClient
 from src.core.clients.powerbi_client import PowerBIClient
+from src.core.services.notification_service import NotificationService
 from src.core.services.supabase_service import SupabaseService
+from src.core.utils.greeting import get_saudacao
 from src.core.utils.logger import get_logger
 from jinja2 import Template
 from src.modules.ina.renderer import InaRenderer
@@ -316,45 +318,50 @@ class InaAutomation:
 
         data_pos = datetime.now().strftime("%d/%m/%Y")
 
-        # Resolve caption: template passado > template do banco > fallback hardcoded
+        # Resolve template: passado pelo schedule > banco > None (fallback hardcoded)
         if template_content:
             caption_template = template_content
         else:
             tmpl = self.supabase.get_template_by_name("Mensagem de Inadimplência")
             caption_template = tmpl["content"] if tmpl else None
 
-        if caption_template:
-            hora = datetime.now().hour
-            if hora < 12:
-                saudacao = "Bom dia"
-            elif hora < 18:
-                saudacao = "Boa tarde"
-            else:
-                saudacao = "Boa noite"
-
-            context = {
-                "data": data_pos,
-                "saudacao": saudacao,
-                "saudacao_lower": saudacao.lower(),
-            }
-            try:
-                if "{{" in caption_template:
-                    caption = Template(caption_template).render(**context)
-                else:
-                    caption = caption_template.format(**context)
-            except Exception:
-                caption = caption_template
-        else:
-            caption = f"📊 Painel INA — Posição: Hoje ({data_pos})"
+        notification_service = NotificationService(self.supabase)
+        batch: list[tuple] = []
 
         for r in recipients or []:
             phone = r.get("phone") or r.get("telefone")
             if not phone:
                 continue
-            try:
-                self.whatsapp.send_file(group_id=phone, file_path=output, caption=caption)
-            except Exception as e:
-                logger.error(f"Erro ao enviar para {phone}: {e}")
+
+            nome = r.get("name") or r.get("nome") or "Colaborador"
+            primeiro_nome = nome.split()[0].title()
+            saudacao = get_saudacao()
+            saudacao_lower = saudacao.lower()
+
+            context = {
+                "nome": primeiro_nome,
+                "nome_completo": nome,
+                "saudacao": saudacao,
+                "saudacao_lower": saudacao_lower,
+                "data": data_pos,
+            }
+
+            if caption_template:
+                try:
+                    if "{{" in caption_template:
+                        caption = Template(caption_template).render(**context)
+                    else:
+                        caption = caption_template.format(**context)
+                except Exception as e:
+                    logger.error(f"Erro ao formatar template para {nome}: {e}")
+                    caption = f"{saudacao}, {primeiro_nome}!\n\n📊 Painel INA — Posição: Hoje ({data_pos})"
+            else:
+                caption = f"{saudacao}, {primeiro_nome}!\n\n📊 Painel INA — Posição: Hoje ({data_pos})"
+
+            batch.append((r, output, caption))
+
+        results = notification_service.send_batch(batch, context_tag="ina")
+        logger.info(f"[INA] Envios: {results['success']} ok, {results['failed']} falhas.")
 
 
 def main():
