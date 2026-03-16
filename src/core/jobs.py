@@ -33,7 +33,7 @@ def job_painel_ina(recipients=None, template_content=None):
     SupabaseService().log_event("job_start", {"job": "painel_ina"})
 
     ina = InaAutomation()
-    ina.run(recipients=recipients)
+    ina.run(recipients=recipients, template_content=template_content)
 
 
 

@@ -17,6 +17,7 @@ from src.core.clients.evolution_client import EvolutionClient
 from src.core.clients.powerbi_client import PowerBIClient
 from src.core.services.supabase_service import SupabaseService
 from src.core.utils.logger import get_logger
+from jinja2 import Template
 from src.modules.ina.renderer import InaRenderer
 
 logger = get_logger("run_ina")
@@ -271,7 +272,7 @@ class InaAutomation:
 
         return top10
 
-    def run(self, recipients=None, generate_only=False):
+    def run(self, recipients=None, generate_only=False, template_content=None):
         """Executa a automação: busca dados, gera imagem e envia por WhatsApp."""
         data = self.fetch_kpis()
 
@@ -314,7 +315,37 @@ class InaAutomation:
             return
 
         data_pos = datetime.now().strftime("%d/%m/%Y")
-        caption = f"📊 Painel INA — Posição: Hoje ({data_pos})"
+
+        # Resolve caption: template passado > template do banco > fallback hardcoded
+        if template_content:
+            caption_template = template_content
+        else:
+            tmpl = self.supabase.get_template_by_name("Mensagem de Inadimplência")
+            caption_template = tmpl["content"] if tmpl else None
+
+        if caption_template:
+            hora = datetime.now().hour
+            if hora < 12:
+                saudacao = "Bom dia"
+            elif hora < 18:
+                saudacao = "Boa tarde"
+            else:
+                saudacao = "Boa noite"
+
+            context = {
+                "data": data_pos,
+                "saudacao": saudacao,
+                "saudacao_lower": saudacao.lower(),
+            }
+            try:
+                if "{{" in caption_template:
+                    caption = Template(caption_template).render(**context)
+                else:
+                    caption = caption_template.format(**context)
+            except Exception:
+                caption = caption_template
+        else:
+            caption = f"📊 Painel INA — Posição: Hoje ({data_pos})"
 
         for r in recipients or []:
             phone = r.get("phone") or r.get("telefone")
