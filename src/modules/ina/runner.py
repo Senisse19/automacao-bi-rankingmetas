@@ -301,6 +301,13 @@ class InaAutomation:
         for k, v in kpis_fmt.items():
             logger.info(f"  {k}: {v}")
 
+        # Skip se não houver dados: total de inadimplência e quantidade em atraso ambos zerados
+        total_ina = kpis_fmt.get("Card_Inadimplencia_TOTAL", "R$ 0,00")
+        qtd_atraso = kpis_fmt.get("Card_QtdAtraso", "0")
+        if total_ina == "R$ 0,00" and qtd_atraso == "0":
+            logger.warning("Sem dados de inadimplência para o período. Relatório não será enviado.")
+            return
+
         # Formata Top10 para o renderer
         top10_fmt = []
         for it in top10:

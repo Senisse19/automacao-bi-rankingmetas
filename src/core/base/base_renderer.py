@@ -16,6 +16,8 @@ class BaseRenderer:
         self.text_color = (255, 255, 255)
         self.accent_color = (201, 169, 98)
         self.gold_color = (201, 169, 98)
+        self.silver_color = (192, 192, 192)
+        self.bronze_color = (176, 141, 87)
         self.header_color = (26, 26, 26)
         self.muted_text = (180, 180, 180)
         self.label_color = (140, 140, 140)
@@ -72,6 +74,11 @@ class BaseRenderer:
             "C:/Windows/Fonts/segoeuib.ttf",
             "C:/Windows/Fonts/verdanab.ttf",
             "C:/Windows/Fonts/tahomabd.ttf",
+            # Linux fallbacks
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf",
+            "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
         ]
         for font in possible_fonts:
             if os.path.exists(font):
@@ -84,6 +91,11 @@ class BaseRenderer:
             "C:/Windows/Fonts/times.ttf",
             "C:/Windows/Fonts/georgia.ttf",
             "C:/Windows/Fonts/constan.ttf",
+            # Linux fallbacks
+            "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+            "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
         ]
         for font in possible_fonts:
             if os.path.exists(font):

@@ -69,6 +69,11 @@ class UnidadesAutomation:
         new_units = self.fetcher.fetch_units_list(date_start, date_end, status="Nova")
         inactive_units = self.fetcher.fetch_units_list(date_start, date_end, status="Inativada")
 
+        # Os contadores são derivados diretamente das listas para garantir consistência
+        # (medidas KPI do Power BI não respondem bem a filtros de período curto).
+        summary["novas_unidades"] = len(new_units)
+        summary["unidades_inativadas"] = len(inactive_units)
+
         return {"summary": summary, "new_units_list": new_units, "inactive_units_list": inactive_units}
 
     def run(self, report_type="daily", generate_only=False, recipients=None, template_content=None, dry_run=False):
@@ -79,6 +84,14 @@ class UnidadesAutomation:
 
         # 1. Fetch Data
         data = self.fetch_dashboard_data(date_start, date_end)
+
+        # Skip se não houver dados novos ou inativações no período
+        if not data["new_units_list"] and not data["inactive_units_list"]:
+            logger.warning(
+                f"Nenhuma unidade nova ou inativada encontrada para o período {date_start} a {date_end}. "
+                "Relatório não será enviado."
+            )
+            return None
 
         # 2. Render Image
         # Adaptando os dados para o formato esperado pelo UnidadesRenderer
