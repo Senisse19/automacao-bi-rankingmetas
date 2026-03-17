@@ -93,7 +93,7 @@ class PowerBIDataFetcher:
             result = self.client.execute_dax(query)
             if result and len(result) > 0:
                 row = result[0]
-                return {
+                result_dict = {
                     "Comercial": row.get("[Total_Comercial]") or 0,
                     "Operacional": row.get("[Total_Operacao]") or 0,
                     "Corporate": row.get("[Corporate_Liquido]") or 0,
@@ -110,6 +110,7 @@ class PowerBIDataFetcher:
                     "Tax_Repasse": row.get("[Tax_Repasse]") or 0,
                     "Tecnologia_Repasse": row.get("[Tecnologia_Repasse]") or 0,
                 }
+                return result_dict
         except Exception as e:
             logger.error(f"Erro ao buscar valores realizados: {e}")
 

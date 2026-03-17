@@ -69,7 +69,7 @@ def get_receitas_query(date_start, date_end):
                 COALESCE([educacao_liquido], 0) +
                 COALESCE([expansao_liquido], 0) +
                 COALESCE([franchising_liquido], 0) +
-                COALESCE([tecnologia_liquido], 0) +
+                IFERROR([tecnlogia_liquido], 0) +  // Nota: Erro de digitação 'tecnlogia' no dataset PBI
                 COALESCE([Valor_OutrasReceitas], 0)
             )
         ),
@@ -113,7 +113,7 @@ def get_receitas_liquido_query(date_start, date_end):
             "Expansao_Liquido", COALESCE([expansao_liquido], 0),
             "Franchising_Liquido", COALESCE([franchising_liquido], 0),
             "Tax_Liquido", COALESCE([tax_liquido], 0),
-            "Tecnologia_Liquido", COALESCE([tecnologia_liquido], 0),
+            "Tecnologia_Liquido", IFERROR([tecnlogia_liquido], 0), // Nota: Erro de digitação 'tecnlogia' no dataset PBI
             "Total_Comercial", COALESCE([total_liquido_comercial], 0),
             "Total_Operacao", COALESCE([total_liquido_operacao], 0),
             "Corporate_Repasse", COALESCE([Valor_Corporate_Repasse], 0),

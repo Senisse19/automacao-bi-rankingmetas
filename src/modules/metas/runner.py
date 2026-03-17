@@ -257,9 +257,8 @@ class MetasAutomation:
         if total_gs.get("realizado") == "-":
             logger.warning(
                 f"⚠ Nenhum dado REALIZADO encontrado para o período {self.get_periodo()} (Valor: '-'). "
-                "Abortando execução."
+                "Continuando execução para gerar imagens parciais."
             )
-            return
 
         periodo = self.get_periodo()
         images = self.generate_images(total_gs, deps, receitas, periodo)
