@@ -1,4 +1,4 @@
-﻿from datetime import datetime
+from datetime import datetime
 
 from PIL import Image, ImageDraw
 
@@ -6,50 +6,34 @@ from .base_renderer import BaseRenderer
 
 
 class UnidadesRenderer(BaseRenderer):
+    """
+    Renderizador para relatórios de Unidades.
+    Layout: 3 cards KPI + tabelas de Novas Unidades e Mortalidade.
+    """
+
     def __init__(self):
         super().__init__()
-        # Background sampled from mock_unidades_weekly.png
-        self.bg_color = (195, 195, 195)  # Light Grey
+        self.accent_color = (213, 174, 119)
+        self.gold_color = (213, 174, 119)
+        self.scale = 1
 
-        # Cards remain Dark for contrast
-        self.card_color = (31, 31, 31)  # #1F1F1F
-        self.accent_color = (213, 174, 119)  # #D5AE77
-        self.light_gold = (213, 174, 119)  # #D5AE77
-
-        # High-DPI Scaling
-        self.scale = 4
-        self.padding = 20 * self.scale
-
-    def generate_unidades_reports(self, data, report_type="daily", output_path="unidades_report.pdf"):
+    def generate_unidades_reports(self, data, report_type="daily", output_path="unidades_report.png"):
         """
-        Gera relat├│rio de Novas Unidades e Cancelamentos com Layout Dark Premium e Pagina├º├úo (High DPI).
+        Gera relatório de Unidades com layout de tabela (estilo INA).
         """
-        s = self.scale
-        self.width = 650 * s
+        self.width = 950
+        margin = 30
+        padding = 18
 
-        # Estilos Fontes (Sizes are pre-scaled in BaseRenderer)
-        font_section = self._get_font(18, bold=True)
+        summary = data.get("summary", {})
+        new_units = data.get("new", [])
+        cancelled_units = data.get("cancelled", [])
 
-        font_label = self._get_font(11, bold=True)
-
-        # Colors
-        label_color_bright = (160, 160, 160)
-        text_white = (240, 240, 240)
-
-        header_h = 70 * s  # Base estimation, real value from _draw_header
-        padding = 15 * s
-
-        sections = [
-            ("NOVAS UNIDADES", data.get("new", [])),
-            ("CANCELADAS", data.get("cancelled", [])),
-            ("UPSELL", data.get("upsell", [])),
-        ]
-
-        # === TITLE LOGIC ===
+        # Título / data
         try:
             date_str = datetime.strptime(data["date"], "%Y-%m-%d").strftime("%d/%m/%Y")
-        except ValueError:
-            date_str = data["date"]
+        except (ValueError, KeyError):
+            date_str = data.get("date", datetime.now().strftime("%d/%m/%Y"))
 
         if report_type == "weekly" and "start_date" in data:
             try:
@@ -57,328 +41,223 @@ class UnidadesRenderer(BaseRenderer):
             except ValueError:
                 start_str = data["start_date"]
             date_display = f"{start_str} a {date_str}"
-            title_text = "RELAT├ôRIO DE UNIDADES SEMANAL"
+            title_text = "RELATÓRIO DE UNIDADES SEMANAL"
         else:
-            date_display = f"{date_str}"
-            title_text = "RELAT├ôRIO DE UNIDADES DI├üRIO"
+            date_display = date_str
+            title_text = "RELATÓRIO DE UNIDADES DIÁRIO"
 
-        # === PAGINATION LOGIC ===
-        pages = []
-        MAX_H = 1000 * s  # Max page height Scaled
+        # KPIs
+        novas = summary.get("novas_unidades", len(new_units))
+        pagantes = summary.get("unidades_pagantes", 0)
+        mortalidade = summary.get("unidades_inativadas", len(cancelled_units))
 
-        # Start First Page
-        current_img = Image.new("RGB", (self.width, MAX_H), self.bg_color)
-        current_draw = ImageDraw.Draw(current_img)
+        # Constantes de layout
+        header_h = 70
+        kpi_h = 90
+        section_title_h = 88
+        table_hdr_h = 44
+        row_h = 38
 
-        # Header Page 1
-        header_h = self._draw_header(current_draw, title_text, date_display)
-        y = header_h + padding + (10 * s)
-        current_h_used = y
+        def table_block_h(n_rows):
+            return table_hdr_h + (max(n_rows, 1) * row_h) + 20
 
-        margin = self.padding
-        card_w = self.width - 2 * margin
+        total_h = (
+            header_h + padding
+            + kpi_h + padding * 2
+            + section_title_h + table_block_h(len(new_units)) + padding * 2
+            + section_title_h + table_block_h(len(cancelled_units)) + padding * 2
+            + 50  # footer
+        )
 
-        for title, items in sections:
-            # 1. Calculate Metrics
-            section_count = len(items)
-            total_value = sum(item.get("valor", 0) for item in items)
+        img = Image.new("RGB", (self.width, total_h), self.bg_color)
+        draw = ImageDraw.Draw(img)
 
-            def fmt_moeda_title(val):
-                return f"R$ {val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        # 1. Cabeçalho (usa _draw_header da base: fundo cinza + logo GS com fonte serif)
+        y = self._draw_header(draw, title_text, date_display) + padding
 
-            # 2. Prepare Display Strings
-            # Old: display_title = f"{title} ({section_count})"
-            display_title = title  # "NOVAS UNIDADES"
+        # 2. Cards KPI
+        kpis = [
+            ("NOVAS UNIDADES", novas),
+            ("UNIDADES PAGANTES", pagantes),
+            ("MORTALIDADE", mortalidade),
+        ]
+        gap = 15
+        kpi_card_w = (self.width - 2 * margin - (len(kpis) - 1) * gap) / len(kpis)
 
-            val_qtd = str(section_count)
+        font_kpi_label = self._get_font(11, bold=True)
+        font_kpi_value = self._get_font(30, bold=True)
 
-            val_valor = fmt_moeda_title(total_value)
+        for i, (label, val) in enumerate(kpis):
+            x = margin + i * (kpi_card_w + gap)
+            draw.rounded_rectangle(
+                [(x, y), (x + kpi_card_w, y + kpi_h)],
+                radius=10,
+                fill=self.card_color,
+                outline=self.accent_color,
+                width=2,
+            )
+            lb = draw.textbbox((0, 0), label, font=font_kpi_label)
+            lw = lb[2] - lb[0]
+            draw.text((x + (kpi_card_w - lw) / 2, y + 12), label, font=font_kpi_label, fill=self.muted_text)
 
-            # 3. Orphan Header Logic
-            # Calculate required space: Title Block + (First Card OR Empty Block)
-            title_block_h = (28 * s) + (3 * s) + (25 * s)  # Text + Line + Margin
+            vs = str(val)
+            vb = draw.textbbox((0, 0), vs, font=font_kpi_value)
+            vw = vb[2] - vb[0]
+            draw.text((x + (kpi_card_w - vw) / 2, y + 36), vs, font=font_kpi_value, fill=self.accent_color)
 
-            if items:
-                first_content_h = 210 * s  # Item height increased for 3 rows
+        y += kpi_h + padding * 2
+
+        # 3. Seção Novas Unidades
+        y = self._draw_table_section(
+            draw, y, "NOVAS UNIDADES", novas, new_units,
+            row_h, table_hdr_h, section_title_h, margin, padding,
+        )
+
+        # 4. Seção Mortalidade
+        self._draw_table_section(
+            draw, y, "MORTALIDADE", mortalidade, cancelled_units,
+            row_h, table_hdr_h, section_title_h, margin, padding,
+        )
+
+        # 5. Rodapé
+        self._draw_footer(draw, total_h)
+
+        img.save(output_path, "PNG")
+        return output_path
+
+    def _draw_table_section(self, draw, y, title, count, units, row_h, table_hdr_h, section_title_h, margin, padding):
+        """Desenha título da seção com contagem + tabela de unidades."""
+        inner_w = self.width - 2 * margin
+        inner_x = margin + 15
+
+        font_title = self._get_font(14, bold=True)
+        font_count = self._get_font(34, bold=True)
+        font_head = self._get_font(10, bold=True)
+        font_row = self._get_font(12)
+        font_row_bold = self._get_font(12, bold=True)
+
+        # Título da seção (texto escuro sobre fundo cinza claro)
+        draw.text((margin, y), title, font=font_title, fill=self.card_color)
+        y += 22
+        draw.text((margin, y), str(count), font=font_count, fill=self.card_color)
+        y += section_title_h - 22
+
+        # Colunas: (label, x_offset, width, align)
+        cols = [
+            ("NOME DA UNIDADE", 0,   280, "left"),
+            ("UF",             292,   45, "center"),
+            ("NOME DO MODELO", 349,  175, "left"),
+            ("UNIDADE",        536,   70, "center"),
+            ("VALOR",          618,  155, "right"),
+            ("ANOS",           785,   60, "center"),
+        ]
+
+        # Card de fundo
+        num_rows = max(len(units), 1)
+        total_table_h = table_hdr_h + (num_rows * row_h) + 20
+
+        draw.rounded_rectangle(
+            [(margin, y), (margin + inner_w, y + total_table_h)],
+            radius=12,
+            fill=self.card_color,
+        )
+
+        # Cabeçalho da tabela
+        hdr_y = y + 14
+        for label, offset, width, align in cols:
+            cx = inner_x + offset
+            bbox = draw.textbbox((0, 0), label, font=font_head)
+            tw = bbox[2] - bbox[0]
+            if align == "center":
+                tx = cx + (width - tw) / 2
+            elif align == "right":
+                tx = cx + width - tw
             else:
-                first_content_h = 80 * s  # Empty state height
+                tx = cx
+            draw.text((tx, hdr_y), label, font=font_head, fill=self.accent_color)
 
-            required_h = title_block_h + first_content_h
+        # Linha separadora
+        sep_y = y + table_hdr_h - 8
+        draw.line(
+            [(margin + 10, sep_y), (margin + inner_w - 10, sep_y)],
+            fill=self.accent_color,
+            width=1,
+        )
 
-            # Check Page Break
-            if current_h_used + required_h > MAX_H - (60 * s):
-                self._draw_footer(current_draw, MAX_H)
-                pages.append(current_img)
+        if not units:
+            msg = "Nenhum registro encontrado"
+            bbox = draw.textbbox((0, 0), msg, font=font_row)
+            mw = bbox[2] - bbox[0]
+            draw.text(
+                (margin + (inner_w - mw) / 2, sep_y + 15),
+                msg, font=font_row, fill=self.muted_text,
+            )
+        else:
+            def fmt_money(val):
+                if not val and val != 0:
+                    return "R$ 0,00"
+                try:
+                    return f"R$ {float(val):,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+                except (ValueError, TypeError):
+                    return str(val)
 
-                current_img = Image.new("RGB", (self.width, MAX_H), self.bg_color)
-                current_draw = ImageDraw.Draw(current_img)
-                header_h = self._draw_header(current_draw, title_text, date_display)
-                y = header_h + padding + (10 * s)
-                current_h_used = y
+            def trunc(text, n: int = 38) -> str:
+                s = str(text) if text else ""
+                limit = n - 2
+                return s[:limit] + ".." if len(s) > n else s
 
-            # 4. Draw Title & Metrics
+            for i, item in enumerate(units):
+                row_y = y + table_hdr_h + (i * row_h)
+                cy = row_y + row_h // 2
 
-            # --- UX/UI IMPROVEMENT: Right Align Metrics ---
-            # Title (Left)
-            current_draw.text((margin, y), display_title, font=font_section, fill=(40, 40, 40))
-
-            # Metrics (Right Aligned to card_w)
-            right_edge = margin + card_w
-
-            # Fonts for Metrics
-            font_metric_label = self._get_font(12, bold=True)
-            font_metric_val = self._get_font(18, bold=True)
-
-            # Helper to draw metric pair aligned to the right: [LABEL] [VALUE]
-            def draw_metric_right_aligned(end_x, baseline_y, label, value, val_color=(0, 0, 0)):
-                # 1. Calc Value width
-                bbox_val = current_draw.textbbox((0, 0), value, font=font_metric_val)
-                w_val = bbox_val[2] - bbox_val[0]
-
-                # 2. Calc Label width
-                bbox_lbl = current_draw.textbbox((0, 0), label, font=font_metric_label)
-                w_lbl = bbox_lbl[2] - bbox_lbl[0]
-
-                spacing = 10 * s
-
-                # Draw Value (at end_x - w_val)
-                val_x = end_x - w_val
-                # Align baseline manually or use anchor? Let's use manual baseline adjustment.
-                # Assuming font_section (Title) height ~22px.
-                # We want visually centered or baseline aligned.
-                current_draw.text((val_x, baseline_y), value, font=font_metric_val, fill=val_color)
-
-                # Draw Label (to left of Value)
-                lbl_x = val_x - spacing - w_lbl
-                current_draw.text(
-                    (lbl_x, baseline_y + (4 * s)),
-                    label,
-                    font=font_metric_label,
-                    fill=(100, 100, 100),
-                )  # Small offset for visual centering
-
-                return lbl_x - (30 * s)  # Return new end_x for next item (with extra padding)
-
-            # Draw "VALOR TOTAL" (Rightmost)
-            next_right = right_edge
-            next_right = draw_metric_right_aligned(next_right, y, "VALOR:", val_valor)  # Simplified Label
-
-            # Draw "QTD" (Left of Valor)
-            draw_metric_right_aligned(next_right, y, "QTD:", val_qtd)
-
-            y += 28 * s
-            current_draw.rectangle([(margin, y), (margin + (300 * s), y + (3 * s))], fill=self.accent_color)
-            y += 25 * s
-            current_h_used = y
-
-            if not items:
-                empty_h = 80 * s
-                # Space check already done above, but safe to keep logic consistent or just draw
-
-                current_draw.rounded_rectangle(
-                    [(margin, y), (margin + card_w, y + empty_h)],
-                    radius=int(6 * s),
-                    fill=self.card_color,
-                )
-
-                if title == "NOVAS UNIDADES":
-                    msg = "Nenhuma nova unidade nesta data"
-                elif title == "CANCELADAS":
-                    msg = "Nenhuma unidade cancelada nesta data"
-                elif title == "UPSELL":
-                    msg = "Nenhum upsell nesta data"
-                else:
-                    msg = "N├úo h├í dados"
-
-                font_empty_bold = self._get_font(14, bold=False)
-                bbox = current_draw.textbbox((0, 0), msg, font=font_empty_bold)
-                text_w = bbox[2] - bbox[0]
-                text_h = bbox[3] - bbox[1]
-
-                current_draw.text(
-                    (
-                        margin + (card_w - text_w) / 2,
-                        y + (empty_h - text_h) / 2 - (3 * s),
-                    ),
-                    msg,
-                    font=font_empty_bold,
-                    fill=label_color_bright,
-                )
-                y += empty_h + (30 * s)
-                current_h_used = y
-
-            else:
-                current_y = y
-                item_h = 210 * s  # Increased height for 3 rows
-                items_idx = 0
-
-                while items_idx < len(items):
-                    available_h = (MAX_H - (60 * s)) - current_y
-                    can_fit = max(0, int(available_h // item_h))
-
-                    if can_fit == 0:
-                        self._draw_footer(current_draw, MAX_H)
-                        pages.append(current_img)
-                        current_img = Image.new("RGB", (self.width, MAX_H), self.bg_color)
-                        current_draw = ImageDraw.Draw(current_img)
-                        header_h = self._draw_header(current_draw, title_text, date_display)
-
-                        y = header_h + padding + (10 * s)
-                        current_y = y
-                        continue
-
-                    chunk_items = items[items_idx : items_idx + can_fit]
-
-                    block_h = (len(chunk_items) * item_h) + (10 * s)
-                    current_draw.rounded_rectangle(
-                        [(margin, current_y), (margin + card_w, current_y + block_h)],
-                        radius=int(6 * s),
-                        fill=self.card_color,
+                # Zebra striping
+                if i % 2 == 1:
+                    draw.rectangle(
+                        [(margin + 2, row_y), (margin + inner_w - 2, row_y + row_h)],
+                        fill=(42, 42, 42),
                     )
 
-                    inner_y = current_y + (20 * s)
-                    for i, item in enumerate(chunk_items):
-                        # Data extraction
-                        val_cod = item.get("codigo", "")
-                        nome = item.get("nome", "N├úo Informado") or "N├úo Informado"
-                        # UnidadesClient now returns "Unidade X - Partner Name" if possible
+                def _str(v) -> str:
+                    """Retorna '-' para valores vazios/nulos do Power BI."""
+                    if v is None:
+                        return "-"
+                    s = str(v).strip()
+                    return s if s else "-"
 
-                        cidade = item.get("cidade", "N├úo Informado") or "N├úo Informado"
-                        uf = item.get("uf", "N├úo Informado") or "N├úo Informado"
+                nome_raw = item.get("Nome", item.get("nome"))
+                nome_s = str(nome_raw).strip() if nome_raw is not None else ""
+                nome = trunc(nome_s if nome_s else "- Sem Cadastro -", 38)
 
-                        if cidade == "---" or cidade == "-":
-                            cidade = "N├úo Informado"
-                        if uf == "---" or uf == "-":
-                            uf = "N├úo Informado"
+                uf = _str(item.get("UF", item.get("uf")))
+                modelo_raw = item.get("Modelo", item.get("modelo"))
+                modelo = trunc(_str(modelo_raw), 24)
+                codigo = _str(item.get("Codigo", item.get("codigo")))
+                valor = fmt_money(item.get("Valor", item.get("valor", 0)))
+                anos = _str(item.get("Anos", item.get("anos_contrato", item.get("anos"))))
 
-                        valor_aquisicao = item.get("valor", 0)
+                row_vals = [
+                    (nome,   "left",   font_row_bold, self.accent_color),
+                    (uf,     "center", font_row,      self.text_color),
+                    (modelo, "left",   font_row,      self.text_color),
+                    (codigo, "center", font_row,      self.text_color),
+                    (valor,  "right",  font_row,      self.text_color),
+                    (anos,   "center", font_row,      self.text_color),
+                ]
 
-                        (item.get("raw_data") or item.get("unit_raw_data") or {})
+                for (text, align, font, color), (_, offset, width, _) in zip(row_vals, cols):
+                    cx = inner_x + offset
+                    bbox = draw.textbbox((0, 0), text, font=font)
+                    tw = bbox[2] - bbox[0]
+                    th = bbox[3] - bbox[1]
 
-                        modelo = item.get("modelo", "N├úo Informado") or "N├úo Informado"
-                        tipo_franquia = item.get("tipo", "N├úo Informado") or "N├úo Informado"
+                    if align == "center":
+                        tx = cx + (width - tw) / 2
+                    elif align == "right":
+                        tx = cx + width - tw
+                    else:
+                        tx = cx
 
-                        anos_contrato = item.get("anos_contrato", 0)
-                        percentual_retencao = item.get("percentual_retencao", 0)
+                    ty = cy - th // 2
+                    draw.text((tx, ty), text, font=font, fill=color)
 
-                        def fmt_moeda(val):
-                            if isinstance(val, (int, float)):
-                                return f"R$ {val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-                            return str(val)
-
-                        # Display Name Logic matches client output
-                        display_name = nome
-                        if "Unidade" not in str(display_name) and val_cod:
-                            display_name = f"Unidade {val_cod} - {display_name}"
-
-                        # Draw Name (Top Left)
-                        px = margin + (25 * s)
-                        rx = margin + card_w - (25 * s)
-
-                        current_draw.text(
-                            (px, inner_y),
-                            display_name,
-                            font=self._get_font(20, bold=True),
-                            fill=self.light_gold,
-                        )
-
-                        # Grid Layout Definition
-                        # Row 1 Y
-                        row1_y = inner_y + (40 * s)
-                        row2_y = inner_y + (85 * s)
-
-                        # Cols X (3 Columns)
-                        col1_x = px
-                        col2_x = px + (210 * s)
-                        col3_x = px + (410 * s)
-
-                        # Helper to draw label/value pair
-                        def draw_field(x, y, label, value, val_color=text_white, is_money=False):
-                            current_draw.text((x, y), label, font=font_label, fill=label_color_bright)
-                            f_val = self._get_font(14, bold=False)
-                            if is_money:
-                                f_val = self._get_font(15, bold=True)
-
-                            current_draw.text(
-                                (x, y + (14 * s)),
-                                str(value)[:28],
-                                font=f_val,
-                                fill=val_color,
-                            )
-
-                        # Row 1: Cidade/UF | Modelo | Rede
-                        if cidade == "N├úo Informado" and uf == "N├úo Informado":
-                            local_full = "N├úo Informado"
-                        else:
-                            local_full = f"{cidade} - {uf}"
-
-                        draw_field(col1_x, row1_y, "CIDADE / UF", local_full)
-                        draw_field(col2_x, row1_y, "MODELO DE NEG├ôCIO", modelo)
-                        draw_field(col3_x, row1_y, "REDE DE DISTRIBUI├ç├âO", tipo_franquia)
-
-                        # Row 2: Valor Aquisi├º├úo | Tempo Contrato | % Reten├º├úo
-                        draw_field(
-                            col1_x,
-                            row2_y,
-                            "VALOR AQUISI├ç├âO",
-                            fmt_moeda(valor_aquisicao),
-                            val_color=text_white,
-                            is_money=True,
-                        )
-                        draw_field(
-                            col2_x,
-                            row2_y,
-                            "TEMPO DE CONTRATO",
-                            f"{anos_contrato} Anos" if anos_contrato else "N├úo Informado",
-                        )
-                        draw_field(
-                            col3_x,
-                            row2_y,
-                            "% RETEN├ç├âO",
-                            f"{percentual_retencao}%"
-                            if percentual_retencao is not None and percentual_retencao != ""
-                            else "N├úo Informado",
-                        )
-
-                        # Row 3: Royalties | CRM
-                        row3_y = inner_y + (130 * s)
-                        royalties = item.get("royalties", 0)
-                        crm = item.get("crm", 0)
-
-                        draw_field(
-                            col1_x,
-                            row3_y,
-                            "ROYALTIES",
-                            f"{royalties}%" if royalties else "N├úo Informado",
-                        )
-                        draw_field(
-                            col2_x,
-                            row3_y,
-                            "CRM",
-                            fmt_moeda(crm) if crm else "N├úo Informado",
-                        )
-
-                        # Separator
-                        if i < len(chunk_items) - 1:
-                            sep_y = inner_y + item_h - (10 * s)
-                            current_draw.line(
-                                [(px, sep_y), (rx, sep_y)],
-                                fill=(60, 60, 60),
-                                width=int(1 * s),
-                            )
-
-                        inner_y += item_h
-
-                    current_y += block_h + (20 * s)
-                    y = current_y
-                    current_h_used = y
-                    items_idx += can_fit
-
-        self._draw_footer(current_draw, MAX_H)
-        pages.append(current_img)
-
-        if pages:
-            # Save first frame with append for others
-            pages[0].save(output_path, save_all=True, append_images=pages[1:])
-
-        return output_path
+        return y + total_table_h + padding * 2

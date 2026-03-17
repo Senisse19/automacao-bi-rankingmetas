@@ -36,6 +36,17 @@ def job_painel_ina(recipients=None, template_content=None):
     ina.run(recipients=recipients, template_content=template_content)
 
 
+def job_unidades(recipients=None, template_content=None, report_type="daily"):
+    """Executa a automação de Unidades (Power BI)."""
+    from src.modules.unidades.runner import UnidadesAutomation
+
+    logger.info(f"Iniciando Unidades Automation ({report_type})")
+    SupabaseService().log_event("job_start", {"job": f"unidades_{report_type}"})
+
+    ua = UnidadesAutomation()
+    ua.run(report_type=report_type, recipients=recipients, template_content=template_content)
+
+
 
 
 # --- Mapping ---
@@ -44,7 +55,8 @@ JOB_MAPPING = {
     "metas_diarias": job_metas,
     "ranking_geral": job_ranking_geral,
     "painel_ina": job_painel_ina,
-
+    "unidades_diarias": lambda **kwargs: job_unidades(report_type="daily", **kwargs),
+    "unidades_semanais": lambda **kwargs: job_unidades(report_type="weekly", **kwargs),
 }
 
 

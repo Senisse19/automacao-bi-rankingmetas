@@ -132,3 +132,97 @@ def get_receitas_liquido_query(date_start, date_end):
     """
 
 
+
+def get_unidades_summary_query(date_start, date_end):
+    """
+    Retorna apenas UnidadesPagantes via DAX.
+    NovasUnidades e UnidadesInativadas são derivadas do len() das listas em fetch_dashboard_data.
+    """
+    return f"""
+    EVALUATE
+    CALCULATETABLE(
+        ROW(
+            "UnidadesPagantes", [unidades_pagantes]
+        ),
+        DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}")
+    )
+    """
+
+
+def get_unidades_novas_query(date_start, date_end):
+    """
+    Lista de Novas Unidades — tabela: modelos_Ativos
+      - Filtro de data : NOT ISBLANK([data])
+      - Nome / UF      : 'Unidades (2)'[nome|uf] join em [codigo] = [unidade]
+      - Modelo         : CALCULATE(MAX('Desc_Modelos'[nome])) via relacionamento
+    """
+    return f"""
+    EVALUATE
+    CALCULATETABLE(
+        SELECTCOLUMNS(
+            GENERATE(
+                FILTER('modelos_Ativos',
+                    NOT ISBLANK('modelos_Ativos'[data])
+                    && NOT ISBLANK('modelos_Ativos'[unidade])
+                    && 'modelos_Ativos'[unidade] <> 0
+                ),
+                VAR vUnidade = 'modelos_Ativos'[unidade]
+                RETURN ROW(
+                    "Nome_Virtual",   CALCULATE(MAX('Unidades (2)'[nome]), 'Unidades (2)'[codigo] = vUnidade),
+                    "UF_Virtual",     CALCULATE(MAX('Unidades (2)'[uf]),   'Unidades (2)'[codigo] = vUnidade),
+                    "Modelo_Virtual", CALCULATE(MAX('Desc_Modelos'[nome]))
+                )
+            ),
+            "Nome",   [Nome_Virtual],
+            "UF",     [UF_Virtual],
+            "Modelo", [Modelo_Virtual],
+            "Codigo", 'modelos_Ativos'[unidade],
+            "Valor",  'modelos_Ativos'[valor],
+            "Anos",   'modelos_Ativos'[anos]
+        ),
+        DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}")
+    )
+    """
+
+
+def get_unidades_inativas_query(date_start, date_end):
+    """
+    Lista de Mortalidade — tabela: Modelos_Inativos
+      - Filtro de data : NOT ISBLANK([data_inativacao])
+      - Nome / UF      : 'Unidades'[nome|uf] join em [codigo] = [unidade]
+      - Modelo         : RELATED('Desc_Modelos'[nome]) via relacionamento direto
+    """
+    return f"""
+    EVALUATE
+    CALCULATETABLE(
+        SELECTCOLUMNS(
+            GENERATE(
+                FILTER('Modelos_Inativos',
+                    NOT ISBLANK('Modelos_Inativos'[data_inativacao])
+                    && NOT ISBLANK('Modelos_Inativos'[unidade])
+                    && NOT ISBLANK(RELATED('Desc_Modelos'[nome]))
+                ),
+                VAR vUnidade = 'Modelos_Inativos'[unidade]
+                RETURN ROW(
+                    "Nome_Virtual",   CALCULATE(MAX('Unidades'[nome]), 'Unidades'[codigo] = vUnidade),
+                    "UF_Virtual",     CALCULATE(MAX('Unidades'[uf]),   'Unidades'[codigo] = vUnidade),
+                    "Modelo_Virtual", RELATED('Desc_Modelos'[nome])
+                )
+            ),
+            "Nome",   [Nome_Virtual],
+            "UF",     [UF_Virtual],
+            "Modelo", [Modelo_Virtual],
+            "Codigo", 'Modelos_Inativos'[unidade],
+            "Valor",  'Modelos_Inativos'[valor],
+            "Anos",   'Modelos_Inativos'[anos]
+        ),
+        DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}")
+    )
+    """
+
+
+def get_unidades_list_query(date_start, date_end, status="Nova"):
+    """Wrapper de compatibilidade — delega para as funções específicas por status."""
+    if status == "Nova":
+        return get_unidades_novas_query(date_start, date_end)
+    return get_unidades_inativas_query(date_start, date_end)
