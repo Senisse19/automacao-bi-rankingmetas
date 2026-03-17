@@ -1,8 +1,8 @@
-
 import os
 
 try:
     from dotenv import load_dotenv
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
     dotenv_path = os.path.join(current_dir, ".env")
     load_dotenv(dotenv_path)
@@ -28,5 +28,6 @@ def main():
             f.write(f"ERROR: {e}")
         print(f"Erro salvo em {output_file}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

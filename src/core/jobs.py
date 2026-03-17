@@ -7,8 +7,6 @@ logger = get_logger("jobs")
 # --- Job Wrappers ---
 
 
-
-
 def job_metas(recipients=None, template_content=None):
     """Executa a automação de Metas (Power BI)."""
     logger.info("Iniciando Metas Automation (Dynamic)")
@@ -45,8 +43,6 @@ def job_unidades(recipients=None, template_content=None, report_type="daily"):
 
     ua = UnidadesAutomation()
     ua.run(report_type=report_type, recipients=recipients, template_content=template_content)
-
-
 
 
 # --- Mapping ---

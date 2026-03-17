@@ -4,8 +4,6 @@ Separating queries from logic makes it easier to maintain and update the semanti
 """
 
 
-
-
 def get_metas_com_op_query(date_start, date_end):
     return f"""
     EVALUATE
@@ -71,7 +69,7 @@ def get_receitas_query(date_start, date_end):
                 COALESCE([educacao_liquido], 0) +
                 COALESCE([expansao_liquido], 0) +
                 COALESCE([franchising_liquido], 0) +
-                COALESCE([tecnlogia_liquido], 0) +
+                COALESCE([tecnologia_liquido], 0) +
                 COALESCE([Valor_OutrasReceitas], 0)
             )
         ),
@@ -104,8 +102,6 @@ def get_percentuais_dept_query(prefixo, date_start, date_end):
     """
 
 
-
-
 def get_receitas_liquido_query(date_start, date_end):
     # Líquido = Realizado - Repasse por departamento
     return f"""
@@ -117,11 +113,11 @@ def get_receitas_liquido_query(date_start, date_end):
             "Expansao_Liquido", COALESCE([expansao_liquido], 0),
             "Franchising_Liquido", COALESCE([franchising_liquido], 0),
             "Tax_Liquido", COALESCE([tax_liquido], 0),
-            "Tecnologia_Liquido", COALESCE([tecnlogia_liquido], 0),
+            "Tecnologia_Liquido", COALESCE([tecnologia_liquido], 0),
             "Total_Comercial", COALESCE([total_liquido_comercial], 0),
             "Total_Operacao", COALESCE([total_liquido_operacao], 0),
             "Corporate_Repasse", COALESCE([Valor_Corporate_Repasse], 0),
-            "Tax_Repasse", COALESCE([valor_Tax_Repasse], 0),
+            "Tax_Repasse", COALESCE([Valor_Tax_Repasse], 0),
             "Educacao_Repasse", COALESCE([Valor_Educacao_Repasse], 0),
             "Expansao_Repasse", COALESCE([Valor_Expansao_Repasse], 0),
             "Franchising_Repasse", COALESCE([Valor_Franchising_Repasse], 0),
@@ -130,7 +126,6 @@ def get_receitas_liquido_query(date_start, date_end):
         DATESBETWEEN('Calendario'[Date], {date_start}, {date_end})
     )
     """
-
 
 
 def get_unidades_summary_query(date_start, date_end):

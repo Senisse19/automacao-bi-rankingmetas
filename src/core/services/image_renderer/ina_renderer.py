@@ -10,13 +10,7 @@ class InaRenderer(BaseRenderer):
     Renderizador para o Painel INA (Inadimpl├¬ncia).
     """
 
-    def generate_image(
-        self,
-        kpis,
-        top10,
-        output_path="ina_report.png",
-        area_name="GERAL"
-    ):
+    def generate_image(self, kpis, top10, output_path="ina_report.png", area_name="GERAL"):
         """
         Gera a imagem do relat├│rio di├írio do INA.
         """

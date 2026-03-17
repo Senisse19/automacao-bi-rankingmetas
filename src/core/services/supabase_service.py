@@ -115,7 +115,7 @@ class SupabaseService:
             ids_filter = ",".join(str(sid) for sid in schedule_ids)
 
             rec_params = {
-                "select": "schedule_id,contact:automation_contacts(*, profile:profiles(is_admin, department))",
+                "select": "schedule_id,contact:automation_contacts(*)",
                 "schedule_id": f"in.({ids_filter})",
             }
             all_recipients = self._get("automation_recipients", rec_params)

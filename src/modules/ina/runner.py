@@ -74,6 +74,7 @@ class InaAutomation:
 
         # Fallback: remove todas as tags HTML e retorna o texto limpo
         import html as _html_mod
+
         sem_tags = re.sub(r"<[^>]+>", "", v)
         # Remove blocos CSS (entre { e })
         sem_css = re.sub(r"\{[^}]*\}", "", sem_tags)
@@ -140,8 +141,7 @@ class InaAutomation:
         hoje = datetime.now()
         ano_mes = int(hoje.strftime("%Y%m"))
         logger.info(
-            f"Buscando KPIs INA (referência D-0: {hoje.strftime('%d/%m/%Y')}, "
-            f"Calendario[AnoMes_Ordenacao]={ano_mes})"
+            f"Buscando KPIs INA (referência D-0: {hoje.strftime('%d/%m/%Y')}, Calendario[AnoMes_Ordenacao]={ano_mes})"
         )
 
         query_kpis = f"""

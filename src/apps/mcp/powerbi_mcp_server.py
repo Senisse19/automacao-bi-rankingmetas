@@ -88,6 +88,7 @@ def _extract_html_value(raw: Any) -> str:
 
 # ------- Handlers das ferramentas MCP -------
 
+
 def tool_execute_dax(args: dict) -> str:
     """Executa uma query DAX no Power BI."""
     workspace_id = args.get("workspace_id", DEFAULT_WORKSPACE_ID)
@@ -237,8 +238,7 @@ TOOLS = {
     "get_schema": {
         "name": "get_schema",
         "description": (
-            "Retorna o schema completo de um dataset do Power BI: "
-            "tabelas, colunas e medidas com expressões DAX."
+            "Retorna o schema completo de um dataset do Power BI: tabelas, colunas e medidas com expressões DAX."
         ),
         "inputSchema": {
             "type": "object",
@@ -258,8 +258,7 @@ TOOLS = {
                     "type": "array",
                     "items": {"type": "string"},
                     "description": (
-                        "Lista de nomes de medidas a avaliar "
-                        "(ex: ['Card_Inadimplencia_TOTAL', 'Card_QtdAtraso'])"
+                        "Lista de nomes de medidas a avaliar (ex: ['Card_Inadimplencia_TOTAL', 'Card_QtdAtraso'])"
                     ),
                 },
                 "dataset_id": {"type": "string", "description": "ID do dataset"},

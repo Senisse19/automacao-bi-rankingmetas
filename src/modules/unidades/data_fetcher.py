@@ -92,7 +92,10 @@ class PowerBIUnidadesFetcher:
             return []
 
         normalized = [_normalize_keys(row) for row in rows]
-        logger.debug(f"fetch_units_list ({status}): {len(normalized)} itens, keys: {list(normalized[0].keys()) if normalized else []}")
+        logger.debug(
+            f"fetch_units_list ({status}): {len(normalized)} itens, "
+            f"keys: {list(normalized[0].keys()) if normalized else []}"
+        )
         return normalized
 
     def fetch_dashboard_data(self, date_start: str, date_end: str) -> Dict:

@@ -11,9 +11,12 @@ try:
 except ImportError:
     print("ERRO: O pacote 'python-dotenv' não foi encontrado.")
     print("Por favor, execute: pip install python-dotenv")
+
     # Em ambientes críticos, poderíamos encerrar, mas aqui vamos tentar continuar
     # pois o OS pode já ter as variáveis definidas.
-    def load_dotenv(*args, **kwargs): pass
+    def load_dotenv(*args, **kwargs):
+        pass
+
 
 # Carregar variáveis do arquivo .env (na raiz do projeto)
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -145,6 +148,7 @@ def validate_config(strict: bool = True) -> bool:
     Retorna True se tudo estiver ok.
     """
     from src.core.utils.logger import get_logger  # importação local para evitar ciclo
+
     _logger = get_logger("config")
 
     missing = [v for v in _REQUIRED_VARS if not os.getenv(v)]

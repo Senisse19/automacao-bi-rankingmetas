@@ -131,10 +131,7 @@ class PowerBIClient:
             if not self.authenticate():
                 return None
 
-        url = (
-            f"https://api.powerbi.com/v1.0/myorg/groups/{self.workspace_id}/datasets/"
-            f"{self.dataset_id}/executeQueries"
-        )
+        url = f"https://api.powerbi.com/v1.0/myorg/groups/{self.workspace_id}/datasets/{self.dataset_id}/executeQueries"
 
         headers = {
             "Authorization": f"Bearer {self.token}",

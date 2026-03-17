@@ -136,25 +136,12 @@ class MetasAutomation:
         # Group flat list by report type (diretoria/admins receive 'geral', others 'resumo')
         recipients_map = {}
         for r in custom_recipients:
-            # Extração robusta do profile (pode vir como lista em joins do Supabase)
-            profile = r.get("profile") or {}
-            if isinstance(profile, list) and len(profile) > 0:
-                profile = profile[0]
-
-            is_admin = profile.get("is_admin", False)
-
-            # Coleta departamentos de ambas as fontes (profile e contact) e normaliza
-            p_dept = str(profile.get("department") or "").lower().strip()
+            # Roteamento baseado no departamento do contato (automation_contacts.department)
+            # Contatos com department='geral' ou 'diretoria' recebem o relatório completo
             c_dept = str(r.get("department") or "").lower().strip()
+            is_diretoria = c_dept in ["diretoria", "geral"]
 
-            # Lógica central:
-            # 1. Qualquer um com 'is_admin' marcado no profile recebe metas_geral.
-            # 2. Se o departamento em 'profiles' for 'Diretoria'.
-            # 3. Se o departamento em 'automation_contacts' for 'geral' (mapeado para Diretoria no portal).
-            # 4. Se o departamento em 'automation_contacts' for 'diretoria'.
-            is_diretoria = any(d in ["diretoria", "geral"] for d in [p_dept, c_dept])
-
-            if is_admin or is_diretoria:
+            if is_diretoria:
                 dept_key = "diretoria"
             else:
                 dept_key = "resumo"
@@ -169,6 +156,7 @@ class MetasAutomation:
 
         # Instantiate Notification Service
         from src.core.services.notification_service import NotificationService
+
         notification_service = NotificationService(self.supabase)
 
         # Monta o lote completo de envios antes de disparar para permitir send_batch
@@ -247,7 +235,7 @@ class MetasAutomation:
         else:
             logger.info(f"[DRY-RUN] Simulação de envio para {len(batch)} destinatários concluída.")
             for p, img, cap in batch:
-                nome_p = p.get('nome') or p.get('name') or "Sem nome"
+                nome_p = p.get("nome") or p.get("name") or "Sem nome"
                 logger.info(f"   -> Enviar para: {nome_p} | Imagem: {os.path.basename(img)}")
 
     def send_email(self, images):
@@ -279,7 +267,7 @@ class MetasAutomation:
         if not generate_only or dry_run:
             self.send_whatsapp(images, custom_recipients=recipients, template_content=template_content, dry_run=dry_run)
             # self.send_email(images) # Commenting out email for now to focus on WA
-        
+
         if generate_only:
             logger.info("   [INFO] Imagens geradas. Verifique a pasta images/")
         logger.info("=== FIM AUTOMAÇÃO METAS ===\n")

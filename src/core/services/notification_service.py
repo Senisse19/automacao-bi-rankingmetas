@@ -128,7 +128,5 @@ class NotificationService:
                     logger.error(f"   [Batch] Exceção não tratada para {nome}: {type(e).__name__}")
                     results["failed"] += 1
 
-        logger.info(
-            f"[Batch] Concluído: {results['success']} enviados, {results['failed']} falhas."
-        )
+        logger.info(f"[Batch] Concluído: {results['success']} enviados, {results['failed']} falhas.")
         return results

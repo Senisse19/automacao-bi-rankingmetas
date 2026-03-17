@@ -62,10 +62,16 @@ class UnidadesRenderer(BaseRenderer):
             return table_hdr_h + (max(n_rows, 1) * row_h) + 20
 
         total_h = (
-            header_h + padding
-            + kpi_h + padding * 2
-            + section_title_h + table_block_h(len(new_units)) + padding * 2
-            + section_title_h + table_block_h(len(cancelled_units)) + padding * 2
+            header_h
+            + padding
+            + kpi_h
+            + padding * 2
+            + section_title_h
+            + table_block_h(len(new_units))
+            + padding * 2
+            + section_title_h
+            + table_block_h(len(cancelled_units))
+            + padding * 2
             + 50  # footer
         )
 
@@ -109,14 +115,30 @@ class UnidadesRenderer(BaseRenderer):
 
         # 3. Seção Novas Unidades
         y = self._draw_table_section(
-            draw, y, "NOVAS UNIDADES", novas, new_units,
-            row_h, table_hdr_h, section_title_h, margin, padding,
+            draw,
+            y,
+            "NOVAS UNIDADES",
+            novas,
+            new_units,
+            row_h,
+            table_hdr_h,
+            section_title_h,
+            margin,
+            padding,
         )
 
         # 4. Seção Mortalidade
         self._draw_table_section(
-            draw, y, "MORTALIDADE", mortalidade, cancelled_units,
-            row_h, table_hdr_h, section_title_h, margin, padding,
+            draw,
+            y,
+            "MORTALIDADE",
+            mortalidade,
+            cancelled_units,
+            row_h,
+            table_hdr_h,
+            section_title_h,
+            margin,
+            padding,
         )
 
         # 5. Rodapé
@@ -144,12 +166,12 @@ class UnidadesRenderer(BaseRenderer):
 
         # Colunas: (label, x_offset, width, align)
         cols = [
-            ("NOME DA UNIDADE", 0,   280, "left"),
-            ("UF",             292,   45, "center"),
-            ("NOME DO MODELO", 349,  175, "left"),
-            ("UNIDADE",        536,   70, "center"),
-            ("VALOR",          618,  155, "right"),
-            ("ANOS",           785,   60, "center"),
+            ("NOME DA UNIDADE", 0, 280, "left"),
+            ("UF", 292, 45, "center"),
+            ("NOME DO MODELO", 349, 175, "left"),
+            ("UNIDADE", 536, 70, "center"),
+            ("VALOR", 618, 155, "right"),
+            ("ANOS", 785, 60, "center"),
         ]
 
         # Card de fundo
@@ -190,9 +212,12 @@ class UnidadesRenderer(BaseRenderer):
             mw = bbox[2] - bbox[0]
             draw.text(
                 (margin + (inner_w - mw) / 2, sep_y + 15),
-                msg, font=font_row, fill=self.muted_text,
+                msg,
+                font=font_row,
+                fill=self.muted_text,
             )
         else:
+
             def fmt_money(val):
                 if not val and val != 0:
                     return "R$ 0,00"
@@ -236,12 +261,12 @@ class UnidadesRenderer(BaseRenderer):
                 anos = _str(item.get("Anos", item.get("anos_contrato", item.get("anos"))))
 
                 row_vals = [
-                    (nome,   "left",   font_row_bold, self.accent_color),
-                    (uf,     "center", font_row,      self.text_color),
-                    (modelo, "left",   font_row,      self.text_color),
-                    (codigo, "center", font_row,      self.text_color),
-                    (valor,  "right",  font_row,      self.text_color),
-                    (anos,   "center", font_row,      self.text_color),
+                    (nome, "left", font_row_bold, self.accent_color),
+                    (uf, "center", font_row, self.text_color),
+                    (modelo, "left", font_row, self.text_color),
+                    (codigo, "center", font_row, self.text_color),
+                    (valor, "right", font_row, self.text_color),
+                    (anos, "center", font_row, self.text_color),
                 ]
 
                 for (text, align, font, color), (_, offset, width, _) in zip(row_vals, cols):

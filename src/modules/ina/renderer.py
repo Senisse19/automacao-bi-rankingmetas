@@ -19,9 +19,9 @@ class InaRenderer(BaseRenderer):
         ("Card_Inadimplencia_Ate_2_Dias", "CONCILIAÇÃO (D+2)"),
         ("Card_Inadimplencia_3_Mais_Dias", "INADIMPLÊNCIA (D+3)"),
         ("Card_QtdAtraso", "QUANTIDADE TÍTULOS"),
-        ("Card_Media_Atraso",            "MÉDIA DIAS EM ATRASO"),
-        ("Card_INTERCOMPANY",            "INADIMPLÊNCIA INTERCOMPANY"),
-        ("Card_Inadimplencia_TOTAL",     "INADIMPLÊNCIA TOTAL"),
+        ("Card_Media_Atraso", "MÉDIA DIAS EM ATRASO"),
+        ("Card_INTERCOMPANY", "INADIMPLÊNCIA INTERCOMPANY"),
+        ("Card_Inadimplencia_TOTAL", "INADIMPLÊNCIA TOTAL"),
     ]
 
     def generate_image(self, kpis, top10, output_path="ina_report_global.png"):

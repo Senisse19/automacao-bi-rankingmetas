@@ -88,5 +88,4 @@ class JobService:
             self.supabase.log_event(
                 "job_queue_error",
                 {"job_id": job_id, "error": str(e), "duration": duration},
-                level="error",
             )

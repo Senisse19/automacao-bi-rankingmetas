@@ -21,10 +21,7 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Origens permitidas para CORS (produção + dev local)
-ALLOWED_ORIGINS = os.getenv(
-    "CORS_ORIGINS",
-    "https://bi.grupostudio.tec.br,http://localhost:3000"
-).split(",")
+ALLOWED_ORIGINS = os.getenv("CORS_ORIGINS", "https://bi.grupostudio.tec.br,http://localhost:3000").split(",")
 
 # CORS restrito aos domínios autorizados
 app.add_middleware(

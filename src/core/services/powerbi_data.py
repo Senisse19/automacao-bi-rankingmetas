@@ -201,7 +201,7 @@ class PowerBIDataFetcher:
                 return {
                     "outras": row.get("[OutrasReceitas]") or 0,
                     "intercompany": row.get("[InterCompany]") or 0,
-                    "total_geral": row.get("[NaoIdentificada]") or 0,
+                    "total_geral": row.get("[TotalGeral]") or 0,
                     "repasse": row.get("[Repasse]") or 0,
                     "sem_categoria": row.get("[SemCategoria]") or 0,
                 }
@@ -405,10 +405,11 @@ if __name__ == "__main__":
     print(json.dumps(receitas, indent=2, ensure_ascii=False))
 
     print("\nDEPARTAMENTOS:")
-    for d in deps:
-        print(f"\n{d['nome']}:")
-        print(f"  Meta1: {d['meta1']}")
-        print(f"  Meta2: {d['meta2']}")
-        print(f"  Meta3: {d['meta3']}")
-        print(f"  Realizado: {d['realizado']}")
-        print(f"  %: {d['percent']}")
+    if deps:
+        for d in deps:
+            print(f"\n{d['nome']}:")
+            print(f"  Meta1: {d['meta1']}")
+            print(f"  Meta2: {d['meta2']}")
+            print(f"  Meta3: {d['meta3']}")
+            print(f"  Realizado: {d['realizado']}")
+            print(f"  %: {d['percent']}")

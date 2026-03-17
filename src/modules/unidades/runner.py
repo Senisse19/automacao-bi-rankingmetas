@@ -17,9 +17,11 @@ from src.core.services.notification_service import NotificationService
 from src.core.services.supabase_service import SupabaseService
 from src.core.utils.greeting import get_saudacao
 from src.core.utils.logger import get_logger
+
 from .data_fetcher import PowerBIUnidadesFetcher
 
 logger = get_logger("unidades_automation")
+
 
 class UnidadesAutomation:
     """
@@ -56,7 +58,7 @@ class UnidadesAutomation:
             sunday = monday + timedelta(days=6)
             date_start = monday.strftime("%Y-%m-%d")
             date_end = sunday.strftime("%Y-%m-%d")
-        
+
         return date_start, date_end
 
     def fetch_dashboard_data(self, date_start, date_end):
@@ -67,21 +69,17 @@ class UnidadesAutomation:
         new_units = self.fetcher.fetch_units_list(date_start, date_end, status="Nova")
         inactive_units = self.fetcher.fetch_units_list(date_start, date_end, status="Inativada")
 
-        return {
-            "summary": summary,
-            "new_units_list": new_units,
-            "inactive_units_list": inactive_units
-        }
+        return {"summary": summary, "new_units_list": new_units, "inactive_units_list": inactive_units}
 
     def run(self, report_type="daily", generate_only=False, recipients=None, template_content=None, dry_run=False):
         """Executa o ciclo completo da automação."""
         logger.info(f"Iniciando automação de Unidades ({report_type})...")
-        
+
         date_start, date_end = self.get_dates(report_type)
-        
+
         # 1. Fetch Data
         data = self.fetch_dashboard_data(date_start, date_end)
-        
+
         # 2. Render Image
         # Adaptando os dados para o formato esperado pelo UnidadesRenderer
         # O renderer espera 'new', 'cancelled' e 'upsell'
@@ -90,15 +88,14 @@ class UnidadesAutomation:
             "start_date": date_start,
             "new": data["new_units_list"],
             "cancelled": data["inactive_units_list"],
-            "upsell": [], # TODO: Verificar se upsell deve ser incluído
-            "summary": data["summary"]
+            "upsell": [],  # TODO: Verificar se upsell deve ser incluído
+            "summary": data["summary"],
         }
-        
+
         output_path = self.renderer.generate_unidades_reports(
-            render_data, 
-            report_type="weekly" if report_type == "weekly" else "daily"
+            render_data, report_type="weekly" if report_type == "weekly" else "daily"
         )
-        
+
         logger.info(f"Relatório gerado em: {output_path}")
 
         # 3. Send
@@ -108,7 +105,7 @@ class UnidadesAutomation:
                 return output_path
 
             logger.info(f"Enviando para {len(recipients)} destinatários...")
-            
+
             # Monta o lote de envios
             saudacao = get_saudacao()
             data_fmt = datetime.strptime(date_end, "%Y-%m-%d").strftime("%d/%m/%Y")
@@ -152,29 +149,15 @@ class UnidadesAutomation:
 
         return output_path
 
+
 def main():
     parser = argparse.ArgumentParser(description="Automação de Unidades Power BI")
     parser.add_argument(
-        "--type", 
-        choices=["daily", "weekly"], 
-        default="daily", 
-        help="Tipo de relatório (daily ou weekly)"
+        "--type", choices=["daily", "weekly"], default="daily", help="Tipo de relatório (daily ou weekly)"
     )
-    parser.add_argument(
-        "--generate-only", 
-        action="store_true", 
-        help="Apenas gerar a imagem, sem enviar"
-    )
-    parser.add_argument(
-        "--dry-run", 
-        action="store_true", 
-        help="Simular envio (apenas logs)"
-    )
-    parser.add_argument(
-        "--payload", 
-        type=str, 
-        help="JSON payload com destinatários e template"
-    )
+    parser.add_argument("--generate-only", action="store_true", help="Apenas gerar a imagem, sem enviar")
+    parser.add_argument("--dry-run", action="store_true", help="Simular envio (apenas logs)")
+    parser.add_argument("--payload", type=str, help="JSON payload com destinatários e template")
 
     args = parser.parse_args()
 
@@ -200,6 +183,7 @@ def main():
         template_content=template_content,
         dry_run=args.dry_run,
     )
+
 
 if __name__ == "__main__":
     main()
