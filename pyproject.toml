@@ -22,6 +22,6 @@ ignore = []
 "config.py" = ["E402"]
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["core*", "modules*", "utils*", "scripts*"]
+where = ["src"]
+include = ["core*", "modules*", "utils*", "config*"]
 exclude = ["tests*", "archive*"]

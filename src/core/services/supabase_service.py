@@ -1,6 +1,7 @@
 import logging
 import os
 import time
+from typing import Any
 
 import requests
 from dotenv import load_dotenv
@@ -309,6 +310,39 @@ class SupabaseService:
             return True
         except Exception as e:
             logger.warning(f"Erro ao fazer upsert em {table}: {e}")
+            return False
+
+    def update_setting(self, key: str, value: Any) -> bool:
+        """
+        Atualiza ou cria uma configuração na tabela system_settings.
+        Utiliza UPSERT nativo do PostgREST (Supabase).
+        """
+        try:
+            payload = {
+                "key": key,
+                "value": value,
+                "updated_at": "now()"
+            }
+
+            # Headers para UPSERT (evita erro de chave duplicada ou necessidade de PATCH manual)
+            headers = self.headers.copy()
+            headers["Prefer"] = "resolution=merge-duplicates"
+
+            endpoint = f"{self.url}/rest/v1/system_settings"
+            resp = requests.post(endpoint, headers=headers, json=payload, timeout=30)
+
+            if resp.status_code >= 400:
+                logger.error(f"Falha ao realizar upsert da config '{key}': {resp.status_code} - {resp.text}")
+                return False
+
+            # Limpa cache local para forçar novo fetch na próxima leitura
+            if key in self._settings_cache:
+                self._settings_cache.pop(key, None)
+
+            logger.info(f"Configuracao '{key}' sincronizada com sucesso no Supabase (Upsert).")
+            return True
+        except Exception as e:
+            logger.error(f"Erro inesperado ao salvar config '{key}': {str(e)}")
             return False
 
     def get_all_ids(self, table: str) -> set:

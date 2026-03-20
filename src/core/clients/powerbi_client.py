@@ -184,6 +184,46 @@ class PowerBIClient:
         except Exception:
             return []
 
+    def trigger_dataset_refresh(self, dataset_id: str, workspace_id: str | None = None) -> bool:
+        """
+        Dispara a atualização de um dataset no Power BI.
+
+        Retorna True se o servidor aceitou (HTTP 202) ou False em caso de falha.
+        O workspace_id padrão é o configurado na instância.
+        """
+        # Usa o workspace da instância se não for fornecido explicitamente
+        ws_id = workspace_id or self.workspace_id
+
+        # Renova o token se necessário antes de disparar
+        if not self.token or time.time() >= self.token_expiry:
+            if not self.authenticate():
+                logger.error(f"Falha ao autenticar antes do refresh do dataset {dataset_id}")
+                return False
+
+        url = f"https://api.powerbi.com/v1.0/myorg/groups/{ws_id}/datasets/{dataset_id}/refreshes"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
+        }
+
+        try:
+            response = self.session.post(url, headers=headers, json={}, timeout=15)
+
+            # 202 Accepted = Power BI aceitou a requisição de refresh
+            if response.status_code == 202:
+                logger.info(f"Refresh aceito para dataset {dataset_id}")
+                return True
+
+            logger.error(
+                f"Refresh negado para dataset {dataset_id} "
+                f"(HTTP {response.status_code}): {response.text[:200]}"
+            )
+            return False
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Erro ao disparar refresh do dataset {dataset_id}: {e}")
+            return False
+
 
 # Teste direto
 if __name__ == "__main__":

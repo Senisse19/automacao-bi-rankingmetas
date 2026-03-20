@@ -51,6 +51,10 @@ class UnidadesAutomation:
             # Ontem
             date_end = (now - timedelta(days=1)).strftime("%Y-%m-%d")
             date_start = date_end
+        elif report_type == "monthly":
+            # Do início do mês atual até hoje
+            date_start = now.replace(day=1).strftime("%Y-%m-%d")
+            date_end = now.strftime("%Y-%m-%d")
         else:
             # Semana passada (Segunda a Domingo)
             days_to_last_monday = now.weekday() + 7
@@ -76,11 +80,21 @@ class UnidadesAutomation:
 
         return {"summary": summary, "new_units_list": new_units, "inactive_units_list": inactive_units}
 
-    def run(self, report_type="daily", generate_only=False, recipients=None, template_content=None, dry_run=False):
+    def run(
+        self,
+        report_type="daily",
+        generate_only=False,
+        recipients=None,
+        template_content=None,
+        dry_run=False,
+        date_start=None,
+        date_end=None,
+    ):
         """Executa o ciclo completo da automação."""
         logger.info(f"Iniciando automação de Unidades ({report_type})...")
 
-        date_start, date_end = self.get_dates(report_type)
+        if not date_start or not date_end:
+            date_start, date_end = self.get_dates(report_type)
 
         # 1. Fetch Data
         data = self.fetch_dashboard_data(date_start, date_end)
@@ -166,10 +180,15 @@ class UnidadesAutomation:
 def main():
     parser = argparse.ArgumentParser(description="Automação de Unidades Power BI")
     parser.add_argument(
-        "--type", choices=["daily", "weekly"], default="daily", help="Tipo de relatório (daily ou weekly)"
+        "--type",
+        choices=["daily", "weekly", "monthly", "custom"],
+        default="daily",
+        help="Tipo de relatório (daily, weekly, monthly ou custom)",
     )
     parser.add_argument("--generate-only", action="store_true", help="Apenas gerar a imagem, sem enviar")
     parser.add_argument("--dry-run", action="store_true", help="Simular envio (apenas logs)")
+    parser.add_argument("--start-date", type=str, help="Data de início (YYYY-MM-DD) para tipo custom")
+    parser.add_argument("--end-date", type=str, help="Data de fim (YYYY-MM-DD) para tipo custom")
     parser.add_argument("--payload", type=str, help="JSON payload com destinatários e template")
 
     args = parser.parse_args()
@@ -195,6 +214,8 @@ def main():
         recipients=recipients,
         template_content=template_content,
         dry_run=args.dry_run,
+        date_start=args.start_date,
+        date_end=args.end_date,
     )
 
 
