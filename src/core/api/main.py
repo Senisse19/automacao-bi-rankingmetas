@@ -7,7 +7,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
-from src.core.api.routers import export, pbi, webhooks
+from src.core.api.routers import export, webhooks
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -66,7 +66,6 @@ async def api_key_middleware(request: Request, call_next):
 
 
 app.include_router(export.router, prefix="/api/v1/export", tags=["exportação"])
-app.include_router(pbi.router, prefix="/api/v1/pbi", tags=["pbi"])
 app.include_router(webhooks.router, prefix="/api/webhooks", tags=["webhooks"])
 
 
