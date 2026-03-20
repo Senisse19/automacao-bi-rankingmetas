@@ -30,5 +30,5 @@ COPY . .
 # Criar diretório para persistência de imagens (volume)
 RUN mkdir -p images
 
-# Comando para iniciar a aplicação usando execução de módulo para resolver imports corretamente
-CMD ["python", "-m", "src.apps.scheduler.scheduler"]
+# Comando para iniciar a aplicação (API + Scheduler)
+CMD ["python", "-m", "src.main"]
