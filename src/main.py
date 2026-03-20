@@ -10,8 +10,9 @@ from src.core.api.main import app
 from src.apps.scheduler.scheduler import run_scheduler_loop, validate_config
 
 def start_api():
-    print("🚀 Iniciando API na porta 8000...")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Porta 3000: deve coincidir com "Ports Exposes" configurado no Coolify
+    print("🚀 Iniciando API na porta 3000...")
+    uvicorn.run(app, host="0.0.0.0", port=3000)
 
 def start_scheduler():
     print("⏰ Iniciando Scheduler...")
