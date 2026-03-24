@@ -139,7 +139,8 @@ def get_unidades_summary_query(date_start, date_end):
         ROW(
             "UnidadesPagantes", [unidades_pagantes]
         ),
-        DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}")
+        DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}"),
+        FILTER(ALL('Unidades (2)'[nome]), 'Unidades (2)'[nome] <> "")
     )
     """
 
@@ -154,26 +155,29 @@ def get_unidades_novas_query(date_start, date_end):
     return f"""
     EVALUATE
     CALCULATETABLE(
-        SELECTCOLUMNS(
-            GENERATE(
-                FILTER('modelos_Ativos',
-                    NOT ISBLANK('modelos_Ativos'[data])
-                    && NOT ISBLANK('modelos_Ativos'[unidade])
-                    && 'modelos_Ativos'[unidade] <> 0
+        FILTER(
+            SELECTCOLUMNS(
+                GENERATE(
+                    FILTER('modelos_Ativos',
+                        NOT ISBLANK('modelos_Ativos'[data])
+                        && NOT ISBLANK('modelos_Ativos'[unidade])
+                        && 'modelos_Ativos'[unidade] <> 0
+                    ),
+                    VAR vUnidade = 'modelos_Ativos'[unidade]
+                    RETURN ROW(
+                        "Nome_Virtual",   CALCULATE(MAX('Unidades (2)'[nome]), 'Unidades (2)'[codigo] = vUnidade),
+                        "UF_Virtual",     CALCULATE(MAX('Unidades (2)'[uf]),   'Unidades (2)'[codigo] = vUnidade),
+                        "Modelo_Virtual", CALCULATE(MAX('Desc_Modelos'[nome]))
+                    )
                 ),
-                VAR vUnidade = 'modelos_Ativos'[unidade]
-                RETURN ROW(
-                    "Nome_Virtual",   CALCULATE(MAX('Unidades (2)'[nome]), 'Unidades (2)'[codigo] = vUnidade),
-                    "UF_Virtual",     CALCULATE(MAX('Unidades (2)'[uf]),   'Unidades (2)'[codigo] = vUnidade),
-                    "Modelo_Virtual", CALCULATE(MAX('Desc_Modelos'[nome]))
-                )
+                "Nome",   [Nome_Virtual],
+                "UF",     [UF_Virtual],
+                "Modelo", [Modelo_Virtual],
+                "Codigo", 'modelos_Ativos'[unidade],
+                "Valor",  'modelos_Ativos'[valor],
+                "Anos",   'modelos_Ativos'[anos]
             ),
-            "Nome",   [Nome_Virtual],
-            "UF",     [UF_Virtual],
-            "Modelo", [Modelo_Virtual],
-            "Codigo", 'modelos_Ativos'[unidade],
-            "Valor",  'modelos_Ativos'[valor],
-            "Anos",   'modelos_Ativos'[anos]
+            NOT ISBLANK([Nome]) && [Nome] <> ""
         ),
         DATESBETWEEN('Calendario'[Date], "{date_start}", "{date_end}")
     )
