@@ -381,10 +381,15 @@ class PowerBIDataFetcher:
                 }
             )
 
+        repasse_raw = receitas_raw.get("repasse", 0)
+        repasse_final = repasse_raw if repasse_raw else sum(
+            realizados.get(f"{n}_Repasse", 0) for n, _, _ in _DEPARTAMENTOS_CONFIG
+        )
+
         receitas = {
             "outras": format_currency(receitas_raw.get("outras", 0)),
             "intercompany": format_currency(receitas_raw.get("intercompany", 0)),
-            "repasse": format_currency(receitas_raw.get("repasse", 0)),
+            "repasse_total": format_currency(repasse_final),
             "total_geral": format_currency(receitas_raw.get("total_geral", 0)),
             "sem_categoria": format_currency(receitas_raw.get("sem_categoria", 0)),
         }
